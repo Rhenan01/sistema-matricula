@@ -1066,6 +1066,44 @@ document.getElementById('btnClearGrade').addEventListener('click', () => {
   document.getElementById('feedback').innerText = ''; // limpa mensagens de feedback
 });
 
+/** Ordem dos blocos do seletor cutoff*/
+const TIME_INDEX = [
+  '07:00','07:50','08:40','09:30','10:40','11:30','12:20','13:10',
+  '14:00','14:50','15:40','16:40','17:30','18:20','19:10','20:10'
+];
+
+/** Converte "HH:MM" → minutos absolutos */
+function timeToMin(t) {
+  const [h, m] = t.split(':').map(Number);
+  return h * 60 + m;
+}
+
+/** "HH:MM" → índice de bloco (>= corte). */
+function timeToBlockIndex(hhmm) {
+  const i = TIME_INDEX.indexOf(hhmm);
+  if (i !== -1) return i;
+  // fallback: pega o primeiro bloco cujo horário >= hhmm
+  const target = timeToMin(hhmm);
+  for (let k = 0; k < TIME_INDEX.length; k++) {
+    if (timeToMin(TIME_INDEX[k]) >= target) return k;
+  }
+  return TIME_INDEX.length - 1; // último bloco como fallback
+}
+
+/** Menor índice de início entre os slots da disciplina (primeiro tempo real) */
+function firstStartBlock(disc) {
+  const slots = MASTER.get(disc.nome) || [];
+  if (!slots.length) return Infinity;
+  // slots[i].inicio é índice de bloco (0-based) no seu grid
+  return Math.min(...slots.map(s => s.inicio));
+}
+
+/** A disciplina passa no corte? (primeiro início ≥ bloco do corte) */
+function passaCorte(disc, cutoffIdx) {
+  return firstStartBlock(disc) >= cutoffIdx;
+}
+
+
 // ---------- Função de ordenação de candidatas ----------
 function ordenarCandidatas(cands, estrategia, diaLivre) {
   // Ordenação por CR (créditos), desempata pelo semestre
@@ -1160,11 +1198,16 @@ function suggestAndRender() {
   const qtd = Math.max(1, Math.min(12, parseInt(document.getElementById('qtd').value || '1')));
   const estrategia = document.getElementById('estrategia').value;  // estratégia de ordenação
   const diaLivre = document.getElementById('diaLivre').value;      // dia preferido livre
+  const cutoffHHMM = (document.getElementById('cutoff')?.value || '07:00').trim();
+  const cutoffIdx  = timeToBlockIndex(cutoffHHMM);
   const feitas = getFeitas();                                      // disciplinas já concluídas
   const crFeitas = calcCRFeitas(feitas);                           // CR acumulado das disciplinas feitas
 
   // Filtra disciplinas candidatas que atendem pré-requisitos e não foram feitas
   let candidatas = D.filter(d => !feitas.includes(d.nome) && prereqOK(d, feitas, crFeitas));
+
+  candidatas = candidatas.filter(d => passaCorte(d, cutoffIdx));
+
   candidatas = ordenarCandidatas(candidatas, estrategia, diaLivre);
 
   const preferir = (estrategia === 'dialivre') ? diaLivre : null;
