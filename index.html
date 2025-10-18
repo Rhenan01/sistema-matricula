@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sistema Matrícula CEFET</title>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
+</head>
+
+<body>
+    <!-- ==========================
+        CABEÇALHO
+        ========================== -->
+    <header>
+        <div class="header-top">
+            <h1>Sistema de Matrícula Inteligente</h1>
+        </div>
+        <p><span id="typed"></span></p>
+        <img src="logo.png" alt="Logo CEFET" class="logo-cefet">
+    </header>
+    <main>
+        <!-- ==========================
+             CONTROLES SUPERIORES
+             ========================== -->
+        <div class="controls">
+            <div class="left-controls">
+
+                <!-- Quantidade de disciplinas -->
+                <div class="field">
+                    <label class="small">Qtd. disciplinas desejadas</label>
+                    <input id="qtd" type="number" min="1" max="12" value="6"/>
+                </div>
+
+                <!-- Estratégia de matrícula -->
+                <div class="field">
+                    <label class="small">Estratégia</label>
+                    <select id="estrategia">
+                        <option value="semestre">Progredir por semestre</option>
+                        <option value="cr">Maximizar CR</option>
+                        <option value="dialivre">Deixar dia livre</option>
+                    </select>
+                </div>
+
+                <!-- Dia a deixar livre (opcional) -->
+                <div class="field" id="diaWrap" style="display:none;">
+                    <label class="small">Dia a deixar livre</label>
+                    <select id="diaLivre">
+                        <option>Seg</option>
+                        <option>Ter</option>
+                        <option>Qua</option>
+                        <option>Qui</option>
+                        <option>Sex</option>
+                        <option>Sáb</option>
+                    </select>
+                </div>
+
+                <!-- Filtros rápidos -->
+                <div class="field">
+                    <label class="small">Filtros rápidos</label>
+                    <div class="toggles">
+                        <button id="btnClear" class="btn ghost">Limpar marcados</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CR concluídos -->
+            <div style="display:flex; gap:10px; align-items:center;">
+                <div style="text-align:right;">
+                    <div class="small-muted">CR concluídos</div>
+                    <div id="crConcl" style="font-weight:800; font-size:16px">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================
+             LINHAS DE SEMESTRES
+             ========================== -->
+        <div class="sem-row" id="rowTop"></div>
+        <div class="sem-row" id="rowBottom"></div>
+        <div class="sem-row" id="rowExtra"></div>
+
+        <!-- ==========================
+             BOTÕES PRINCIPAIS
+             ========================== -->
+        <div class="tools" style="justify-content:center; margin-top:12px;">
+            <button id="btnGerar" class="btn">Gerar Grade</button>
+        </div>
+
+        <div id="feedback"></div>
+
+        <!-- ==========================
+             GRADE HORÁRIA
+             ========================== -->
+        <div class="grade-wrap" id="gradeWrap">
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+                <!-- Texto à esquerda -->
+                <div class="small-muted">Clique no ✕ para remover uma disciplina colocada.</div>
+
+                <!-- Botões agrupados à direita -->
+                <div style="display:flex; gap:8px;">
+                    <button id="btnClearGrade" class="btn btn-danger">🧹</button>
+                    <button id="btnExportPDF" class="btn">Exportar Grade (PDF)</button>
+                </div>
+            </div>
+
+            <div style="height:12px"></div>
+            <div id="grade" class="grid" aria-label="grade-horaria"></div>
+
+            <div class="tools">
+                <div class="small-muted" id="infoMsg">CR sugeridos: 0</div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- ==========================
+         MODAL
+         ========================== -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Matérias disponíveis</h3>
+            <ul id="materiasList"></ul>
+        </div>
+    </div>
+
+    <!-- ==========================
+         SCRIPT PRINCIPAL
+         ========================== -->
+    <script src="script.js"></script>
+</body>
+</html>
