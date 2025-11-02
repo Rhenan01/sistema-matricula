@@ -20,6 +20,12 @@
         </div>
         <p><span id="typed"></span></p>
         <img src="logo.png" alt="Logo CEFET" class="logo-cefet">
+        <select id="select-curso" class="select">
+            <option value="prod-novo">Engenharia de Produção (PPC novo)</option>
+            <option value="prod-antigo">Engenharia de Produção (PPC antigo)</option>
+            <option value="mec-novo">Engenharia Mecânica (PPC novo)</option>
+            <option value="mec-antigo">Engenharia Mecânica (PPC antigo)</option>
+        </select>
     </header>
     <main>
         <!-- ==========================
@@ -146,10 +152,22 @@
             <ul id="materiasList"></ul>
         </div>
     </div>
-
+    
     <!-- ==========================
          SCRIPT PRINCIPAL
          ========================== -->
     <script src="script.js"></script>
+    <script>
+    // aplica valor salvo e recarrega quando trocar
+    (function () {
+        const sel = document.getElementById('select-curso');
+        const saved = localStorage.getItem('cursoKey') || sel.value || 'prod-novo';
+        sel.value = saved;
+        sel.addEventListener('change', () => {
+        localStorage.setItem('cursoKey', sel.value);
+        location.reload(); // “roda o código de novo” com outro D
+        });
+    })();
+    </script>
 </body>
 </html>

@@ -66,6 +66,12 @@ header p {
   margin: 6px 0 0;
 }
 
+header select {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .logo-cefet {
   position: absolute;
   top: 0;
@@ -315,6 +321,7 @@ label.small {
   flex: 1;
   text-align: left;
   font-size: 13px;
+  cursor: default;
 }
 
 .chips {
@@ -590,5 +597,9 @@ label.small {
 .modal .close:hover {
   color: #fff;
 }
+
+/* cores de elegibilidade */
+.cant-pull { color: #d60a0a; font-weight: 600; }  /* não pode (pré não ok) */
+.can-pull  { color: #0b63ff; font-weight: 600; }  /* pode (pré ok) */
 
 

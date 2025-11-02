@@ -1,298 +1,314 @@
-// ---------- Lista de disciplinas do curso ----------
-const D = [
-  // 1º Semestre
-  {nome:"Introdução a Administração", preReq:[], T:2, P:0, sem:1, cr:2,
-    horarios:[{dia:"Ter", inicio:13, dur:2}]
-  },
-  {nome:"Introdução a Engenharia", preReq:[], T:2, P:0, sem:1, cr:2,
-    horarios:[{dia:"Seg", inicio:11, dur:2}]
-  },
-  {nome:"Cálculo a uma Variável", preReq:[], T:6, P:0, sem:1, cr:6,
-    horarios:[
-      {dia:"Seg", inicio:7, dur:2},
-      {dia:"Ter", inicio:7, dur:2},
-      {dia:"Qui", inicio:7, dur:2}
-    ]
-  },
-  {nome:"Álgebra Linear I", preReq:[], T:2, P:0, sem:1, cr:2,
-    horarios:[{dia:"Qui", inicio:11, dur:2}]
-  },
-  {nome:"Química Geral", preReq:[], T:2, P:0, sem:1, cr:2,
-    horarios:[{dia:"Qua", inicio:9, dur:2}]
-  },
-  {nome:"Desenho", preReq:[], T:4, P:0, sem:1, cr:4,
-    horarios:[
-      {dia:"Seg", inicio:9, dur:2},
-      {dia:"Ter", inicio:9, dur:2}
-    ]
-  },
+// ======== Escolha atual do curso ========
+const CURSO_KEY = (typeof localStorage !== 'undefined' && localStorage.getItem('cursoKey')) || 'prod-novo';
 
-  // 2º Semestre
-  {nome:"Álgebra Linear II", preReq:["Álgebra Linear I"], T:3, P:0, sem:2, cr:3,
-    horarios:[{dia:"Qua", inicio:7, dur:3}]
-  },
-  {nome:"Cálculo a Várias Variáveis", preReq:["Cálculo a uma Variável"], T:4, P:0, sem:2, cr:4,
-    horarios:[
-      {dia:"Ter", inicio:11, dur:2},
-      {dia:"Qua", inicio:10, dur:2}
-    ]
-  },
-  {nome:"Física I", preReq:["Álgebra Linear I", "Cálculo a uma Variável"], T:4, P:2, sem:2, cr:5,
-    horarios:[
-      {dia:"Seg", inicio:11, dur:2},
-      {dia:"Sex", inicio:8, dur:4}
-    ]
-  },
-  {nome:"Introdução a Economia", preReq:[], T:2, P:0, sem:2, cr:2,
-    horarios:[{dia:"Qui", inicio:10, dur:2}]
-  },
-  {nome:"Química Experimental", preReq:[], T:1, P:2, sem:2, cr:2,
-    horarios:[{dia:"Ter", inicio:8, dur:3}]
-  },
-  {nome:"Programação", preReq:[], T:2, P:2, sem:2, cr:3,
-    horarios:[{dia:"Seg", inicio:7, dur:4}]
-  },
-  {nome:"Humanidades e Ciências Sociais", preReq:[], T:2, P:0, sem:2, cr:2,
-    horarios:[{dia:"Qui", inicio:8, dur:2}]
-  },
+// ======== Repositório de datasets por curso ========
+const DATASETS = {
+  "prod-novo": [
+    // 1º Semestre
+    {nome:"Introdução a Administração", preReq:[], T:2, P:0, sem:1, cr:2,
+      horarios:[{dia:"Ter", inicio:13, dur:2}]
+    },
+    {nome:"Introdução a Engenharia", preReq:[], T:2, P:0, sem:1, cr:2,
+      horarios:[{dia:"Seg", inicio:11, dur:2}]
+    },
+    {nome:"Cálculo a uma Variável", preReq:[], T:6, P:0, sem:1, cr:6,
+      horarios:[
+        {dia:"Seg", inicio:7, dur:2},
+        {dia:"Ter", inicio:7, dur:2},
+        {dia:"Qui", inicio:7, dur:2}
+      ]
+    },
+    {nome:"Álgebra Linear I", preReq:[], T:2, P:0, sem:1, cr:2,
+      horarios:[{dia:"Qui", inicio:11, dur:2}]
+    },
+    {nome:"Química Geral", preReq:[], T:2, P:0, sem:1, cr:2,
+      horarios:[{dia:"Qua", inicio:9, dur:2}]
+    },
+    {nome:"Desenho", preReq:[], T:4, P:0, sem:1, cr:4,
+      horarios:[
+        {dia:"Seg", inicio:9, dur:2},
+        {dia:"Ter", inicio:9, dur:2}
+      ]
+    },
 
-  // 3º Semestre
-  {nome:"Física II", preReq:["Física I"], T:4, P:2, sem:3, cr:5,
-    horarios:[
-      {dia:"Seg", inicio:7, dur:4},
-      {dia:"Qua", inicio:13, dur:2}
-    ]
-  },
-  {nome:"EDO", preReq:["Álgebra Linear II", "Cálculo a uma Variável"], T:4, P:0, sem:3, cr:4,
-    horarios:[
-      {dia:"Ter", inicio:9, dur:2},
-      {dia:"Qui", inicio:9, dur:2}
-    ]
-  },
-  {nome:"Cálculo Vetorial", preReq:["Cálculo a Várias Variáveis"], T:2, P:0, sem:3, cr:2,
-    horarios:[{dia:"Ter", inicio:13, dur:2}]
-  },
-  {nome:"Engenharia de Métodos", preReq:["Introdução a Administração"], T:3, P:0, sem:3, cr:3,
-    horarios:[{dia:"Qua", inicio:7, dur:3}]
-  },
-  {nome:"Cálculo Numérico", preReq:["Álgebra Linear I", "Cálculo a uma Variável", "Programação"], T:2, P:2, sem:3, cr:3,
-    horarios:[
-      {dia:"Seg", inicio:11, dur:2},
-      {dia:"Sex", inicio:8, dur:2}
-    ]
-  },
-  {nome:"Mecânica Geral", preReq:["Física I", "Álgebra Linear II"], T:4, P:0, sem:3, cr:4,
-    horarios:[
-      {dia:"Ter", inicio:11, dur:2},
-      {dia:"Qui", inicio:11, dur:2}
-    ]
-  },
-  {nome:"Economia da Produção", preReq:["Introdução a Economia"], T:3, P:0, sem:3, cr:3,
-    horarios:[{dia:"Qua", inicio:10, dur:3}]
-  },
+    // 2º Semestre
+    {nome:"Álgebra Linear II", preReq:["Álgebra Linear I"], T:3, P:0, sem:2, cr:3,
+      horarios:[{dia:"Qua", inicio:7, dur:3}]
+    },
+    {nome:"Cálculo a Várias Variáveis", preReq:["Cálculo a uma Variável"], T:4, P:0, sem:2, cr:4,
+      horarios:[
+        {dia:"Ter", inicio:11, dur:2},
+        {dia:"Qua", inicio:10, dur:2}
+      ]
+    },
+    {nome:"Física I", preReq:["Álgebra Linear I", "Cálculo a uma Variável"], T:4, P:2, sem:2, cr:5,
+      horarios:[
+        {dia:"Seg", inicio:11, dur:2},
+        {dia:"Sex", inicio:8, dur:4}
+      ]
+    },
+    {nome:"Introdução a Economia", preReq:[], T:2, P:0, sem:2, cr:2,
+      horarios:[{dia:"Qui", inicio:10, dur:2}]
+    },
+    {nome:"Química Experimental", preReq:[], T:1, P:2, sem:2, cr:2,
+      horarios:[{dia:"Ter", inicio:8, dur:3}]
+    },
+    {nome:"Programação", preReq:[], T:2, P:2, sem:2, cr:3,
+      horarios:[{dia:"Seg", inicio:7, dur:4}]
+    },
+    {nome:"Humanidades e Ciências Sociais", preReq:[], T:2, P:0, sem:2, cr:2,
+      horarios:[{dia:"Qui", inicio:8, dur:2}]
+    },
 
-  // 4º Semestre
-  {nome:"EDPS", preReq:["EDO"], T:3, P:0, sem:4, cr:3,
-    horarios:[{dia:"Qua", inicio:7, dur:3}]
-  },
-  {nome:"Estatística", preReq:["Cálculo a Várias Variáveis"], T:3, P:0, sem:4, cr:3,
-    horarios:[{dia:"Ter", inicio:8, dur:3}]
-  },
-  {nome:"Física III", preReq:["Física II"], T:4, P:2, sem:4, cr:5,
-    horarios:[
-      {dia:"Seg", inicio:11, dur:2},
-      {dia:"Seg", inicio:15, dur:2},
-      {dia:"Ter", inicio:11, dur:2}
-    ]
-  },
-  {nome:"Psicologia e Sociologia do Trabalho", preReq:["Introdução a Economia"], T:3, P:0, sem:4, cr:3,
-    horarios:[{dia:"Qua", inicio:14, dur:3}]
-  },
-  {nome:"Resistência de Materiais III", preReq:["Mecânica Geral"], T:3, P:0, sem:4, cr:3,
-    horarios:[{dia:"Qua", inicio:11, dur:3}]
-  },
-  {nome:"Desenho Técnico", preReq:["Desenho"], T:3, P:0, sem:4, cr:3,
-    horarios:[{dia:"Qui", inicio:8, dur:3}]
-  },
-  {nome:"Metodologia Cientifica", preReq:["Introdução a Engenharia"], T:2, P:0, sem:4, cr:2,
-    horarios:[{dia:"Sex", inicio:7, dur:2}]
-  },
+    // 3º Semestre
+    {nome:"Física II", preReq:["Física I"], T:4, P:2, sem:3, cr:5,
+      horarios:[
+        {dia:"Seg", inicio:7, dur:4},
+        {dia:"Qua", inicio:13, dur:2}
+      ]
+    },
+    {nome:"EDO", preReq:["Álgebra Linear II", "Cálculo a uma Variável"], T:4, P:0, sem:3, cr:4,
+      horarios:[
+        {dia:"Ter", inicio:9, dur:2},
+        {dia:"Qui", inicio:9, dur:2}
+      ]
+    },
+    {nome:"Cálculo Vetorial", preReq:["Cálculo a Várias Variáveis"], T:2, P:0, sem:3, cr:2,
+      horarios:[{dia:"Ter", inicio:13, dur:2}]
+    },
+    {nome:"Engenharia de Métodos", preReq:["Introdução a Administração"], T:3, P:0, sem:3, cr:3,
+      horarios:[{dia:"Qua", inicio:7, dur:3}]
+    },
+    {nome:"Cálculo Numérico", preReq:["Álgebra Linear I", "Cálculo a uma Variável", "Programação"], T:2, P:2, sem:3, cr:3,
+      horarios:[
+        {dia:"Seg", inicio:11, dur:2},
+        {dia:"Sex", inicio:8, dur:2}
+      ]
+    },
+    {nome:"Mecânica Geral", preReq:["Física I", "Álgebra Linear II"], T:4, P:0, sem:3, cr:4,
+      horarios:[
+        {dia:"Ter", inicio:11, dur:2},
+        {dia:"Qui", inicio:11, dur:2}
+      ]
+    },
+    {nome:"Economia da Produção", preReq:["Introdução a Economia"], T:3, P:0, sem:3, cr:3,
+      horarios:[{dia:"Qua", inicio:10, dur:3}]
+    },
 
-  // 5º Semestre
-  {nome:"Eletricidade Aplicada", preReq:["Física II"], T:4, P:0, sem:5, cr:4,
-    horarios:[
-      {dia:"Seg", inicio:13, dur:2},
-      {dia:"Ter", inicio:13, dur:2}
-    ]
-  },
-  {nome:"Métodos Estatísticos", preReq:["EDPS", "Estatística"], T:3, P:0, sem:5, cr:3,
-    horarios:[{dia:"Sex", inicio:15, dur:3}]
-  },
-  {nome:"Gestão da Informação I", preReq:["Engenharia de Métodos"], T:3, P:0, sem:5, cr:3,
-    horarios:[{dia:"Qua", inicio:10, dur:3}]
-  },
-  {nome:"Ciência do Ambiente", preReq:[], T:2, P:0, sem:5, cr:2,
-    horarios:[{dia:"Qua", inicio:11, dur:2}]
-  },
-  {nome:"Fenômenos de Transorte", preReq:["Física III"], T:3, P:0, sem:5, cr:3,
-    horarios:[{dia:"Qui", inicio:8, dur:3}]
-  },
-  {nome:"Ciência dos Materiais", preReq:[], T:3, P:0, sem:5, cr:3,
-    horarios:[{dia:"Ter", inicio:10, dur:3}]
-  },
+    // 4º Semestre
+    {nome:"EDPS", preReq:["EDO"], T:3, P:0, sem:4, cr:3,
+      horarios:[{dia:"Qua", inicio:7, dur:3}]
+    },
+    {nome:"Estatística", preReq:["Cálculo a Várias Variáveis"], T:3, P:0, sem:4, cr:3,
+      horarios:[{dia:"Ter", inicio:8, dur:3}]
+    },
+    {nome:"Física III", preReq:["Física II"], T:4, P:2, sem:4, cr:5,
+      horarios:[
+        {dia:"Seg", inicio:11, dur:2},
+        {dia:"Seg", inicio:15, dur:2},
+        {dia:"Ter", inicio:11, dur:2}
+      ]
+    },
+    {nome:"Psicologia e Sociologia do Trabalho", preReq:["Introdução a Economia"], T:3, P:0, sem:4, cr:3,
+      horarios:[{dia:"Qua", inicio:14, dur:3}]
+    },
+    {nome:"Resistência de Materiais III", preReq:["Mecânica Geral"], T:3, P:0, sem:4, cr:3,
+      horarios:[{dia:"Qua", inicio:11, dur:3}]
+    },
+    {nome:"Desenho Técnico", preReq:["Desenho"], T:3, P:0, sem:4, cr:3,
+      horarios:[{dia:"Qui", inicio:8, dur:3}]
+    },
+    {nome:"Metodologia Cientifica", preReq:["Introdução a Engenharia"], T:2, P:0, sem:4, cr:2,
+      horarios:[{dia:"Sex", inicio:7, dur:2}]
+    },
 
-  // 6º Semestre
-  {nome:"Ergonomia", preReq:["Psicologia e Sociologia do Trabalho"], T:2, P:0, sem:6, cr:2,
-    horarios:[{dia:"Qua", inicio:12, dur:3}]
-  },
-  {nome:"Pesquisa Operacional I", preReq:["Cálculo Vetorial", "Gestão da Informação I"], T:3, P:0, sem:6, cr:3,
-    horarios:[{dia:"Qui", inicio:8, dur:3}]
-  },
-  {nome:"Fundamentos da Engenharia de Segurança", preReq:["Psicologia e Sociologia do Trabalho"], T:2, P:0, sem:6, cr:2,
-    horarios:[{dia:"Ter", inicio:10, dur:3}]
-  },
-  {nome:"Processo de Fabricação", preReq:["Ciência dos Materiais"], T:4, P:0, sem:6, cr:4,
-    horarios:[
-      {dia:"Seg", inicio:13, dur:3},
-      {dia:"Qui", inicio:15, dur:2}
-    ]
-  },
-  {nome:"Contabilidade Gerencial", preReq:["Introdução a Economia"], T:3, P:0, sem:6, cr:3,
-    horarios:[{dia:"Sex", inicio:11, dur:3}]
-  },
-  {nome:"Estatística da Qualidade e Confiabilidade", preReq:["Métodos Estatísticos"], T:3, P:0, sem:6, cr:3,
-    horarios:[{dia:"Sáb", inicio:3, dur:3}]
-  },
+    // 5º Semestre
+    {nome:"Eletricidade Aplicada", preReq:["Física II"], T:4, P:0, sem:5, cr:4,
+      horarios:[
+        {dia:"Seg", inicio:13, dur:2},
+        {dia:"Ter", inicio:13, dur:2}
+      ]
+    },
+    {nome:"Métodos Estatísticos", preReq:["EDPS", "Estatística"], T:3, P:0, sem:5, cr:3,
+      horarios:[{dia:"Sex", inicio:15, dur:3}]
+    },
+    {nome:"Gestão da Informação I", preReq:["Engenharia de Métodos"], T:3, P:0, sem:5, cr:3,
+      horarios:[{dia:"Qua", inicio:10, dur:3}]
+    },
+    {nome:"Ciência do Ambiente", preReq:[], T:2, P:0, sem:5, cr:2,
+      horarios:[{dia:"Qua", inicio:11, dur:2}]
+    },
+    {nome:"Fenômenos de Transorte", preReq:["Física III"], T:3, P:0, sem:5, cr:3,
+      horarios:[{dia:"Qui", inicio:8, dur:3}]
+    },
+    {nome:"Ciência dos Materiais", preReq:[], T:3, P:0, sem:5, cr:3,
+      horarios:[{dia:"Ter", inicio:10, dur:3}]
+    },
 
-  // 7º Semestre
-  {nome:"Gestão Ambiental", preReq:["Ciência do Ambiente"], T:3, P:0, sem:7, cr:3,
-    horarios:[{dia:"Qui", inicio:9, dur:3}]
-  },
-  {nome:"Pesquisa Operacional II", preReq:["Pesquisa Operacional I"], T:3, P:0, sem:7, cr:3,
-    horarios:[{dia:"Sex", inicio:14, dur:3}]
-  },
-  {nome:"Gestão Emprendedora", preReq:["Gestão da Informação I"], T:3, P:0, sem:7, cr:3,
-    horarios:[{dia:"Qui", inicio:11, dur:3}]
-  },
-  {nome:"Engenharia Econômica", preReq:["Contabilidade Gerencial"], T:3, P:0, sem:7, cr:3,
-    horarios:[{dia:"Qua", inicio:14, dur:3}]
-  },
-  {nome:"Gestão da Qualidade", preReq:["Estatística da Qualidade e Confiabilidade"], T:3, P:0, sem:7, cr:3,
-    horarios:[{dia:"Qui", inicio:11, dur:3}]
-  },
-  {nome:"Custos Industriais", preReq:["Contabilidade Gerencial"], T:3, P:0, sem:7, cr:3,
-    horarios:[{dia:"Seg", inicio:11, dur:3}]
-  },
+    // 6º Semestre
+    {nome:"Ergonomia", preReq:["Psicologia e Sociologia do Trabalho"], T:2, P:0, sem:6, cr:2,
+      horarios:[{dia:"Qua", inicio:12, dur:3}]
+    },
+    {nome:"Pesquisa Operacional I", preReq:["Cálculo Vetorial", "Gestão da Informação I"], T:3, P:0, sem:6, cr:3,
+      horarios:[{dia:"Qui", inicio:8, dur:3}]
+    },
+    {nome:"Fundamentos da Engenharia de Segurança", preReq:["Psicologia e Sociologia do Trabalho"], T:2, P:0, sem:6, cr:2,
+      horarios:[{dia:"Ter", inicio:10, dur:3}]
+    },
+    {nome:"Processo de Fabricação", preReq:["Ciência dos Materiais"], T:4, P:0, sem:6, cr:4,
+      horarios:[
+        {dia:"Seg", inicio:13, dur:3},
+        {dia:"Qui", inicio:15, dur:2}
+      ]
+    },
+    {nome:"Contabilidade Gerencial", preReq:["Introdução a Economia"], T:3, P:0, sem:6, cr:3,
+      horarios:[{dia:"Sex", inicio:11, dur:3}]
+    },
+    {nome:"Estatística da Qualidade e Confiabilidade", preReq:["Métodos Estatísticos"], T:3, P:0, sem:6, cr:3,
+      horarios:[{dia:"Sáb", inicio:3, dur:3}]
+    },
 
-  // 8º Semestre
-  {nome:"Projeto do Produto", preReq:["Ergonomia", "Gestão da Qualidade"], T:3, P:0, sem:8, cr:3,
-    horarios:[{dia:"Qui", inicio:15, dur:3}]
-  },
-  {nome:"Simulação", preReq:["Métodos Estatísticos", "Pesquisa Operacional II"], T:2, P:2, sem:8, cr:3,
-    horarios:[
-      {dia:"Seg", inicio:13, dur:2},
-      {dia:"Qua", inicio:13, dur:2}
-    ]
-  },
-  {nome:"Logística I", preReq:["Pesquisa Operacional I"], T:3, P:0, sem:8, cr:3,
-    horarios:[{dia:"Qua", inicio:10, dur:3}]
-  },
-  {nome:"P.C.P I", preReq:["Engenharia Econômica"], T:3, P:0, sem:8, cr:3,
-    horarios:[
-      {dia:"Ter", inicio:15, dur:2},
-      {dia:"Qua", inicio:15, dur:2}
-    ]
-  },
-  {nome:"Gestão de Projeto", preReq:["Engenharia Econômica"], T:3, P:0, sem:8, cr:3,
-    horarios:[{dia:"Ter", inicio:10, dur:3}]
-  },
-  {nome:"Gestão da Manutenção", preReq:["Gestão da Qualidade"], T:3, P:0, sem:8, cr:3,
-    horarios:[{dia:"Qua", inicio:11, dur:3}]
-  },
+    // 7º Semestre
+    {nome:"Gestão Ambiental", preReq:["Ciência do Ambiente"], T:3, P:0, sem:7, cr:3,
+      horarios:[{dia:"Qui", inicio:9, dur:3}]
+    },
+    {nome:"Pesquisa Operacional II", preReq:["Pesquisa Operacional I"], T:3, P:0, sem:7, cr:3,
+      horarios:[{dia:"Sex", inicio:14, dur:3}]
+    },
+    {nome:"Gestão Emprendedora", preReq:["Gestão da Informação I"], T:3, P:0, sem:7, cr:3,
+      horarios:[{dia:"Qui", inicio:11, dur:3}]
+    },
+    {nome:"Engenharia Econômica", preReq:["Contabilidade Gerencial"], T:3, P:0, sem:7, cr:3,
+      horarios:[{dia:"Qua", inicio:14, dur:3}]
+    },
+    {nome:"Gestão da Qualidade", preReq:["Estatística da Qualidade e Confiabilidade"], T:3, P:0, sem:7, cr:3,
+      horarios:[{dia:"Qui", inicio:11, dur:3}]
+    },
+    {nome:"Custos Industriais", preReq:["Contabilidade Gerencial"], T:3, P:0, sem:7, cr:3,
+      horarios:[{dia:"Seg", inicio:11, dur:3}]
+    },
 
-  // 9º Semestre
-  {nome:"Projeto Final I", preReq:["140 Créditos"], T:0, P:2, sem:9, cr:1,
-    horarios:[{dia:"Ter", inicio:9, dur:4}]
-  },
-  {nome:"Gestão Estratégica", preReq:["Gestão Emprendedora"], T:3, P:0, sem:9, cr:3,
-    horarios:[{dia:"Qui", inicio:14, dur:3}]
-  },
-  {nome:"Gestão da Inovação", preReq:["Gestão Emprendedora"], T:3, P:0, sem:9, cr:3,
-    horarios:[{dia:"Qua", inicio:10, dur:3}]
-  },
-  {nome:"Logística II", preReq:["Logística I"], T:3, P:0, sem:9, cr:3,
-    horarios:[
-      {dia:"Seg", inicio:13, dur:2},
-      {dia:"Qua", inicio:13, dur:2}
-    ]
-  },
-  {nome:"P.C.P II", preReq:["P.C.P I"], T:3, P:0, sem:9, cr:3,
-    horarios:[{dia:"Qua", inicio:15, dur:2}]
-  },
-  {nome:"Planejamento das Instalações", preReq:["Simulação"], T:1, P:2, sem:9, cr:2,
-    horarios:[{dia:"Ter", inicio:13, dur:3}]
-  },
+    // 8º Semestre
+    {nome:"Projeto do Produto", preReq:["Ergonomia", "Gestão da Qualidade"], T:3, P:0, sem:8, cr:3,
+      horarios:[{dia:"Qui", inicio:15, dur:3}]
+    },
+    {nome:"Simulação", preReq:["Métodos Estatísticos", "Pesquisa Operacional II"], T:2, P:2, sem:8, cr:3,
+      horarios:[
+        {dia:"Seg", inicio:13, dur:2},
+        {dia:"Qua", inicio:13, dur:2}
+      ]
+    },
+    {nome:"Logística I", preReq:["Pesquisa Operacional I"], T:3, P:0, sem:8, cr:3,
+      horarios:[{dia:"Qua", inicio:10, dur:3}]
+    },
+    {nome:"P.C.P I", preReq:["Engenharia Econômica"], T:3, P:0, sem:8, cr:3,
+      horarios:[
+        {dia:"Ter", inicio:15, dur:2},
+        {dia:"Qua", inicio:15, dur:2}
+      ]
+    },
+    {nome:"Gestão de Projeto", preReq:["Engenharia Econômica"], T:3, P:0, sem:8, cr:3,
+      horarios:[{dia:"Ter", inicio:10, dur:3}]
+    },
+    {nome:"Gestão da Manutenção", preReq:["Gestão da Qualidade"], T:3, P:0, sem:8, cr:3,
+      horarios:[{dia:"Qua", inicio:11, dur:3}]
+    },
 
-  // 10º Semestre
-  {nome:"Projeto Final II", preReq:["Projeto Final I"], T:0, P:2, sem:10, cr:1,
-    horarios:[{dia:"Qua", inicio:11, dur:3}]
-  },
-  {nome:"Análise Organizacional", preReq:["Gestão Emprendedora"], T:2, P:0, sem:10, cr:2,
-    horarios:[{dia:"Seg", inicio:10, dur:3}]
-  },
-  {nome:"Estágio Supervisionado", preReq:["120 Créditos"], T:7, P:0, sem:10, cr:7,
-    horarios:[{dia:"Qua", inicio:8, dur:2}]
-  },
-  {nome:"Ciência de Dados", preReq:["Pesquisa Operacional I"], T:2, P:2, sem:10, cr:3,
-    horarios:[{dia:"Ter", inicio:11, dur:4}]
-  },
+    // 9º Semestre
+    {nome:"Projeto Final I", preReq:["140 Créditos"], T:0, P:2, sem:9, cr:1,
+      horarios:[{dia:"Ter", inicio:9, dur:4}]
+    },
+    {nome:"Gestão Estratégica", preReq:["Gestão Emprendedora"], T:3, P:0, sem:9, cr:3,
+      horarios:[{dia:"Qui", inicio:14, dur:3}]
+    },
+    {nome:"Gestão da Inovação", preReq:["Gestão Emprendedora"], T:3, P:0, sem:9, cr:3,
+      horarios:[{dia:"Qua", inicio:10, dur:3}]
+    },
+    {nome:"Logística II", preReq:["Logística I"], T:3, P:0, sem:9, cr:3,
+      horarios:[
+        {dia:"Seg", inicio:13, dur:2},
+        {dia:"Qua", inicio:13, dur:2}
+      ]
+    },
+    {nome:"P.C.P II", preReq:["P.C.P I"], T:3, P:0, sem:9, cr:3,
+      horarios:[{dia:"Qua", inicio:15, dur:2}]
+    },
+    {nome:"Planejamento das Instalações", preReq:["Simulação"], T:1, P:2, sem:9, cr:2,
+      horarios:[{dia:"Ter", inicio:13, dur:3}]
+    },
 
-  // Optativas
-  {nome:"Excel Aplicado a Negócios", preReq:["Programação"], T:2, P:2, sem:0, cr:3,
-  horarios:[{dia:"Seg", inicio:13, dur:4}]
-  },
-  {nome:"Int. Comércio Exterior", preReq:[], T:3, P:0, sem:0, cr:3,
-    horarios:[{dia:"Qua", inicio:10, dur:3}]
-  },
-  {nome:"Estatística Multivariada", preReq:["Cálculo a Várias Variáveis","Pesquisa Operacional I"], T:3, P:0, sem:0, cr:3,
-    horarios:[{dia:"Sex", inicio:12, dur:3}]
-  },
-  {nome:"Banco de Dados", preReq:["Programação"], T:2, P:2, sem:0, cr:3,
-    horarios:[{dia:"Ter", inicio:7, dur:4}]
-  },
-  {nome:"Metrologia", preReq:["Estatística da Qualidade e Confiabilidade"], T:2, P:2, sem:0, cr:3,
-    horarios:[
-      {dia:"Qui", inicio:15, dur:2},
-      {dia:"Sex", inicio:13, dur:2}
-    ]
-  },
+    // 10º Semestre
+    {nome:"Projeto Final II", preReq:["Projeto Final I"], T:0, P:2, sem:10, cr:1,
+      horarios:[{dia:"Qua", inicio:11, dur:3}]
+    },
+    {nome:"Análise Organizacional", preReq:["Gestão Emprendedora"], T:2, P:0, sem:10, cr:2,
+      horarios:[{dia:"Seg", inicio:10, dur:3}]
+    },
+    {nome:"Estágio Supervisionado", preReq:["120 Créditos"], T:7, P:0, sem:10, cr:7,
+      horarios:[{dia:"Qua", inicio:8, dur:2}]
+    },
+    {nome:"Ciência de Dados", preReq:["Pesquisa Operacional I"], T:2, P:2, sem:10, cr:3,
+      horarios:[{dia:"Ter", inicio:11, dur:4}]
+    },
 
-  // Turmas Extras
-  {nome:"Cálculo a uma Variável (Ext)", preReq:[], T:6, P:0, sem:11, cr:6,
-    horarios:[
-      {dia:"Seg", inicio:13, dur:2},
-      {dia:"Ter", inicio:13, dur:2},
-      {dia:"Qui", inicio:13, dur:2}
-    ]
-  },
-  {nome:"Álgebra Linear I (Ext)", preReq:[], T:2, P:0, sem:11, cr:2,
-    horarios:[
-      {dia:"Sex", inicio:15, dur:2}
-    ]
-  },
-  {nome:"Química Geral (Ext)", preReq:[], T:2, P:0, sem:11, cr:2,
-    horarios:[
-      {dia:"Seg", inicio:13, dur:4}
-    ]
-  },
-  {nome:"Desenho (Ext)", preReq:[], T:4, P:0, sem:11, cr:4,
-    horarios:[
-      {dia:"Sáb", inicio:2, dur:4}
-    ]
-  }
+    // Optativas
+    {nome:"Excel Aplicado a Negócios", preReq:["Programação"], T:2, P:2, sem:0, cr:3,
+    horarios:[{dia:"Seg", inicio:13, dur:4}]
+    },
+    {nome:"Int. Comércio Exterior", preReq:[], T:3, P:0, sem:0, cr:3,
+      horarios:[{dia:"Qua", inicio:10, dur:3}]
+    },
+    {nome:"Estatística Multivariada", preReq:["Cálculo a Várias Variáveis","Pesquisa Operacional I"], T:3, P:0, sem:0, cr:3,
+      horarios:[{dia:"Sex", inicio:12, dur:3}]
+    },
+    {nome:"Banco de Dados", preReq:["Programação"], T:2, P:2, sem:0, cr:3,
+      horarios:[{dia:"Ter", inicio:7, dur:4}]
+    },
+    {nome:"Metrologia", preReq:["Estatística da Qualidade e Confiabilidade"], T:2, P:2, sem:0, cr:3,
+      horarios:[
+        {dia:"Qui", inicio:15, dur:2},
+        {dia:"Sex", inicio:13, dur:2}
+      ]
+    },
 
-];
-console.log(D)
+    // Turmas Extras
+    {nome:"Cálculo a uma Variável (Ext)", preReq:[], T:6, P:0, sem:11, cr:6,
+      horarios:[
+        {dia:"Seg", inicio:13, dur:2},
+        {dia:"Ter", inicio:13, dur:2},
+        {dia:"Qui", inicio:13, dur:2}
+      ]
+    },
+    {nome:"Álgebra Linear I (Ext)", preReq:[], T:2, P:0, sem:11, cr:2,
+      horarios:[
+        {dia:"Sex", inicio:15, dur:2}
+      ]
+    },
+    {nome:"Química Geral (Ext)", preReq:[], T:2, P:0, sem:11, cr:2,
+      horarios:[
+        {dia:"Seg", inicio:13, dur:4}
+      ]
+    },
+    {nome:"Desenho (Ext)", preReq:[], T:4, P:0, sem:11, cr:4,
+      horarios:[
+        {dia:"Sáb", inicio:2, dur:4}
+      ]
+    }
+  ],
+  "prod-antigo": [
+
+  ],
+  "mec-novo":   [
+
+  ],
+  "mec-antigo": [
+
+  ]
+};
+
+// ======== D “constante” baseado no curso escolhido ========
+const D = JSON.parse(JSON.stringify(DATASETS[CURSO_KEY]));
+
 // ---------- Mapas de equivalência entre disciplinas ----------
 // Chave: disciplina normal, Valor: disciplina extra
 const extraMap = new Map([
@@ -381,7 +397,8 @@ function getFeitas() {
   return Array.from(todasFeitas);
 }
 
-// Calcula total de créditos das disciplinas feitas, sem duplicar equivalentes
+// ========================= Utils de CR / Estado =========================
+
 function calcCRFeitas(lista) {
   const mapCreditos = new Map(D.map(d => [d.nome, d.cr || 0]));
   const contados = new Set();
@@ -391,69 +408,129 @@ function calcCRFeitas(lista) {
     let normal = nome;
     let extra = extraMap.get(nome);
 
-    // Se é disciplina extra, identifica a normal correspondente
     if (!extra) {
       const par = [...extraMap.entries()].find(([n, e]) => e === nome);
       if (par) [normal, extra] = par;
     }
 
-    // Soma apenas se nenhum dos dois já foi contado
     if (!contados.has(normal) && !contados.has(extra)) {
       total += mapCreditos.get(normal) || 0;
       if (normal) contados.add(normal);
       if (extra) contados.add(extra);
     }
   }
-
   return total;
 }
 
-// Atualiza visualmente a contagem de créditos concluídos
 function refreshConcluidos() {
   const feitas = getFeitas();
   document.getElementById('crConcl').textContent = calcCRFeitas(feitas);
 }
 
-// Verifica se uma disciplina atende aos pré-requisitos
 function prereqOK(disc, feitas, crFeitas) {
   if (!disc.preReq) return true;
-
   for (const p of disc.preReq) {
     if (p.endsWith("Créditos")) {
-      if (crFeitas < parseInt(p)) return false; // pré-requisito de créditos
+      if (crFeitas < parseInt(p)) return false;
     } else if (!feitas.includes(p)) {
-      return false; // pré-requisito de disciplina normal
+      return false;
     }
   }
-
   return true;
 }
 
-// Sincroniza estado entre disciplina normal e sua equivalente extra
+// =============== Tooltip de pré-requisitos (explicação) ===============
+function getPrereqExplanation(disc, feitas, crFeitas) {
+  if (!disc.preReq || disc.preReq.length === 0) {
+    return { ok: true, msg: "Sem pré-requisitos" };
+  }
+
+  let ok = true;
+  const missingDiscs = [];
+  let creditMsg = null;
+
+  for (const p of disc.preReq) {
+    if (p.endsWith("Créditos")) {
+      const req = parseInt(p, 10);
+      if (crFeitas < req) {
+        ok = false;
+        const falta = req - crFeitas;
+        creditMsg = `Faltam ${falta} créditos (precisa ${req})`;
+      }
+    } else if (!feitas.includes(p)) {
+      ok = false;
+      missingDiscs.push(p);
+    }
+  }
+
+  if (ok) return { ok: true, msg: "Você possui todos os pré-requisitos" };
+
+  const parts = [];
+  if (creditMsg) parts.push(creditMsg);
+  if (missingDiscs.length) parts.push(`Falta cursar: ${missingDiscs.join(", ")}`);
+
+  return { ok: false, msg: parts.join(" · ") };
+}
+
+
+// =============== PINTURA de cores (baseada no DOM atual) ===============
+
+function getFeitasFromDOM() {
+  return Array.from(document.querySelectorAll('.chk.checked'))
+    .map(el => el.dataset.nome)
+    .filter(Boolean);
+}
+
+function updateBoxColors(box, feitas, crFeitas) {
+  const linhas = box.querySelectorAll('.disc');
+  linhas.forEach(line => {
+    const nome = line.dataset.nome;
+    const d = D.find(dd => dd.nome === nome);
+    const lbl = line.querySelector('.label');
+    if (!d || !lbl) return;
+
+    const { ok, msg } = getPrereqExplanation(d, feitas, crFeitas);
+
+    // classes exclusivas
+    lbl.classList.remove('can-pull', 'cant-pull');
+    lbl.classList.add(ok ? 'can-pull' : 'cant-pull');
+
+    // tooltip nativo
+    if (msg) lbl.title = msg; else lbl.removeAttribute('title');
+  });
+}
+
+function updateAllColorsDOM() {
+  const feitas = getFeitasFromDOM();
+  const crFeitas = calcCRFeitas(feitas);
+  document.querySelectorAll('.sem').forEach(box => {
+    updateBoxColors(box, feitas, crFeitas);
+  });
+}
+
+// =================== Sincronização de equivalentes ===================
+
 function sincronizarExtra(nomeDisc, marcado) {
-  // Se for normal, marca/desmarca equivalente
   if (extraMap.has(nomeDisc)) {
     const eq = extraMap.get(nomeDisc);
     const chkEq = document.querySelector(`.chk[data-nome="${eq}"]`);
     if (chkEq) chkEq.classList.toggle('checked', marcado);
   }
-
-  // Se for extra, marca/desmarca normal
   for (const [normal, extra] of extraMap.entries()) {
     if (extra === nomeDisc) {
       const chkNorm = document.querySelector(`.chk[data-nome="${normal}"]`);
       if (chkNorm) chkNorm.classList.toggle('checked', marcado);
     }
   }
+  updateAllColorsDOM();
 }
 
-// ---------- Função para construir coluna de semestre ----------
+// =================== Construção das colunas de semestre ===================
 
 function buildSemColumn(sem) {
   const box = document.createElement('div'); 
   box.className = 'sem';
 
-  // ----- Cabeçalho da coluna -----
   const titleContainer = document.createElement('div'); 
   titleContainer.style.display = 'flex'; 
   titleContainer.style.alignItems = 'center'; 
@@ -464,7 +541,6 @@ function buildSemColumn(sem) {
   else if (sem === 11) title.textContent = 'Turmas Extras';
   else title.textContent = `${sem}º Semestre`;
 
-  // Checkbox "marcar tudo"
   const chkAll = document.createElement('input'); 
   chkAll.type = 'checkbox';
   chkAll.className = 'custom-checkbox';
@@ -484,18 +560,18 @@ function buildSemColumn(sem) {
         sincronizarExtra(nomeDisc, marcado);
       }
     });
+
     refreshConcluidos();
+    updateAllColorsDOM();
   });
 
   titleContainer.appendChild(title);
   titleContainer.appendChild(chkAll);
 
-  // ----- Lista de disciplinas -----
   const list = document.createElement('div'); 
   list.className = 'disc-list';
 
   (bySem[sem] || []).forEach(d => {
-    // atribui cor se ainda não tiver
     if (!colorMap.has(d.nome)) {
       colorMap.set(d.nome, palette[colorIdx % palette.length]); 
       colorIdx++; 
@@ -503,6 +579,7 @@ function buildSemColumn(sem) {
 
     const line = document.createElement('div'); 
     line.className = 'disc';
+    line.dataset.nome = d.nome;
 
     const chk = document.createElement('div'); 
     chk.className = 'chk'; 
@@ -517,7 +594,6 @@ function buildSemColumn(sem) {
     lbl.className = 'label'; 
     lbl.textContent = d.nome;
 
-    // clique no checkbox
     chk.addEventListener('click', () => {
       const nomeDisc = d.nome;
       const feitas = getFeitas();
@@ -532,8 +608,8 @@ function buildSemColumn(sem) {
       chk.classList.toggle('checked', marcado);
       sincronizarExtra(nomeDisc, marcado);
       refreshConcluidos();
+      updateAllColorsDOM();
 
-      // atualiza o estado do "marcar tudo"
       const todas = Array.from(box.querySelectorAll('.disc .chk'))
                          .every(c => c.classList.contains('checked'));
       chkAll.checked = todas;
@@ -547,32 +623,29 @@ function buildSemColumn(sem) {
   box.appendChild(titleContainer);
   box.appendChild(list);
 
+  updateBoxColors(box, getFeitasFromDOM(), calcCRFeitas(getFeitasFromDOM()));
+
   return box;
 }
 
-// ---------- Elementos principais da grade ----------
+// =================== Montagem da grade ===================
+
 const rowTop = document.getElementById('rowTop');
 const rowBottom = document.getElementById('rowBottom');
-const rowExtra = document.getElementById('rowExtra'); // Optativas e turmas extras
+const rowExtra = document.getElementById('rowExtra');
 
-// ---------- Montagem dos semestres 1–5 na linha superior ----------
 for (let sem = 1; sem <= 5; sem++) {
-  const col = buildSemColumn(sem); // Cria coluna do semestre
-  rowTop.appendChild(col);         // Adiciona à linha superior
+  rowTop.appendChild(buildSemColumn(sem));
 }
-
-// ---------- Montagem dos semestres 6–10 na linha inferior ----------
 for (let sem = 6; sem <= 10; sem++) {
-  const col = buildSemColumn(sem); // Cria coluna do semestre
-  rowBottom.appendChild(col);      // Adiciona à linha inferior
+  rowBottom.appendChild(buildSemColumn(sem));
 }
+rowExtra.appendChild(buildSemColumn(11));
+rowExtra.appendChild(buildSemColumn(0));
 
-// ---------- Montagem das optativas e turmas extras ----------
-const colTurmasExt = buildSemColumn(11); // Turmas extras
-const colExtra = buildSemColumn(0);  // Optativas
-
-rowExtra.appendChild(colTurmasExt); // Adiciona turmas extras primeiro
-rowExtra.appendChild(colExtra);     // Adiciona optativas em seguida
+document.addEventListener('DOMContentLoaded', () => {
+  updateAllColorsDOM();
+});
 
 // ---------- Função utilitária para obter o horário ----------
 function getHorario(dia, row) {
@@ -1053,17 +1126,47 @@ document.getElementById('btnExportPDF').addEventListener('click', () => {
   });
 });
 
-// ---------- Limpar todas as disciplinas colocadas ----------
+
+// =================== Limpar Grade + Repaint ===================
+
 function clearPlaced() {
-  placed.clear();           // limpa mapa de disciplinas colocadas
-  renderGridStructure();    // redesenha grade vazia
-  refreshPlacedUI();        // atualiza chips e créditos
+  placed.clear();
+  renderGridStructure();
+  refreshPlacedUI();
 }
 
-// Botão "Limpar Grade"
 document.getElementById('btnClearGrade').addEventListener('click', () => {
   clearPlaced();
-  document.getElementById('feedback').innerText = ''; // limpa mensagens de feedback
+  document.getElementById('feedback').innerText = '';
+
+  // espera o re-render completo (2 frames) antes de pintar
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      refreshConcluidos();
+      updateAllColorsDOM();
+    });
+  });
+});
+
+// =================== OBSERVADOR DE MUDANÇAS DE DOM ===================
+// por quê: clearPlaced/renderGridStructure alteram o DOM; garantimos repaint
+const mo = new MutationObserver((mutations) => {
+  const shouldRepaint = mutations.some(m =>
+    m.type === 'childList' ||
+    (m.type === 'attributes' &&
+     m.attributeName === 'class' &&
+     (m.target.classList?.contains('chk') || m.target.classList?.contains('disc')))
+  );
+  if (shouldRepaint) {
+    // microtask: evita múltiplos repaints na mesma batelada
+    Promise.resolve().then(updateAllColorsDOM);
+  }
+});
+mo.observe(document.body, {
+  subtree: true,
+  childList: true,
+  attributes: true,
+  attributeFilter: ['class']
 });
 
 /** Ordem dos blocos do seletor cutoff*/
