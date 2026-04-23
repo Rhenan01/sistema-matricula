@@ -2,6 +2,8 @@
 
 Sistema web desenvolvido com **Python, Flask e PostgreSQL** para auxiliar alunos do **CEFET/RJ UnED Itaguaí** no processo de matrícula. O projeto foi estruturado para permitir autenticação, cadastro de usuário com **curso** e **PPC**, consulta de disciplinas conforme o PPC do aluno, registro do histórico acadêmico e geração inteligente de grade com base em **pré-requisitos**, **créditos já concluídos**, **reprovações** e **regras curriculares**.
 
+[![Demo – GitHub Pages](https://img.shields.io/badge/demo-online-brightgreen)](https://rhenan01.github.io/SistemaMatriculaInteligente/)
+
 ---
 
 ## Sumário
