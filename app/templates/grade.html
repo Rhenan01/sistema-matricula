@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Configurações básicas do documento -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <!-- Título exibido na aba do navegador -->
+    <title>Montagem de Grade</title>
+
+    <!-- Favicon da página -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='central' font-size='40'%3E📅%3C/text%3E%3C/svg%3E">
+
+    <!-- Bibliotecas externas -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Estilos da página -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/grade.css') }}">
+</head>
+
+<body>
+    <header>
+        <div class="header-top">
+            <!-- Área do perfil do usuário -->
+            <div class="profile-area" id="profileArea">
+                <button type="button" class="profile-trigger" id="profileTrigger">
+                    <div class="profile-avatar">
+                        {{ user_name[0]|upper if user_name else 'U' }}
+                    </div>
+
+                    <div class="profile-user-info">
+                        <span class="profile-user-label">Aluno</span>
+                        <span class="profile-user-name">{{ user_name }}</span>
+                    </div>
+
+                    <span class="profile-chevron" id="profileChevron">⌄</span>
+                </button>
+
+                <!-- Menu dropdown do perfil -->
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="profile-dropdown-header">
+                        <div class="profile-avatar large">
+                            {{ user_name[0]|upper if user_name else 'U' }}
+                        </div>
+
+                        <div class="profile-dropdown-user">
+                            <span class="profile-user-label">Conectado como</span>
+                            <strong>{{ user_name }}</strong>
+                        </div>
+                    </div>
+
+                    <a href="{{ url_for('main.index') }}" class="profile-link secondary">
+                        <span class="profile-link-icon">◻︎</span>
+                        <span>Voltar para o menu principal</span>
+                    </a>
+
+                    <a href="{{ url_for('main.historico_disciplinas') }}" class="profile-link secondary">
+                        <span class="profile-link-icon">✎</span>
+                        <span>Ir para Histórico de Disciplinas</span>
+                    </a>
+                    {% if is_admin %}
+                    <a href="{{ url_for('admin.dashboard') }}" class="profile-link secondary">
+                        <span>⚙</span>
+                        <span>Painel Administrativo</span>
+                    </a>
+                    {% endif %}
+                    <a href="{{ url_for('auth.logout') }}" class="profile-logout-link">
+                        <span class="logout-icon">↗</span>
+                        <span>Sair</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Título principal e subtítulo -->
+            <div class="title-wrap">
+                <h1>Montagem de Grade</h1>
+                <p><span id="typed"></span></p>
+            </div>
+
+            <!-- Logo -->
+            <img src="{{ url_for('static', filename='figures/logo.png') }}" alt="Logo CEFET" class="logo-cefet">
+        </div>
+    </header>
+
+    <main>
+        <!-- Barra principal de configuração da geração -->
+       <section class="controls">
+            <div class="controls-panel">
+                <div class="controls-block controls-block-config">
+                    <div class="field field-qtd">
+                        <label class="small" for="qtd">Qtd. disciplinas</label>
+                        <input id="qtd" type="number" min="1" max="12" value="6" />
+                    </div>
+
+                    <div class="field field-estrategia">
+                        <label class="small" for="estrategiaBase">Estratégia principal</label>
+                        <select id="estrategiaBase">
+                            <option value="semestre">Progredir por semestre</option>
+                            <option value="cr">Maximizar CR</option>
+                        </select>
+                    </div>
+
+                    <div class="field field-horario">
+                        <label class="small" for="horarioMinimo">A partir de</label>
+                        <select id="horarioMinimo">
+                            <option value="">Sem filtro</option>
+                            <option value="13:10-14:00">13:10</option>
+                            <option value="14:00-14:50">14:00</option>
+                            <option value="14:50-15:40">14:50</option>
+                            <option value="15:40-16:30">15:40</option>
+                            <option value="16:40-17:30">16:40</option>
+                            <option value="17:30-18:20">17:30</option>
+                            <option value="18:20-19:10">18:20</option>
+                            <option value="19:10-20:00">19:10</option>
+                            <option value="20:10-21:00">20:10</option>
+                            <option value="21:00-21:50">21:00</option>
+                            <option value="21:50-22:40">21:50</option>
+                        </select>
+                    </div>
+
+                    <div class="field field-toggle">
+                        <label class="small" for="preferirDiaLivre">Preferências</label>
+
+                        <label class="switch-card">
+                            <input type="checkbox" id="preferirDiaLivre">
+                            <span class="switch-slider"></span>
+                            <span class="switch-label">Priorizar dia livre</span>
+                        </label>
+                    </div>
+
+                    <div class="field dia-field hidden" id="diaWrap">
+                        <label class="small" for="diaLivre">Dia livre</label>
+                        <select id="diaLivre">
+                            <option>Seg</option>
+                            <option>Ter</option>
+                            <option>Qua</option>
+                            <option>Qui</option>
+                            <option>Sex</option>
+                            <option>Sáb</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="controls-block controls-block-actions">
+                    <div class="controls-left">
+                        <div class="field field-historico">
+                            <label class="small">Histórico</label>
+                            <div class="toggles">
+                                <button id="btnToggleConcluidas" class="btn ghost">Ver concluídas</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="controls-center">
+                        <div class="resume-cards">
+                            <div class="resume-card">
+                                <span class="resume-label">Concluídas</span>
+                                <strong id="qtdConcluidas" class="resume-number">0</strong>
+                            </div>
+
+                            <div class="resume-card">
+                                <span class="resume-label">CR</span>
+                                <strong id="crConcl" class="resume-number">0</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="controls-right">
+                        <button id="btnGerar" class="btn-gerar-inline">Gerar Grade</button>
+                    </div>
+                </div>
+
+                <div class="controls-hint">
+                    O filtro de horário considera apenas disciplinas de segunda a sexta. As disciplinas de sábado continuam elegíveis normalmente.
+                </div>
+            </div>
+        </section>
+
+        <!-- Painel colapsável com resumo do histórico -->
+        <section id="painelConcluidas" class="historico-panel collapsed">
+            <div class="historico-panel-header">
+                <strong>Disciplinas concluídas</strong>
+                <span id="historicoResumo" class="small-muted">0 disciplinas</span>
+            </div>
+
+            <div id="historicoChips" class="historico-chips"></div>
+        </section>
+
+        <!-- Área de feedback -->
+        <div id="feedback"></div>
+
+        <!-- Área principal da grade -->
+        <section class="grade-wrap" id="gradeWrap">
+            <div class="grade-topbar">
+                <div class="small-muted">
+                    As disciplinas concluídas e os créditos são carregados automaticamente do Histórico de Disciplinas.
+                </div>
+
+                <div class="grade-actions">
+                    <button id="btnClearGrade" class="btn btn-export btn-icon-text" title="Limpar grade">Limpar</button>
+                    <button id="btnExportPDF" class="btn btn-export">Exportar Grade (PDF)</button>
+                </div>
+            </div>
+
+            <div class="grade-spacer"></div>
+
+            <!-- Grade horária -->
+            <div id="grade" class="grid" aria-label="grade-horaria"></div>
+
+            <!-- Rodapé informativo -->
+            <div class="tools">
+                <div class="small-muted" id="infoMsg">Quantidade de créditos sugeridos na grade: 0</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de seleção manual -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Matérias disponíveis</h3>
+            <ul id="materiasList"></ul>
+        </div>
+    </div>
+
+    <!-- Script principal -->
+    <script type="module" src="{{ url_for('static', filename='js/grade.js') }}"></script>
+</body>
+</html>

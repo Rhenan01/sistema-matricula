@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Disciplinas</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_disciplinas.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-container">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ 'flash-success' if category == 'success' else 'flash-error' }}">
+                        <div class="flash-message-content">
+                            <div class="flash-icon">
+                                {% if category == 'success' %}
+                                    <i class="fa-solid fa-circle-check"></i>
+                                {% else %}
+                                    <i class="fa-solid fa-circle-exclamation"></i>
+                                {% endif %}
+                            </div>
+
+                            <div class="flash-text-group">
+                                <strong>
+                                    {% if category == 'success' %}Sucesso{% else %}Atenção{% endif %}
+                                </strong>
+                                <span>{{ message }}</span>
+                            </div>
+                        </div>
+
+                        <button type="button" class="flash-close" aria-label="Fechar mensagem">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+
+                        <div class="flash-progress"></div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <main class="admin-disciplinas-page">
+        <section class="hero-card reveal">
+            <div class="hero-topbar">
+                <div class="hero-topbar-left">
+                    <a href="{{ url_for('admin.dashboard') }}" class="back-button">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Voltar ao painel</span>
+                    </a>
+
+                    <a href="{{ url_for('main.index') }}" class="back-button secondary-button">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Menu principal</span>
+                    </a>
+                </div>
+
+                <span class="hero-badge">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    Área administrativa
+                </span>
+            </div>
+
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="hero-kicker">Gerenciamento acadêmico</span>
+                    <h1>Gerenciar Disciplinas</h1>
+                    <p>
+                        Cadastre, edite, remova e configure equivalências e pré-requisitos
+                        com uma interface compacta, prática e eficiente.
+                    </p>
+                </div>
+
+                <div class="hero-icon-card">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                </div>
+            </div>
+        </section>
+
+        <section class="modern-card reveal">
+            <div class="card-header">
+                <div>
+                    <span class="section-tag">Cadastro</span>
+                    <h2>Nova disciplina</h2>
+                    <p>Os créditos são calculados automaticamente com base nas cargas horárias.</p>
+                </div>
+            </div>
+
+            <form action="{{ url_for('admin.adicionar_disciplina') }}" method="POST" class="new-disciplina-form">
+                <div class="input-wrapper input-name-create">
+                    <i class="fa-solid fa-book"></i>
+                    <input type="text" name="nome" placeholder="Nome da disciplina" required>
+                </div>
+
+                <div class="select-wrapper input-ppc-create">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                    <select name="ppc_id" required>
+                        <option value="" disabled selected hidden>Curso / PPC</option>
+                        {% for ppc in ppcs %}
+                            <option value="{{ ppc.id }}">
+                                {{ ppc.label }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="input-wrapper input-semestre-create">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <input type="number" name="semestre" placeholder="Sem." min="1" step="1" required>
+                </div>
+
+                <div class="input-wrapper input-number-medium-create">
+                    <i class="fa-solid fa-clock"></i>
+                    <input type="number" name="carga_teorica" placeholder="T" min="0" step="1" required>
+                </div>
+
+                <div class="input-wrapper input-number-medium-create">
+                    <i class="fa-solid fa-flask"></i>
+                    <input type="number" name="carga_pratica" placeholder="P" min="0" step="2" required>
+                </div>
+
+                <div class="select-wrapper input-type-create">
+                    <i class="fa-solid fa-tag"></i>
+                    <select name="tipo" required>
+                        <option value="" disabled selected hidden>Tipo</option>
+                        <option value="regular">regular</option>
+                        <option value="optativa">optativa</option>
+                        <option value="extra">extra</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Adicionar</span>
+                </button>
+            </form>
+        </section>
+
+        <section class="modern-card reveal">
+            <div class="card-header card-header-list">
+                <div class="list-header-text">
+                    <span class="section-tag">Listagem</span>
+                    <h2>Disciplinas cadastradas</h2>
+                    <p>Filtre e gerencie as disciplinas já existentes no sistema.</p>
+                </div>
+
+                <div class="list-tools">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="filtroDisciplinas" placeholder="Buscar disciplina...">
+                    </div>
+
+                    <div class="select-wrapper filter-select">
+                        <i class="fa-solid fa-filter"></i>
+                        <select id="filtroSemestre">
+                            <option value="">Todos os semestres</option>
+                            {% for semestre in range(1, 11) %}
+                                <option value="{{ semestre }}">{{ semestre }}º semestre</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="select-wrapper filter-select filter-select-ppc">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                        <select id="filtroPpc">
+                            <option value="">Todos os cursos / PPCs</option>
+                            {% for ppc in ppcs %}
+                                <option value="{{ ppc.label|lower }}">{{ ppc.label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <span class="counter-box">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span id="contadorDisciplinas">{{ disciplinas|length }}</span> disciplina(s)
+                    </span>
+                </div>
+            </div>
+
+            <div class="disciplinas-list" id="listaDisciplinas">
+                {% if disciplinas %}
+                    {% for disciplina in disciplinas %}
+                        <article
+                            class="disciplina-item reveal-item"
+                            data-disciplina-nome="{{ disciplina.nome|lower }}"
+                            data-disciplina-curso="{{ disciplina.curso_nome|lower }}"
+                            data-disciplina-ppc="{{ disciplina.ppc_label|lower }}"
+                            data-disciplina-semestre="{{ disciplina.semestre }}"
+                        >
+                            <div class="disciplina-top">
+                                <div class="disciplina-left">
+                                    <div class="disciplina-index">#{{ loop.index }}</div>
+
+                                    <div class="disciplina-info">
+                                        <h3>{{ disciplina.nome }}</h3>
+                                        <p>{{ disciplina.curso_nome }} • PPC {{ disciplina.ppc_codigo }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="disciplina-badges">
+                                    <span
+                                        class="disciplina-badge badge-equivalencia"
+                                        data-tooltip="{{ disciplina.equivalencias_tooltip if disciplina.equivalencias_tooltip else 'Nenhuma equivalência cadastrada.' }}"
+                                    >
+                                        <i class="fa-solid fa-link"></i>
+                                        Eq. {{ disciplina.total_equivalencias }}
+                                    </span>
+
+                                    <span
+                                        class="disciplina-badge badge-pre-requisito"
+                                        data-tooltip="{% if disciplina.pre_requisitos_tooltip %}{{ disciplina.pre_requisitos_tooltip }}{% elif disciplina.creditos_minimos is not none %}Créditos mínimos: {{ disciplina.creditos_minimos }}{% else %}Nenhum pré-requisito cadastrado.{% endif %}"
+                                    >
+                                        <i class="fa-solid fa-list-check"></i>
+                                        PR {{ disciplina.total_pre_requisitos }}
+                                    </span>
+
+                                    <span class="disciplina-badge">
+                                        <i class="fa-solid fa-layer-group"></i>
+                                        {{ disciplina.semestre }}
+                                    </span>
+                                    <span class="disciplina-badge">
+                                        <i class="fa-solid fa-star"></i>
+                                        {{ disciplina.creditos }}
+                                    </span>
+                                    <span class="disciplina-badge">
+                                        <i class="fa-solid fa-clock"></i>
+                                        {{ disciplina.carga_teorica }}
+                                    </span>
+                                    <span class="disciplina-badge">
+                                        <i class="fa-solid fa-flask"></i>
+                                        {{ disciplina.carga_pratica }}
+                                    </span>
+                                    <span class="disciplina-badge badge-type">
+                                        <i class="fa-solid fa-tag"></i>
+                                        {{ disciplina.tipo }}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="disciplina-bottom">
+                                <form
+                                    method="POST"
+                                    action="{{ url_for('admin.editar_disciplina', disciplina_id=disciplina.id) }}"
+                                    class="edit-form"
+                                >
+                                    <div class="mini-input-wrapper input-name">
+                                        <i class="fa-solid fa-pen"></i>
+                                        <input type="text" name="nome" value="{{ disciplina.nome }}" required>
+                                    </div>
+
+                                    <div class="mini-select-wrapper input-ppc">
+                                        <i class="fa-solid fa-book-open-reader"></i>
+                                        <select name="ppc_id" required>
+                                            {% for ppc in ppcs %}
+                                                <option value="{{ ppc.id }}" {% if ppc.id == disciplina.ppc_id %}selected{% endif %}>
+                                                    {{ ppc.label }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div class="mini-input-wrapper input-semestre">
+                                        <i class="fa-solid fa-layer-group"></i>
+                                        <input type="number" name="semestre" value="{{ disciplina.semestre }}" min="1" step="1" required>
+                                    </div>
+
+                                    <div class="mini-input-wrapper input-mini-medium">
+                                        <i class="fa-solid fa-clock"></i>
+                                        <input type="number" name="carga_teorica" value="{{ disciplina.carga_teorica }}" min="0" step="1" required>
+                                    </div>
+
+                                    <div class="mini-input-wrapper input-mini-medium">
+                                        <i class="fa-solid fa-flask"></i>
+                                        <input type="number" name="carga_pratica" value="{{ disciplina.carga_pratica }}" min="0" step="2" required>
+                                    </div>
+
+                                    <div class="mini-select-wrapper input-type">
+                                        <i class="fa-solid fa-tag"></i>
+                                        <select name="tipo" required>
+                                            <option value="regular" {% if disciplina.tipo == 'regular' %}selected{% endif %}>regular</option>
+                                            <option value="optativa" {% if disciplina.tipo == 'optativa' %}selected{% endif %}>optativa</option>
+                                            <option value="extra" {% if disciplina.tipo == 'extra' %}selected{% endif %}>extra</option>
+                                        </select>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-save icon-only" title="Salvar">
+                                        <i class="fa-solid fa-floppy-disk"></i>
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-equivalencia icon-only open-equivalencias-modal"
+                                        title="Equivalências"
+                                        data-disciplina-id="{{ disciplina.id }}"
+                                    >
+                                        <i class="fa-solid fa-link"></i>
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-pre-requisito icon-only open-pre-requisitos-modal"
+                                        title="Pré-requisitos"
+                                        data-disciplina-id="{{ disciplina.id }}"
+                                    >
+                                        <i class="fa-solid fa-list-check"></i>
+                                    </button>
+                                </form>
+
+                                <form
+                                    method="POST"
+                                    action="{{ url_for('admin.excluir_disciplina', disciplina_id=disciplina.id) }}"
+                                    class="delete-form"
+                                    data-disciplina-name="{{ disciplina.nome }}"
+                                >
+                                    <button type="button" class="btn btn-danger icon-only open-delete-modal" title="Excluir">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </article>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-state" id="estadoVazio">
+                        <div class="empty-state-icon">
+                            <i class="fa-solid fa-folder-open"></i>
+                        </div>
+                        <h3>Nenhuma disciplina cadastrada</h3>
+                        <p>Cadastre a primeira disciplina para começar a gerenciar esta área.</p>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="empty-search-state hidden" id="emptySearchState">
+                <div class="empty-state-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h3>Nenhum resultado encontrado</h3>
+                <p>Tente buscar por outro nome, semestre ou PPC.</p>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal-card">
+            <div class="modal-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+
+            <div class="modal-content">
+                <span class="modal-tag">Confirmação</span>
+                <h3>Deseja excluir esta disciplina?</h3>
+                <p id="deleteModalText">Essa ação não poderá ser desfeita.</p>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" id="cancelDelete">
+                    Cancelar
+                </button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">
+                    Excluir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="equivalenciasModal">
+        <div class="modal-card modal-card-lg">
+            <div class="modal-icon modal-icon-link">
+                <i class="fa-solid fa-link"></i>
+            </div>
+
+            <div class="modal-content">
+                <span class="modal-tag">Equivalências</span>
+                <h3 id="equivalenciasModalTitle">Disciplinas equivalentes</h3>
+                <p id="equivalenciasModalSubtitle">Gerencie as equivalências desta disciplina.</p>
+            </div>
+
+            <div class="equivalencias-body">
+                <div class="equivalencias-section">
+                    <h4>Equivalências cadastradas</h4>
+                    <div id="equivalenciasList" class="equivalencias-list"></div>
+                </div>
+
+                <div class="equivalencias-section">
+                    <h4>Adicionar equivalência</h4>
+                    <form id="equivalenciaForm" method="POST" class="equivalencia-form">
+                        <div class="select-wrapper equivalencia-select">
+                            <i class="fa-solid fa-book-open-reader"></i>
+                            <select id="equivalenciaSelect" name="disciplina_equivalente_id" required>
+                                <option value="" disabled selected hidden>Selecione a disciplina equivalente</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Adicionar equivalência</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" id="closeEquivalenciasModal">
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="preRequisitosModal">
+        <div class="modal-card modal-card-lg">
+            <div class="modal-icon modal-icon-pr">
+                <i class="fa-solid fa-list-check"></i>
+            </div>
+
+            <div class="modal-content">
+                <span class="modal-tag">Pré-requisitos</span>
+                <h3 id="preRequisitosModalTitle">Pré-requisitos da disciplina</h3>
+                <p id="preRequisitosModalSubtitle">Gerencie os pré-requisitos desta disciplina.</p>
+            </div>
+
+            <div class="equivalencias-body">
+                <div class="equivalencias-section">
+                    <h4>Pré-requisitos cadastrados</h4>
+                    <div id="preRequisitosList" class="equivalencias-list"></div>
+                </div>
+
+                <div class="equivalencias-section">
+                    <h4>Adicionar pré-requisito</h4>
+                    <form id="preRequisitoForm" method="POST" class="equivalencia-form">
+                        <div class="select-wrapper equivalencia-select">
+                            <i class="fa-solid fa-book-open-reader"></i>
+                            <select id="preRequisitoSelect" name="disciplina_pre_req_id" required>
+                                <option value="" disabled selected hidden>Selecione a disciplina pré-requisito</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Adicionar pré-requisito</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="equivalencias-section">
+                    <h4>Créditos mínimos</h4>
+                    <form id="creditosMinimosForm" method="POST" class="equivalencia-form">
+                        <div class="input-wrapper equivalencia-select">
+                            <i class="fa-solid fa-star"></i>
+                            <input type="number" id="creditosMinimosInput" name="creditos_minimos" placeholder="Informe os créditos mínimos" min="0" step="1">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            <span>Salvar créditos mínimos</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" id="closePreRequisitosModal">
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/admin_disciplinas.js') }}"></script>
+</body>
+</html>

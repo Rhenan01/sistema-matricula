@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Usuários</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_usuarios.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='central' font-size='36'%3E👤%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+    <div class="page-bg-shape shape-1"></div>
+    <div class="page-bg-shape shape-2"></div>
+    <div class="page-bg-shape shape-3"></div>
+
+    <main class="users-page">
+        <section class="hero-section">
+            <div class="hero-actions">
+                <a href="{{ url_for('admin.dashboard') }}" class="hero-btn">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Voltar ao painel</span>
+                </a>
+
+                <a href="{{ url_for('main.index') }}" class="hero-btn">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Menu principal</span>
+                </a>
+            </div>
+
+            <div class="hero-content">
+                <h1>Gerenciar Usuários</h1>
+                <p>Cadastre, edite e organize os usuários da plataforma com uma interface clara e objetiva.</p>
+            </div>
+        </section>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-container">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ 'flash-success' if category == 'success' else 'flash-error' }}">
+                            <div class="flash-message-content">
+                                <div class="flash-icon">
+                                    {% if category == 'success' %}
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    {% else %}
+                                        <i class="fa-solid fa-circle-exclamation"></i>
+                                    {% endif %}
+                                </div>
+
+                                <div class="flash-text-group">
+                                    <strong>
+                                        {% if category == 'success' %}Sucesso{% else %}Atenção{% endif %}
+                                    </strong>
+                                    <span>{{ message }}</span>
+                                </div>
+                            </div>
+
+                            <button type="button" class="flash-close" aria-label="Fechar mensagem">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+
+                            <div class="flash-progress"></div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <section class="section-card">
+            <div class="section-label">Cadastro</div>
+            <h2>Novo usuário</h2>
+
+            <form action="{{ url_for('admin.adicionar_usuario') }}" method="POST" class="create-user-form" novalidate>
+                <div class="form-grid">
+                    <div class="field">
+                        <input type="text" name="nome" placeholder="Nome completo" required>
+                        <small class="field-error"></small>
+                    </div>
+
+                    <div class="field">
+                        <input type="email" name="email" placeholder="E-mail" required>
+                        <small class="field-error"></small>
+                    </div>
+
+                    <div class="field">
+                        <input type="text" name="matricula" placeholder="Matrícula" inputmode="numeric" maxlength="7" required>
+                        <small class="field-error"></small>
+                    </div>
+
+                    <div class="field">
+                        <input type="password" name="senha" placeholder="Senha inicial" required>
+                        <small class="field-error"></small>
+                    </div>
+
+                    <div class="field field-curso">
+                        <select name="curso_id" required data-role="curso-select">
+                            <option value="">Curso</option>
+                            {% for curso in cursos %}
+                                <option value="{{ curso.id }}">{{ curso.nome }}</option>
+                            {% endfor %}
+                        </select>
+                        <small class="field-error"></small>
+                    </div>
+
+                    <div class="field field-ppc">
+                        <select name="ppc_id" required data-role="ppc-select">
+                            <option value="">PPC</option>
+                            {% for ppc in ppcs %}
+                                <option value="{{ ppc.id }}" data-curso-id="{{ ppc.curso_id }}">
+                                    {{ ppc.codigo }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <small class="field-error"></small>
+                    </div>
+
+                    <label class="toggle-field">
+                        <input type="checkbox" name="is_admin">
+                        <span class="toggle-switch"></span>
+                        <span class="toggle-text">Administrador</span>
+                    </label>
+
+                    <button type="submit" class="add-user-btn">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span>Adicionar usuário</span>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section class="section-card">
+            <div class="section-label">Listagem</div>
+            <div class="list-header">
+                <div>
+                    <h2>Usuários cadastrados</h2>
+                    <p>Gerencie os usuários existentes no sistema.</p>
+                </div>
+
+                <div class="toolbar">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="filtroUsuarios" placeholder="Buscar usuário...">
+                    </div>
+
+                    <div class="count-badge" id="contadorUsuarios">
+                        {{ usuarios|length }} usuário(s)
+                    </div>
+                </div>
+            </div>
+
+            <div class="users-list" id="usuariosList">
+                {% for usuario in usuarios %}
+                    <div class="user-card"
+                         data-user-card
+                         data-search="{{ (usuario.nome ~ ' ' ~ usuario.email ~ ' ' ~ usuario.matricula ~ ' ' ~ (usuario.curso_nome or '') ~ ' ' ~ (usuario.ppc_codigo or ''))|lower }}">
+
+                        <div class="user-card-top">
+                            <div class="user-main-info">
+                                <h3>{{ usuario.nome }}</h3>
+                                <p>{{ usuario.email }} • {{ usuario.matricula }}</p>
+                            </div>
+
+                            <span class="role-badge {{ 'role-admin' if usuario.is_admin else 'role-user' }}">
+                                {{ 'Admin' if usuario.is_admin else 'Usuário' }}
+                            </span>
+                        </div>
+
+                        <div class="user-edit-row">
+                            <form id="edit-user-{{ usuario.id }}"
+                                  action="{{ url_for('admin.editar_usuario', user_id=usuario.id) }}"
+                                  method="POST"
+                                  class="edit-user-form js-user-form"
+                                  novalidate>
+
+                                <div class="field">
+                                    <input type="text" name="nome" value="{{ usuario.nome }}" required>
+                                    <small class="field-error"></small>
+                                </div>
+
+                                <div class="field">
+                                    <input type="email" name="email" value="{{ usuario.email }}" required>
+                                    <small class="field-error"></small>
+                                </div>
+
+                                <div class="field field-small">
+                                    <input type="text" name="matricula" value="{{ usuario.matricula }}" inputmode="numeric" maxlength="7" required>
+                                    <small class="field-error"></small>
+                                </div>
+
+                                <div class="field field-small">
+                                    <input type="password" name="senha" placeholder="Nova senha (opcional)">
+                                    <small class="field-error"></small>
+                                </div>
+
+                                <div class="field field-curso">
+                                    <select name="curso_id" required data-role="curso-select">
+                                        <option value="">Curso</option>
+                                        {% for curso in cursos %}
+                                            <option value="{{ curso.id }}"
+                                                {% if curso.id == usuario.curso_id %}selected{% endif %}>
+                                                {{ curso.nome }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                    <small class="field-error"></small>
+                                </div>
+
+                                <div class="field field-ppc">
+                                    <select name="ppc_id" required data-role="ppc-select">
+                                        <option value="">PPC</option>
+                                        {% for ppc in ppcs %}
+                                            <option value="{{ ppc.id }}"
+                                                    data-curso-id="{{ ppc.curso_id }}"
+                                                {% if ppc.id == usuario.ppc_id %}selected{% endif %}>
+                                                {{ ppc.codigo }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                    <small class="field-error"></small>
+                                </div>
+
+                                <label class="toggle-field toggle-field-compact">
+                                    <input type="checkbox" name="is_admin" {% if usuario.is_admin %}checked{% endif %}>
+                                    <span class="toggle-switch"></span>
+                                    <span class="toggle-text">Admin</span>
+                                </label>
+                            </form>
+
+                            <div class="user-actions">
+                                <button type="submit"
+                                        form="edit-user-{{ usuario.id }}"
+                                        class="icon-action-btn save-btn"
+                                        title="Salvar alterações">
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                </button>
+
+                                <button type="button"
+                                        class="icon-action-btn delete-btn open-delete-modal"
+                                        data-form-id="delete-user-{{ usuario.id }}"
+                                        data-user-name="{{ usuario.nome }}"
+                                        title="Excluir usuário">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <form id="delete-user-{{ usuario.id }}"
+                              action="{{ url_for('admin.excluir_usuario', user_id=usuario.id) }}"
+                              method="POST"
+                              class="hidden-form"></form>
+                    </div>
+                {% else %}
+                    <div class="empty-state" id="estadoVazioUsuarios">
+                        <i class="fa-solid fa-users-slash"></i>
+                        <h3>Nenhum usuário cadastrado</h3>
+                        <p>Adicione um novo usuário para começar.</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="empty-state hidden" id="emptySearchStateUsuarios">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <h3>Nenhum resultado encontrado</h3>
+                <p>Tente buscar por nome, e-mail, matrícula, curso ou PPC.</p>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal-card">
+            <div class="modal-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+
+            <div class="modal-label">Confirmação</div>
+
+            <h3>Deseja excluir este usuário?</h3>
+            <p id="deleteModalText">Tem certeza que deseja excluir este usuário?</p>
+
+            <div class="modal-actions">
+                <button type="button" class="modal-btn modal-btn-secondary" id="cancelDelete">
+                    Cancelar
+                </button>
+                <button type="button" class="modal-btn modal-btn-danger" id="confirmDelete">
+                    Excluir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/admin_usuarios.js') }}"></script>
+</body>
+</html>

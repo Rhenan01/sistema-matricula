@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Cursos</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_cursos.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <!-- Elementos decorativos de fundo -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+
+    <!-- Container das mensagens flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-container">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ 'flash-success' if category == 'success' else 'flash-error' }}">
+                        <div class="flash-message-content">
+                            <div class="flash-icon">
+                                {% if category == 'success' %}
+                                    <i class="fa-solid fa-circle-check"></i>
+                                {% else %}
+                                    <i class="fa-solid fa-circle-exclamation"></i>
+                                {% endif %}
+                            </div>
+
+                            <div class="flash-text-group">
+                                <strong>
+                                    {% if category == 'success' %}
+                                        Sucesso
+                                    {% else %}
+                                        Atenção
+                                    {% endif %}
+                                </strong>
+                                <span>{{ message }}</span>
+                            </div>
+                        </div>
+
+                        <button type="button" class="flash-close" aria-label="Fechar mensagem">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+
+                        <div class="flash-progress"></div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <main class="admin-cursos-page">
+        <!-- Cabeçalho principal -->
+        <section class="hero-card reveal">
+          <div class="hero-topbar">
+              <div class="hero-topbar-left">
+                  <a href="{{ url_for('admin.dashboard') }}" class="back-button">
+                      <i class="fa-solid fa-arrow-left"></i>
+                      <span>Voltar ao painel</span>
+                  </a>
+
+                  <a href="{{ url_for('main.index') }}" class="back-button secondary-button">
+                      <i class="fa-solid fa-house"></i>
+                      <span>Menu principal</span>
+                  </a>
+              </div>
+
+              <span class="hero-badge">
+                  <i class="fa-solid fa-shield-halved"></i>
+                  Área administrativa
+              </span>
+          </div>
+
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="hero-kicker">Gerenciamento acadêmico</span>
+                    <h1>Gerenciar Cursos</h1>
+                    <p>
+                        Cadastre, edite e remova os cursos disponíveis no sistema.
+                    </p>
+                </div>
+
+                <div class="hero-icon-card">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Card de cadastro -->
+        <section class="modern-card reveal">
+            <div class="card-header">
+                <div>
+                    <span class="section-tag">Cadastro</span>
+                    <h2>Novo curso</h2>
+                    <p>Adicione um novo curso à base de dados.</p>
+                </div>
+            </div>
+
+            <form action="{{ url_for('admin.adicionar_curso') }}" method="POST" class="new-course-form">
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-book-open"></i>
+                    <input
+                        type="text"
+                        name="nome"
+                        placeholder="Digite o nome do curso"
+                        autocomplete="off"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Adicionar curso</span>
+                </button>
+            </form>
+        </section>
+
+        <!-- Card da listagem -->
+        <section class="modern-card reveal">
+            <div class="card-header card-header-list">
+                <div>
+                    <span class="section-tag">Listagem</span>
+                    <h2>Cursos cadastrados</h2>
+                    <p>Gerencie os cursos já existentes no sistema.</p>
+                </div>
+
+                <div class="list-tools">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="filtroCursos" placeholder="Buscar curso...">
+                    </div>
+
+                    <span class="courses-counter">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span id="contadorCursos">{{ cursos|length }}</span> curso(s)
+                    </span>
+                </div>
+            </div>
+
+            <div class="courses-list" id="listaCursos">
+                {% if cursos %}
+                    {% for curso in cursos %}
+                        <article class="course-item reveal-item" data-course-name="{{ curso.nome|lower }}">
+                            <div class="course-left">
+                                <div class="course-index">
+                                    <span>#{{ loop.index }}</span>
+                                </div>
+
+                                <div class="course-info">
+                                    <h3>{{ curso.nome }}</h3>
+                                    <p>Curso disponível para uso no sistema.</p>
+                                </div>
+                            </div>
+
+                            <div class="course-right">
+                                <form
+                                    method="POST"
+                                    action="{{ url_for('admin.editar_curso', curso_id=curso.id) }}"
+                                    class="edit-form"
+                                >
+                                    <div class="mini-input-wrapper">
+                                        <i class="fa-solid fa-pen"></i>
+                                        <input
+                                            type="text"
+                                            name="nome"
+                                            value="{{ curso.nome }}"
+                                            required
+                                        >
+                                    </div>
+
+                                    <button type="submit" class="btn btn-save">
+                                        <i class="fa-solid fa-floppy-disk"></i>
+                                        <span>Salvar</span>
+                                    </button>
+                                </form>
+
+                                <form
+                                    method="POST"
+                                    action="{{ url_for('admin.excluir_curso', curso_id=curso.id) }}"
+                                    class="delete-form"
+                                    data-course-name="{{ curso.nome }}"
+                                >
+                                    <button type="button" class="btn btn-danger open-delete-modal">
+                                        <i class="fa-solid fa-trash"></i>
+                                        <span>Excluir</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </article>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-state" id="estadoVazio">
+                        <div class="empty-state-icon">
+                            <i class="fa-solid fa-folder-open"></i>
+                        </div>
+                        <h3>Nenhum curso cadastrado</h3>
+                        <p>Cadastre o primeiro curso para começar a gerenciar esta área.</p>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="empty-search-state hidden" id="emptySearchState">
+                <div class="empty-state-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h3>Nenhum resultado encontrado</h3>
+                <p>Tente buscar por outro nome de curso.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de exclusão -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal-card">
+            <div class="modal-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+
+            <div class="modal-content">
+                <span class="modal-tag">Confirmação</span>
+                <h3>Deseja excluir este curso?</h3>
+                <p id="deleteModalText">Essa ação não poderá ser desfeita.</p>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" id="cancelDelete">
+                    Cancelar
+                </button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">
+                    Excluir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/admin_cursos.js') }}"></script>
+</body>
+</html>

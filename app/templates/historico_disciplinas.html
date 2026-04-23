@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Configurações básicas do documento -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <!-- Título exibido na aba do navegador -->
+    <title>Histórico de Disciplinas</title>
+
+    <!-- Favicon da página -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='central' font-size='40'%3E📖%3C/text%3E%3C/svg%3E">
+
+    <!-- Biblioteca para animação de texto digitado -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <!-- Estilos específicos da página de histórico de disciplinas -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/historico_disciplinas.css') }}">
+</head>
+<body>
+    <!-- Elementos decorativos de fundo -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+
+    <!-- Cabeçalho principal da página -->
+    <header>
+        <div class="header-top">
+
+            <!-- Área do perfil do usuário -->
+            <div class="profile-area" id="profileArea">
+                <!-- Botão que abre/fecha o menu do perfil -->
+                <button type="button" class="profile-trigger" id="profileTrigger">
+                    <!-- Avatar com a inicial do usuário -->
+                    <div class="profile-avatar">
+                        {{ user_name[0]|upper if user_name else 'U' }}
+                    </div>
+
+                    <!-- Informações resumidas do usuário -->
+                    <div class="profile-user-info">
+                        <span class="profile-user-label">Aluno</span>
+                        <span class="profile-user-name">{{ user_name }}</span>
+                    </div>
+
+                    <!-- Indicador visual de dropdown -->
+                    <span class="profile-chevron">⌄</span>
+                </button>
+
+                <!-- Menu dropdown do perfil -->
+                <div class="profile-dropdown">
+                    <!-- Cabeçalho do dropdown -->
+                    <div class="profile-dropdown-header">
+                        <div class="profile-avatar large">
+                            {{ user_name[0]|upper if user_name else 'U' }}
+                        </div>
+
+                        <div class="profile-dropdown-user">
+                            <span class="profile-user-label">Conectado como</span>
+                            <strong>{{ user_name }}</strong>
+                        </div>
+                    </div>
+
+                    <!-- Link para voltar ao menu principal -->
+                    <a href="{{ url_for('main.index') }}" class="profile-link secondary">
+                        <span>←</span>
+                        <span>Voltar para o menu principal</span>
+                    </a>
+
+                    <!-- Link para acessar a tela de sistema de matrícula -->
+                    <a href="{{ url_for('main.grade') }}" class="profile-link secondary">
+                        <span>▦</span>
+                        <span>Ir para Montagem de Grade</span>
+                    </a>
+
+                    <!-- Link para acessar a tela de configurações -->
+                    {% if is_admin %}
+                    <a href="{{ url_for('admin.dashboard') }}" class="profile-link secondary">
+                        <span>⚙</span>
+                        <span>Painel Administrativo</span>
+                    </a>
+                    {% endif %}
+                    
+                    <!-- Link para logout -->
+                    <a href="{{ url_for('auth.logout') }}" class="profile-link danger">
+                        <span>↗</span>
+                        <span>Sair</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Bloco central do título da página -->
+            <div class="title-wrap">
+                <h1>Histórico de Disciplinas</h1>
+                <p><span id="typed"></span></p>
+            </div>
+
+            <!-- Logo da instituição -->
+            <img src="{{ url_for('static', filename='figures/logo.png') }}" alt="Logo CEFET" class="logo-cefet">
+        </div>
+    </header>
+
+    <!-- Conteúdo principal da página -->
+    <main>
+
+        <!-- Card introdutório com explicação e indicadores -->
+        <section class="hero-card">
+            <div class="hero-left">
+                <h2>Informe seu histórico acadêmico</h2>
+                <p>
+                    Selecione as disciplinas já concluídas e registre suas reprovações para que o sistema compreenda sua trajetória acadêmica e sugira uma grade mais adequada ao seu perfil.
+                </p>
+            </div>
+
+            <!-- Indicadores resumidos do histórico -->
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <span class="stat-label">Disciplinas concluídas</span>
+                    <strong id="totalSelecionadas">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-label">CR concluídos</span>
+                    <strong id="crConcl">0</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- Barra de filtros e ações principais -->
+        <section class="toolbar">
+            <div class="toolbar-top">
+
+                <!-- Área esquerda: busca e filtro -->
+                <div class="toolbar-left">
+                    <div class="field search-field">
+                        <label for="searchDisc">Buscar disciplina</label>
+                        <input type="text" id="searchDisc" placeholder="Digite o nome da disciplina...">
+                    </div>
+
+                    <div class="field">
+                        <label for="filterSem">Filtrar semestre</label>
+                        <select id="filterSem">
+                            <option value="todos">Todos</option>
+                            <option value="1">1º semestre</option>
+                            <option value="2">2º semestre</option>
+                            <option value="3">3º semestre</option>
+                            <option value="4">4º semestre</option>
+                            <option value="5">5º semestre</option>
+                            <option value="6">6º semestre</option>
+                            <option value="7">7º semestre</option>
+                            <option value="8">8º semestre</option>
+                            <option value="9">9º semestre</option>
+                            <option value="10">10º semestre</option>
+                            <option value="0">Optativas</option>
+                            <option value="11">Turmas extras</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Área direita: botões de ação -->
+                <div class="toolbar-right">
+                    <button id="btnLimpar" class="btn ghost">Limpar seleção</button>
+                    <button id="btnSalvar" class="btn primary">Salvar seleção</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Container onde os cards dos semestres serão renderizados via JavaScript -->
+        <section id="semestresContainer" class="semestres-grid">
+            <!-- Cards gerados dinamicamente pelo JS -->
+        </section>
+
+        <!-- Ações finais da página -->
+        <section class="bottom-actions">
+            <button id="btnSalvarBottom" class="btn primary">Salvar e continuar depois</button>
+            <a href="{{ url_for('main.grade') }}" class="btn secondary-link">Ir para Montagem de Grade</a>
+        </section>
+    </main>
+
+    <!-- Toast de feedback visual -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Script principal da página -->
+    <script type="module" src="{{ url_for('static', filename='js/historico_disciplinas.js') }}"></script>
+</body>
+</html>

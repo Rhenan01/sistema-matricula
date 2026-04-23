@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Horários</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_horarios.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="schedule-bg schedule-bg-1"></div>
+    <div class="schedule-bg schedule-bg-2"></div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-container">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ 'flash-success' if category == 'success' else 'flash-error' }}">
+                        <span>{{ message }}</span>
+                        <button type="button" class="flash-close">×</button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <main class="schedule-page">
+        <section class="schedule-hero">
+            <div class="schedule-hero-top">
+                <div class="schedule-hero-actions">
+                    <a href="{{ url_for('admin.dashboard') }}" class="schedule-back-btn">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Voltar ao painel
+                    </a>
+                    <a href="{{ url_for('main.index') }}" class="schedule-back-btn secondary">
+                        <i class="fa-solid fa-house"></i>
+                        Menu principal
+                    </a>
+                </div>
+
+                <button type="button" class="schedule-add-btn" id="openAddHorarioModal">
+                    <i class="fa-solid fa-plus"></i>
+                    Novo horário
+                </button>
+            </div>
+
+            <div class="schedule-hero-content">
+                <div>
+                    <span class="schedule-tag">Gestão de horários</span>
+                    <h1>Horários das Disciplinas</h1>
+                    <p>Visualize e administre a distribuição de horários por PPC, semestre, optativas e turmas extras.</p>
+                </div>
+
+                <form method="GET" action="{{ url_for('admin.horarios') }}" class="schedule-filter">
+                    <label for="ppc_id">PPC</label>
+                    <select name="ppc_id" id="ppc_id" onchange="this.form.submit()">
+                        {% for ppc in ppcs %}
+                            <option value="{{ ppc.id }}" {% if ppc.id == selected_ppc_id %}selected{% endif %}>
+                                {{ ppc.label }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
+        </section>
+
+        <section class="schedule-sections">
+            {% for secao in secoes %}
+                <details class="schedule-section" open>
+                    <summary>
+                        <div class="schedule-section-title">
+                            <span class="schedule-pill">{{ secao.titulo }}</span>
+                            <strong>{{ secao.titulo }}</strong>
+                        </div>
+                        <span class="schedule-summary-action">Expandir / recolher</span>
+                    </summary>
+
+                    <div class="schedule-grid-wrap">
+                        <div class="schedule-grid">
+                            <div class="schedule-grid-header schedule-grid-time">Horário</div>
+                            {% for dia in dias_semana %}
+                                <div class="schedule-grid-header">{{ dia.nome }}</div>
+                            {% endfor %}
+
+                            {% for bloco in blocos %}
+                                <div class="schedule-grid-time-cell">
+                                    <span class="block-order">{{ bloco.ordem }}</span>
+                                    <small>{{ bloco.hora_inicio }} — {{ bloco.hora_fim }}</small>
+                                </div>
+
+                                {% for dia in dias_semana %}
+                                    <div class="schedule-cell">
+                                        {% set itens = secao.grid[(bloco.id, dia.id)] %}
+                                        {% if itens %}
+                                            {% for item in itens %}
+                                                <div class="schedule-entry {{ 'continued' if not item.is_start else '' }}">
+                                                    <div class="schedule-entry-main">
+                                                        <strong>{{ item.disciplina_nome }}</strong>
+                                                        <span>{{ 'Bloco inicial ' ~ item.bloco_inicio }} • {{ item.quantidade_blocos }} bloco(s)</span>
+                                                    </div>
+
+                                                    {% if item.is_start %}
+                                                        <div class="schedule-entry-actions">
+                                                            <button
+                                                                type="button"
+                                                                class="icon-btn edit openEditHorarioModal"
+                                                                title="Editar horário"
+                                                                data-horario-id="{{ item.horario_id }}"
+                                                                data-disciplina-id="{{ item.disciplina_id }}"
+                                                                data-dia-semana-id="{{ item.dia_semana_id }}"
+                                                                data-bloco-inicio="{{ item.bloco_inicio }}"
+                                                                data-quantidade-blocos="{{ item.quantidade_blocos }}"
+                                                                data-ppc-id="{{ selected_ppc_id }}"
+                                                            >
+                                                                <i class="fa-solid fa-pen"></i>
+                                                            </button>
+
+                                                            <form action="{{ url_for('admin.excluir_horario', horario_id=item.horario_id) }}" method="POST" class="delete-horario-form">
+                                                                <input type="hidden" name="ppc_id" value="{{ selected_ppc_id }}">
+                                                                <button type="button" class="icon-btn danger openDeleteHorarioModal" data-disciplina-nome="{{ item.disciplina_nome }}" title="Excluir horário">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            <div class="schedule-empty-cell"></div>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </details>
+            {% endfor %}
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="horarioModal">
+        <div class="modal-card modal-card-large">
+            <div class="modal-icon blue">
+                <i class="fa-solid fa-calendar-days"></i>
+            </div>
+
+            <div class="modal-header">
+                <span class="modal-tag">Horário</span>
+                <h3 id="horarioModalTitle">Novo horário</h3>
+                <p id="horarioModalSubtitle">Configure o horário da disciplina selecionada.</p>
+            </div>
+
+            <form id="horarioForm" method="POST" class="horario-form">
+                <input type="hidden" name="ppc_id" id="horarioPpcId" value="{{ selected_ppc_id }}">
+
+                <select name="disciplina_id" id="horarioDisciplina" required>
+                    <option value="" disabled selected hidden>Disciplina</option>
+                    {% for disciplina in disciplinas %}
+                        <option value="{{ disciplina.id }}">
+                            {{ disciplina.nome }} •
+                            {% if disciplina.tipo|lower == 'optativa' %}
+                                Optativa
+                            {% elif disciplina.tipo|lower == 'extra' %}
+                                Extra
+                            {% else %}
+                                {{ disciplina.semestre }}º semestre
+                            {% endif %}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <select name="dia_semana_id" id="horarioDia" required>
+                    <option value="" disabled selected hidden>Dia da semana</option>
+                    {% for dia in dias_semana %}
+                        <option value="{{ dia.id }}">{{ dia.nome }}</option>
+                    {% endfor %}
+                </select>
+
+                <select name="bloco_inicio" id="horarioBlocoInicio" required>
+                    <option value="" disabled selected hidden>Bloco inicial</option>
+                    {% for bloco in blocos %}
+                        <option value="{{ bloco.id }}">
+                            {{ bloco.ordem }} • {{ bloco.hora_inicio }} — {{ bloco.hora_fim }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <input type="number" name="quantidade_blocos" id="horarioQuantidadeBlocos" min="1" step="1" placeholder="Quantidade de blocos" required>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancelHorarioModal">Cancelar</button>
+                    <button type="submit" class="btn-primary" id="submitHorarioBtn">Salvar horário</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="deleteHorarioModal">
+        <div class="modal-card">
+            <div class="modal-icon danger">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+
+            <div class="modal-header">
+                <span class="modal-tag">Exclusão</span>
+                <h3>Excluir horário</h3>
+                <p id="deleteHorarioText">Tem certeza que deseja excluir este horário?</p>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-secondary" id="cancelDeleteHorario">Cancelar</button>
+                <button type="button" class="btn-danger" id="confirmDeleteHorario">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/admin_horarios.js') }}"></script>
+</body>
+</html>

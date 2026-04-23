@@ -1,0 +1,1337 @@
+/* =========================================================
+   IMPORTAÇÃO DE FONTE
+   ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+
+/* =========================================================
+   RESET GLOBAL
+   - Remove margens e paddings padrão
+   - Define box-sizing para facilitar medidas
+   - Aplica a fonte padrão em todo o site
+   ========================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+/* =========================================================
+   BODY
+   - Fundo geral da página
+   - Centraliza o container principal
+   - Impede barra de rolagem visual
+   ========================================================= */
+body {
+    position: relative;
+    background: linear-gradient(135deg, #00509e, #002f6c);
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   CONTAINER PRINCIPAL
+   - Card branco que abriga login, registro e painel lateral
+   - Mantém a animação de transição entre os estados
+   ========================================================= */
+.container {
+    position: relative;
+    z-index: 1;
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    width: 850px;
+    max-width: 100%;
+    min-height: 520px;
+    transition: all 0.6s ease-in-out;
+}
+
+
+/* =========================================================
+   TEXTOS GENÉRICOS DENTRO DO CONTAINER
+   - Parágrafos, spans e links usados nos formulários
+   ========================================================= */
+.container p {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    margin: 20px 0;
+}
+
+.container span {
+    font-size: 12px;
+}
+
+.container a {
+    color: #333;
+    font-size: 13px;
+    text-decoration: none;
+    margin: 15px 0 10px;
+}
+
+
+/* =========================================================
+   LOGO
+   - Fica absoluta dentro do container
+   - Muda de lado conforme a animação login/registro
+   ========================================================= */
+.logo-cefet {
+    position: absolute;
+    top: 18px;
+    width: 82px;
+    height: auto;
+    z-index: 2000;
+    pointer-events: none;
+    transition: left 0.8s ease, transform 0.8s ease;
+    left: 20px;
+}
+
+/* Estado padrão: logo no canto esquerdo */
+.container:not(.active) .logo-cefet {
+    left: 20px;
+}
+
+/* Estado ativo: logo vai para o lado direito */
+.container.active .logo-cefet {
+    left: calc(100% - 112px);
+}
+
+
+/* =========================================================
+   BOTÕES
+   - Estilo base de todos os botões do container
+   ========================================================= */
+.container button {
+    background-color: #002f6c;
+    color: #fff;
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Hover geral dos botões */
+.container button:hover {
+    background-color: #00509e;
+    box-shadow: 0 8px 20px rgba(0, 80, 158, 0.4);
+    transform: translateY(-3px) scale(1.02);
+}
+
+/* Botões transparentes do painel azul */
+.container button.hidden {
+    background-color: transparent;
+    border-color: #fff;
+}
+
+/* Hover dos botões transparentes */
+.container button.hidden:hover {
+    background-color: #0072ce;
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(0, 114, 206, 0.4);
+    transform: translateY(-3px) scale(1.02);
+}
+
+/* Altura mínima adicionada depois para manter consistência visual */
+.container button {
+    min-height: 44px;
+}
+
+
+/* =========================================================
+   FORMULÁRIOS
+   - Estrutura geral de login e cadastro
+   ========================================================= */
+.container form {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 40px;
+    height: 100%;
+}
+
+/* Campos input padrão */
+.container input {
+    background-color: #eee;
+    border: 2px solid transparent;
+    margin: 10px 0;
+    padding: 11px 15px;
+    font-size: 14px;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+/* Estado focado dos inputs */
+.container input:focus {
+    border-color: #00509e;
+    background-color: #f0f4fc;
+    box-shadow: 0 4px 12px rgba(0, 80, 158, 0.25);
+    transform: translateY(-1px);
+}
+
+/* Placeholder padrão */
+.container input::placeholder {
+    color: #999;
+    transition: all 0.3s ease;
+}
+
+/* Efeito do placeholder ao focar */
+.container input:focus::placeholder {
+    transform: translateY(-11px);
+    font-size: 11px;
+    color: #00509e;
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   TÍTULOS E SUBTÍTULOS DAS TELAS
+   - Mantém login e cadastro com espaçamentos próprios
+   ========================================================= */
+.sign-up span,
+.sign-in span {
+    display: block;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    margin-bottom: 10px;
+}
+
+
+/* =========================================================
+   CAMPO DE SENHA COM ÍCONE DE OLHO
+   - Estrutura para input + botão de mostrar senha
+   ========================================================= */
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+/* Dá espaço à direita para o ícone */
+.password-container input {
+    padding-right: 35px;
+}
+
+/* Ícone do olho */
+.password-container i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #555;
+    font-size: 16px;
+}
+
+/* Hover do olho */
+.password-container i:hover {
+    color: #00509e;
+    box-shadow: 0 8px 20px rgba(0, 80, 158, 0.4);
+}
+
+
+/* =========================================================
+   ESTRUTURA DAS ÁREAS DE LOGIN E REGISTRO
+   - Cada lado ocupa metade do container
+   - A classe .active faz a troca de painéis
+   ========================================================= */
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+/* Área de login */
+.sign-in {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+/* Quando ativa, a área de login vai para a direita */
+.container.active .sign-in {
+    transform: translateX(100%);
+}
+
+/* Ajustes específicos do formulário de cadastro */
+.sign-up form {
+    padding-top: 34px;
+    padding-bottom: 26px;
+    justify-content: flex-start;
+}
+
+/* Área de cadastro */
+.sign-up {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+    margin-top: 20px;
+}
+
+/* Espaçamento do botão do cadastro */
+.sign-up form button {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 180px;
+    min-height: 42px;
+    padding: 8px 28px;
+    align-self: center;
+}
+
+/* Quando ativa, a área de cadastro aparece */
+.container.active .sign-up {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: move 0.6s;
+}
+
+/* Animação de entrada do painel de cadastro */
+@keyframes move {
+    0%, 49.99% {
+        opacity: 0;
+        z-index: 1;
+    }
+    50%, 100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+
+/* =========================================================
+   PAINEL LATERAL AZUL (TOGGLE)
+   - Parte que desliza entre login e registro
+   ========================================================= */
+.toggle-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 150px 0 0 100px;
+    transition: all 0.6s ease-in-out;
+    z-index: 1000;
+    background: linear-gradient(to right, #00509e, #002f6c);
+}
+
+/* Inverte o lado do painel quando está ativo */
+.container.active .toggle-container {
+    transform: translateX(-100%);
+    border-radius: 0 150px 100px 0;
+}
+
+/* Fundo interno do toggle */
+.toggle {
+    height: 100%;
+    width: 200%;
+    left: -100%;
+    background: linear-gradient(to right, #00509e, #002f6c);
+    color: #fff;
+    position: relative;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+/* Move o conteúdo do toggle */
+.container.active .toggle {
+    transform: translateX(50%);
+}
+
+/* Painéis internos com textos e botões */
+.toggle-panel {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 30px;
+    text-align: center;
+    top: 0;
+    transition: all 0.6s ease-in-out;
+}
+
+/* Painel esquerdo começa fora da tela */
+.toggle-left {
+    transform: translateX(-200%);
+}
+
+/* Painel esquerdo entra quando container está ativo */
+.container.active .toggle-left {
+    transform: translateX(0);
+}
+
+/* Painel direito inicialmente visível */
+.toggle-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+/* Painel direito sai quando container está ativo */
+.container.active .toggle-right {
+    transform: translateX(200%);
+}
+
+
+/* =========================================================
+   CÍRCULOS DO FUNDO
+   - Efeito visual decorativo da página
+   ========================================================= */
+.circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Estilo padrão dos círculos */
+.circles li {
+    position: absolute;
+    list-style: none;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: float 25s linear infinite;
+}
+
+/* Círculos ímpares com transparência ligeiramente diferente */
+.circles li:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Posição individual de cada círculo */
+.circles li:nth-child(1) { left: 10%; top: 20%; animation-duration: 20s; }
+.circles li:nth-child(2) { left: 30%; top: 40%; animation-duration: 22s; }
+.circles li:nth-child(3) { left: 50%; top: 60%; animation-duration: 24s; }
+.circles li:nth-child(4) { left: 70%; top: 80%; animation-duration: 26s; }
+.circles li:nth-child(5) { left: 90%; top: 20%; animation-duration: 28s; }
+
+/* Animação de subida/flutuação */
+@keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-100vh) rotate(360deg); }
+}
+
+
+/* =========================================================
+   MENSAGENS FLASH DO FLASK
+   - Feedback visual de sucesso e erro
+   ========================================================= */
+.flash-message {
+    margin-bottom: 10px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    animation: fadeIn 0.4s ease;
+}
+
+.flash-message.hide {
+    animation: fadeOut 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+/* Cor de sucesso */
+.flash-success {
+    background: #16a34a;
+}
+
+/* Cor de erro */
+.flash-error {
+    background: #dc2626;
+}
+
+.close-flash {
+    margin-left: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* =========================================================
+   SELECTS CUSTOMIZADOS
+   - Blocos usados para curso e PPC
+   - Mantidos como estão hoje para não alterar comportamento
+   ========================================================= */
+
+/* Wrapper do select */
+.select-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 8px 0;
+}
+
+/* Primeira definição do select moderno
+   Observação:
+   Mais abaixo existe outra definição de .modern-select.
+   Mantive as duas para preservar exatamente o comportamento atual. */
+.modern-select {
+    width: 100%;
+    height: 50px;
+    padding: 0 44px 0 18px;
+    border: none;
+    outline: none;
+    border-radius: 14px;
+    background: #f1f1f1;
+    color: #555;
+    font-size: 1rem;
+    font-family: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 0 0 1px transparent;
+}
+
+/* Hover do select moderno */
+.modern-select:hover {
+    background: #ececec;
+}
+
+/* Linha com dois selects lado a lado */
+.select-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin: 6px 0;
+}
+
+/* Primeiro select da linha, geralmente curso */
+.select-row .select-wrapper:first-child {
+    flex: 1.35;
+}
+
+/* Segundo select da linha, geralmente PPC */
+.select-row .select-wrapper:last-child {
+    flex: 0.95;
+}
+
+/* Repetição mantida para preservar o comportamento atual */
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Segunda definição do select moderno
+   Esta regra sobrescreve parte da anterior, como a altura (54px) */
+.modern-select {
+    width: 100%;
+    height: 54px;
+    padding: 0 44px 0 18px;
+    border: none;
+    outline: none;
+    border-radius: 14px;
+    background: #f1f1f1;
+    color: #555;
+    font-size: 1rem;
+    font-family: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 0 0 1px transparent;
+}
+
+/* Hover novamente mantido */
+.modern-select:hover {
+    background: #ececec;
+}
+
+/* Estado focado do select */
+.modern-select:focus {
+    background: #ffffff;
+    box-shadow: 0 0 0 2px rgba(0, 74, 173, 0.18);
+}
+
+/* Estado desabilitado do select */
+.modern-select:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+}
+
+/* Ícone dentro do select */
+.select-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+    pointer-events: none;
+    font-size: 0.95rem;
+}
+
+/* Estilo das opções internas */
+.modern-select option {
+    color: #222;
+    background: #fff;
+}
+
+.modern-select {
+    color: #999; /* estado vazio */
+}
+
+/* quando tem valor selecionado */
+.modern-select.valid {
+    color: #333;
+}
+
+/* =========================================================
+   RESPONSIVIDADE
+   - Em telas menores, os selects quebram para coluna
+   ========================================================= */
+@media (max-width: 768px) {
+    .select-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .select-row .select-wrapper:first-child,
+    .select-row .select-wrapper:last-child {
+        flex: 1;
+    }
+}
+
+/* =========================================================
+   INPUT COM ÍCONE DE INFORMAÇÃO
+   - Usado no campo matrícula
+   ========================================================= */
+.input-with-icon {
+    position: relative;
+    width: 100%;
+}
+
+.input-with-icon input {
+    width: 100%;
+    padding-right: 42px;
+}
+
+/* Ícone de informação */
+.info-tooltip {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #7a7a7a;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Caixa da dica */
+.tooltip-text {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    right: -6px;
+    background: #0b3f88;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1.35;
+    padding: 8px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: all 0.2s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+    z-index: 3000;
+}
+
+/* Setinha da tooltip */
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    right: 14px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: #0b3f88 transparent transparent transparent;
+}
+
+/* Mostra tooltip no hover */
+.info-tooltip:hover .tooltip-text {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* =========================================================
+   BOTÃO REGISTRAR DESABILITADO
+   ========================================================= */
+#registerSubmit:disabled {
+    background-color: #9aa8bf;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    opacity: 0.85;
+}
+
+#registerSubmit:disabled:hover {
+    background-color: #9aa8bf;
+    box-shadow: none;
+    transform: none;
+}
+
+/* =========================================================
+   TERCEIRA TELA - MENU PÓS-LOGIN
+   ========================================================= */
+.menu-screen {
+    position: absolute;
+    inset: 0;
+    z-index: 3000;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.96);
+    transition: all 0.55s ease;
+    background:
+        radial-gradient(circle at top left, rgba(0, 114, 206, 0.18), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(0, 47, 108, 0.18), transparent 35%),
+        linear-gradient(135deg, #f8fbff, #eef4ff);
+    padding: 34px;
+}
+
+.container.show-menu .menu-screen {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+}
+
+.container.show-menu .form-container,
+.container.show-menu .toggle-container {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.96);
+    transition: all 0.45s ease;
+}
+
+.container.show-menu .logo-cefet {
+    left: 20px;
+    transform: scale(0.95);
+}
+
+.menu-screen-content {
+    width: 100%;
+    height: 100%;
+    border-radius: 26px;
+    padding: 28px;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow:
+        0 10px 30px rgba(0, 47, 108, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    animation: fadeSlideMenu 0.7s ease;
+}
+
+@keyframes fadeSlideMenu {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.menu-header {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.menu-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    color: #0b3f88;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+.menu-header h1 {
+    font-size: 2rem;
+    color: #0f172a;
+    margin-bottom: 10px;
+}
+
+.menu-header p {
+    font-size: 0.98rem;
+    color: #475569;
+    margin: 0;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-top: 10px;
+}
+
+.menu-card {
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    border: none;
+    border-radius: 22px;
+    padding: 24px 20px;
+    min-height: 185px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.10);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.20), transparent 55%);
+    pointer-events: none;
+}
+
+.primary-card {
+    background: linear-gradient(135deg, #00509e, #002f6c);
+    color: #fff;
+}
+
+.secondary-card {
+    background: linear-gradient(135deg, #ffffff, #eef4ff);
+    color: #0f172a;
+}
+
+.menu-card:hover {
+    transform: translateY(-8px) scale(1.015);
+    box-shadow: 0 18px 34px rgba(0, 47, 108, 0.18);
+}
+
+.menu-card-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    font-size: 1.35rem;
+}
+
+.primary-card .menu-card-icon {
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.18);
+}
+
+.secondary-card .menu-card-icon {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    color: #0b3f88;
+}
+
+.menu-card h3 {
+    font-size: 1.08rem;
+    margin-bottom: 10px;
+}
+
+.menu-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0 0 16px 0;
+    opacity: 0.95;
+}
+
+.menu-card-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-width: 105px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+.primary-card .menu-card-action {
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.secondary-card .menu-card-action {
+    background: #dbeafe;
+    color: #0b3f88;
+}
+
+.menu-footer-actions {
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.menu-outline-btn,
+.menu-logout-btn {
+    min-width: 150px;
+    min-height: 46px;
+    border-radius: 999px;
+    padding: 12px 22px;
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.menu-outline-btn {
+    background: #fff;
+    border: 1px solid rgba(0, 47, 108, 0.18);
+    color: #0b3f88;
+}
+
+.menu-outline-btn:hover {
+    background: #f1f5f9;
+    transform: translateY(-2px);
+}
+
+.menu-logout-btn {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: #fff;
+    border: none;
+    box-shadow: 0 10px 22px rgba(220, 38, 38, 0.22);
+}
+
+.menu-logout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 26px rgba(220, 38, 38, 0.28);
+}
+
+@media (max-width: 768px) {
+    .menu-screen {
+        padding: 16px;
+    }
+
+    .menu-screen-content {
+        padding: 20px;
+    }
+
+    .menu-header h1 {
+        font-size: 1.45rem;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .menu-card {
+        min-height: 160px;
+    }
+
+    .menu-footer-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-outline-btn,
+    .menu-logout-btn {
+        width: 100%;
+    }
+}
+
+/* =========================================================
+   MENU PÓS-LOGIN - PADRONIZADO CORRETAMENTE
+   ========================================================= */
+
+/* Área principal */
+.menu-screen {
+    position: absolute;
+    inset: 0;
+    z-index: 3000;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.96);
+    transition: all 0.55s ease;
+    background:
+        radial-gradient(circle at top left, rgba(0, 114, 206, 0.12), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(0, 47, 108, 0.12), transparent 35%),
+        linear-gradient(135deg, #f8fbff, #eef4ff);
+    padding: 28px;
+}
+
+.container.show-menu .menu-screen {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+}
+
+.container.show-menu .form-container,
+.container.show-menu .toggle-container {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Container interno */
+.menu-screen-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    padding: 26px 34px;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow:
+        0 10px 30px rgba(0, 47, 108, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Cabeçalho */
+.menu-header {
+    text-align: center;
+    margin-bottom: 12px;
+    padding: 0 84px;
+    flex-shrink: 0;
+}
+
+.menu-badge {
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: #dbeafe;
+    color: #0b3f88;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.menu-header h1 {
+    font-size: 1.9rem;
+    color: #0f172a;
+    margin-bottom: 8px;
+    line-height: 1.15;
+}
+
+.menu-header p {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin: 0;
+}
+
+/* Grid */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 200px;
+    gap: 18px;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: 10px;
+    padding-bottom: 4px;
+    align-content: start;
+}
+
+/* Scroll */
+.menu-grid::-webkit-scrollbar {
+    width: 8px;
+}
+
+.menu-grid::-webkit-scrollbar-track {
+    background: rgba(203, 213, 225, 0.45);
+    border-radius: 999px;
+}
+
+.menu-grid::-webkit-scrollbar-thumb {
+    background: #3b82f6;
+    border-radius: 999px;
+}
+
+.menu-grid {
+    scrollbar-width: thin;
+    scrollbar-color: #3b82f6 rgba(203, 213, 225, 0.45);
+}
+
+/* =========================================================
+   CARD BASE - TODOS IGUAIS
+   ========================================================= */
+.menu-card {
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 22px;
+    padding: 18px;
+    min-height: 200px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    transition: all 0.25s ease;
+    background: #ffffff;
+    box-sizing: border-box;
+}
+
+.menu-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.menu-card:hover {
+    transform: translateY(-3px);
+}
+
+/* =========================================================
+   CARD ATIVO - MUDA SÓ A COR
+   ========================================================= */
+.primary-card {
+    background: linear-gradient(135deg, #0f3d75, #0b2f5c);
+}
+
+/* =========================================================
+   CARDS INATIVOS
+   ========================================================= */
+.secondary-card {
+    background: #ffffff;
+    cursor: not-allowed;
+    opacity: 0.98;
+}
+
+.disabled-card {
+    pointer-events: none;
+}
+
+/* =========================================================
+   ÍCONE
+   ========================================================= */
+.menu-card-icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    min-height: 46px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    background: #dbeafe;
+    color: #0b3f88;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.primary-card .menu-card-icon {
+    background: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+}
+
+/* =========================================================
+   TEXTO
+   ========================================================= */
+.menu-card h3 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+    width: 100%;
+    color: #0f172a;
+}
+
+.menu-card p {
+    font-size: 0.72rem;
+    color: #64748b;
+    line-height: 1.4;
+    margin: 0;
+    width: 100%;
+    flex: 1;
+}
+
+.primary-card h3,
+.primary-card p {
+    color: #ffffff;
+}
+
+.secondary-card h3 {
+    color: #0f172a;
+}
+
+.secondary-card p {
+    color: #64748b;
+}
+
+/* =========================================================
+   BOTÃO / ETIQUETA
+   ========================================================= */
+.menu-card-action {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 104px;
+    height: 38px;
+    padding: 0 16px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.primary-card .menu-card-action {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.secondary-card .menu-card-action {
+    background: #dbeafe;
+    color: #0b3f88;
+    border: 1px solid transparent;
+}
+
+/* =========================================================
+   BOTÃO VOLTAR
+   ========================================================= */
+.back-icon {
+    position: absolute;
+    top: 18px;
+    left: 16px;
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    border: none;
+    background: #0b3f88;
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    transition: all 0.22s ease;
+    font-size: 20px;
+}
+
+.back-icon i {
+    color: #ffffff;
+    line-height: 1;
+}
+
+.back-icon:hover {
+    transform: translateY(-2px);
+    background: #12438f;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+}
+
+.admin-shortcut {
+    position: absolute;
+    top: 18px;
+    right: 16px;
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0b3f88;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 20px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    transition: all 0.22s ease;
+    z-index: 10;
+}
+
+.admin-shortcut i {
+    color: #ffffff;
+    line-height: 1;
+}
+
+.admin-shortcut:hover {
+    transform: translateY(-2px);
+    background: #12438f;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+}
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+@media (max-width: 768px) {
+    .menu-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 190px;
+    }
+}

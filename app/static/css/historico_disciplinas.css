@@ -1,0 +1,1014 @@
+:root {
+  /* =========================
+     Paleta principal
+     ========================= */
+  --bg-a: #07162f;
+  --bg-b: #0d2450;
+  --bg-c: #12346f;
+
+  /* Superfícies e transparências */
+  --card: rgba(255, 255, 255, 0.08);
+  --glass-2: rgba(255, 255, 255, 0.03);
+  --line: rgba(255, 255, 255, 0.10);
+
+  /* Tipografia */
+  --text: #eaf2ff;
+  --muted: #a9b8d3;
+
+  /* Cores de destaque */
+  --accentA: #00509e;
+  --accentB: #1e90ff;
+  --accentC: #34d399;
+
+  /* Estados */
+  --danger: #ef4444;
+  --warning: #fbbf24;
+
+  /* Sombra padrão */
+  --shadow: 0 20px 60px rgba(2, 8, 23, 0.40);
+}
+
+/* =========================
+   Reset e base global
+   ========================= */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(30, 144, 255, 0.16), transparent 22%),
+    radial-gradient(circle at bottom right, rgba(52, 211, 153, 0.10), transparent 20%),
+    linear-gradient(180deg, var(--bg-a), var(--bg-b) 45%, var(--bg-c));
+  color: var(--text);
+  padding: 18px;
+  overflow-x: hidden;
+}
+
+/* =========================
+   Elementos decorativos de fundo
+   ========================= */
+.bg-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(18px);
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb-1 {
+  width: 240px;
+  height: 240px;
+  background: #1e90ff;
+  top: 50px;
+  left: -60px;
+}
+
+.orb-2 {
+  width: 240px;
+  height: 240px;
+  background: #34d399;
+  right: -70px;
+  top: 260px;
+}
+
+.orb-3 {
+  width: 220px;
+  height: 220px;
+  background: #7c3aed;
+  left: 42%;
+  bottom: -80px;
+}
+
+/* =========================
+   Estrutura principal
+   ========================= */
+header,
+main {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+
+header {
+  max-width: 1420px;
+  margin: 0 auto 14px;
+  position: relative;
+  z-index: 50;
+}
+
+main {
+  max-width: 1420px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* =========================
+   Cabeçalho
+   ========================= */
+.header-top {
+  min-height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.title-wrap {
+  text-align: center;
+}
+
+.title-wrap h1 {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.title-wrap p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.logo-cefet {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 110px;
+  height: auto;
+}
+
+/* =========================
+   Menu de perfil
+   ========================= */
+.profile-area {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2000;
+}
+
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 300px;
+  min-height: 76px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.04));
+  color: var(--text);
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(2, 8, 23, 0.28);
+  backdrop-filter: blur(12px);
+  transition: all 0.28s ease;
+}
+
+.profile-trigger:hover {
+  transform: translateY(-2px);
+  border-color: rgba(30, 144, 255, 0.35);
+}
+
+.profile-avatar {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--accentA), var(--accentB));
+  color: white;
+  font-weight: 800;
+  box-shadow: 0 8px 20px rgba(0, 80, 158, 0.35);
+}
+
+.profile-avatar.large {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  font-size: 18px;
+}
+
+.profile-user-info,
+.profile-dropdown-user {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  text-align: left;
+}
+
+.profile-user-label {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.profile-user-name {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.15;
+  max-width: 180px;
+  word-break: break-word;
+}
+
+.profile-chevron {
+  margin-left: auto;
+  color: var(--muted);
+  transition: transform 0.2s ease;
+}
+
+.profile-area.open .profile-chevron {
+  transform: rotate(180deg);
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  width: 300px;
+  padding: 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: linear-gradient(180deg, rgba(10, 31, 68, 0.99), rgba(15, 37, 79, 0.99));
+  box-shadow: 0 18px 40px rgba(2, 8, 23, 0.52);
+  opacity: 0;
+  transform: translateY(-8px) scale(0.98);
+  pointer-events: none;
+  transition: all 0.24s ease;
+  z-index: 3000;
+}
+
+.profile-area.open .profile-dropdown {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.profile-dropdown-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding-bottom: 12px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  border-radius: 14px;
+  padding: 12px;
+  font-weight: 700;
+  transition: 0.25s ease;
+}
+
+.profile-link.secondary {
+  color: var(--text);
+  background: rgba(30, 144, 255, 0.10);
+  border: 1px solid rgba(30, 144, 255, 0.16);
+  margin-bottom: 8px;
+}
+
+.profile-link.secondary:hover {
+  background: rgba(30, 144, 255, 0.18);
+}
+
+.profile-link.danger {
+  color: #ffd9d9;
+  background: rgba(239, 68, 68, 0.10);
+  border: 1px solid rgba(239, 68, 68, 0.16);
+}
+
+.profile-link.danger:hover {
+  background: rgba(239, 68, 68, 0.18);
+  color: white;
+}
+
+/* =========================
+   Superfícies principais
+   ========================= */
+.hero-card,
+.toolbar,
+.semester-card {
+  background: linear-gradient(180deg, var(--card), var(--glass-2));
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+/* =========================
+   Hero / resumo superior
+   ========================= */
+.hero-card {
+  border-radius: 24px;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+}
+
+.hero-left {
+  flex: 1;
+}
+
+.hero-left h2 {
+  margin: 0 0 8px;
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.08;
+}
+
+.hero-left p {
+  margin: 0;
+  color: var(--muted);
+  max-width: 760px;
+  line-height: 1.55;
+  font-size: 15px;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.stat-card {
+  min-width: 160px;
+  border-radius: 20px;
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.stat-card strong {
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 900;
+  line-height: 1;
+}
+
+/* =========================
+   Toolbar de filtros e ações
+   ========================= */
+.toolbar {
+  border-radius: 22px;
+  padding: 16px;
+}
+
+.toolbar-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.toolbar-left,
+.toolbar-right {
+  display: flex;
+  gap: 12px;
+  align-items: end;
+  flex-wrap: wrap;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.search-field input,
+.field select {
+  min-width: 230px;
+}
+
+/* =========================
+   Campos de formulário
+   ========================= */
+input,
+select {
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 14px;
+  padding: 0 14px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+  transition: 0.22s ease;
+}
+
+input::placeholder {
+  color: #9fb0ce;
+}
+
+input:focus,
+select:focus {
+  border-color: rgba(30, 144, 255, 0.5);
+  box-shadow: 0 0 0 4px rgba(30, 144, 255, 0.10);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+select option {
+  background: #12346f;
+  color: var(--text);
+}
+
+/* =========================
+   Botões e links-botão
+   ========================= */
+.btn,
+.secondary-link {
+  height: 48px;
+  padding: 0 18px;
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: 0.25s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn.primary {
+  color: #041829;
+  background: linear-gradient(90deg, var(--accentC), var(--accentB));
+  box-shadow: 0 12px 30px rgba(30, 144, 255, 0.22);
+}
+
+.btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(30, 144, 255, 0.28);
+}
+
+.btn.ghost {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.secondary-link {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.secondary-link:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+/* =========================
+   Grid de semestres
+   ========================= */
+.semestres-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(290px, 1fr));
+  gap: 14px;
+  align-items: start;
+}
+
+.semester-card {
+  border-radius: 20px;
+  padding: 14px;
+  min-height: 0;
+  transition: 0.25s ease;
+  overflow: visible;
+}
+
+.semester-card:hover {
+  transform: translateY(-2px);
+}
+
+.semester-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.semester-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.semester-pill {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.semester-title-wrap h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.semester-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.semester-btn {
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.semester-btn:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+/* =========================
+   Lista interna de disciplinas
+   ========================= */
+.semester-body {
+  max-height: 330px;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+
+.semester-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.semester-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+}
+
+.semester-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Mantido porque o JS ainda tem suporte para colapso */
+.semester-card.collapsed .semester-body {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.semester-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* =========================
+   Card da disciplina
+   ========================= */
+.disciplina-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: 0.22s ease;
+  position: relative;
+}
+
+.disciplina-item:hover {
+  transform: translateX(3px);
+  border-color: rgba(30, 144, 255, 0.24);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.04));
+}
+
+/* Checkbox visual da disciplina */
+.disc-check {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+  transition: 0.22s ease;
+  margin-top: 2px;
+}
+
+.disc-check svg {
+  width: 13px;
+  height: 13px;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: 0.18s ease;
+}
+
+.disc-check.checked {
+  background: linear-gradient(135deg, var(--accentC), var(--accentB));
+  border-color: transparent;
+  box-shadow: 0 8px 18px rgba(30, 144, 255, 0.24);
+}
+
+.disc-check.checked svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Conteúdo textual da disciplina */
+.disciplina-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.disciplina-main {
+  width: 100%;
+  min-width: 0;
+}
+
+.disciplina-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+.disciplina-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.disciplina-title-row h4 {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.disciplina-cr {
+  border-radius: 999px;
+  padding: 5px 8px;
+  font-size: 10px;
+  font-weight: 800;
+  color: #8cd7ff;
+  background: rgba(30, 144, 255, 0.12);
+  border: 1px solid rgba(30, 144, 255, 0.18);
+  white-space: nowrap;
+}
+
+.disciplina-meta {
+  margin-top: 6px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.disciplina-meta span {
+  font-size: 11px;
+  color: var(--muted);
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.disciplina-bottom-row {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+/* Espaço onde aparece o badge de bloqueio */
+.locked-slot {
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+/* =========================
+   Controles de reprovação
+   ========================= */
+.disciplina-reprovacao-inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.reprovacao-label {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.reprovacao-control.modern {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.reprovacao-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.10);
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s ease;
+}
+
+.reprovacao-btn:hover {
+  background: rgba(30, 144, 255, 0.20);
+  transform: scale(1.05);
+}
+
+.reprovacao-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.reprovacao-btn:disabled:hover {
+  background: rgba(255, 255, 255, 0.10);
+  transform: none;
+}
+
+.reprovacao-value {
+  min-width: 24px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+/* =========================
+   Estado bloqueado por pré-requisito
+   ========================= */
+.disciplina-item.locked {
+  opacity: 0.48;
+  filter: grayscale(0.12);
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+}
+
+.disciplina-item.locked:hover {
+  transform: none;
+  border-color: rgba(255, 255, 255, 0.12);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03));
+}
+
+.disciplina-item.locked .disc-check {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.disciplina-item.locked .reprovacao-control.modern {
+  opacity: 0.55;
+}
+
+.locked-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--warning);
+  background: rgba(251, 191, 36, 0.10);
+  border: 1px solid rgba(251, 191, 36, 0.18);
+  white-space: nowrap;
+}
+
+/* Ajustes de layout do estado bloqueado */
+.disciplina-item.locked .disciplina-top {
+  align-items: center;
+}
+
+.disciplina-item.locked .disciplina-side {
+  justify-content: center;
+  align-self: center;
+}
+
+.disciplina-item.locked .disciplina-reprovacao-inline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.disciplina-item.locked .disciplina-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.disciplina-item.locked .locked-badge {
+  align-self: center;
+  margin-top: 0;
+}
+
+.disciplina-item.locked .locked-slot {
+  min-height: 24px;
+}
+
+.disciplina-item.locked .locked-slot .locked-badge,
+.disciplina-item .locked-slot .locked-badge {
+  display: inline-flex;
+}
+
+/* =========================
+   Ações finais e toast
+   ========================= */
+.bottom-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  background: linear-gradient(90deg, #0ea5e9, #34d399);
+  color: #042028;
+  font-weight: 900;
+  padding: 14px 18px;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(2, 8, 23, 0.35);
+  transform: translateY(24px);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.25s ease;
+  z-index: 9999;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* =========================
+   Responsividade
+   ========================= */
+@media (max-width: 1250px) {
+  .semestres-grid {
+    grid-template-columns: repeat(2, minmax(290px, 1fr));
+  }
+}
+
+@media (max-width: 980px) {
+  .header-top {
+    padding-top: 92px;
+  }
+
+  .profile-area {
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+  }
+
+  .profile-trigger,
+  .profile-dropdown {
+    width: 280px;
+  }
+
+  .logo-cefet {
+    position: static;
+    display: block;
+    margin: 12px auto 0;
+  }
+
+  .hero-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .semestres-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .semester-body {
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .toolbar-top {
+    flex-direction: column;
+  }
+
+  .toolbar-left,
+  .toolbar-right {
+    width: 100%;
+  }
+
+  .search-field input,
+  .field select,
+  .btn,
+  .secondary-link {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 12px;
+  }
+
+  .hero-card,
+  .toolbar,
+  .semester-card {
+    padding: 14px;
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .disciplina-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .disciplina-side {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .disciplina-reprovacao-inline {
+    align-items: flex-start;
+  }
+}

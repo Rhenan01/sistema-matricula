@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de matrícula inteligente para alunos do CEFET RJ Itaguaí">
+    <title>Sistema de Matrícula</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='central' font-size='40'%3E📚%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+    <!-- Efeito visual de círculos de fundo -->
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <!-- CONFIGURAÇÃO DAS MENSAGENS QUE O FLASK VAI EXIBIR  -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
+          {% for category, message in messages %}
+            <div class="flash-message {{ 'flash-success' if category == 'success' else 'flash-error' }}">
+                {{ message }}
+                <span class="close-flash">&times;</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <!-- Container principal que engloba os formulários e painel de toggle -->
+    <div class="container" id="container">
+        <!-- Logo do CEFET -->
+        <img src="{{ url_for('static', filename='figures/logo.png') }}" alt="Logo CEFET" class="logo-cefet">
+
+        <!-- ========================= -->
+        <!-- Formulário de Login -->
+        <!-- ========================= -->
+        <div class="form-container sign-in">
+            <form action="{{ url_for('auth.login') }}" method="POST">
+                <h1>Entrar</h1>
+                <span>Use sua matrícula e senha</span>
+                <!-- Matrícula -->
+                <input type="text" name="registration" placeholder="Matrícula" required>
+                <!-- Senha com botão de mostrar/esconder -->
+                <div class="password-container">
+                    <input type="password" name="password" placeholder="Senha" id="senhaLogin" required>
+                    <i class="fa-solid fa-eye" id="toggleSenhaLogin"></i>
+                </div>
+                <!-- Botão de login -->
+                <button type="submit" name="login_btn">Entrar</button>
+            </form>
+        </div>
+
+        <!-- ========================= -->
+        <!-- Formulário de Registro -->
+        <!-- ========================= -->
+        <div class="form-container sign-up">
+            <form action="{{ url_for('auth.register') }}" method="POST">
+                <h1>Criar Conta</h1>
+                <span>Use sua matrícula para se registrar</span>
+                <!-- Nome -->
+                <div class="input-with-icon">
+                    <input type="text" name="name" id="registerName" placeholder="Nome" required>
+                    <div class="info-tooltip">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="tooltip-text">Digite seu nome completo</span>
+                    </div>
+                </div>
+                <!-- Matrícula (7 dígitos) -->
+                <div class="input-with-icon">
+                    <input 
+                        type="text"
+                        name="registration"
+                        id="registerRegistration"
+                        placeholder="Matrícula"
+                        pattern="\d{7}"
+                        maxlength="7"
+                        inputmode="numeric"
+                        title="Digite 7 números, por exemplo: 2212656"
+                        required
+                    >
+                    <div class="info-tooltip">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="tooltip-text">Formato: 7 números, ex.: 2212656</span>
+                    </div>
+                </div>
+                <!-- Email -->
+                <div class="input-with-icon">
+                    <input type="email" name="email" id="registerEmail" placeholder="Email" required>
+                    <div class="info-tooltip">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="tooltip-text">Informe o seu email constitucional</span>
+                    </div>
+                </div>
+                <!-- Curso -->
+               <div class="select-row">
+                    <div class="select-wrapper">
+                        <select name="course_id" id="courseSelect" class="modern-select" required>
+                            <option value="" disabled selected hidden>Curso</option>
+                            {% for curso in cursos %}
+                                <option value="{{ curso.id }}">
+                                    {% if 'Produção' in curso.nome %}
+                                        Produção
+                                    {% elif 'Mecânica' in curso.nome %}
+                                        Mecânica
+                                    {% else %}
+                                        {{ curso.nome }}
+                                    {% endif %}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <i class="fa-solid fa-graduation-cap select-icon"></i>
+                    </div>
+
+                    <div class="select-wrapper">
+                        <select name="ppc_id" id="ppcSelect" class="modern-select" required disabled>
+                            <option value="" disabled selected hidden>PPC</option>
+                            {% for ppc in ppcs %}
+                                <option value="{{ ppc.id }}" data-course="{{ ppc.curso_id }}">
+                                    {{ ppc.codigo }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <i class="fa-solid fa-book select-icon"></i>
+                    </div>
+                </div>
+                <!-- Senha com botão de mostrar/esconder -->
+                <div class="password-container">
+                    <input type="password" name="password" placeholder="Senha" id="senhaRegistro" required>
+                    <i class="fa-solid fa-eye" id="toggleSenhaRegistro" aria-label="Mostrar/Esconder senha"></i>
+                </div>
+                <!-- Botão de registrar -->
+                <button type="submit" name="register_btn" id="registerSubmit" disabled>Registrar</button>
+            </form>
+        </div>
+
+        <!-- ========================= -->
+        <!-- Painel de Toggle (mensagens laterais) -->
+        <!-- ========================= -->
+        <div class="toggle-container">
+            <div class="toggle">
+                <!-- Painel esquerdo (Mensagem para login) -->
+                <div class="toggle-panel toggle-left">
+                    <h1>Bem-vindo(a) de volta!</h1>
+                    <p>Insira seus dados pessoais para usar todos os recursos do site</p>
+                    <button class="hidden" id="login">Entrar</button>
+                </div>
+                <!-- Painel direito (Mensagem para registro) -->
+                <div class="toggle-panel toggle-right">
+                    <h1>Olá Cefetiano!</h1>
+                    <p>Registre-se com seus dados pessoais para usar todos os recursos do site</p>
+                    <button class="hidden" id="register">Registrar</button>
+                </div>
+            </div>
+        </div>
+        <!-- ========================= -->
+        <!-- Tela interna pós-login -->
+        <!-- ========================= -->
+        <div class="menu-screen" id="menuScreen">
+            <div class="menu-screen-content">
+                <a href="{{ url_for('auth.logout') }}" id="backToLoginIcon" class="back-icon" title="Sair">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                {% if is_admin %}
+                <a href="{{ url_for('admin.dashboard') }}" class="admin-shortcut" title="Configurações">
+                    <i class="fa-solid fa-gear"></i>
+                </a>
+                {% endif %}
+                <div class="menu-header">
+                    <span class="menu-badge">Área do Aluno</span>
+                    <h1>Bem-vindo, {{ user_name if user_name else 'Cefetiano(a)' }}!</h1>
+                    <p>Escolha uma funcionalidade para continuar no sistema.</p>
+                </div>
+
+                <div class="menu-grid">
+                    <a href="{{ url_for('main.grade') }}" class="menu-card primary-card">
+                        <div class="menu-card-icon">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                        <h3>Montagem de Grade</h3>
+                        <p>Monte e gerencie sua grade acadêmica.</p>
+                        <span class="menu-card-action">Acessar</span>
+                    </a>
+
+                    <a href="{{ url_for('main.historico_disciplinas') }}" class="menu-card primary-card">
+                        <div class="menu-card-icon">
+                            <i class="fa-solid fa-book-medical"></i>
+                        </div>
+                        <h3>Histórico de Disciplinas</h3>
+                        <p>Visualize e gerencie seu histórico acadêmico.</p>
+                        <span class="menu-card-action">Acessar</span>
+                    </a>
+
+                    <a href="javascript:void(0)" class="menu-card secondary-card disabled-card" aria-disabled="true">
+                        <div class="menu-card-icon">
+                            <i class="fa-solid fa-compass-drafting"></i>
+                        </div>
+                        <h3>CAD</h3>
+                        <p>Acompanhamento acadêmico para alunos próximos do jubilamento.</p>
+                        <span class="menu-card-action">Em breve</span>
+                    </a>
+
+                    <a href="javascript:void(0)" class="menu-card secondary-card disabled-card" aria-disabled="true">
+                        <div class="menu-card-icon">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
+                        <h3>Suporte</h3>
+                        <p>Canal de ajuda para dúvidas, problemas técnicos e orientações.</p>
+                        <span class="menu-card-action">Em breve</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS principal -->
+    <script>
+        window.usuarioLogado = "{{ 'true' if usuario_logado else 'false' }}" === "true";
+    </script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>

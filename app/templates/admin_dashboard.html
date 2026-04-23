@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_dashboard.css') }}">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='central' font-size='38'%3E⚙️%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+    <div class="admin-bg-shape shape-1"></div>
+    <div class="admin-bg-shape shape-2"></div>
+    <div class="admin-bg-shape shape-3"></div>
+
+    <main class="admin-page">
+        <section class="admin-hero">
+            <div class="admin-hero-top">
+                <a href="{{ url_for('main.index') }}" class="admin-back-btn">← Voltar ao menu</a>
+                <span class="admin-badge">Área restrita</span>
+            </div>
+
+            <div class="admin-hero-content">
+                <h1>Painel Administrativo</h1>
+                <p>
+                    Gerencie as estruturas principais do sistema de forma centralizada,
+                    segura e organizada.
+                </p>
+            </div>
+        </section>
+
+        <section class="admin-grid">
+            <a href="{{ url_for('admin.cursos') }}" class="admin-card">
+                <div class="admin-card-icon">🎓</div>
+                <h2>Gerenciar Cursos</h2>
+                <p>Cadastre, edite e organize os cursos disponíveis na base de dados.</p>
+                <span class="admin-card-action">Acessar módulo</span>
+            </a>
+
+            <a href="{{ url_for('admin.ppcs') }}" class="admin-card">
+                <div class="admin-card-icon">📘</div>
+                <h2>Gerenciar PPCs</h2>
+                <p>Controle os PPCs e seus vínculos com os cursos cadastrados.</p>
+                <span class="admin-card-action">Acessar módulo</span>
+            </a>
+
+            <a href="{{ url_for('admin.disciplinas') }}" class="admin-card">
+                <div class="admin-card-icon">🧩</div>
+                <h2>Gerenciar Disciplinas</h2>
+                <p>Administre disciplinas, semestres, créditos, cargas horárias, tipos e PPCs vinculados.</p>
+                <span class="admin-card-action">Acessar módulo</span>
+            </a>
+
+            <a href="{{ url_for('admin.usuarios') }}" class="admin-card">
+                <div class="admin-card-icon">👥</div>
+                <h2>Gerenciar Usuários</h2>
+                <p>Cadastre, edite e organize os usuários do sistema, seus vínculos acadêmicos e permissões.</p>
+                <span class="admin-card-action">Acessar módulo</span>
+            </a>
+
+            <a href="{{ url_for('admin.horarios') }}" class="admin-card">
+                <div class="admin-card-icon">🗓️</div>
+                <h2>Gerenciar Horários</h2>
+                <p>Visualize as grades por semestre e PPC, e administre os horários das disciplinas de forma dinâmica.</p>
+                <span class="admin-card-action">Acessar módulo</span>
+            </a>
+        </section>
+    </main>
+</body>
+</html>

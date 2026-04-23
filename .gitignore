@@ -1,0 +1,43 @@
+# =========================
+# Ambiente virtual
+# =========================
+ambv/
+venv/
+.venv/
+
+# =========================
+# Cache e compilados Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Variáveis de ambiente
+# =========================
+.env
+
+# =========================
+# Configurações locais
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# Arquivos do sistema
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs e temporários
+# =========================
+*.log
+*.tmp
+
+# =========================
+# Testes e cobertura
+# =========================
+.pytest_cache/
+.coverage
+htmlcov/
