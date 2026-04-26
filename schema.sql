@@ -1,18 +1,4 @@
 -- =========================================================
--- TABELA DE USUÁRIOS
--- =========================================================
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    matricula VARCHAR(20) NOT NULL UNIQUE,
-    email VARCHAR(120) NOT NULL UNIQUE,
-    password_hash TEXT NOT NULL,
-    curso_id INTEGER REFERENCES cursos(id),
-    ppc_id INTEGER REFERENCES ppcs(id),
-    is_admin BOOLEAN NOT NULL DEFAULT FALSE
-);
-
--- =========================================================
 -- TABELA DE CURSOS
 -- =========================================================
 CREATE TABLE cursos (
@@ -31,11 +17,18 @@ CREATE TABLE ppcs (
 );
 
 -- =========================================================
--- RELAÇÃO DE USUÁRIO COM CURSO / PPC
+-- TABELA DE USUÁRIOS
 -- =========================================================
-ALTER TABLE users
-ADD COLUMN curso_id INTEGER REFERENCES cursos(id),
-ADD COLUMN ppc_id INTEGER REFERENCES ppcs(id);
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    matricula VARCHAR(20) NOT NULL UNIQUE,
+    email VARCHAR(120) NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    curso_id INTEGER REFERENCES cursos(id),
+    ppc_id INTEGER REFERENCES ppcs(id),
+    is_admin BOOLEAN NOT NULL DEFAULT FALSE
+);
 
 -- =========================================================
 -- TABELAS AUXILIARES DE HORÁRIO
