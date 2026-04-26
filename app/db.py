@@ -1,13 +1,15 @@
+import os
 import psycopg
 from psycopg.rows import dict_row
 
-# Configurações de conexão com o banco de dados PostgreSQL
+
+# Configuração local, usada quando você roda no seu computador
 DB_CONFIG = {
-    "host": "localhost",
-    "dbname": "sistema_matricula",
-    "user": "postgres",
-    "password": "1234",
-    "port": 5432,
+    "host": os.getenv("DB_HOST", "localhost"),
+    "dbname": os.getenv("DB_NAME", "sistema_matricula"),
+    "user": os.getenv("DB_USER", "postgres"),
+    "password": os.getenv("DB_PASSWORD", "1234"),
+    "port": os.getenv("DB_PORT", "5432"),
 }
 
 
@@ -15,10 +17,17 @@ def get_connection():
     """
     Cria e retorna uma nova conexão com o banco de dados.
 
-    A conexão utiliza dict_row para que os resultados das consultas
-    sejam retornados como dicionários, facilitando o acesso aos campos
-    pelo nome das colunas.
+    Localmente, usa o PostgreSQL instalado no computador.
+    No Render, usa a variável DATABASE_URL apontando para o banco online.
     """
+    database_url = os.getenv("DATABASE_URL")
+
+    if database_url:
+        return psycopg.connect(
+            database_url,
+            row_factory=dict_row
+        )
+
     return psycopg.connect(
         host=DB_CONFIG["host"],
         dbname=DB_CONFIG["dbname"],
