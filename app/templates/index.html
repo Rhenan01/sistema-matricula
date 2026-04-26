@@ -37,7 +37,7 @@
     {% endwith %}
 
     <!-- Container principal que engloba os formulários e painel de toggle -->
-    <div class="container" id="container">
+    <div class="container {% if usuario_logado %}show-menu{% endif %}" id="container">
         <!-- Logo do CEFET -->
         <img src="{{ url_for('static', filename='figures/logo.png') }}" alt="Logo CEFET" class="logo-cefet">
 

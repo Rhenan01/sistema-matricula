@@ -229,6 +229,6 @@ if (backToLoginBtn) {
         container.classList.remove("active");
     });
 }
-if (usuarioLogado) {
+if (usuarioLogado && !container.classList.contains("show-menu")) {
     abrirMenu();
 }

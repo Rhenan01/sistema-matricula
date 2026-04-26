@@ -3,7 +3,7 @@ import psycopg
 from psycopg.rows import dict_row
 
 
-# Configuração local, usada quando você roda no seu computador
+# Configuração local, usada quando você roda no computador
 DB_CONFIG = {
     "host": os.getenv("DB_HOST", "localhost"),
     "dbname": os.getenv("DB_NAME", "sistema_matricula"),
