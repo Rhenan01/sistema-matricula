@@ -1327,11 +1327,466 @@ body {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
 }
 /* =========================================================
-   RESPONSIVO
+   RESPONSIVIDADE DA TELA INICIAL
+   - Mantém o desktop 1360x768 como está
+   - Corrige tablets, celulares e telas 1280x720
+   ========================================================= */
+
+
+/* =========================================================
+   AJUSTE PARA TELAS LARGAS COM ALTURA MENOR
+   Exemplo: 1280x720
+   Não afeta 1360x768, porque limita em max-width: 1300px
+   ========================================================= */
+@media (min-width: 769px) and (max-width: 1300px) and (max-height: 730px) {
+    body {
+        padding: 18px;
+        overflow: hidden;
+    }
+
+    .container {
+        width: 850px;
+        min-height: 520px;
+        transform: scale(0.88);
+        transform-origin: center center;
+    }
+}
+
+
+/* =========================================================
+   TABLETS E NOTEBOOKS MENORES
+   ========================================================= */
+@media (max-width: 1100px) and (min-width: 769px) {
+    body {
+        padding: 24px;
+    }
+
+    .container {
+        width: min(850px, 94vw);
+        min-height: 520px;
+    }
+}
+
+
+/* =========================================================
+   CELULARES E TABLETS EM PÉ
    ========================================================= */
 @media (max-width: 768px) {
-    .menu-grid {
-        grid-template-columns: 1fr;
-        grid-auto-rows: 190px;
+    html,
+    body {
+        width: 100%;
+        min-height: 100%;
+    }
+
+    body {
+        min-height: 100vh;
+        height: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding: 24px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container {
+        width: min(430px, 100%);
+        max-width: 430px;
+        min-height: auto;
+        border-radius: 24px;
+        overflow: hidden;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .logo-cefet {
+        top: 18px;
+        left: 22px !important;
+        width: 78px;
+        z-index: 80;
+        transform: none !important;
+    }
+
+    .container.active .logo-cefet {
+        left: 22px !important;
+        transform: none !important;
+    }
+
+    /* =========================
+       FORMULÁRIOS MOBILE
+       ========================= */
+    .form-container {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .sign-in,
+    .sign-up {
+        width: 100%;
+        left: auto;
+        margin-top: 0;
+        transform: none;
+    }
+
+    .sign-in {
+        display: block;
+        opacity: 1;
+        z-index: 2;
+    }
+
+    .sign-up {
+        display: none;
+        opacity: 0;
+        z-index: 1;
+    }
+
+    .container.active .sign-in {
+        display: none;
+        opacity: 0;
+        transform: none;
+    }
+
+    .container.active .sign-up {
+        display: block;
+        opacity: 1;
+        z-index: 5;
+        transform: none;
+        animation: none;
+    }
+
+    .container form {
+        height: auto;
+        min-height: 0;
+        padding: 98px 28px 34px;
+        justify-content: center;
+    }
+
+    .sign-in form {
+        min-height: 276px;
+    }
+
+    .sign-up form {
+        min-height: 342px;
+        padding-top: 92px;
+        padding-bottom: 30px;
+        justify-content: center;
+    }
+
+    .container form h1 {
+        font-size: 1.72rem;
+        line-height: 1.15;
+        text-align: center;
+    }
+
+    .sign-up span,
+    .sign-in span {
+        text-align: center;
+        font-size: 0.86rem;
+        margin-bottom: 14px;
+    }
+
+    .container input {
+        font-size: 0.9rem;
+        padding: 12px 14px;
+        margin: 7px 0;
+    }
+
+    .password-container input {
+        padding-right: 38px;
+    }
+
+    .container button {
+        width: 100%;
+        max-width: 230px;
+        min-height: 44px;
+        padding: 10px 24px;
+    }
+
+    .sign-up form button {
+        width: 100%;
+        max-width: 230px;
+        margin-bottom: 0;
+    }
+
+    .select-row {
+        flex-direction: column;
+        gap: 0;
+        margin: 4px 0;
+    }
+
+    .select-row .select-wrapper:first-child,
+    .select-row .select-wrapper:last-child {
+        flex: 1;
+    }
+
+    .select-wrapper {
+        margin: 7px 0;
+    }
+
+    .modern-select {
+        height: 46px;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    .tooltip-text {
+        right: -2px;
+        max-width: 230px;
+        white-space: normal;
+        text-align: left;
+    }
+
+    /* =========================
+       PAINEL AZUL MOBILE
+       Corrige a quina branca
+       ========================= */
+    .toggle-container,
+    .container.active .toggle-container {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        height: auto;
+        min-height: 168px;
+        z-index: 20;
+        overflow: hidden;
+        transform: none !important;
+        border-radius: 0 0 24px 24px !important;
+        background: linear-gradient(135deg, #00509e, #002f6c);
+    }
+
+    .toggle,
+    .container.active .toggle {
+        position: relative;
+        left: auto;
+        width: 100%;
+        height: 100%;
+        min-height: 168px;
+        transform: none !important;
+        background: linear-gradient(135deg, #00509e, #002f6c);
+        border-radius: 0 0 24px 24px;
+    }
+
+    .toggle-panel,
+    .container.active .toggle-panel {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 100%;
+        height: auto;
+        min-height: 168px;
+        padding: 24px 28px;
+        transform: none !important;
+        background: transparent;
+        border-radius: 0;
+    }
+
+    .toggle-panel h1 {
+        font-size: 1.42rem;
+        line-height: 1.2;
+    }
+
+    .toggle-panel p {
+        font-size: 0.84rem;
+        line-height: 1.45;
+        margin: 12px 0;
+    }
+
+    .toggle-left {
+        display: none;
+    }
+
+    .toggle-right {
+        display: flex;
+    }
+
+    .container.active .toggle-left {
+        display: flex;
+    }
+
+    .container.active .toggle-right {
+        display: none;
+    }
+
+    .container button.hidden {
+        width: 100%;
+        max-width: 210px;
+    }
+
+    .circles li {
+        width: 72px;
+        height: 72px;
+    }
+}
+
+
+/* =========================================================
+   CELULARES GRANDES
+   Exemplo: 430x932
+   ========================================================= */
+@media (max-width: 480px) {
+    body {
+        padding: 18px 10px;
+    }
+
+    .container {
+        width: min(404px, 100%);
+        max-width: 404px;
+        border-radius: 20px;
+    }
+
+    .logo-cefet {
+        width: 70px;
+        top: 16px;
+        left: 18px !important;
+    }
+
+    .container form {
+        padding: 88px 22px 28px;
+    }
+
+    .sign-in form {
+        min-height: 282px;
+    }
+
+    .sign-up form {
+        min-height: 352px;
+        padding-top: 84px;
+    }
+
+    .container form h1 {
+        font-size: 1.52rem;
+    }
+
+    .container input {
+        margin: 7px 0;
+        font-size: 0.86rem;
+    }
+
+    .modern-select {
+        height: 44px;
+        font-size: 0.86rem;
+    }
+
+    .toggle-container,
+    .container.active .toggle-container,
+    .toggle,
+    .container.active .toggle,
+    .toggle-panel,
+    .container.active .toggle-panel {
+        min-height: 160px;
+        border-radius: 0 0 20px 20px !important;
+    }
+
+    .toggle-panel {
+        padding: 22px;
+    }
+
+    .toggle-panel h1 {
+        font-size: 1.22rem;
+    }
+
+    .toggle-panel p {
+        font-size: 0.78rem;
+    }
+}
+
+
+/* =========================================================
+   CELULARES MÉDIOS E PEQUENOS
+   Exemplo: 390x844, 360x800
+   ========================================================= */
+@media (max-width: 390px) {
+    body {
+        padding: 14px 9px;
+    }
+
+    .container {
+        width: min(360px, 100%);
+    }
+
+    .container form {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .sign-in form {
+        min-height: 276px;
+    }
+
+    .sign-up form {
+        min-height: 346px;
+    }
+
+    .container form h1 {
+        font-size: 1.42rem;
+    }
+
+    .logo-cefet {
+        width: 64px;
+    }
+
+    .toggle-panel h1 {
+        font-size: 1.14rem;
+    }
+
+    .toggle-panel p {
+        font-size: 0.74rem;
+    }
+}
+
+
+/* =========================================================
+   CELULARES MUITO ESTREITOS
+   ========================================================= */
+@media (max-width: 340px) {
+    .container form {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .container form h1 {
+        font-size: 1.32rem;
+    }
+
+    .container button {
+        max-width: 200px;
+    }
+
+    .toggle-panel {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+}
+
+/* =========================================================
+   AJUSTE FINO DE CENTRALIZAÇÃO NO MOBILE
+   ========================================================= */
+@media (max-width: 768px) {
+    html {
+        width: 100%;
+        min-height: 100%;
+    }
+
+    body {
+        width: 100%;
+        min-width: 100%;
+        margin: 0;
+        padding-left: 0;
+        padding-right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container {
+        margin-left: auto;
+        margin-right: auto;
     }
 }
