@@ -1053,10 +1053,91 @@ select option {
   pointer-events: none;
 }
 
-/* ==========================
-   RESPONSIVIDADE DOS CONTROLES
-   ========================== */
+/* =========================================================
+   RESPONSIVIDADE - MONTAGEM DE GRADE
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   Telas médias e notebooks menores
+   ---------------------------------------------------------
+   Ajusta a largura geral e reorganiza os controles quando a
+   tela começa a ficar estreita para o layout completo.
+   --------------------------------------------------------- */
 @media (max-width: 1200px) {
+  header,
+  main,
+  .historico-panel {
+    max-width: 1080px;
+  }
+
+  .controls-block-config {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .controls-block-actions {
+    grid-template-columns: 1fr auto;
+  }
+
+  .controls-center {
+    justify-content: flex-start;
+  }
+
+  .controls-right {
+    grid-column: 1 / -1;
+    justify-content: stretch;
+  }
+
+  .btn-gerar-inline {
+    width: 100%;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Tablets e telas intermediárias
+   ---------------------------------------------------------
+   Centraliza o perfil no topo, reduz a logo e deixa os
+   controles mais confortáveis em duas colunas.
+   --------------------------------------------------------- */
+@media (max-width: 980px) {
+  body {
+    padding: 18px;
+  }
+
+  header,
+  main,
+  .historico-panel {
+    max-width: 920px;
+  }
+
+  .header-top {
+    min-height: auto;
+    padding-top: 92px;
+  }
+
+  .profile-area {
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+  }
+
+  .profile-trigger,
+  .profile-dropdown {
+    width: 280px;
+  }
+
+  .logo-cefet {
+    position: static;
+    display: block;
+    width: 96px;
+    margin: 12px auto 0;
+  }
+
+  .controls-panel {
+    padding: 18px 16px 14px;
+  }
+
   .controls-block-config {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1069,63 +1150,74 @@ select option {
   .controls-left,
   .controls-center,
   .controls-right {
-    justify-content: flex-start;
+    width: 100%;
+    justify-content: stretch;
   }
 
-  .controls-center {
-    justify-content: flex-start;
+  .field-historico,
+  .toggles,
+  .btn-gerar-inline {
+    width: 100%;
+  }
+
+  .resume-cards {
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-/* ==========================
-   RESPONSIVIDADE GERAL
-   ========================== */
-@media (max-width: 900px) {
-  .header-top {
-    padding-top: 86px;
-    min-height: auto;
+
+/* ---------------------------------------------------------
+   Base mobile
+   ---------------------------------------------------------
+   Define a largura útil da página em telas pequenas e impede
+   rolagem lateral fora da área da grade.
+   --------------------------------------------------------- */
+@media (max-width: 768px) {
+  html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
-  .profile-area {
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
+  body {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100dvh;
+    padding: 14px 0;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
-  .profile-trigger {
-    width: 240px;
+  header,
+  main,
+  .historico-panel {
+    width: min(430px, calc(100vw - 24px));
+    max-width: calc(100vw - 24px);
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .profile-user-name {
-    max-width: 138px;
+  main {
+    gap: 12px;
   }
 
-  .profile-dropdown {
-    left: 50%;
-    width: 240px;
-    transform: translateX(-50%) translateY(-8px) scale(0.98);
-  }
-
-  .profile-area.open .profile-dropdown {
-    transform: translateX(-50%) translateY(0) scale(1);
-  }
-
-  .logo-cefet {
-    position: static;
-    display: block;
-    margin: 14px auto 0;
+  .controls,
+  .grade-wrap,
+  .historico-panel {
+    border-radius: 20px;
   }
 
   .controls-panel {
-    padding: 18px 16px 14px;
+    padding: 14px;
+    gap: 14px;
   }
 
-  .controls-block-config {
-    grid-template-columns: 1fr;
-  }
-
+  .controls-block-config,
   .controls-block-actions {
+    display: grid;
     grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .controls-left,
@@ -1135,8 +1227,674 @@ select option {
     justify-content: stretch;
   }
 
-  .field-historico {
+  .field,
+  .field-historico,
+  .toggles,
+  .resume-cards,
+  .btn-gerar-inline {
     width: 100%;
+  }
+
+  .resume-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  input[type="number"],
+  select,
+  .switch-card,
+  .btn,
+  .btn.ghost,
+  .btn-gerar-inline,
+  .btn-export {
+    min-height: 44px;
+    height: 44px;
+    border-radius: 12px;
+    font-size: 0.82rem;
+  }
+
+  select,
+  input[type="number"] {
+    line-height: 1.25;
+  }
+
+  select {
+    padding-top: 0;
+    padding-bottom: 0;
+    display: block;
+  }
+
+  .controls-hint {
+    font-size: 0.74rem;
+    line-height: 1.45;
+  }
+
+  .grade-topbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .grade-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  .grade-actions .btn {
+    width: 100%;
+  }
+
+  .tools .small-muted,
+  .grade-topbar .small-muted {
+    font-size: 0.74rem;
+    line-height: 1.45;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Celular em pé
+   ---------------------------------------------------------
+   A página fica em coluna única. A grade mantém largura mínima
+   e usa rolagem horizontal própria para preservar legibilidade.
+   --------------------------------------------------------- */
+@media (max-width: 768px) and (orientation: portrait) {
+  header,
+  .header-top,
+  main,
+  .controls,
+  .controls-panel,
+  .historico-panel {
+    overflow: visible;
+  }
+
+  .header-top {
+    min-height: auto;
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .profile-area {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    z-index: 8000;
+  }
+
+  .profile-trigger {
+    width: 100%;
+    min-height: 64px;
+    padding: 9px 12px;
+    border-radius: 18px;
+    position: relative;
+    z-index: 8100;
+  }
+
+  .profile-dropdown {
+    position: fixed !important;
+    top: 86px !important;
+    left: 50% !important;
+    right: auto !important;
+
+    width: min(430px, calc(100vw - 24px)) !important;
+    max-width: calc(100vw - 24px) !important;
+    max-height: min(330px, calc(100dvh - 104px));
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 9000 !important;
+
+    transform: translateX(-50%) translateY(-8px) scale(0.98) !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .profile-area.open .profile-dropdown {
+    transform: translateX(-50%) translateY(0) scale(1) !important;
+  }
+
+  .profile-avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+  }
+
+  .profile-user-label {
+    font-size: 10px;
+  }
+
+  .profile-user-name {
+    font-size: 12px;
+    max-width: 210px;
+  }
+
+  .title-wrap {
+    width: 100%;
+    text-align: center;
+  }
+
+  .title-wrap h1 {
+    font-size: 1.65rem;
+    line-height: 1.1;
+  }
+
+  .title-wrap p {
+    max-width: 280px;
+    min-height: 34px;
+    margin: 6px auto 0;
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .logo-cefet {
+    width: 84px;
+    margin-top: 2px;
+  }
+
+  .switch-card {
+    justify-content: flex-start;
+  }
+
+  .resume-card {
+    height: 54px;
+    border-radius: 14px;
+  }
+
+  .resume-label {
+    font-size: 0.68rem;
+  }
+
+  .resume-number {
+    font-size: 1.1rem;
+  }
+
+  .historico-panel {
+    padding: 12px;
+  }
+
+  .historico-panel-header {
+    align-items: flex-start;
+  }
+
+  .historico-chips {
+    max-height: 130px;
+  }
+
+  .historico-chip {
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.25;
+  }
+
+  .feedback-box {
+    gap: 10px;
+  }
+
+  .feedback-title {
+    font-size: 0.82rem;
+  }
+
+  .feedback-chip {
+    font-size: 0.74rem;
+    line-height: 1.35;
+  }
+
+  .grade-wrap {
+    position: relative;
+    overflow-x: auto !important;
+    overflow-y: visible;
+    padding: 12px 0 44px !important;
+    -webkit-overflow-scrolling: touch;
+    isolation: isolate;
+  }
+
+  .grade-wrap::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .grade-wrap::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 999px;
+  }
+
+  .grade-wrap::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, rgba(30, 144, 255, 0.85), rgba(52, 211, 153, 0.85));
+    border-radius: 999px;
+  }
+
+  .grade-wrap::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  .grid {
+    position: relative;
+    min-width: 760px !important;
+    grid-template-columns: 104px repeat(6, minmax(104px, 1fr)) !important;
+    z-index: 1;
+  }
+
+  .cell {
+    min-height: 46px;
+    padding: 6px;
+    font-size: 0.72rem;
+  }
+
+  .cell.head {
+    position: sticky;
+    top: 0;
+    z-index: 15;
+    background: linear-gradient(180deg, #17356b, #122d5d);
+  }
+
+  .cell.head:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 30;
+    background: #17356b !important;
+    box-shadow: none !important;
+  }
+
+  .timecell {
+    position: sticky;
+    left: 0;
+    z-index: 29;
+
+    width: 104px !important;
+    min-width: 104px !important;
+    max-width: 104px !important;
+
+    background: #17356b !important;
+    box-shadow: none !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 0.7rem;
+  }
+
+  .timecell::after,
+  .cell.head:first-child::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  .occupied {
+    min-height: 46px;
+    padding: 3px;
+  }
+
+  .occupied,
+  .occupied-shell,
+  .occupied-box {
+    min-width: 0;
+  }
+
+  .occupied-box {
+    overflow: hidden;
+    padding: 5px 20px 5px 6px;
+    border-radius: 8px;
+  }
+
+  .occupied-title {
+    font-size: 0.66rem;
+    line-height: 1.15;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+
+  .occupied .remove {
+    right: 5px;
+    top: 4px;
+    font-size: 11px;
+  }
+
+  .chips {
+    min-width: 760px;
+  }
+
+  .chip {
+    font-size: 0.72rem;
+    padding: 7px 9px;
+  }
+
+  .grade-topbar,
+  .grade-spacer,
+  .tools {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+
+  .tools {
+    position: sticky;
+    left: 0;
+    bottom: 0;
+    z-index: 30;
+    width: calc(100% - 24px);
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    padding-top: 8px;
+    background: transparent !important;
+  }
+
+  .tools .small-muted {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    max-width: 100%;
+    padding: 8px 14px;
+    border-radius: 999px;
+
+    background: rgba(15, 37, 79, 0.95);
+    border: 1px solid rgba(52, 211, 153, 0.22);
+    color: #dbeafe;
+
+    font-size: 0.74rem;
+    line-height: 1.2;
+    box-shadow: 0 8px 18px rgba(2, 8, 23, 0.22);
+  }
+
+  .modal-content {
+    width: min(330px, calc(100vw - 28px));
+    max-height: 72dvh;
+    margin: 18dvh auto 0;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Celulares pequenos em pé
+   Ex.: 360x800 e 390x844.
+   --------------------------------------------------------- */
+@media (max-width: 390px) and (orientation: portrait) {
+  header,
+  main,
+  .historico-panel {
+    width: min(348px, calc(100vw - 24px));
+    max-width: calc(100vw - 24px);
+  }
+
+  .profile-trigger {
+    min-height: 60px;
+    padding: 8px 11px;
+  }
+
+  .profile-dropdown {
+    top: 82px !important;
+    width: min(348px, calc(100vw - 24px)) !important;
+    max-height: min(310px, calc(100dvh - 96px));
+  }
+
+  .profile-avatar {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+  }
+
+  .profile-user-name {
+    font-size: 11px;
+    max-width: 190px;
+  }
+
+  .title-wrap h1 {
+    font-size: 1.45rem;
+  }
+
+  .title-wrap p {
+    font-size: 0.72rem;
+    max-width: 250px;
+  }
+
+  .logo-cefet {
+    width: 76px;
+  }
+
+  .controls-panel,
+  .historico-panel {
+    padding: 12px;
+  }
+
+  .grade-wrap {
+    padding: 12px 0 44px !important;
+  }
+
+  label.small,
+  .small-muted {
+    font-size: 0.7rem;
+  }
+
+  input[type="number"],
+  select,
+  .switch-card,
+  .btn,
+  .btn.ghost,
+  .btn-gerar-inline,
+  .btn-export {
+    min-height: 44px;
+    height: 44px;
+    font-size: 0.78rem;
+  }
+
+  .switch-label {
+    font-size: 0.78rem;
+  }
+
+  .grade-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .grid,
+  .chips {
+    min-width: 720px !important;
+  }
+
+  .grid {
+    grid-template-columns: 98px repeat(6, minmax(98px, 1fr)) !important;
+  }
+
+  .cell {
+    min-height: 44px;
+    font-size: 0.68rem;
+  }
+
+  .timecell {
+    width: 98px !important;
+    min-width: 98px !important;
+    max-width: 98px !important;
+  }
+
+  .occupied-title {
+    font-size: 0.62rem;
+  }
+
+  .tools .small-muted {
+    font-size: 0.7rem;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Celulares muito pequenos
+   Ex.: 320x568.
+   --------------------------------------------------------- */
+@media (max-width: 340px) and (orientation: portrait) {
+  body {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  header,
+  main,
+  .historico-panel {
+    width: min(318px, calc(100vw - 18px));
+    max-width: calc(100vw - 18px);
+  }
+
+  .profile-dropdown {
+    top: 76px !important;
+    width: min(318px, calc(100vw - 18px)) !important;
+    max-height: min(290px, calc(100dvh - 88px));
+  }
+
+  .profile-user-name {
+    max-width: 160px;
+  }
+
+  .title-wrap h1 {
+    font-size: 1.28rem;
+  }
+
+  .title-wrap p {
+    display: none;
+  }
+
+  .logo-cefet {
+    width: 68px;
+  }
+
+  .resume-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .grid,
+  .chips {
+    min-width: 700px !important;
+  }
+
+  .grid {
+    grid-template-columns: 92px repeat(6, minmax(98px, 1fr)) !important;
+  }
+
+  .timecell {
+    width: 92px !important;
+    min-width: 92px !important;
+    max-width: 92px !important;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Celular deitado
+   ---------------------------------------------------------
+   A grade é compactada para caber inteira na tela. Nesse modo
+   a página usa rolagem vertical normal e não precisa arrastar
+   a grade para o lado.
+   --------------------------------------------------------- */
+@media (orientation: landscape) and (max-height: 500px) and (max-width: 950px) {
+  html {
+    overflow-x: hidden;
+  }
+
+  body {
+    min-height: 100dvh;
+    padding: 10px 14px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  header,
+  main,
+  .historico-panel {
+    width: min(860px, calc(100vw - 28px));
+    max-width: calc(100vw - 28px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header {
+    margin-bottom: 10px;
+  }
+
+  .header-top {
+    min-height: 72px;
+    padding-top: 0;
+  }
+
+  .profile-area {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    z-index: 8000;
+  }
+
+  .profile-trigger,
+  .profile-dropdown {
+    width: 280px;
+  }
+
+  .profile-dropdown {
+    max-height: calc(100dvh - 90px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    z-index: 9000;
+  }
+
+  .profile-trigger {
+    min-height: 66px;
+    padding: 8px 12px;
+  }
+
+  .profile-avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+  }
+
+  .title-wrap {
+    padding-top: 84px;
+  }
+
+  .title-wrap h1 {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+  }
+
+  .title-wrap p {
+    font-size: 0.82rem;
+  }
+
+  .logo-cefet {
+    position: absolute;
+    right: 0;
+    top: 92px;
+    width: 96px;
+    margin: 0;
+  }
+
+  .controls-panel {
+    padding: 16px 18px;
+  }
+
+  .controls-block-config {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .controls-block-actions {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .controls-left,
+  .controls-center,
+  .controls-right,
+  .field-historico,
+  .toggles,
+  .btn-gerar-inline {
+    width: 100%;
+  }
+
+  .controls-center {
+    justify-content: center;
+  }
+
+  .controls-right {
+    justify-content: stretch;
   }
 
   .resume-cards {
@@ -1146,38 +1904,306 @@ select option {
 
   .btn-gerar-inline {
     width: 100%;
-    min-width: 0;
+    max-width: none;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 
-  .switch-card {
+  input[type="number"],
+  select,
+  .switch-card,
+  .btn,
+  .btn.ghost,
+  .btn-gerar-inline,
+  .btn-export {
+    min-height: 44px;
+    height: 44px;
+  }
+
+  .grade-wrap {
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: visible;
+    padding-bottom: 16px;
+  }
+
+  .grid {
     width: 100%;
+    min-width: 0 !important;
+    grid-template-columns: 82px repeat(6, minmax(0, 1fr));
+  }
+
+  .chips {
+    width: 100%;
+    min-width: 0 !important;
+  }
+
+  .cell {
+    min-height: 40px;
+    padding: 4px;
+    font-size: 0.64rem;
+  }
+
+  .cell.head {
+    position: sticky;
+    top: 0;
+    z-index: 6;
+    background: linear-gradient(180deg, #17356b, #122d5d);
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+
+  .cell.head:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 12;
+    background: #17356b;
+    box-shadow: none;
+  }
+
+  .timecell {
+    position: sticky;
+    left: 0;
+    z-index: 11;
+    min-width: 82px;
+    padding: 4px 5px;
+    font-size: 0.56rem;
+    line-height: 1.15;
+    white-space: nowrap;
+    background: #17356b;
+    box-shadow: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .occupied {
+    min-height: 40px;
+    padding: 2px;
+  }
+
+  .occupied-box {
+    padding: 4px 15px 4px 5px;
+    border-radius: 7px;
+  }
+
+  .occupied-title {
+    font-size: 0.52rem;
+    line-height: 1.05;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+
+  .occupied .remove {
+    top: 3px;
+    right: 4px;
+    font-size: 10px;
+  }
+
+  .tools {
+    position: static;
+    width: 100%;
+    margin-top: 10px;
+    padding-top: 0;
+    background: transparent;
+
+    display: flex;
+    justify-content: center;
+  }
+
+  .tools .small-muted {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    padding: 7px 14px;
+    border-radius: 999px;
+
+    background: rgba(15, 37, 79, 0.95);
+    border: 1px solid rgba(52, 211, 153, 0.22);
+    color: #dbeafe;
+
+    font-size: 0.72rem;
+    line-height: 1.2;
+    box-shadow: 0 8px 18px rgba(2, 8, 23, 0.18);
+  }
+
+  .modal-content {
+    margin: 8dvh auto 0;
+    max-height: 78dvh;
   }
 }
 
-@media (max-width: 640px) {
-  body {
-    padding: 14px;
+
+/* ---------------------------------------------------------
+   Celular deitado com altura muito baixa
+   Ex.: 800x360 e 844x390.
+   --------------------------------------------------------- */
+@media (orientation: landscape) and (max-height: 390px) and (max-width: 950px) {
+  .title-wrap {
+    padding-top: 76px;
+  }
+
+  .title-wrap h1 {
+    font-size: 1.65rem;
+  }
+
+  .title-wrap p {
+    font-size: 0.76rem;
+  }
+
+  .logo-cefet {
+    top: 82px;
+    width: 82px;
+  }
+
+  .profile-trigger {
+    min-height: 58px;
+  }
+
+  .controls-panel {
+    padding: 14px 16px;
+  }
+
+  .grid {
+    grid-template-columns: 78px repeat(6, minmax(0, 1fr));
+  }
+
+  .timecell {
+    min-width: 78px;
+    font-size: 0.54rem;
+  }
+
+  .cell {
+    min-height: 38px;
+    font-size: 0.6rem;
+  }
+
+  .occupied {
+    min-height: 38px;
+  }
+
+  .occupied-title {
+    font-size: 0.5rem;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Tablet deitado
+   Ex.: 1024x768.
+   ---------------------------------------------------------
+   Separa perfil, título e logo em três áreas para evitar
+   sobreposição no cabeçalho.
+   --------------------------------------------------------- */
+@media (min-width: 951px) and (max-width: 1100px) and (orientation: landscape) {
+  header,
+  main,
+  .historico-panel {
+    width: min(980px, calc(100vw - 36px));
+    max-width: calc(100vw - 36px);
+  }
+
+  .header-top {
+    min-height: 86px;
+    padding-top: 0;
+    display: grid;
+    grid-template-columns: 240px 1fr 100px;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .profile-area {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    justify-self: start;
+    width: 240px;
+  }
+
+  .profile-trigger,
+  .profile-dropdown {
+    width: 240px;
+  }
+
+  .profile-trigger {
+    min-height: 62px;
+    padding: 8px 12px;
+    border-radius: 18px;
+  }
+
+  .profile-avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+  }
+
+  .profile-user-label {
+    font-size: 10px;
+  }
+
+  .profile-user-name {
+    max-width: 145px;
+    font-size: 12px;
+    line-height: 1.15;
+  }
+
+  .title-wrap {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .title-wrap h1 {
+    font-size: 2rem;
+    line-height: 1.1;
+    white-space: normal;
+  }
+
+  .title-wrap p {
+    max-width: 330px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.78rem;
+  }
+
+  .logo-cefet {
+    position: static;
+    width: 92px;
+    justify-self: end;
+    margin: 0;
+  }
+
+  .controls-block-config {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .controls-block-actions {
+    grid-template-columns: 1fr auto auto;
+  }
+
+  .field-historico {
+    width: 190px;
   }
 
   .resume-cards {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(92px, 96px));
+    width: auto;
   }
 
-  .resume-card {
-    align-items: flex-start;
+  .btn-gerar-inline {
+    width: auto;
   }
 
-  .resume-label,
-  .resume-number {
-    text-align: left;
+  .grid,
+  .chips {
+    min-width: 980px;
   }
 
-  .grade-topbar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .grade-actions {
-    justify-content: flex-end;
+  .grid {
+    grid-template-columns: 120px repeat(6, minmax(120px, 1fr));
   }
 }
+

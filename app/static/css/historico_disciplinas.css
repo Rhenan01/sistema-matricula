@@ -915,17 +915,38 @@ select option {
   opacity: 1;
 }
 
-/* =========================
+/* =========================================================
    Responsividade
-   ========================= */
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   Telas médias
+   ---------------------------------------------------------
+   A partir desse ponto, o grid de semestres passa de três
+   para duas colunas, mantendo boa leitura em notebooks menores.
+   --------------------------------------------------------- */
 @media (max-width: 1250px) {
   .semestres-grid {
     grid-template-columns: repeat(2, minmax(290px, 1fr));
   }
 }
 
+
+/* ---------------------------------------------------------
+   Tablets e telas intermediárias
+   ---------------------------------------------------------
+   Reorganiza o cabeçalho e empilha o resumo superior quando
+   a largura não comporta bem a estrutura completa do desktop.
+   --------------------------------------------------------- */
 @media (max-width: 980px) {
+  header,
+  main {
+    max-width: 920px;
+  }
+
   .header-top {
+    min-height: auto;
     padding-top: 92px;
   }
 
@@ -943,6 +964,7 @@ select option {
   .logo-cefet {
     position: static;
     display: block;
+    width: 100px;
     margin: 12px auto 0;
   }
 
@@ -952,22 +974,73 @@ select option {
   }
 
   .hero-stats {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
+
+/* ---------------------------------------------------------
+   Base mobile
+   ---------------------------------------------------------
+   Define a largura útil da página, evita rolagem lateral e
+   prepara os blocos principais para telas estreitas.
+   --------------------------------------------------------- */
 @media (max-width: 768px) {
-  .semestres-grid {
-    grid-template-columns: 1fr;
+  html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
-  .semester-body {
-    max-height: none;
-    overflow-y: visible;
+  body {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100dvh;
+    padding: 14px 0;
+    overflow-x: hidden;
+  }
+
+  .bg-orb {
+    max-width: 180px;
+    max-height: 180px;
+    filter: blur(16px);
+  }
+
+  .orb-1 {
+    top: 40px;
+    left: -80px;
+  }
+
+  .orb-2 {
+    right: -90px;
+    top: 320px;
+  }
+
+  .orb-3 {
+    left: 38%;
+    bottom: -100px;
+  }
+
+  header,
+  main {
+    width: min(430px, calc(100vw - 24px));
+    max-width: calc(100vw - 24px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  main {
+    gap: 12px;
+  }
+
+  .semestres-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .toolbar-top {
     flex-direction: column;
+    gap: 14px;
   }
 
   .toolbar-left,
@@ -980,35 +1053,797 @@ select option {
   .btn,
   .secondary-link {
     width: 100%;
+    min-width: 0;
   }
 }
 
-@media (max-width: 640px) {
+
+/* ---------------------------------------------------------
+   Celular em pé
+   ---------------------------------------------------------
+   Layout vertical compacto. O conteúdo principal fica em uma
+   coluna e os controles de reprovação passam a ocupar a
+   largura do card.
+   --------------------------------------------------------- */
+@media (max-width: 768px) and (orientation: portrait) {
   body {
-    padding: 12px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .header-top {
+    min-height: auto;
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .profile-area {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    z-index: 2000;
+  }
+
+  .profile-trigger {
+    width: 100%;
+    min-height: 64px;
+    padding: 9px 12px;
+    border-radius: 18px;
+  }
+
+  .profile-dropdown {
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+
+  .profile-avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+  }
+
+  .profile-user-label {
+    font-size: 10px;
+  }
+
+  .profile-user-name {
+    font-size: 12px;
+    max-width: 210px;
+  }
+
+  .title-wrap {
+    width: 100%;
+    text-align: center;
+  }
+
+  .title-wrap h1 {
+    font-size: 1.75rem;
+    line-height: 1.08;
+  }
+
+  .title-wrap p {
+    max-width: 280px;
+    min-height: 34px;
+    margin: 6px auto 0;
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .logo-cefet {
+    width: 86px;
+    margin-top: 2px;
+  }
+
+  .hero-card {
+    border-radius: 22px;
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .hero-left h2 {
+    font-size: 1.35rem;
+    line-height: 1.12;
+  }
+
+  .hero-left p {
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .stat-card {
+    min-width: 0;
+    border-radius: 16px;
+    padding: 13px;
+  }
+
+  .stat-label {
+    margin-bottom: 8px;
+    font-size: 0.68rem;
+    line-height: 1.25;
+  }
+
+  .stat-card strong {
+    font-size: 1.75rem;
+  }
+
+  .toolbar {
+    border-radius: 20px;
+    padding: 14px;
+  }
+
+  .toolbar-left,
+  .toolbar-right {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .toolbar-right {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .field {
+    gap: 7px;
+  }
+
+  .field label {
+    font-size: 0.72rem;
+  }
+
+  input,
+  select,
+  .btn,
+  .secondary-link {
+    height: 44px;
+    border-radius: 12px;
+    font-size: 0.82rem;
+  }
+
+  .btn,
+  .secondary-link {
+    padding: 0 12px;
+  }
+
+  .semester-card {
+    border-radius: 18px;
+    padding: 13px;
+  }
+
+  .semester-card:hover {
+    transform: none;
+  }
+
+  .semester-header {
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .semester-pill {
+    padding: 5px 9px;
+    font-size: 0.62rem;
+  }
+
+  .semester-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .semester-btn {
+    width: 100%;
+    padding: 9px 8px;
+    border-radius: 11px;
+    font-size: 0.72rem;
+  }
+
+  .semester-body {
+    max-height: min(560px, 70dvh);
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+
+  .semester-list {
+    gap: 10px;
+  }
+
+  .disciplina-item {
+    padding: 11px;
+    gap: 9px;
+    border-radius: 14px;
+  }
+
+  .disciplina-item:hover {
+    transform: none;
+  }
+
+  .disc-check {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    margin-top: 1px;
+  }
+
+  .disciplina-content,
+  .disciplina-main {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .disciplina-top {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .disciplina-title-row {
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .disciplina-title-row h4 {
+    font-size: 0.82rem;
+    line-height: 1.32;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .disciplina-cr {
+    padding: 5px 8px;
+    font-size: 0.62rem;
+  }
+
+  .disciplina-meta {
+    gap: 6px;
+  }
+
+  .disciplina-meta span {
+    padding: 4px 8px;
+    font-size: 0.68rem;
+  }
+
+  .disciplina-bottom-row {
+    margin-top: 12px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .locked-slot {
+    min-height: 0;
+  }
+
+  .locked-badge {
+    font-size: 0.62rem;
+    white-space: normal;
+    line-height: 1.2;
+  }
+
+  .disciplina-reprovacao-inline {
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .reprovacao-label {
+    font-size: 0.7rem;
+  }
+
+  .reprovacao-control.modern {
+    padding: 5px;
+    gap: 8px;
+  }
+
+  .reprovacao-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+
+  .reprovacao-value {
+    min-width: 22px;
+    font-size: 0.88rem;
+  }
+
+  .bottom-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .toast {
+    left: 14px;
+    right: 14px;
+    bottom: 14px;
+    text-align: center;
+    font-size: 0.82rem;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Celulares pequenos em pé
+   Ex.: 360x800 e 390x844.
+   --------------------------------------------------------- */
+@media (max-width: 390px) and (orientation: portrait) {
+  header,
+  main {
+    width: min(348px, calc(100vw - 24px));
+    max-width: calc(100vw - 24px);
+  }
+
+  .profile-trigger {
+    min-height: 60px;
+    padding: 8px 11px;
+  }
+
+  .profile-avatar {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+  }
+
+  .profile-user-name {
+    max-width: 190px;
+    font-size: 11px;
+  }
+
+  .title-wrap h1 {
+    font-size: 1.55rem;
+  }
+
+  .title-wrap p {
+    max-width: 250px;
+    font-size: 0.72rem;
+  }
+
+  .logo-cefet {
+    width: 78px;
   }
 
   .hero-card,
   .toolbar,
   .semester-card {
-    padding: 14px;
+    padding: 12px;
+  }
+
+  .hero-left h2 {
+    font-size: 1.18rem;
+  }
+
+  .hero-left p {
+    font-size: 0.76rem;
+  }
+
+  .stat-card {
+    padding: 11px;
+  }
+
+  .stat-label {
+    font-size: 0.62rem;
+  }
+
+  .stat-card strong {
+    font-size: 1.55rem;
+  }
+
+  input,
+  select,
+  .btn,
+  .secondary-link {
+    height: 42px;
+    font-size: 0.78rem;
+  }
+
+  .semester-body {
+    max-height: min(530px, 68dvh);
+  }
+
+  .semester-btn {
+    font-size: 0.66rem;
+  }
+
+  .disciplina-item {
+    padding: 10px;
+  }
+
+  .disciplina-title-row h4 {
+    font-size: 0.78rem;
+  }
+
+  .disciplina-meta span {
+    font-size: 0.64rem;
+  }
+
+  .disciplina-reprovacao-inline {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .reprovacao-control.modern {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Celulares muito pequenos
+   Ex.: 320x568.
+   --------------------------------------------------------- */
+@media (max-width: 340px) and (orientation: portrait) {
+  body {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  header,
+  main {
+    width: min(318px, calc(100vw - 18px));
+    max-width: calc(100vw - 18px);
+  }
+
+  .profile-user-name {
+    max-width: 160px;
+  }
+
+  .title-wrap h1 {
+    font-size: 1.36rem;
+  }
+
+  .title-wrap p {
+    display: none;
+  }
+
+  .logo-cefet {
+    width: 70px;
   }
 
   .hero-stats {
     grid-template-columns: 1fr;
   }
 
-  .disciplina-top {
-    flex-direction: column;
-    align-items: flex-start;
+  .toolbar-right {
+    grid-template-columns: 1fr;
   }
 
-  .disciplina-side {
-    width: 100%;
-    align-items: flex-start;
+  .semester-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .semester-body {
+    max-height: 500px;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Celular deitado
+   ---------------------------------------------------------
+   Mantém o uso horizontal da tela e deixa a página com rolagem
+   vertical normal. Os semestres ficam em duas colunas.
+   --------------------------------------------------------- */
+@media (orientation: landscape) and (max-height: 500px) and (max-width: 950px) {
+  html {
+    overflow-x: hidden;
+  }
+
+  body {
+    min-height: 100dvh;
+    padding: 10px 14px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  header,
+  main {
+    width: min(860px, calc(100vw - 28px));
+    max-width: calc(100vw - 28px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header {
+    margin-bottom: 10px;
+  }
+
+  .header-top {
+    min-height: 72px;
+    padding-top: 0;
+  }
+
+  .profile-area {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+  }
+
+  .profile-trigger,
+  .profile-dropdown {
+    width: 280px;
+  }
+
+  .profile-trigger {
+    min-height: 66px;
+    padding: 8px 12px;
+  }
+
+  .profile-avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+  }
+
+  .title-wrap {
+    padding-top: 84px;
+  }
+
+  .title-wrap h1 {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+  }
+
+  .title-wrap p {
+    font-size: 0.82rem;
+  }
+
+  .logo-cefet {
+    position: absolute;
+    right: 0;
+    top: 92px;
+    width: 96px;
+    margin: 0;
+  }
+
+  .hero-card {
+    padding: 16px 18px;
+    border-radius: 22px;
+    align-items: stretch;
+  }
+
+  .hero-left h2 {
+    font-size: 1.65rem;
+  }
+
+  .hero-left p {
+    font-size: 0.9rem;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
+
+  .toolbar {
+    padding: 14px;
+  }
+
+  .toolbar-top {
+    align-items: end;
+  }
+
+  .toolbar-left {
+    flex: 1;
+  }
+
+  .toolbar-right {
+    flex-shrink: 0;
+  }
+
+  .search-field input,
+  .field select {
+    min-width: 220px;
+  }
+
+  .semestres-grid {
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    gap: 14px;
+  }
+
+  .semester-body {
+    max-height: 260px;
+    overflow-y: auto;
+  }
+
+  .disciplina-bottom-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
   }
 
   .disciplina-reprovacao-inline {
-    align-items: flex-start;
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between;
+  }
+
+  .bottom-actions {
+    padding-bottom: 10px;
   }
 }
+
+
+/* ---------------------------------------------------------
+   Celular deitado com altura muito baixa
+   ---------------------------------------------------------
+   Reduz alguns elementos para preservar área útil.
+   --------------------------------------------------------- */
+@media (orientation: landscape) and (max-height: 390px) and (max-width: 950px) {
+  .title-wrap {
+    padding-top: 76px;
+  }
+
+  .title-wrap h1 {
+    font-size: 1.7rem;
+  }
+
+  .title-wrap p {
+    font-size: 0.76rem;
+  }
+
+  .logo-cefet {
+    top: 82px;
+    width: 82px;
+  }
+
+  .profile-trigger {
+    min-height: 58px;
+  }
+
+  .hero-left h2 {
+    font-size: 1.4rem;
+  }
+
+  .hero-left p {
+    font-size: 0.82rem;
+  }
+
+  input,
+  select,
+  .btn,
+  .secondary-link {
+    height: 42px;
+  }
+
+  .semester-body {
+    max-height: 230px;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Tablet deitado
+   Ex.: 1024x768.
+   ---------------------------------------------------------
+   Mantém perfil, título e logo em três colunas para evitar
+   sobreposição no cabeçalho.
+   --------------------------------------------------------- */
+@media (min-width: 951px) and (max-width: 1100px) and (orientation: landscape) {
+  header,
+  main {
+    width: min(980px, calc(100vw - 36px));
+    max-width: calc(100vw - 36px);
+  }
+
+  .header-top {
+    min-height: 86px;
+    padding-top: 0;
+    display: grid;
+    grid-template-columns: 240px 1fr 100px;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .profile-area {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    justify-self: start;
+    width: 240px;
+  }
+
+  .profile-trigger,
+  .profile-dropdown {
+    width: 240px;
+  }
+
+  .profile-trigger {
+    min-height: 62px;
+    padding: 8px 12px;
+    border-radius: 18px;
+  }
+
+  .profile-avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+  }
+
+  .profile-user-label {
+    font-size: 10px;
+  }
+
+  .profile-user-name {
+    max-width: 145px;
+    font-size: 12px;
+    line-height: 1.15;
+  }
+
+  .title-wrap {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .title-wrap h1 {
+    font-size: 2rem;
+    line-height: 1.1;
+    white-space: normal;
+  }
+
+  .title-wrap p {
+    max-width: 330px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.78rem;
+  }
+
+  .logo-cefet {
+    position: static;
+    width: 92px;
+    justify-self: end;
+    margin: 0;
+  }
+
+  .hero-card {
+    align-items: center;
+  }
+
+  .hero-left h2 {
+    font-size: 1.6rem;
+  }
+
+  .hero-left p {
+    font-size: 0.86rem;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(2, minmax(130px, 1fr));
+  }
+
+  .stat-card {
+    min-width: 130px;
+  }
+
+  .toolbar-left {
+    flex: 1;
+  }
+
+  .toolbar-right {
+    flex-shrink: 0;
+  }
+
+  .search-field input,
+  .field select {
+    min-width: 190px;
+  }
+
+  .semestres-grid {
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+  }
+
+  .semester-body {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+}
+

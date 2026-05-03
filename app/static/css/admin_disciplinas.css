@@ -1165,7 +1165,19 @@ input[type="number"] {
     }
 }
 
+/* =========================================================
+   RESPONSIVIDADE - GERENCIAR DISCIPLINAS
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   Notebooks menores
+   --------------------------------------------------------- */
 @media (max-width: 1360px) {
+    .admin-disciplinas-page {
+        max-width: 1180px;
+    }
+
     .card-header-list {
         flex-direction: column;
         align-items: flex-start;
@@ -1178,11 +1190,11 @@ input[type="number"] {
 
     .list-tools {
         width: 100%;
-        grid-template-columns: minmax(160px, 0.9fr) 210px minmax(240px, 1fr) auto;
+        grid-template-columns: minmax(170px, 1fr) 210px minmax(240px, 1fr) auto;
     }
 
     .new-disciplina-form {
-        grid-template-columns: minmax(200px, 1fr) minmax(280px, 1.15fr) 88px 88px 88px 115px auto;
+        grid-template-columns: minmax(210px, 1fr) minmax(280px, 1.2fr) 88px 88px 88px 115px auto;
     }
 
     .disciplina-top {
@@ -1199,20 +1211,6 @@ input[type="number"] {
         align-items: stretch;
     }
 
-    .delete-form {
-        align-self: flex-end;
-    }
-}
-
-@media (max-width: 1180px) {
-    .list-tools {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .counter-box {
-        justify-content: center;
-    }
-
     .edit-form {
         flex-wrap: wrap;
     }
@@ -1224,24 +1222,79 @@ input[type="number"] {
 
     .input-ppc {
         flex: 1 1 280px;
-        max-width: none;
         min-width: 280px;
+        max-width: none;
+    }
+
+    .delete-form {
+        align-self: flex-end;
     }
 }
 
+
+/* ---------------------------------------------------------
+   Telas intermediárias
+   --------------------------------------------------------- */
+@media (max-width: 1180px) {
+    .admin-disciplinas-page {
+        max-width: 980px;
+    }
+
+    .new-disciplina-form {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .new-disciplina-form .btn-primary {
+        grid-column: 1 / -1;
+        width: 100%;
+    }
+
+    .input-name-create,
+    .input-ppc-create,
+    .input-semestre-create,
+    .input-number-medium-create,
+    .input-type-create {
+        min-width: 0;
+    }
+
+    .list-tools {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .counter-box {
+        justify-content: center;
+    }
+
+    .input-semestre,
+    .input-mini-medium,
+    .input-type {
+        flex: 1 1 120px;
+        max-width: none;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Tablets e telas menores
+   --------------------------------------------------------- */
 @media (max-width: 992px) {
+    .admin-disciplinas-page {
+        max-width: 860px;
+    }
+
     .hero-content {
         flex-direction: column;
         align-items: flex-start;
     }
 
     .hero-icon-card {
-        width: 88px;
-        height: 88px;
-        font-size: 2rem;
+        width: 96px;
+        height: 96px;
+        font-size: 2.2rem;
     }
 
-    .card-header {
+    .card-header,
+    .card-header-list {
         flex-direction: column;
         align-items: flex-start;
     }
@@ -1255,7 +1308,1156 @@ input[type="number"] {
     .filter-select,
     .filter-select-ppc {
         width: 100%;
-        min-width: 100%;
+    }
+
+    .disciplina-item {
+        gap: 14px;
+    }
+
+    .disciplina-bottom {
+        gap: 12px;
+    }
+
+    .edit-form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .input-name,
+    .input-ppc,
+    .input-semestre,
+    .input-mini-medium,
+    .input-type {
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+        flex: unset;
+    }
+
+    .edit-form .icon-only {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .delete-form {
+        align-self: stretch;
+    }
+
+    .delete-form .btn-danger {
+        width: 100%;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Base mobile
+   --------------------------------------------------------- */
+@media (max-width: 768px) {
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body {
+        min-height: 100dvh;
+    }
+
+    .bg-orb {
+        opacity: 0.24;
+        filter: blur(20px);
+    }
+
+    .orb-1 {
+        width: 190px;
+        height: 190px;
+        top: -70px;
+        left: -80px;
+    }
+
+    .orb-2 {
+        width: 170px;
+        height: 170px;
+        right: -80px;
+        top: 140px;
+    }
+
+    .orb-3 {
+        width: 190px;
+        height: 190px;
+        left: -70px;
+        bottom: -80px;
+    }
+
+    .admin-disciplinas-page {
+        width: min(430px, calc(100vw - 24px));
+        max-width: calc(100vw - 24px);
+        margin: 0 auto;
+        padding: 18px 0 34px;
+    }
+
+    .hero-card,
+    .modern-card {
+        padding: 18px;
+        border-radius: 22px;
+    }
+
+    .hero-topbar {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        align-items: stretch;
+        margin-bottom: 18px;
+    }
+
+    .hero-topbar-left {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        width: 100%;
+    }
+
+    .back-button,
+    .secondary-button {
+        width: 100%;
+        min-height: 40px;
+        padding: 9px 12px;
+        border-radius: 13px;
+        justify-content: center;
+        text-align: center;
+        font-size: 0.82rem;
+    }
+
+    .hero-badge {
+        width: fit-content;
+        max-width: 100%;
+        justify-content: center;
+        padding: 9px 14px;
+        font-size: 0.78rem;
+    }
+
+    .hero-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .hero-kicker {
+        font-size: 0.72rem;
+    }
+
+    .hero-text h1 {
+        font-size: 1.72rem;
+        line-height: 1.08;
+    }
+
+    .hero-text p {
+        font-size: 0.88rem;
+        line-height: 1.5;
+    }
+
+    .hero-icon-card {
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+        font-size: 1.75rem;
+    }
+
+    .card-header,
+    .card-header-list {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .section-tag {
+        font-size: 0.68rem;
+        padding: 5px 10px;
+    }
+
+    .card-header h2 {
+        font-size: 1.45rem;
+        line-height: 1.12;
+    }
+
+    .card-header p {
+        font-size: 0.86rem;
+        line-height: 1.45;
+    }
+
+    .new-disciplina-form {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .input-wrapper,
+    .select-wrapper,
+    .mini-input-wrapper,
+    .mini-select-wrapper,
+    .search-box {
+        width: 100%;
+        min-width: 0;
+        min-height: 46px;
+        border-radius: 14px;
+    }
+
+    .input-wrapper,
+    .select-wrapper,
+    .mini-input-wrapper,
+    .mini-select-wrapper {
+        padding-left: 12px;
+        padding-right: 34px;
+    }
+
+    .input-wrapper input,
+    .mini-input-wrapper input,
+    .search-box input,
+    .select-wrapper select,
+    .mini-select-wrapper select {
+        width: 100%;
+        font-size: 0.84rem;
+        line-height: 1.25;
+    }
+
+    .select-wrapper select,
+    .mini-select-wrapper select {
+        min-height: 46px;
+    }
+
+    .btn,
+    .btn-primary,
+    .btn-save,
+    .btn-danger,
+    .btn-secondary,
+    .btn-equivalencia,
+    .btn-pre-requisito {
+        min-height: 46px;
+        border-radius: 14px;
+        font-size: 0.84rem;
+    }
+
+    .new-disciplina-form .btn-primary {
+        width: 100%;
+    }
+
+    .list-tools {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .counter-box {
+        width: 100%;
+        height: 44px;
+        justify-content: center;
+        border-radius: 14px;
+        font-size: 0.84rem;
+    }
+
+    .disciplinas-list {
+        gap: 14px;
+    }
+
+    .disciplina-item {
+        padding: 15px;
+        border-radius: 20px;
+        gap: 14px;
+    }
+
+    .disciplina-item:hover {
+        transform: none;
+    }
+
+    .disciplina-top {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .disciplina-left {
+        display: grid;
+        grid-template-columns: 42px 1fr;
+        gap: 12px;
+        align-items: center;
+        width: 100%;
+    }
+
+    .disciplina-index {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        font-size: 0.78rem;
+    }
+
+    .disciplina-info {
+        min-width: 0;
+    }
+
+    .disciplina-info h3 {
+        margin-bottom: 4px;
+        font-size: 1rem;
+        line-height: 1.15;
+        overflow-wrap: anywhere;
+    }
+
+    .disciplina-info p {
+        font-size: 0.74rem;
+        line-height: 1.35;
+        overflow-wrap: anywhere;
+    }
+
+    .disciplina-badges {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        gap: 7px;
+    }
+
+    .disciplina-badge {
+        min-height: 30px;
+        padding: 0 9px;
+        font-size: 0.72rem;
+    }
+
+    .badge-equivalencia::after,
+    .badge-pre-requisito::after {
+        left: 0;
+        right: auto;
+        transform: none;
+        min-width: 220px;
+        max-width: min(320px, calc(100vw - 48px));
+    }
+
+    .badge-equivalencia::before,
+    .badge-pre-requisito::before {
+        left: 18px;
+        transform: none;
+    }
+
+    .disciplina-bottom {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .edit-form {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 10px;
+        width: 100%;
+        align-items: stretch;
+    }
+
+    .input-name,
+    .input-ppc {
+        grid-column: 1 / -1;
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+        height: 44px;
+        min-height: 44px;
+        border-radius: 13px;
+    }
+
+    .input-semestre,
+    .input-mini-medium {
+        grid-column: span 2;
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+        height: 44px;
+        min-height: 44px;
+        border-radius: 13px;
+    }
+
+    .input-type {
+        grid-column: 1 / -1;
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+        height: 44px;
+        min-height: 44px;
+        border-radius: 13px;
+    }
+
+    .edit-form .btn-save,
+    .edit-form .btn-equivalencia,
+    .edit-form .btn-pre-requisito {
+        grid-column: span 2;
+        width: 100%;
+        min-width: 0;
+        height: 46px;
+        min-height: 46px;
+        justify-content: center;
+        margin-top: 0;
+    }
+
+    .delete-form {
+        width: 100%;
+        align-self: stretch;
+        margin-top: 2px;
+    }
+
+    .delete-form .btn-danger {
+        width: 100%;
+        min-width: 0;
+        height: 46px;
+        padding: 0 14px;
+        margin-top: 0;
+    }
+
+    .icon-only span {
+        display: none;
+    }
+
+    .flash-container {
+        top: 14px;
+        right: 14px;
+        left: 14px;
+    }
+
+    .flash-message {
+        width: 100%;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Celular em pé
+   --------------------------------------------------------- */
+@media (max-width: 768px) and (orientation: portrait) {
+    .disciplina-bottom {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .edit-form {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 10px;
+        width: 100%;
+        align-items: stretch;
+    }
+
+    .input-name,
+    .input-ppc {
+        grid-column: 1 / -1;
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+    }
+
+    .input-semestre,
+    .input-mini-medium {
+        grid-column: span 2;
+        min-width: 0;
+        max-width: none;
+        height: 44px;
+    }
+
+    .input-type {
+        grid-column: 1 / -1;
+        min-width: 0;
+        max-width: none;
+        height: 44px;
+    }
+
+    .edit-form .btn-save,
+    .edit-form .btn-equivalencia,
+    .edit-form .btn-pre-requisito {
+        grid-column: span 2;
+        width: 100%;
+        min-width: 0;
+        height: 46px;
+        min-height: 46px;
+        justify-content: center;
+        margin-top: 0;
+    }
+
+    .delete-form {
+        width: 100%;
+        margin-top: 2px;
+    }
+
+    .delete-form .btn-danger {
+        width: 100%;
+        min-width: 0;
+        height: 46px;
+        margin-top: 0;
+    }
+
+    .modal-overlay {
+        padding: 16px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-card,
+    .modal-card-lg {
+        width: min(390px, calc(100vw - 28px));
+        max-width: calc(100vw - 28px);
+        max-height: min(760px, calc(100dvh - 32px));
+        overflow-y: auto;
+        border-radius: 22px;
+        padding: 22px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .modal-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        font-size: 1.25rem;
+        margin-bottom: 14px;
+    }
+
+    .modal-content h3 {
+        font-size: 1.22rem;
+        line-height: 1.18;
+    }
+
+    .modal-content p {
+        font-size: 0.86rem;
+        line-height: 1.45;
+    }
+
+    .equivalencias-body {
+        gap: 16px;
+    }
+
+    .equivalencias-section h4 {
+        font-size: 0.94rem;
+    }
+
+    .equivalencia-form {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .equivalencia-select {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .equivalencia-form .btn-primary {
+        width: 100%;
+    }
+
+    .equivalencia-item {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .equivalencia-item-info strong {
+        font-size: 0.9rem;
+        line-height: 1.25;
+    }
+
+    .equivalencia-item-info span {
+        font-size: 0.78rem;
+        line-height: 1.35;
+    }
+
+    .equivalencia-remove-form {
+        width: 100%;
+    }
+
+    .equivalencia-remove-form .btn-danger {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .modal-actions .btn {
+        width: 100%;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Celulares pequenos em pé
+   Ex.: 360x800 e 390x844
+   --------------------------------------------------------- */
+@media (max-width: 390px) and (orientation: portrait) {
+    .admin-disciplinas-page {
+        width: min(348px, calc(100vw - 24px));
+        max-width: calc(100vw - 24px);
+        padding-top: 16px;
+    }
+
+    .hero-card,
+    .modern-card {
+        padding: 16px;
+        border-radius: 20px;
+    }
+
+    .hero-topbar {
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    .back-button,
+    .secondary-button {
+        min-height: 38px;
+        padding: 8px 10px;
+        font-size: 0.74rem;
+    }
+
+    .hero-badge {
+        min-height: 34px;
+        padding: 8px 12px;
+        font-size: 0.72rem;
+    }
+
+    .hero-text h1 {
+        font-size: 1.48rem;
+    }
+
+    .hero-text p {
+        font-size: 0.8rem;
+    }
+
+    .hero-icon-card {
+        width: 62px;
+        height: 62px;
+        font-size: 1.5rem;
+    }
+
+    .card-header h2 {
+        font-size: 1.24rem;
+    }
+
+    .card-header p {
+        font-size: 0.78rem;
+    }
+
+    .input-wrapper,
+    .select-wrapper,
+    .mini-input-wrapper,
+    .mini-select-wrapper,
+    .search-box {
+        min-height: 44px;
+    }
+
+    .select-wrapper select,
+    .mini-select-wrapper select {
+        min-height: 44px;
+    }
+
+    .btn,
+    .btn-primary,
+    .btn-save,
+    .btn-danger,
+    .btn-secondary,
+    .btn-equivalencia,
+    .btn-pre-requisito {
+        min-height: 44px;
+        font-size: 0.78rem;
+    }
+
+    .disciplina-item {
+        padding: 15px;
+        border-radius: 18px;
+    }
+
+    .disciplina-left {
+        grid-template-columns: 40px 1fr;
+    }
+
+    .disciplina-index {
+        width: 40px;
+        height: 40px;
+        font-size: 0.74rem;
+    }
+
+    .disciplina-info h3 {
+        font-size: 0.94rem;
+    }
+
+    .disciplina-info p {
+        font-size: 0.72rem;
+    }
+
+    .disciplina-badge {
+        min-height: 28px;
+        padding: 0 8px;
+        font-size: 0.68rem;
+    }
+
+    .edit-form {
+        gap: 9px;
+    }
+
+    .edit-form .btn-save,
+    .edit-form .btn-equivalencia,
+    .edit-form .btn-pre-requisito {
+        height: 44px;
+        min-height: 44px;
+    }
+
+    .delete-form .btn-danger {
+        height: 44px;
+        min-height: 44px;
+    }
+
+    .modal-card,
+    .modal-card-lg {
+        width: min(336px, calc(100vw - 24px));
+        max-width: calc(100vw - 24px);
+        padding: 18px;
+        max-height: calc(100dvh - 28px);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Celulares muito pequenos em pé
+   Ex.: 320x568
+   --------------------------------------------------------- */
+@media (max-width: 340px) and (orientation: portrait) {
+    .admin-disciplinas-page {
+        width: min(318px, calc(100vw - 18px));
+        max-width: calc(100vw - 18px);
+        padding-top: 12px;
+        padding-bottom: 28px;
+    }
+
+    .hero-card,
+    .modern-card {
+        padding: 14px;
+        border-radius: 18px;
+    }
+
+    .hero-topbar-left {
+        grid-template-columns: 1fr;
+    }
+
+    .back-button,
+    .secondary-button {
+        justify-content: flex-start;
+    }
+
+    .hero-text h1 {
+        font-size: 1.32rem;
+    }
+
+    .hero-text p {
+        font-size: 0.75rem;
+    }
+
+    .hero-icon-card {
+        width: 56px;
+        height: 56px;
+    }
+
+    .disciplina-badges {
+        gap: 6px;
+    }
+
+    .disciplina-badge {
+        font-size: 0.64rem;
+    }
+
+    .edit-form {
+        gap: 8px;
+    }
+
+    .edit-form .btn-save,
+    .edit-form .btn-equivalencia,
+    .edit-form .btn-pre-requisito {
+        height: 42px;
+        min-height: 42px;
+    }
+
+    .delete-form .btn-danger {
+        height: 42px;
+        min-height: 42px;
+    }
+
+    .modal-card,
+    .modal-card-lg {
+        width: min(306px, calc(100vw - 18px));
+        padding: 16px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Celular deitado
+   --------------------------------------------------------- */
+@media (orientation: landscape) and (max-height: 500px) and (max-width: 950px) {
+    body {
+        min-height: 100dvh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .admin-disciplinas-page {
+        width: min(860px, calc(100vw - 28px));
+        max-width: calc(100vw - 28px);
+        padding: 10px 0 20px;
+    }
+
+    .hero-card,
+    .modern-card {
+        border-radius: 24px;
+        padding: 18px 22px;
+    }
+
+    .hero-topbar {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+    }
+
+    .hero-topbar-left {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        width: auto;
+    }
+
+    .back-button,
+    .secondary-button {
+        width: auto;
+        min-height: 40px;
+        padding: 9px 14px;
+        border-radius: 13px;
+        font-size: 0.86rem;
+    }
+
+    .hero-badge {
+        min-height: 38px;
+        padding: 8px 14px;
+        font-size: 0.82rem;
+    }
+
+    .hero-content {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .hero-text h1 {
+        font-size: 1.85rem;
+    }
+
+    .hero-text p {
+        font-size: 0.9rem;
+    }
+
+    .hero-icon-card {
+        width: 76px;
+        height: 76px;
+        border-radius: 18px;
+        font-size: 1.8rem;
+    }
+
+    .new-disciplina-form {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .new-disciplina-form .btn-primary {
+        grid-column: 1 / -1;
+    }
+
+    .list-tools {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .disciplina-item {
+        padding: 16px 18px;
+        border-radius: 22px;
+        gap: 14px;
+        overflow: hidden;
+    }
+
+    .disciplina-top {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .disciplina-left {
+        display: grid;
+        grid-template-columns: 56px 1fr;
+        gap: 14px;
+        align-items: center;
+    }
+
+    .disciplina-index {
+        width: 56px;
+        height: 56px;
+        border-radius: 18px;
+    }
+
+    .disciplina-info h3 {
+        font-size: 1.18rem;
+    }
+
+    .disciplina-info p {
+        font-size: 0.86rem;
+    }
+
+    .disciplina-badges {
+        justify-content: flex-start;
+    }
+
+    .disciplina-bottom {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .edit-form {
+        display: contents;
+    }
+
+    .input-name,
+    .input-ppc {
+        grid-column: span 2;
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+        height: 44px;
+    }
+
+    .input-semestre,
+    .input-mini-medium,
+    .input-type {
+        grid-column: span 1;
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+        height: 44px;
+    }
+
+    .edit-form .btn-save,
+    .edit-form .btn-equivalencia,
+    .edit-form .btn-pre-requisito {
+        grid-column: span 1;
+        width: 100%;
+        min-width: 0;
+        height: 44px;
+    }
+
+    .delete-form {
+        grid-column: span 1;
+        width: 100%;
+        display: block;
+    }
+
+    .delete-form .btn-danger {
+        width: 100%;
+        min-width: 0;
+        height: 44px;
+    }
+
+    .modal-overlay {
+        align-items: flex-start;
+        justify-content: center;
+        padding: 10px 16px;
+        overflow-y: auto;
+    }
+
+    .modal-card,
+    .modal-card-lg {
+        width: min(760px, calc(100vw - 32px));
+        max-width: calc(100vw - 32px);
+        max-height: none;
+        min-height: 0;
+        margin: 0 auto;
+        padding: 18px 20px;
+        border-radius: 22px;
+    }
+
+    .modal-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 15px;
+        font-size: 1.18rem;
+        margin-bottom: 10px;
+    }
+
+    .modal-content h3 {
+        font-size: 1.28rem;
+        margin-bottom: 8px;
+    }
+
+    .modal-content p {
+        font-size: 0.88rem;
+        line-height: 1.45;
+    }
+
+    .equivalencias-body {
+        gap: 14px;
+        margin-top: 14px;
+    }
+
+    .equivalencias-section h4 {
+        margin-bottom: 8px;
+    }
+
+    .equivalencia-form {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 10px;
+    }
+
+    .equivalencia-form .btn-primary {
+        min-width: 220px;
+    }
+
+    .modal-actions {
+        margin-top: 16px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Celular deitado com altura muito baixa
+   Ex.: 800x360 e 844x390
+   --------------------------------------------------------- */
+@media (orientation: landscape) and (max-height: 390px) and (max-width: 950px) {
+    .admin-disciplinas-page {
+        padding-top: 8px;
+    }
+
+    .hero-card,
+    .modern-card {
+        padding: 16px 20px;
+    }
+
+    .hero-text h1 {
+        font-size: 1.65rem;
+    }
+
+    .hero-text p {
+        font-size: 0.82rem;
+    }
+
+    .hero-icon-card {
+        width: 66px;
+        height: 66px;
+        font-size: 1.55rem;
+    }
+
+    .input-wrapper,
+    .select-wrapper,
+    .mini-input-wrapper,
+    .mini-select-wrapper,
+    .search-box,
+    .btn,
+    .btn-primary,
+    .btn-save,
+    .btn-danger,
+    .btn-secondary,
+    .btn-equivalencia,
+    .btn-pre-requisito {
+        min-height: 42px;
+        height: 42px;
+    }
+
+    .disciplina-bottom {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .input-name,
+    .input-ppc {
+        grid-column: span 2;
+        height: 42px;
+    }
+
+    .input-semestre,
+    .input-mini-medium,
+    .input-type {
+        grid-column: span 1;
+        height: 42px;
+    }
+
+    .edit-form .btn-save,
+    .edit-form .btn-equivalencia,
+    .edit-form .btn-pre-requisito,
+    .delete-form .btn-danger {
+        height: 42px;
+        min-height: 42px;
+    }
+
+    .modal-overlay {
+        padding: 8px 14px;
+    }
+
+    .modal-card,
+    .modal-card-lg {
+        width: min(780px, calc(100vw - 28px));
+        max-width: calc(100vw - 28px);
+        padding: 16px 18px;
+        border-radius: 20px;
+    }
+
+    .modal-icon {
+        width: 42px;
+        height: 42px;
+        margin-bottom: 8px;
+    }
+
+    .modal-content h3 {
+        font-size: 1.12rem;
+    }
+
+    .modal-content p {
+        font-size: 0.8rem;
+    }
+
+    .equivalencias-body {
+        gap: 12px;
+        margin-top: 12px;
+    }
+
+    .equivalencia-empty,
+    .equivalencia-item {
+        padding: 10px 12px;
+        border-radius: 14px;
+    }
+
+    .modal-actions {
+        margin-top: 12px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Tablet em pé
+   Ex.: 768x1024 e 820x1180
+   --------------------------------------------------------- */
+@media (min-width: 769px) and (max-width: 900px) and (orientation: portrait) {
+    .admin-disciplinas-page {
+        width: min(720px, calc(100vw - 36px));
+        max-width: calc(100vw - 36px);
+    }
+
+    .hero-card,
+    .modern-card {
+        padding: 22px;
+        border-radius: 24px;
     }
 
     .new-disciplina-form {
@@ -1263,100 +2465,49 @@ input[type="number"] {
     }
 
     .new-disciplina-form .btn-primary {
-        grid-column: span 2;
-    }
-}
-
-@media (max-width: 768px) {
-    .admin-disciplinas-page {
-        padding: 16px 14px 30px;
+        grid-column: 1 / -1;
     }
 
-    .hero-card,
-    .modern-card {
-        padding: 16px;
-        border-radius: 18px;
+    .list-tools {
+        grid-template-columns: 1fr 1fr;
     }
 
-    .hero-topbar {
-        flex-direction: column;
-        align-items: stretch;
+    .filter-select-ppc,
+    .counter-box {
+        grid-column: 1 / -1;
     }
 
-    .hero-topbar-left {
-        width: 100%;
+    .disciplina-bottom {
+        display: grid;
+        grid-template-columns: 1fr;
     }
 
-    .hero-badge {
-        justify-content: center;
-    }
-
-    .hero-text h1 {
-        font-size: 1.9rem;
-    }
-
-    .new-disciplina-form,
-    .edit-form,
-    .modal-actions {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .btn-primary,
-    .btn-save,
-    .btn-danger,
-    .btn-secondary {
-        width: 100%;
+    .edit-form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
     }
 
     .input-name,
     .input-ppc,
     .input-semestre,
     .input-mini-medium,
-    .input-type,
-    .input-name-create,
-    .input-ppc-create,
-    .input-semestre-create,
-    .input-number-medium-create,
-    .input-type-create,
-    .select-wrapper,
-    .input-wrapper,
-    .mini-input-wrapper,
-    .mini-select-wrapper {
-        min-width: 100%;
-        max-width: 100%;
-        flex: 1 1 100%;
+    .input-type {
+        width: 100%;
+        min-width: 0;
+        max-width: none;
     }
 
-    .disciplina-bottom {
-        flex-direction: column;
-        align-items: stretch;
+    .edit-form .icon-only {
+        width: 100%;
+        min-width: 0;
     }
 
     .delete-form {
         width: 100%;
-        align-self: stretch;
     }
 
-    .delete-form .btn {
-        width: 100%;
-    }
-
-    .disciplina-index {
-        width: 44px;
-        height: 44px;
-    }
-
-    .equivalencia-form {
-        grid-template-columns: 1fr;
-    }
-
-    .equivalencia-item {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .equivalencia-remove-form .btn-danger {
+    .delete-form .btn-danger {
         width: 100%;
     }
 }

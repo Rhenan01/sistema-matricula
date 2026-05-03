@@ -133,3 +133,34 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+const toggleAllSemestersBtn = document.getElementById("toggleAllSemesters");
+const semesterSections = document.querySelectorAll(".schedule-section");
+
+function updateToggleAllSemestersButton() {
+    if (!toggleAllSemestersBtn || semesterSections.length === 0) return;
+
+    const allOpen = Array.from(semesterSections).every((section) => section.open);
+
+    toggleAllSemestersBtn.innerHTML = allOpen
+        ? '<i class="fa-solid fa-compress"></i> Recolher todos'
+        : '<i class="fa-solid fa-expand"></i> Expandir todos';
+}
+
+if (toggleAllSemestersBtn && semesterSections.length > 0) {
+    toggleAllSemestersBtn.addEventListener("click", () => {
+        const allOpen = Array.from(semesterSections).every((section) => section.open);
+
+        semesterSections.forEach((section) => {
+            section.open = !allOpen;
+        });
+
+        updateToggleAllSemestersButton();
+    });
+
+    semesterSections.forEach((section) => {
+        section.addEventListener("toggle", updateToggleAllSemestersButton);
+    });
+
+    updateToggleAllSemestersButton();
+}

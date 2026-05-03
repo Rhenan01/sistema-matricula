@@ -843,9 +843,21 @@ body {
 }
 
 /* =========================================================
-   RESPONSIVIDADE
-========================================================= */
+   RESPONSIVIDADE - GERENCIAR CURSOS
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   Tablets e notebooks menores
+   ---------------------------------------------------------
+   Reduz a complexidade da listagem e evita que o card do curso
+   fique apertado em larguras intermediárias.
+   --------------------------------------------------------- */
 @media (max-width: 992px) {
+    .admin-cursos-page {
+        max-width: 860px;
+    }
+
     .hero-content {
         flex-direction: column;
         align-items: flex-start;
@@ -877,38 +889,180 @@ body {
     }
 
     .course-right {
+        width: 100%;
         justify-content: flex-start;
+    }
+
+    .edit-form {
+        flex: 1;
+    }
+
+    .mini-input-wrapper {
+        flex: 1;
     }
 }
 
+
+/* ---------------------------------------------------------
+   Base mobile
+   ---------------------------------------------------------
+   Define largura útil, evita rolagem lateral e deixa os blocos
+   principais em coluna única.
+   --------------------------------------------------------- */
 @media (max-width: 768px) {
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body {
+        min-height: 100dvh;
+    }
+
+    .bg-orb {
+        opacity: 0.24;
+        filter: blur(20px);
+    }
+
+    .orb-1 {
+        width: 190px;
+        height: 190px;
+        top: -70px;
+        left: -80px;
+    }
+
+    .orb-2 {
+        width: 170px;
+        height: 170px;
+        right: -80px;
+        top: 140px;
+    }
+
+    .orb-3 {
+        width: 190px;
+        height: 190px;
+        left: -70px;
+        bottom: -80px;
+    }
+
     .admin-cursos-page {
-        padding: 24px 16px 40px;
+        width: min(430px, calc(100vw - 24px));
+        max-width: calc(100vw - 24px);
+        margin: 0 auto;
+        padding: 18px 0 34px;
     }
 
     .hero-card,
     .modern-card {
-        padding: 20px;
+        padding: 18px;
         border-radius: 22px;
     }
 
+    /*
+      No celular, os dois botões principais ficam agrupados no topo
+      e o selo fica logo abaixo, centralizado.
+    */
     .hero-topbar {
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
         align-items: stretch;
+        margin-bottom: 18px;
+    }
+
+    .hero-topbar-left {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        width: 100%;
+    }
+
+    .back-button,
+    .secondary-button {
+        width: 100%;
+        min-height: 40px;
+        padding: 9px 12px;
+        border-radius: 13px;
+        font-size: 0.82rem;
+        justify-content: center;
+        text-align: center;
     }
 
     .hero-badge {
+        width: fit-content;
+        max-width: 100%;
         justify-content: center;
+        padding: 9px 14px;
+        font-size: 0.78rem;
+    }
+
+    .hero-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .hero-kicker {
+        font-size: 0.72rem;
     }
 
     .hero-text h1 {
-        font-size: 2rem;
+        font-size: 1.72rem;
+        line-height: 1.08;
     }
 
-    .new-course-form,
-    .edit-form,
-    .modal-actions {
+    .hero-text p {
+        font-size: 0.88rem;
+        line-height: 1.5;
+    }
+
+    .hero-icon-card {
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+        font-size: 1.75rem;
+    }
+
+    .card-header,
+    .card-header-list {
         flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .section-tag {
+        font-size: 0.68rem;
+        padding: 5px 10px;
+    }
+
+    .card-header h2 {
+        font-size: 1.45rem;
+    }
+
+    .card-header p {
+        font-size: 0.86rem;
+    }
+
+    .new-course-form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .input-wrapper,
+    .mini-input-wrapper,
+    .search-box {
+        width: 100%;
+        min-width: 0;
+        min-height: 46px;
+        border-radius: 14px;
+    }
+
+    .input-wrapper input,
+    .mini-input-wrapper input,
+    .search-box input {
+        font-size: 0.86rem;
     }
 
     .btn-primary,
@@ -916,18 +1070,421 @@ body {
     .btn-danger,
     .btn-secondary {
         width: 100%;
+        min-height: 46px;
+        border-radius: 14px;
+        font-size: 0.84rem;
     }
 
-    .mini-input-wrapper {
-        min-width: 100%;
+    .list-tools {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .courses-counter {
+        width: fit-content;
+        height: 42px;
+        border-radius: 14px;
+        font-size: 0.84rem;
+    }
+
+    .courses-list {
+        gap: 14px;
+    }
+
+    .course-item {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        padding: 17px;
+        border-radius: 20px;
+    }
+
+    .course-item:hover {
+        transform: none;
     }
 
     .course-left {
         align-items: flex-start;
+        gap: 12px;
     }
 
     .course-index {
-        width: 48px;
-        height: 48px;
+        width: 46px;
+        height: 46px;
+        border-radius: 15px;
+    }
+
+    .course-info h3 {
+        font-size: 1.12rem;
+        line-height: 1.18;
+    }
+
+    .course-info p {
+        font-size: 0.82rem;
+        line-height: 1.4;
+    }
+
+    /*
+      Ações do card em mobile:
+      campo, salvar e excluir ficam empilhados e com a mesma largura.
+    */
+    .course-right {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        justify-content: stretch;
+    }
+
+    .edit-form,
+    .delete-form {
+        width: 100%;
+    }
+
+    .edit-form {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .mini-input-wrapper {
+        width: 100%;
+    }
+
+    .btn-save,
+    .btn-danger {
+        width: 100%;
+    }
+
+    .flash-container {
+        top: 14px;
+        right: 14px;
+        left: 14px;
+    }
+
+    .flash-message {
+        width: 100%;
+    }
+
+    .modal-overlay {
+        padding: 16px;
+    }
+
+    .modal-card {
+        padding: 22px;
+        border-radius: 22px;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Celulares pequenos
+   Ex.: 360x800 e 390x844.
+   --------------------------------------------------------- */
+@media (max-width: 390px) {
+    .admin-cursos-page {
+        width: min(348px, calc(100vw - 24px));
+        max-width: calc(100vw - 24px);
+        padding-top: 16px;
+    }
+
+    .hero-card,
+    .modern-card {
+        padding: 16px;
+        border-radius: 20px;
+    }
+
+    .hero-topbar {
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    .back-button {
+        min-height: 38px;
+        padding: 8px 12px;
+        font-size: 0.78rem;
+    }
+
+    .hero-badge {
+        min-height: 34px;
+        padding: 8px 12px;
+        font-size: 0.72rem;
+    }
+
+    .hero-text h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-text p {
+        font-size: 0.8rem;
+    }
+
+    .hero-icon-card {
+        width: 62px;
+        height: 62px;
+        font-size: 1.5rem;
+    }
+
+    .card-header h2 {
+        font-size: 1.26rem;
+    }
+
+    .card-header p {
+        font-size: 0.8rem;
+    }
+
+    .input-wrapper,
+    .mini-input-wrapper,
+    .search-box {
+        min-height: 44px;
+    }
+
+    .btn-primary,
+    .btn-save,
+    .btn-danger,
+    .btn-secondary {
+        min-height: 44px;
+        font-size: 0.78rem;
+    }
+
+    .course-item {
+        padding: 15px;
+        border-radius: 18px;
+    }
+
+    .course-index {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        font-size: 0.78rem;
+    }
+
+    .course-info h3 {
+        font-size: 1rem;
+    }
+
+    .course-info p {
+        font-size: 0.76rem;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Celular deitado
+   ---------------------------------------------------------
+   Usa a largura disponível com o cabeçalho mais aberto.
+   Nos cards da listagem, as ações ficam alinhadas à direita.
+   --------------------------------------------------------- */
+@media (orientation: landscape) and (max-height: 500px) and (max-width: 950px) {
+    body {
+        min-height: 100dvh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .admin-cursos-page {
+        width: min(860px, calc(100vw - 28px));
+        max-width: calc(100vw - 28px);
+        padding: 10px 0 20px;
+    }
+
+    .hero-card,
+    .modern-card {
+        border-radius: 24px;
+        padding: 18px 22px;
+    }
+
+    .hero-topbar {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+    }
+
+    .hero-topbar-left {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .back-button {
+        min-height: 40px;
+        padding: 9px 14px;
+        border-radius: 13px;
+        font-size: 0.86rem;
+    }
+
+    .hero-badge {
+        min-height: 38px;
+        padding: 8px 14px;
+        font-size: 0.82rem;
+    }
+
+    .hero-content {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .hero-text h1 {
+        font-size: 1.85rem;
+    }
+
+    .hero-text p {
+        font-size: 0.9rem;
+    }
+
+    .hero-icon-card {
+        width: 76px;
+        height: 76px;
+        border-radius: 18px;
+        font-size: 1.8rem;
+    }
+
+    .card-header,
+    .card-header-list {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    .list-tools {
+        width: auto;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .search-box {
+        width: 260px;
+        min-width: 260px;
+        height: 46px;
+    }
+
+    .courses-counter {
+        height: 46px;
+    }
+
+    .course-item {
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 18px;
+    }
+
+    .course-left {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .course-info h3 {
+        font-size: 1.25rem;
+    }
+
+    .course-info p {
+        font-size: 0.86rem;
+    }
+
+    /*
+      No modo deitado, os botões ficam à direita do card.
+      O campo ocupa espaço flexível e os botões ficam iguais.
+    */
+    .course-right {
+        flex: 1.35;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: nowrap;
+    }
+
+    .edit-form {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: nowrap;
+    }
+
+    .mini-input-wrapper {
+        flex: 1;
+        min-width: 220px;
+        max-width: 310px;
+        min-height: 48px;
+    }
+
+    .delete-form {
+        flex: 0 0 auto;
+    }
+
+    .btn-save,
+    .btn-danger {
+        width: 112px;
+        min-width: 112px;
+        min-height: 48px;
+        padding: 0 14px;
+        border-radius: 15px;
+    }
+
+    .btn-primary {
+        min-height: 48px;
+    }
+
+    .new-course-form {
+        flex-wrap: nowrap;
+    }
+
+    .input-wrapper {
+        min-height: 48px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Celular deitado com altura muito baixa
+   Ex.: 800x360.
+   --------------------------------------------------------- */
+@media (orientation: landscape) and (max-height: 390px) and (max-width: 950px) {
+    .admin-cursos-page {
+        padding-top: 8px;
+    }
+
+    .hero-card,
+    .modern-card {
+        padding: 16px 20px;
+    }
+
+    .hero-text h1 {
+        font-size: 1.65rem;
+    }
+
+    .hero-text p {
+        font-size: 0.82rem;
+    }
+
+    .hero-icon-card {
+        width: 66px;
+        height: 66px;
+        font-size: 1.55rem;
+    }
+
+    .course-item {
+        padding: 14px 16px;
+    }
+
+    .mini-input-wrapper,
+    .btn-save,
+    .btn-danger {
+        min-height: 44px;
     }
 }

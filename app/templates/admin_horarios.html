@@ -32,16 +32,24 @@
                         <i class="fa-solid fa-arrow-left"></i>
                         Voltar ao painel
                     </a>
+
                     <a href="{{ url_for('main.index') }}" class="schedule-back-btn secondary">
                         <i class="fa-solid fa-house"></i>
                         Menu principal
                     </a>
                 </div>
 
-                <button type="button" class="schedule-add-btn" id="openAddHorarioModal">
-                    <i class="fa-solid fa-plus"></i>
-                    Novo horário
-                </button>
+                <div class="schedule-hero-tools">
+                    <button type="button" class="schedule-toggle-all-btn" id="toggleAllSemesters">
+                        <i class="fa-solid fa-compress"></i>
+                        Recolher todos
+                    </button>
+
+                    <button type="button" class="schedule-add-btn" id="openAddHorarioModal">
+                        <i class="fa-solid fa-plus"></i>
+                        Novo horário
+                    </button>
+                </div>
             </div>
 
             <div class="schedule-hero-content">
@@ -70,14 +78,15 @@
                     <summary>
                         <div class="schedule-section-title">
                             <span class="schedule-pill">{{ secao.titulo }}</span>
-                            <strong>{{ secao.titulo }}</strong>
                         </div>
+
                         <span class="schedule-summary-action">Expandir / recolher</span>
                     </summary>
 
                     <div class="schedule-grid-wrap">
                         <div class="schedule-grid">
                             <div class="schedule-grid-header schedule-grid-time">Horário</div>
+
                             {% for dia in dias_semana %}
                                 <div class="schedule-grid-header">{{ dia.nome }}</div>
                             {% endfor %}
@@ -85,18 +94,21 @@
                             {% for bloco in blocos %}
                                 <div class="schedule-grid-time-cell">
                                     <span class="block-order">{{ bloco.ordem }}</span>
-                                    <small>{{ bloco.hora_inicio }} — {{ bloco.hora_fim }}</small>
+                                    <small>
+                                        {{ (bloco.hora_inicio|string)[:5] }} —
+                                        {{ (bloco.hora_fim|string)[:5] }}
+                                    </small>
                                 </div>
 
                                 {% for dia in dias_semana %}
                                     <div class="schedule-cell">
                                         {% set itens = secao.grid[(bloco.id, dia.id)] %}
+
                                         {% if itens %}
                                             {% for item in itens %}
                                                 <div class="schedule-entry {{ 'continued' if not item.is_start else '' }}">
                                                     <div class="schedule-entry-main">
                                                         <strong>{{ item.disciplina_nome }}</strong>
-                                                        <span>{{ 'Bloco inicial ' ~ item.bloco_inicio }} • {{ item.quantidade_blocos }} bloco(s)</span>
                                                     </div>
 
                                                     {% if item.is_start %}
@@ -115,9 +127,19 @@
                                                                 <i class="fa-solid fa-pen"></i>
                                                             </button>
 
-                                                            <form action="{{ url_for('admin.excluir_horario', horario_id=item.horario_id) }}" method="POST" class="delete-horario-form">
+                                                            <form
+                                                                action="{{ url_for('admin.excluir_horario', horario_id=item.horario_id) }}"
+                                                                method="POST"
+                                                                class="delete-horario-form"
+                                                            >
                                                                 <input type="hidden" name="ppc_id" value="{{ selected_ppc_id }}">
-                                                                <button type="button" class="icon-btn danger openDeleteHorarioModal" data-disciplina-nome="{{ item.disciplina_nome }}" title="Excluir horário">
+
+                                                                <button
+                                                                    type="button"
+                                                                    class="icon-btn danger openDeleteHorarioModal"
+                                                                    data-disciplina-nome="{{ item.disciplina_nome }}"
+                                                                    title="Excluir horário"
+                                                                >
                                                                     <i class="fa-solid fa-trash"></i>
                                                                 </button>
                                                             </form>
@@ -155,9 +177,11 @@
 
                 <select name="disciplina_id" id="horarioDisciplina" required>
                     <option value="" disabled selected hidden>Disciplina</option>
+
                     {% for disciplina in disciplinas %}
                         <option value="{{ disciplina.id }}">
-                            {{ disciplina.nome }} •
+                            {{ disciplina.nome }}
+                            •
                             {% if disciplina.tipo|lower == 'optativa' %}
                                 Optativa
                             {% elif disciplina.tipo|lower == 'extra' %}
@@ -171,6 +195,7 @@
 
                 <select name="dia_semana_id" id="horarioDia" required>
                     <option value="" disabled selected hidden>Dia da semana</option>
+
                     {% for dia in dias_semana %}
                         <option value="{{ dia.id }}">{{ dia.nome }}</option>
                     {% endfor %}
@@ -178,14 +203,26 @@
 
                 <select name="bloco_inicio" id="horarioBlocoInicio" required>
                     <option value="" disabled selected hidden>Bloco inicial</option>
+
                     {% for bloco in blocos %}
                         <option value="{{ bloco.id }}">
-                            {{ bloco.ordem }} • {{ bloco.hora_inicio }} — {{ bloco.hora_fim }}
+                            {{ bloco.ordem }}
+                            •
+                            {{ (bloco.hora_inicio|string)[:5] }} —
+                            {{ (bloco.hora_fim|string)[:5] }}
                         </option>
                     {% endfor %}
                 </select>
 
-                <input type="number" name="quantidade_blocos" id="horarioQuantidadeBlocos" min="1" step="1" placeholder="Quantidade de blocos" required>
+                <input
+                    type="number"
+                    name="quantidade_blocos"
+                    id="horarioQuantidadeBlocos"
+                    min="1"
+                    step="1"
+                    placeholder="Quantidade de blocos"
+                    required
+                >
 
                 <div class="modal-actions">
                     <button type="button" class="btn-secondary" id="cancelHorarioModal">Cancelar</button>

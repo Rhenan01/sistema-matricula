@@ -1327,16 +1327,20 @@ body {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
 }
 /* =========================================================
-   RESPONSIVIDADE DA TELA INICIAL
-   - Mantém o desktop 1360x768 como está
-   - Corrige tablets, celulares e telas 1280x720
+   RESPONSIVIDADE
+   Mantém o layout original no desktop principal e ajusta:
+   - telas 1280x720;
+   - mobile em pé;
+   - mobile deitado;
+   - menu pós-login.
    ========================================================= */
 
 
 /* =========================================================
-   AJUSTE PARA TELAS LARGAS COM ALTURA MENOR
+   1. Telas largas com pouca altura
    Exemplo: 1280x720
-   Não afeta 1360x768, porque limita em max-width: 1300px
+
+   O notebook principal 1360x768 não entra nessa regra.
    ========================================================= */
 @media (min-width: 769px) and (max-width: 1300px) and (max-height: 730px) {
     body {
@@ -1354,7 +1358,7 @@ body {
 
 
 /* =========================================================
-   TABLETS E NOTEBOOKS MENORES
+   2. Tablets horizontais e notebooks menores
    ========================================================= */
 @media (max-width: 1100px) and (min-width: 769px) {
     body {
@@ -1369,33 +1373,75 @@ body {
 
 
 /* =========================================================
-   CELULARES E TABLETS EM PÉ
+   3. Base mobile
+   Evita rolagem lateral e centraliza o card.
    ========================================================= */
 @media (max-width: 768px) {
-    html,
-    body {
+    html {
         width: 100%;
+        max-width: 100%;
         min-height: 100%;
+        overflow-x: hidden;
     }
 
     body {
-        min-height: 100vh;
+        width: 100%;
+        max-width: 100%;
+        min-height: 100dvh;
         height: auto;
+        margin: 0;
+        padding: 24px 0;
         overflow-x: hidden;
         overflow-y: auto;
-        padding: 24px 14px;
+
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
+    .circles {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100dvh;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .circles li {
+        width: 72px;
+        height: 72px;
+        max-width: 90px;
+        max-height: 90px;
+    }
+
     .container {
-        width: min(430px, 100%);
-        max-width: 430px;
+        width: min(404px, calc(100vw - 28px)) !important;
+        max-width: calc(100vw - 28px) !important;
+        min-width: 0 !important;
         min-height: auto;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        left: auto !important;
+        right: auto !important;
         border-radius: 24px;
         overflow: hidden;
-        margin: auto;
+        transform: none;
+    }
+
+    .container,
+    .container * {
+        max-width: 100%;
+    }
+}
+
+
+/* =========================================================
+   4. Login e cadastro no mobile em pé
+   Os formulários ficam sobrepostos para manter a animação.
+   ========================================================= */
+@media (max-width: 768px) and (orientation: portrait) {
+    .container {
         display: flex;
         flex-direction: column;
     }
@@ -1413,17 +1459,33 @@ body {
         transform: none !important;
     }
 
-    /* =========================
-       FORMULÁRIOS MOBILE
-       ========================= */
-    .form-container {
-        position: relative;
-        top: auto;
-        left: auto;
+    /* Reserva o espaço do formulário antes do painel azul */
+    .container::before {
+        content: "";
+        display: block;
         width: 100%;
+        height: 374px;
+        flex-shrink: 0;
+        transition: height 0.45s ease;
+    }
+
+    .container.active::before {
+        height: 510px !important;
+    }
+
+    .form-container {
+        position: absolute !important;
+        top: 0;
+        left: 0 !important;
+        width: 100% !important;
         height: auto;
         min-height: 0;
-        transition: opacity 0.35s ease, transform 0.35s ease;
+        display: block !important;
+        transition:
+            opacity 0.42s ease,
+            transform 0.42s ease,
+            visibility 0.42s ease;
+        will-change: opacity, transform;
     }
 
     .sign-in,
@@ -1431,57 +1493,75 @@ body {
         width: 100%;
         left: auto;
         margin-top: 0;
-        transform: none;
     }
 
     .sign-in {
-        display: block;
         opacity: 1;
-        z-index: 2;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateX(0) scale(1);
+        z-index: 3;
     }
 
     .sign-up {
-        display: none;
         opacity: 0;
-        z-index: 1;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateX(36px) scale(0.98);
+        z-index: 2;
     }
 
     .container.active .sign-in {
-        display: none;
         opacity: 0;
-        transform: none;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateX(-36px) scale(0.98);
+        z-index: 2;
     }
 
     .container.active .sign-up {
-        display: block;
         opacity: 1;
-        z-index: 5;
-        transform: none;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateX(0) scale(1);
+        z-index: 3;
         animation: none;
+        height: 510px !important;
+        overflow: visible !important;
     }
 
     .container form {
+        width: 100%;
         height: auto;
-        min-height: 0;
+        min-height: 374px;
         padding: 98px 28px 34px;
         justify-content: center;
+        transition:
+            min-height 0.45s ease,
+            padding 0.45s ease;
     }
 
     .sign-in form {
-        min-height: 276px;
+        min-height: 374px;
     }
 
     .sign-up form {
-        min-height: 342px;
-        padding-top: 92px;
-        padding-bottom: 30px;
-        justify-content: center;
+        min-height: 510px !important;
+        height: 510px !important;
+        padding-top: 70px !important;
+        padding-bottom: 10px !important;
+        justify-content: flex-start !important;
+        overflow: visible !important;
     }
 
     .container form h1 {
         font-size: 1.72rem;
         line-height: 1.15;
         text-align: center;
+    }
+
+    .sign-up form h1 {
+        margin-bottom: 4px !important;
     }
 
     .sign-up span,
@@ -1491,10 +1571,29 @@ body {
         margin-bottom: 14px;
     }
 
+    .sign-up span {
+        margin-bottom: 10px !important;
+    }
+
     .container input {
         font-size: 0.9rem;
         padding: 12px 14px;
         margin: 7px 0;
+    }
+
+    .sign-up input {
+        margin: 4px 0 !important;
+        padding-top: 9px !important;
+        padding-bottom: 9px !important;
+    }
+
+    .password-container,
+    .input-with-icon,
+    .select-row,
+    .select-wrapper,
+    .modern-select,
+    .container input {
+        max-width: 100%;
     }
 
     .password-container input {
@@ -1506,17 +1605,35 @@ body {
         max-width: 230px;
         min-height: 44px;
         padding: 10px 24px;
+        transition:
+            background-color 0.25s ease,
+            box-shadow 0.25s ease,
+            transform 0.18s ease,
+            opacity 0.25s ease;
+    }
+
+    .container button:active,
+    .container button.hidden:active {
+        transform: scale(0.96);
     }
 
     .sign-up form button {
-        width: 100%;
-        max-width: 230px;
-        margin-bottom: 0;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 100% !important;
+        max-width: 230px !important;
+        min-height: 40px !important;
+        margin-top: 6px !important;
+        margin-bottom: 0 !important;
+        flex-shrink: 0 !important;
     }
 
+    /* Selects do cadastro */
     .select-row {
         flex-direction: column;
         gap: 0;
+        width: 100%;
         margin: 4px 0;
     }
 
@@ -1526,11 +1643,14 @@ body {
     }
 
     .select-wrapper {
-        margin: 7px 0;
+        width: 100%;
+        min-width: 0;
+        margin: 4px 0 !important;
     }
 
     .modern-select {
-        height: 46px;
+        width: 100%;
+        height: 40px !important;
         font-size: 0.9rem;
         border-radius: 10px;
     }
@@ -1542,49 +1662,88 @@ body {
         text-align: left;
     }
 
-    /* =========================
-       PAINEL AZUL MOBILE
-       Corrige a quina branca
-       ========================= */
+    /* Alinhamento dos ícones dos campos */
+    .input-with-icon,
+    .password-container,
+    .select-wrapper {
+        position: relative;
+        width: 100%;
+    }
+
+    .input-with-icon input,
+    .password-container input,
+    .select-wrapper .modern-select {
+        padding-right: 40px !important;
+    }
+
+    .input-with-icon .info-tooltip,
+    .password-container i,
+    .select-wrapper .select-icon {
+        position: absolute !important;
+        top: 50% !important;
+        right: 12px !important;
+        transform: translateY(-50%) !important;
+        margin: 0 !important;
+
+        width: 16px !important;
+        height: 16px !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        line-height: 1 !important;
+        font-size: 0.78rem !important;
+    }
+
+    /* Painel azul inferior */
     .toggle-container,
     .container.active .toggle-container {
-        position: relative;
+        position: relative !important;
         top: auto;
         left: auto;
-        width: 100%;
+        width: 100% !important;
         height: auto;
-        min-height: 168px;
+        min-height: 174px !important;
+        flex-shrink: 0;
         z-index: 20;
-        overflow: hidden;
+        overflow: hidden !important;
         transform: none !important;
         border-radius: 0 0 24px 24px !important;
         background: linear-gradient(135deg, #00509e, #002f6c);
+        transition:
+            opacity 0.35s ease,
+            transform 0.35s ease,
+            border-radius 0.35s ease;
+    }
+
+    .container.active .toggle-container {
+        margin-top: -18px !important;
     }
 
     .toggle,
     .container.active .toggle {
         position: relative;
         left: auto;
-        width: 100%;
+        width: 100% !important;
         height: 100%;
-        min-height: 168px;
+        min-height: 174px !important;
         transform: none !important;
         background: linear-gradient(135deg, #00509e, #002f6c);
         border-radius: 0 0 24px 24px;
     }
 
-    .toggle-panel,
-    .container.active .toggle-panel {
-        position: relative;
-        top: auto;
-        right: auto;
-        width: 100%;
+    .toggle-panel {
+        width: 100% !important;
         height: auto;
-        min-height: 168px;
-        padding: 24px 28px;
-        transform: none !important;
+        min-height: 174px !important;
+        padding: 20px 24px 28px !important;
         background: transparent;
         border-radius: 0;
+        transition:
+            opacity 0.35s ease,
+            transform 0.35s ease,
+            visibility 0.35s ease;
     }
 
     .toggle-panel h1 {
@@ -1595,49 +1754,70 @@ body {
     .toggle-panel p {
         font-size: 0.84rem;
         line-height: 1.45;
-        margin: 12px 0;
-    }
-
-    .toggle-left {
-        display: none;
+        margin: 10px 0 14px !important;
     }
 
     .toggle-right {
-        display: flex;
+        display: flex !important;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0) !important;
+        z-index: 2;
     }
 
-    .container.active .toggle-left {
-        display: flex;
+    .toggle-left {
+        display: flex !important;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(18px) !important;
+        position: absolute;
+        inset: 0;
+        z-index: 1;
     }
 
     .container.active .toggle-right {
-        display: none;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-18px) !important;
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+
+    .container.active .toggle-left {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0) !important;
+        position: relative;
+        z-index: 2;
     }
 
     .container button.hidden {
         width: 100%;
         max-width: 210px;
-    }
-
-    .circles li {
-        width: 72px;
-        height: 72px;
+        margin-top: 4px !important;
+        margin-bottom: 0 !important;
     }
 }
 
 
 /* =========================================================
-   CELULARES GRANDES
+   5. Celulares grandes em pé
    Exemplo: 430x932
    ========================================================= */
-@media (max-width: 480px) {
+@media (max-width: 480px) and (orientation: portrait) {
     body {
-        padding: 18px 10px;
+        padding-top: 18px;
+        padding-bottom: 18px;
     }
 
     .container {
-        width: min(404px, 100%);
-        max-width: 404px;
+        width: min(404px, calc(100vw - 28px)) !important;
+        max-width: calc(100vw - 28px) !important;
         border-radius: 20px;
     }
 
@@ -1648,16 +1828,8 @@ body {
     }
 
     .container form {
-        padding: 88px 22px 28px;
-    }
-
-    .sign-in form {
-        min-height: 282px;
-    }
-
-    .sign-up form {
-        min-height: 352px;
-        padding-top: 84px;
+        padding-left: 22px;
+        padding-right: 22px;
     }
 
     .container form h1 {
@@ -1665,12 +1837,10 @@ body {
     }
 
     .container input {
-        margin: 7px 0;
         font-size: 0.86rem;
     }
 
     .modern-select {
-        height: 44px;
         font-size: 0.86rem;
     }
 
@@ -1678,14 +1848,8 @@ body {
     .container.active .toggle-container,
     .toggle,
     .container.active .toggle,
-    .toggle-panel,
-    .container.active .toggle-panel {
-        min-height: 160px;
-        border-radius: 0 0 20px 20px !important;
-    }
-
     .toggle-panel {
-        padding: 22px;
+        border-radius: 0 0 20px 20px !important;
     }
 
     .toggle-panel h1 {
@@ -1699,16 +1863,45 @@ body {
 
 
 /* =========================================================
-   CELULARES MÉDIOS E PEQUENOS
-   Exemplo: 390x844, 360x800
+   6. Celulares médios e pequenos em pé
+   Exemplo: 390x844 e 360x800
    ========================================================= */
-@media (max-width: 390px) {
+@media (max-width: 390px) and (orientation: portrait) {
     body {
-        padding: 14px 9px;
+        padding-top: 18px;
+        padding-bottom: 18px;
     }
 
     .container {
-        width: min(360px, 100%);
+        width: min(348px, calc(100vw - 24px)) !important;
+        max-width: calc(100vw - 24px) !important;
+    }
+
+    .logo-cefet {
+        width: 64px;
+    }
+
+    .container::before {
+        height: 358px;
+    }
+
+    .container.active::before {
+        height: 495px !important;
+    }
+
+    .sign-in form {
+        min-height: 358px;
+    }
+
+    .container.active .sign-up {
+        height: 495px !important;
+    }
+
+    .sign-up form {
+        min-height: 495px !important;
+        height: 495px !important;
+        padding-top: 66px !important;
+        padding-bottom: 8px !important;
     }
 
     .container form {
@@ -1716,20 +1909,43 @@ body {
         padding-right: 20px;
     }
 
-    .sign-in form {
-        min-height: 276px;
-    }
-
-    .sign-up form {
-        min-height: 346px;
-    }
-
     .container form h1 {
         font-size: 1.42rem;
     }
 
-    .logo-cefet {
-        width: 64px;
+    .sign-up input {
+        margin: 3.5px 0 !important;
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+    }
+
+    .sign-up .select-wrapper {
+        margin: 3.5px 0 !important;
+    }
+
+    .sign-up .modern-select {
+        height: 39px !important;
+    }
+
+    .sign-up form button {
+        min-height: 39px !important;
+        margin-top: 7px !important;
+    }
+
+    .container.active .toggle-container {
+        margin-top: -24px !important;
+    }
+
+    .toggle-container,
+    .container.active .toggle-container,
+    .toggle,
+    .container.active .toggle {
+        min-height: 170px !important;
+    }
+
+    .toggle-panel {
+        min-height: 170px !important;
+        padding: 18px 22px 26px !important;
     }
 
     .toggle-panel h1 {
@@ -1738,14 +1954,59 @@ body {
 
     .toggle-panel p {
         font-size: 0.74rem;
+        margin: 9px 0 12px !important;
+    }
+
+    .input-with-icon .info-tooltip,
+    .password-container i,
+    .select-wrapper .select-icon {
+        right: 11px !important;
+        width: 15px !important;
+        height: 15px !important;
+        font-size: 0.74rem !important;
+    }
+
+    .input-with-icon input,
+    .password-container input,
+    .select-wrapper .modern-select {
+        padding-right: 38px !important;
     }
 }
 
 
 /* =========================================================
-   CELULARES MUITO ESTREITOS
+   7. Celulares muito pequenos
+   Exemplo: 320x568
    ========================================================= */
-@media (max-width: 340px) {
+@media (max-width: 340px) and (orientation: portrait) {
+    .container {
+        width: min(318px, calc(100vw - 18px)) !important;
+        max-width: calc(100vw - 18px) !important;
+    }
+
+    .container::before {
+        height: 348px;
+    }
+
+    .container.active::before {
+        height: 482px !important;
+    }
+
+    .container.active .sign-up {
+        height: 482px !important;
+    }
+
+    .sign-in form {
+        min-height: 348px;
+    }
+
+    .sign-up form {
+        min-height: 482px !important;
+        height: 482px !important;
+        padding-top: 60px !important;
+        padding-bottom: 8px !important;
+    }
+
     .container form {
         padding-left: 16px;
         padding-right: 16px;
@@ -1759,34 +2020,734 @@ body {
         max-width: 200px;
     }
 
+    .sign-up input {
+        font-size: 0.76rem !important;
+        margin: 3px 0 !important;
+    }
+
+    .sign-up .modern-select {
+        height: 37px !important;
+        font-size: 0.76rem !important;
+    }
+
+    .sign-up form button {
+        min-height: 37px !important;
+        font-size: 0.66rem !important;
+    }
+
+    .container.active .toggle-container {
+        margin-top: -18px !important;
+    }
+
     .toggle-panel {
-        padding-left: 18px;
-        padding-right: 18px;
+        padding: 18px 18px 24px !important;
     }
 }
 
+
 /* =========================================================
-   AJUSTE FINO DE CENTRALIZAÇÃO NO MOBILE
+   8. Login/cadastro em celular deitado
+   Exemplo: 800x360, 844x390, 932x430
    ========================================================= */
-@media (max-width: 768px) {
-    html {
+@media (orientation: landscape) and (max-height: 500px) and (max-width: 950px) {
+    html,
+    body {
         width: 100%;
+        max-width: 100%;
+        height: 100%;
         min-height: 100%;
+        overflow: hidden;
     }
 
     body {
-        width: 100%;
-        min-width: 100%;
-        margin: 0;
-        padding-left: 0;
-        padding-right: 0;
+        padding: 8px 12px;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
+    .circles {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .circles li {
+        width: 72px;
+        height: 72px;
+    }
+
     .container {
-        margin-left: auto;
-        margin-right: auto;
+        width: min(860px, calc(100vw - 24px)) !important;
+        max-width: calc(100vw - 24px) !important;
+        height: min(400px, calc(100dvh - 16px));
+        min-height: min(400px, calc(100dvh - 16px));
+        margin: 0 auto !important;
+        border-radius: 24px;
+        overflow: hidden;
+    }
+
+    .logo-cefet {
+        width: 68px;
+        top: 14px;
+        left: 18px;
+        z-index: 2000;
+    }
+
+    .container:not(.active) .logo-cefet {
+        left: 18px;
+    }
+
+    .container.active .logo-cefet {
+        left: calc(100% - 86px) !important;
+    }
+
+    .form-container {
+        position: absolute !important;
+        top: 0;
+        height: 100%;
+    }
+
+    .sign-in,
+    .sign-up {
+        width: 50% !important;
+        left: 0 !important;
+        margin-top: 0;
+    }
+
+    .sign-in {
+        z-index: 2;
+    }
+
+    .container.active .sign-in {
+        transform: translateX(100%);
+    }
+
+    .sign-up {
+        opacity: 0;
+        z-index: 1;
+    }
+
+    .container.active .sign-up {
+        transform: translateX(100%);
+        opacity: 1;
+        z-index: 5;
+        animation: move 0.6s;
+    }
+
+    .container form {
+        height: 100%;
+        padding: 56px 22px 18px;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .sign-in form {
+        padding-top: 48px;
+    }
+
+    .sign-up form {
+        justify-content: flex-start;
+        padding-top: 48px;
+        padding-bottom: 14px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .sign-up form::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .sign-up form::-webkit-scrollbar-thumb {
+        background: rgba(0, 80, 158, 0.45);
+        border-radius: 999px;
+    }
+
+    .container form h1 {
+        font-size: 1.05rem;
+        margin-bottom: 2px;
+        line-height: 1.1;
+    }
+
+    .sign-up span,
+    .sign-in span {
+        font-size: 0.68rem;
+        margin-bottom: 8px;
+        line-height: 1.25;
+        text-align: center;
+    }
+
+    .container input {
+        margin: 5px 0;
+        padding: 9px 12px;
+        font-size: 0.78rem;
+        border-radius: 8px;
+    }
+
+    .password-container input {
+        padding-right: 34px;
+    }
+
+    .password-container i,
+    .info-tooltip,
+    .select-icon {
+        font-size: 0.8rem;
+    }
+
+    .container button {
+        min-height: 36px;
+        padding: 8px 18px;
+        font-size: 0.68rem;
+        margin-top: 8px;
+    }
+
+    .sign-up form button {
+        width: 150px;
+        min-height: 36px;
+        margin-top: 8px;
+        margin-bottom: 6px;
+    }
+
+    .select-row {
+        gap: 8px;
+        flex-direction: row;
+        margin: 2px 0;
+    }
+
+    .select-wrapper {
+        margin: 5px 0;
+    }
+
+    .modern-select {
+        height: 40px;
+        font-size: 0.78rem;
+        border-radius: 10px;
+        padding: 0 38px 0 12px;
+    }
+
+    .tooltip-text {
+        font-size: 10px;
+        max-width: 180px;
+        white-space: normal;
+    }
+
+    .toggle-container {
+        position: absolute !important;
+        top: 0;
+        left: 50%;
+        width: 50%;
+        height: 100%;
+        border-radius: 120px 0 0 80px !important;
+        overflow: hidden;
+        z-index: 1000;
+    }
+
+    .container.active .toggle-container {
+        transform: translateX(-100%) !important;
+        border-radius: 0 120px 80px 0 !important;
+    }
+
+    .toggle {
+        width: 200% !important;
+        height: 100%;
+        left: -100% !important;
+        transform: translateX(0) !important;
+    }
+
+    .container.active .toggle {
+        transform: translateX(50%) !important;
+    }
+
+    .toggle-panel {
+        position: absolute;
+        width: 50% !important;
+        height: 100%;
+        padding: 0 22px;
+    }
+
+    .toggle-left {
+        transform: translateX(-200%) !important;
+    }
+
+    .container.active .toggle-left {
+        transform: translateX(0) !important;
+    }
+
+    .toggle-right {
+        right: 0;
+        transform: translateX(0) !important;
+    }
+
+    .container.active .toggle-right {
+        transform: translateX(200%) !important;
+    }
+
+    .toggle-panel h1 {
+        font-size: 1.05rem;
+        line-height: 1.15;
+        margin-bottom: 6px;
+    }
+
+    .toggle-panel p {
+        font-size: 0.68rem;
+        line-height: 1.35;
+        margin: 8px 0 10px;
+    }
+
+    .container button.hidden {
+        min-width: 120px;
+        min-height: 34px;
+        padding: 7px 16px;
+        font-size: 0.68rem;
+    }
+}
+
+
+/* =========================================================
+   9. Menu pós-login em celular/tablet em pé
+   ========================================================= */
+@media (max-width: 768px) and (orientation: portrait) {
+    .container.show-menu {
+        width: min(404px, calc(100vw - 28px)) !important;
+        max-width: calc(100vw - 28px) !important;
+        height: calc(100dvh - 36px) !important;
+        min-height: 620px;
+        max-height: 860px;
+        border-radius: 24px;
+        overflow: hidden;
+        display: block;
+    }
+
+    .container.show-menu::before {
+        display: none !important;
+        content: none !important;
+    }
+
+    .container.show-menu .logo-cefet {
+        display: none;
+    }
+
+    .container.show-menu .menu-screen {
+        position: absolute;
+        inset: 0;
+        padding: 14px;
+        opacity: 1;
+        pointer-events: auto;
+        transform: none;
+        background:
+            radial-gradient(circle at top left, rgba(0, 114, 206, 0.14), transparent 36%),
+            radial-gradient(circle at bottom right, rgba(0, 47, 108, 0.14), transparent 34%),
+            linear-gradient(135deg, #f8fbff, #eef4ff);
+    }
+
+    .container.show-menu .menu-screen-content {
+        width: 100%;
+        height: 100%;
+        border-radius: 22px;
+        padding: 18px 16px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.76);
+        box-shadow:
+            0 12px 28px rgba(0, 47, 108, 0.16),
+            inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .container.show-menu .back-icon,
+    .container.show-menu .admin-shortcut {
+        top: 18px;
+        width: 44px;
+        height: 44px;
+        border-radius: 13px;
+        font-size: 16px;
+        box-shadow: 0 10px 22px rgba(0, 47, 108, 0.22);
+    }
+
+    .container.show-menu .back-icon {
+        left: 16px;
+    }
+
+    .container.show-menu .admin-shortcut {
+        right: 16px;
+    }
+
+    .container.show-menu .menu-header {
+        padding: 0 52px;
+        margin-bottom: 16px;
+        text-align: center;
+        flex-shrink: 0;
+    }
+
+    .container.show-menu .menu-badge {
+        font-size: 0.64rem;
+        padding: 7px 12px;
+        margin-bottom: 12px;
+        line-height: 1;
+    }
+
+    .container.show-menu .menu-header h1 {
+        font-size: 1.28rem;
+        line-height: 1.16;
+        margin-bottom: 8px;
+        word-break: normal;
+        overflow-wrap: normal;
+        hyphens: none;
+    }
+
+    .container.show-menu .menu-header p {
+        font-size: 0.78rem;
+        line-height: 1.35;
+        color: #64748b;
+        max-width: 260px;
+        margin: 0 auto;
+    }
+
+    .container.show-menu .menu-grid {
+        flex: 1;
+        min-height: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        gap: 14px !important;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 6px;
+        padding-bottom: 4px;
+        align-content: start;
+    }
+
+    .container.show-menu .menu-grid::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .container.show-menu .menu-grid::-webkit-scrollbar-track {
+        background: rgba(203, 213, 225, 0.45);
+        border-radius: 999px;
+    }
+
+    .container.show-menu .menu-grid::-webkit-scrollbar-thumb {
+        background: #3b82f6;
+        border-radius: 999px;
+    }
+
+    .container.show-menu .menu-card {
+        min-height: 170px !important;
+        height: auto !important;
+        padding: 16px 16px 18px !important;
+        border-radius: 18px;
+        overflow: hidden !important;
+        justify-content: flex-start !important;
+        box-shadow: 0 10px 22px rgba(15, 23, 42, 0.09);
+    }
+
+    .container.show-menu .menu-card:hover {
+        transform: none;
+    }
+
+    .container.show-menu .menu-card-icon {
+        width: 42px !important;
+        height: 42px !important;
+        min-width: 42px !important;
+        min-height: 42px !important;
+        border-radius: 13px;
+        margin-bottom: 10px !important;
+        font-size: 1rem;
+    }
+
+    .container.show-menu .menu-card h3 {
+        font-size: 0.9rem;
+        margin-bottom: 7px !important;
+        line-height: 1.2;
+    }
+
+    .container.show-menu .menu-card p {
+        font-size: 0.72rem;
+        line-height: 1.38 !important;
+        margin-bottom: 0 !important;
+        flex: 0 0 auto !important;
+    }
+
+    .container.show-menu .menu-card-action {
+        min-width: 92px;
+        height: 32px;
+        padding: 0 12px;
+        font-size: 0.62rem;
+        margin-top: 14px !important;
+        margin-bottom: 0 !important;
+        flex-shrink: 0 !important;
+        align-self: flex-start !important;
+    }
+}
+
+
+/* =========================================================
+   10. Menu em celular pequeno em pé
+   Exemplo: 360x800 e 390x844
+   ========================================================= */
+@media (max-width: 390px) and (orientation: portrait) {
+    .container.show-menu {
+        width: min(348px, calc(100vw - 24px)) !important;
+        max-width: calc(100vw - 24px) !important;
+        height: calc(100dvh - 36px) !important;
+        min-height: 600px;
+    }
+
+    .container.show-menu .menu-screen {
+        padding: 12px;
+    }
+
+    .container.show-menu .menu-screen-content {
+        padding: 16px 14px;
+        border-radius: 20px;
+    }
+
+    .container.show-menu .back-icon,
+    .container.show-menu .admin-shortcut {
+        width: 40px;
+        height: 40px;
+        top: 16px;
+        border-radius: 12px;
+        font-size: 15px;
+    }
+
+    .container.show-menu .back-icon {
+        left: 14px;
+    }
+
+    .container.show-menu .admin-shortcut {
+        right: 14px;
+    }
+
+    .container.show-menu .menu-header {
+        padding: 0 46px;
+        margin-bottom: 14px;
+    }
+
+    .container.show-menu .menu-badge {
+        font-size: 0.58rem;
+        padding: 6px 10px;
+        margin-bottom: 10px;
+    }
+
+    .container.show-menu .menu-header h1 {
+        font-size: 1.08rem;
+        line-height: 1.16;
+        margin-bottom: 7px;
+    }
+
+    .container.show-menu .menu-header p {
+        font-size: 0.7rem;
+        line-height: 1.32;
+        max-width: 220px;
+    }
+
+    .container.show-menu .menu-grid {
+        gap: 13px !important;
+        padding-right: 5px;
+    }
+
+    .container.show-menu .menu-card {
+        min-height: 168px !important;
+        padding: 15px 15px 18px !important;
+        border-radius: 16px;
+    }
+
+    .container.show-menu .menu-card-icon {
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+        border-radius: 12px;
+        margin-bottom: 9px !important;
+        font-size: 0.92rem;
+    }
+
+    .container.show-menu .menu-card h3 {
+        font-size: 0.82rem;
+        margin-bottom: 5px;
+    }
+
+    .container.show-menu .menu-card p {
+        font-size: 0.66rem;
+        line-height: 1.35 !important;
+        margin-bottom: 0 !important;
+        flex: 0 0 auto !important;
+    }
+
+    .container.show-menu .menu-card-action {
+        min-width: 82px;
+        height: 29px;
+        font-size: 0.58rem;
+        margin-top: 13px !important;
+    }
+}
+
+
+/* =========================================================
+   11. Menu em celular muito pequeno
+   Exemplo: 320x568
+   ========================================================= */
+@media (max-width: 340px) and (orientation: portrait) {
+    .container.show-menu {
+        width: min(318px, calc(100vw - 18px)) !important;
+        max-width: calc(100vw - 18px) !important;
+        height: calc(100dvh - 24px) !important;
+        min-height: 540px;
+    }
+
+    .container.show-menu .menu-screen {
+        padding: 10px;
+    }
+
+    .container.show-menu .menu-screen-content {
+        padding: 14px 12px;
+    }
+
+    .container.show-menu .menu-header {
+        padding: 0 42px;
+    }
+
+    .container.show-menu .menu-header h1 {
+        font-size: 0.98rem;
+    }
+
+    .container.show-menu .menu-header p {
+        font-size: 0.64rem;
+    }
+
+    .container.show-menu .menu-card {
+        min-height: 156px !important;
+        padding: 13px !important;
+    }
+
+    .container.show-menu .menu-card-icon {
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
+        min-height: 36px !important;
+    }
+
+    .container.show-menu .menu-card p {
+        font-size: 0.62rem;
+    }
+}
+
+
+/* =========================================================
+   12. Menu em celular deitado
+   Exemplo: 800x360, 844x390, 932x430
+   ========================================================= */
+@media (orientation: landscape) and (max-height: 500px) and (max-width: 950px) {
+    .container.show-menu {
+        width: min(860px, calc(100vw - 24px)) !important;
+        max-width: calc(100vw - 24px) !important;
+        height: min(400px, calc(100dvh - 16px)) !important;
+        min-height: min(400px, calc(100dvh - 16px)) !important;
+        border-radius: 24px;
+        overflow: hidden;
+    }
+
+    .container.show-menu::before {
+        display: none !important;
+        content: none !important;
+    }
+
+    .container.show-menu .logo-cefet {
+        display: none;
+    }
+
+    .container.show-menu .menu-screen {
+        padding: 10px;
+    }
+
+    .container.show-menu .menu-screen-content {
+        border-radius: 22px;
+        padding: 14px 16px 12px;
+        overflow: hidden;
+    }
+
+    .container.show-menu .menu-header {
+        margin-bottom: 8px;
+        padding: 0 54px;
+    }
+
+    .container.show-menu .menu-badge {
+        font-size: 0.64rem;
+        padding: 6px 12px;
+        margin-bottom: 8px;
+    }
+
+    .container.show-menu .menu-header h1 {
+        font-size: 1.15rem;
+        margin-bottom: 4px;
+        line-height: 1.15;
+    }
+
+    .container.show-menu .menu-header p {
+        font-size: 0.72rem;
+        line-height: 1.3;
+    }
+
+    .container.show-menu .back-icon,
+    .container.show-menu .admin-shortcut {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        top: 12px;
+        font-size: 16px;
+    }
+
+    .container.show-menu .back-icon {
+        left: 12px;
+    }
+
+    .container.show-menu .admin-shortcut {
+        right: 12px;
+    }
+
+    .container.show-menu .menu-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 150px;
+        gap: 12px;
+        padding-right: 4px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .container.show-menu .menu-card {
+        min-height: 150px;
+        padding: 14px;
+        border-radius: 18px;
+    }
+
+    .container.show-menu .menu-card-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+        border-radius: 12px;
+        margin-bottom: 8px;
+        font-size: 1rem;
+    }
+
+    .container.show-menu .menu-card h3 {
+        font-size: 0.82rem;
+        margin-bottom: 6px;
+    }
+
+    .container.show-menu .menu-card p {
+        font-size: 0.66rem;
+        line-height: 1.3;
+    }
+
+    .container.show-menu .menu-card-action {
+        min-width: 84px;
+        height: 30px;
+        font-size: 0.6rem;
+        padding: 0 10px;
     }
 }

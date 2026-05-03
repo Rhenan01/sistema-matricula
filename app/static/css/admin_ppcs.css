@@ -1075,39 +1075,21 @@ body {
 }
 
 /* =========================================================
-   RESPONSIVIDADE
+   RESPONSIVIDADE - GERENCIAR PPCs
    ========================================================= */
 
-@media (max-width: 1100px) {
-    .ppc-item {
-        flex-direction: column;
-        align-items: stretch;
-    }
 
-    .ppc-left {
-        flex: none;
-    }
-
-    .ppc-right {
-        justify-content: flex-start;
-    }
-
-    .edit-form {
-        flex-wrap: wrap;
-    }
-
-    .ppc-item .mini-select-wrapper {
-        flex: 1 1 100%;
-        max-width: none;
-    }
-
-    .ppc-item .mini-input-wrapper {
-        flex: 0 0 180px;
-        max-width: 220px;
-    }
-}
-
+/* ---------------------------------------------------------
+   Tablets e notebooks menores
+   ---------------------------------------------------------
+   Reduz a complexidade da listagem e evita que os cards fiquem
+   apertados em larguras intermediárias.
+   --------------------------------------------------------- */
 @media (max-width: 992px) {
+    .admin-ppcs-page {
+        max-width: 860px;
+    }
+
     .hero-content {
         flex-direction: column;
         align-items: flex-start;
@@ -1132,46 +1114,196 @@ body {
     .search-box {
         width: 100%;
     }
-}
 
-@media (max-width: 900px) {
-    .new-ppc-form {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .admin-ppcs-page {
-        padding: 24px 16px 40px;
-    }
-
-    .hero-card,
-    .modern-card {
-        padding: 20px;
-        border-radius: 22px;
-    }
-
-    .hero-topbar {
+    .ppc-item {
         flex-direction: column;
         align-items: stretch;
     }
 
+    .ppc-right {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .edit-form {
+        flex: 1;
+    }
+
+    .mini-select-wrapper,
+    .mini-input-wrapper {
+        flex: 1;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Base mobile
+   ---------------------------------------------------------
+   Define largura útil, evita rolagem lateral e deixa os blocos
+   principais em coluna única.
+   --------------------------------------------------------- */
+@media (max-width: 768px) {
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body {
+        min-height: 100dvh;
+    }
+
+    .bg-orb {
+        opacity: 0.24;
+        filter: blur(20px);
+    }
+
+    .orb-1 {
+        width: 190px;
+        height: 190px;
+        top: -70px;
+        left: -80px;
+    }
+
+    .orb-2 {
+        width: 170px;
+        height: 170px;
+        right: -80px;
+        top: 140px;
+    }
+
+    .orb-3 {
+        width: 190px;
+        height: 190px;
+        left: -70px;
+        bottom: -80px;
+    }
+
+    .admin-ppcs-page {
+        width: min(430px, calc(100vw - 24px));
+        max-width: calc(100vw - 24px);
+        margin: 0 auto;
+        padding: 18px 0 34px;
+    }
+
+    .hero-card,
+    .modern-card {
+        padding: 18px;
+        border-radius: 22px;
+    }
+
+    .hero-topbar {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        align-items: stretch;
+        margin-bottom: 18px;
+    }
+
     .hero-topbar-left {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
         width: 100%;
     }
 
-    .hero-badge {
+    .back-button,
+    .secondary-button {
+        width: 100%;
+        min-height: 40px;
+        padding: 9px 12px;
+        border-radius: 13px;
+        font-size: 0.82rem;
         justify-content: center;
+        text-align: center;
+    }
+
+    .hero-badge {
+        width: fit-content;
+        max-width: 100%;
+        justify-content: center;
+        padding: 9px 14px;
+        font-size: 0.78rem;
+    }
+
+    .hero-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .hero-kicker {
+        font-size: 0.72rem;
     }
 
     .hero-text h1 {
-        font-size: 2rem;
+        font-size: 1.72rem;
+        line-height: 1.08;
     }
 
-    .new-ppc-form,
-    .edit-form,
-    .modal-actions {
+    .hero-text p {
+        font-size: 0.88rem;
+        line-height: 1.5;
+    }
+
+    .hero-icon-card {
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+        font-size: 1.75rem;
+    }
+
+    .card-header,
+    .card-header-list {
         flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .section-tag {
+        font-size: 0.68rem;
+        padding: 5px 10px;
+    }
+
+    .card-header h2 {
+        font-size: 1.45rem;
+    }
+
+    .card-header p {
+        font-size: 0.86rem;
+    }
+
+    .new-ppc-form {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .input-wrapper,
+    .select-wrapper,
+    .mini-input-wrapper,
+    .mini-select-wrapper,
+    .search-box {
+        width: 100%;
+        min-width: 0;
+        min-height: 46px;
+        border-radius: 14px;
+    }
+
+    .input-wrapper input,
+    .mini-input-wrapper input,
+    .search-box input,
+    .select-wrapper select,
+    .mini-select-wrapper select {
+        width: 100%;
+        font-size: 0.86rem;
+    }
+
+    .select-wrapper select,
+    .mini-select-wrapper select {
+        min-height: 46px;
+        line-height: 1.25;
     }
 
     .btn-primary,
@@ -1179,33 +1311,496 @@ body {
     .btn-danger,
     .btn-secondary {
         width: 100%;
+        min-height: 46px;
+        border-radius: 14px;
+        font-size: 0.84rem;
+    }
+
+    .list-tools {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .ppcs-counter {
+        width: fit-content;
+        height: 42px;
+        border-radius: 14px;
+        font-size: 0.84rem;
+    }
+
+    .ppcs-list {
+        gap: 14px;
+    }
+
+    .ppc-item {
+        min-height: auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 15px;
+        align-items: stretch;
+        border-radius: 20px;
+    }
+
+    .ppc-item:hover {
+        transform: none;
+    }
+
+    .ppc-left {
+        display: grid;
+        grid-template-columns: 42px 1fr;
+        gap: 12px;
+        align-items: center;
+        width: 100%;
+    }
+
+    .ppc-index {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        font-size: 0.78rem;
+    }
+
+    .ppc-info {
+        min-width: 0;
+    }
+
+    .ppc-info h3 {
+        margin-bottom: 4px;
+        font-size: 1rem;
+        line-height: 1.15;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .ppc-info p {
+        font-size: 0.74rem;
+        line-height: 1.3;
+    }
+
+    .ppc-right {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .edit-form,
+    .delete-form,
+    .ppc-actions {
+        width: 100%;
+    }
+
+    .edit-form {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .mini-select-wrapper,
+    .mini-input-wrapper {
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+        min-height: 44px;
+        height: 44px;
+        border-radius: 13px;
+    }
+
+    .mini-select-wrapper select,
+    .mini-input-wrapper input {
+        width: 100%;
+        height: 100%;
+        font-size: 0.78rem;
+    }
+
+    .btn-save,
+    .btn-danger {
+        width: 100%;
+        min-width: 0;
+        min-height: 44px;
+        height: 44px;
+        border-radius: 13px;
+        font-size: 0.78rem;
+    }
+
+    .flash-container {
+        top: 14px;
+        right: 14px;
+        left: 14px;
+    }
+
+    .flash-message {
+        width: 100%;
+    }
+
+    .modal-overlay {
+        padding: 16px;
+    }
+
+    .modal-card {
+        padding: 22px;
+        border-radius: 22px;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Celulares pequenos
+   Ex.: 360x800 e 390x844.
+   --------------------------------------------------------- */
+@media (max-width: 390px) {
+    .admin-ppcs-page {
+        width: min(348px, calc(100vw - 24px));
+        max-width: calc(100vw - 24px);
+        padding-top: 16px;
+    }
+
+    .hero-card,
+    .modern-card {
+        padding: 16px;
+        border-radius: 20px;
+    }
+
+    .hero-topbar {
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    .back-button,
+    .secondary-button {
+        min-height: 38px;
+        padding: 8px 10px;
+        font-size: 0.74rem;
+    }
+
+    .hero-badge {
+        min-height: 34px;
+        padding: 8px 12px;
+        font-size: 0.72rem;
+    }
+
+    .hero-text h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-text p {
+        font-size: 0.8rem;
+    }
+
+    .hero-icon-card {
+        width: 62px;
+        height: 62px;
+        font-size: 1.5rem;
+    }
+
+    .card-header h2 {
+        font-size: 1.26rem;
+    }
+
+    .card-header p {
+        font-size: 0.8rem;
+    }
+
+    .input-wrapper,
+    .select-wrapper,
+    .mini-input-wrapper,
+    .mini-select-wrapper,
+    .search-box {
+        min-height: 44px;
+    }
+
+    .select-wrapper select,
+    .mini-select-wrapper select {
+        min-height: 44px;
+    }
+
+    .btn-primary,
+    .btn-save,
+    .btn-danger,
+    .btn-secondary {
+        min-height: 44px;
+        font-size: 0.78rem;
+    }
+
+    .ppc-item {
+        padding: 15px;
+        border-radius: 18px;
+    }
+
+    .ppc-index {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        font-size: 0.78rem;
+    }
+
+    .ppc-info h3 {
+        font-size: 1rem;
+    }
+
+    .ppc-info p {
+        font-size: 0.76rem;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Celular deitado
+   ---------------------------------------------------------
+   Usa melhor a largura disponível. Nos cards da listagem, os
+   campos ficam em linha própria e as ações alinhadas à direita.
+   --------------------------------------------------------- */
+@media (orientation: landscape) and (max-height: 500px) and (max-width: 950px) {
+    body {
+        min-height: 100dvh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .admin-ppcs-page {
+        width: min(860px, calc(100vw - 28px));
+        max-width: calc(100vw - 28px);
+        padding: 10px 0 20px;
+    }
+
+    .hero-card,
+    .modern-card {
+        border-radius: 24px;
+        padding: 18px 22px;
+    }
+
+    .hero-topbar {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+    }
+
+    .hero-topbar-left {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        width: auto;
+    }
+
+    .back-button,
+    .secondary-button {
+        width: auto;
+        min-height: 40px;
+        padding: 9px 14px;
+        border-radius: 13px;
+        font-size: 0.86rem;
+    }
+
+    .hero-badge {
+        min-height: 38px;
+        padding: 8px 14px;
+        font-size: 0.82rem;
+    }
+
+    .hero-content {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .hero-text h1 {
+        font-size: 1.85rem;
+    }
+
+    .hero-text p {
+        font-size: 0.9rem;
+    }
+
+    .hero-icon-card {
+        width: 76px;
+        height: 76px;
+        border-radius: 18px;
+        font-size: 1.8rem;
+    }
+
+    .card-header,
+    .card-header-list {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    .list-tools {
+        width: auto;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .search-box {
+        width: 260px;
+        min-width: 260px;
+        height: 46px;
+    }
+
+    .ppcs-counter {
+        height: 46px;
+    }
+
+    .new-ppc-form {
+        display: grid;
+        grid-template-columns: minmax(210px, 1fr) minmax(160px, 220px) auto;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .select-wrapper,
+    .input-wrapper {
+        min-height: 48px;
+    }
+
+    .btn-primary {
+        min-height: 48px;
+        padding: 0 18px;
+    }
+
+    .ppc-item {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 16px 18px;
+        align-items: stretch;
+    }
+
+    .ppc-left {
+        display: grid;
+        grid-template-columns: 56px 1fr;
+        gap: 14px;
+        align-items: center;
+        width: 100%;
+    }
+
+    .ppc-index {
+        width: 56px;
+        height: 56px;
+        border-radius: 18px;
+    }
+
+    .ppc-info h3 {
+        margin-bottom: 4px;
+        font-size: 1.25rem;
+        line-height: 1.15;
+    }
+
+    .ppc-info p {
+        font-size: 0.86rem;
+    }
+
+    .ppc-right {
+        width: 100%;
+        display: grid;
+        grid-template-columns: minmax(220px, 1fr) minmax(130px, 150px) 112px 112px;
+        gap: 12px;
+        align-items: center;
+        justify-content: end;
+    }
+
+    .edit-form {
+        display: contents;
+    }
+
+    .ppc-actions,
+    .delete-form {
+        display: block;
+        width: auto;
+    }
+
+    .mini-select-wrapper,
+    .mini-input-wrapper {
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+        min-height: 48px;
+        height: 48px;
+    }
+
+    .mini-select-wrapper select,
+    .mini-input-wrapper input {
+        width: 100%;
+        height: 100%;
+        font-size: 0.86rem;
+    }
+
+    .btn-save,
+    .btn-danger {
+        width: 112px;
+        min-width: 112px;
+        height: 48px;
+        min-height: 48px;
+        padding: 0 14px;
+        border-radius: 15px;
+        font-size: 0.84rem;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Celular deitado com altura muito baixa
+   Ex.: 800x360.
+   --------------------------------------------------------- */
+@media (orientation: landscape) and (max-height: 390px) and (max-width: 950px) {
+    .admin-ppcs-page {
+        padding-top: 8px;
+    }
+
+    .hero-card,
+    .modern-card {
+        padding: 16px 20px;
+    }
+
+    .hero-text h1 {
+        font-size: 1.65rem;
+    }
+
+    .hero-text p {
+        font-size: 0.82rem;
+    }
+
+    .hero-icon-card {
+        width: 66px;
+        height: 66px;
+        font-size: 1.55rem;
+    }
+
+    .ppc-item {
+        padding: 14px 16px;
+        gap: 10px;
+    }
+
+    .ppc-right {
+        grid-template-columns: minmax(200px, 1fr) minmax(115px, 135px) 104px 104px;
+        gap: 10px;
     }
 
     .mini-select-wrapper,
     .mini-input-wrapper,
-    .select-wrapper,
-    .input-wrapper {
-        min-width: 100%;
-        max-width: 100%;
+    .btn-save,
+    .btn-danger {
+        min-height: 44px;
+        height: 44px;
     }
 
-    .ppc-left {
-        align-items: flex-start;
-    }
-
-    .ppc-index {
-        width: 48px;
-        height: 48px;
-    }
-
-    .ppc-item .mini-select-wrapper select {
-        font-size: 0.94rem;
-        padding-left: 42px;
-        padding-right: 40px;
-    }
-
-    .ppc-item .mini-input-wrapper {
-        flex: 1 1 100%;
-        max-width: none;
+    .btn-save,
+    .btn-danger {
+        width: 104px;
+        min-width: 104px;
+        font-size: 0.78rem;
     }
 }

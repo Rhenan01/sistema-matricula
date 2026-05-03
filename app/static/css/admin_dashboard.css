@@ -238,40 +238,342 @@ body {
   font-weight: 700;
 }
 
+/* =========================================================
+   RESPONSIVIDADE - PAINEL ADMINISTRATIVO
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   Tablets e notebooks menores
+   ---------------------------------------------------------
+   A partir dessa largura, os módulos ficam em uma coluna para
+   preservar leitura e evitar cards espremidos.
+   --------------------------------------------------------- */
 @media (max-width: 1024px) {
+  .admin-page {
+    max-width: 860px;
+    padding: 26px 22px 34px;
+  }
+
   .admin-grid {
     grid-template-columns: 1fr;
+    gap: 18px;
   }
 
   .admin-hero-content h1 {
     font-size: clamp(30px, 7vw, 46px);
   }
+
+  .admin-card {
+    min-height: 190px;
+  }
 }
 
+
+/* ---------------------------------------------------------
+   Celular em pé
+   ---------------------------------------------------------
+   Layout mais compacto, com o topo do painel organizado e
+   cards em coluna única.
+   --------------------------------------------------------- */
 @media (max-width: 640px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    min-height: 100dvh;
+  }
+
+  .admin-bg-shape {
+    opacity: 0.18;
+    filter: blur(3px);
+  }
+
+  .shape-1 {
+    width: 170px;
+    height: 170px;
+    top: -60px;
+    left: -70px;
+  }
+
+  .shape-2 {
+    width: 140px;
+    height: 140px;
+    right: -50px;
+    top: 120px;
+  }
+
+  .shape-3 {
+    width: 190px;
+    height: 190px;
+    left: -50px;
+    bottom: -80px;
+  }
+
   .admin-page {
-    padding: 24px 16px 36px;
+    width: min(430px, calc(100vw - 24px));
+    max-width: calc(100vw - 24px);
+    margin: 0 auto;
+    padding: 18px 0 28px;
   }
 
   .admin-hero {
-    padding: 22px 18px;
+    border-radius: 24px;
+    padding: 18px;
   }
 
   .admin-hero-top {
-    flex-direction: column;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    align-items: start;
     margin-bottom: 22px;
   }
 
+  .admin-back-btn {
+    width: fit-content;
+    max-width: 100%;
+    min-height: 42px;
+    padding: 10px 14px;
+    border-radius: 13px;
+    font-size: 0.88rem;
+  }
+
+  .admin-badge {
+    width: fit-content;
+    min-height: 34px;
+    padding: 8px 13px;
+    font-size: 0.72rem;
+  }
+
+  .admin-hero-content h1 {
+    margin-bottom: 10px;
+    font-size: 1.75rem;
+    line-height: 1.08;
+  }
+
+  .admin-hero-content p {
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .admin-grid {
+    margin-top: 14px;
+    gap: 14px;
+  }
+
   .admin-card {
-    padding: 22px 18px;
+    min-height: 170px;
+    border-radius: 22px;
+    padding: 18px;
+  }
+
+  .admin-card:hover {
+    transform: none;
+  }
+
+  .admin-card-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    font-size: 21px;
+    margin-bottom: 14px;
   }
 
   .admin-card h2 {
-    font-size: 24px;
+    font-size: 1.35rem;
+    line-height: 1.15;
   }
 
   .admin-card p {
-    font-size: 15px;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+
+  .admin-card-action {
+    min-height: 36px;
+    padding: 8px 12px;
+    border-radius: 11px;
+    font-size: 0.74rem;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Celulares pequenos
+   Ex.: 360x800 e 390x844.
+   --------------------------------------------------------- */
+@media (max-width: 390px) {
+  .admin-page {
+    width: min(348px, calc(100vw - 24px));
+    max-width: calc(100vw - 24px);
+    padding-top: 16px;
+  }
+
+  .admin-hero {
+    padding: 16px;
+    border-radius: 22px;
+  }
+
+  .admin-hero-top {
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .admin-back-btn {
+    min-height: 40px;
+    padding: 9px 13px;
+    font-size: 0.82rem;
+  }
+
+  .admin-badge {
+    min-height: 32px;
+    padding: 7px 12px;
+    font-size: 0.68rem;
+  }
+
+  .admin-hero-content h1 {
+    font-size: 1.55rem;
+  }
+
+  .admin-hero-content p {
+    font-size: 0.82rem;
+  }
+
+  .admin-card {
+    min-height: 164px;
+    padding: 17px;
+    border-radius: 20px;
+  }
+
+  .admin-card-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 19px;
+  }
+
+  .admin-card h2 {
+    font-size: 1.18rem;
+  }
+
+  .admin-card p {
+    font-size: 0.82rem;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Celular deitado
+   ---------------------------------------------------------
+   Usa melhor a largura disponível e reduz alturas para evitar
+   excesso de rolagem.
+   --------------------------------------------------------- */
+@media (orientation: landscape) and (max-height: 500px) and (max-width: 950px) {
+  body {
+    min-height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .admin-page {
+    width: min(860px, calc(100vw - 28px));
+    max-width: calc(100vw - 28px);
+    padding: 10px 0 18px;
+  }
+
+  .admin-hero {
+    border-radius: 24px;
+    padding: 18px 22px;
+  }
+
+  .admin-hero-top {
+    margin-bottom: 18px;
+  }
+
+  .admin-back-btn {
+    min-height: 40px;
+    padding: 9px 14px;
+  }
+
+  .admin-badge {
+    min-height: 36px;
+    padding: 8px 14px;
+  }
+
+  .admin-hero-content h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+
+  .admin-hero-content p {
+    max-width: 720px;
+    font-size: 0.95rem;
+  }
+
+  .admin-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .admin-card {
+    min-height: 150px;
+    padding: 17px;
+    border-radius: 20px;
+  }
+
+  .admin-card-icon {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 12px;
+    font-size: 19px;
+  }
+
+  .admin-card h2 {
+    font-size: 1.1rem;
+    margin-bottom: 7px;
+  }
+
+  .admin-card p {
+    margin-bottom: 12px;
+    font-size: 0.78rem;
+    line-height: 1.4;
+  }
+
+  .admin-card-action {
+    min-height: 32px;
+    padding: 7px 11px;
+    font-size: 0.68rem;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Celular deitado com altura muito baixa
+   Ex.: 800x360.
+   --------------------------------------------------------- */
+@media (orientation: landscape) and (max-height: 390px) and (max-width: 950px) {
+  .admin-page {
+    padding-top: 8px;
+  }
+
+  .admin-hero {
+    padding: 16px 20px;
+  }
+
+  .admin-hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .admin-hero-content p {
+    font-size: 0.86rem;
+  }
+
+  .admin-card {
+    min-height: 138px;
   }
 }
