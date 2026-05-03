@@ -1,5 +1,6 @@
 const PPC = await fetch("/api/ppc").then(r => r.json());
-
+// Limite máximo permitido para novas reprovações informadas pelo usuário
+const LIMITE_REPROVACOES = 5;
 /* =========================
    Dados principais vindos da API
    ========================= */
@@ -288,20 +289,59 @@ function getReprovacoesCanonicas(id) {
   const item = document.querySelector(`.disciplina-item[data-canonical-id="${canonico}"] .reprovacao-value`);
   return Number(item?.textContent || 0);
 }
+/**
+ * Atualiza o estado dos botões de reprovação de uma disciplina.
+ *
+ * Regra:
+ * - o botão de diminuir só fica ativo se houver reprovação maior que 0
+ * - o botão de aumentar só fica ativo até o limite configurado
+ * - se o valor veio do banco maior que o limite, ele aparece, mas não aumenta mais
+ */
+function atualizarEstadoBotoesReprovacao(item) {
+  if (!item) return;
 
+  const valorEl = item.querySelector(".reprovacao-value");
+  const minusBtn = item.querySelector(".reprovacao-btn.minus");
+  const plusBtn = item.querySelector(".reprovacao-btn.plus");
+
+  const valorAtual = Number(valorEl?.textContent || 0);
+
+  if (minusBtn) {
+    minusBtn.disabled = valorAtual <= 0;
+  }
+
+  if (plusBtn) {
+    plusBtn.disabled = valorAtual >= LIMITE_REPROVACOES;
+  }
+}
+/**
+ * Define o número de reprovações para todos os elementos
+ * que representam a disciplina canônica.
+ */
 /**
  * Define o número de reprovações para todos os elementos
  * que representam a disciplina canônica.
  */
 function setReprovacoesCanonicas(id, valor) {
   const canonico = getCanonicalDiscId(id);
+  const valorTratado = Math.max(0, Number(valor) || 0);
 
-  document.querySelectorAll(`.disciplina-item[data-canonical-id="${canonico}"] .reprovacao-value`)
-    .forEach(el => {
-      el.textContent = Math.max(0, Number(valor) || 0);
+  document.querySelectorAll(`.disciplina-item[data-canonical-id="${canonico}"]`)
+    .forEach(item => {
+      const valorEl = item.querySelector(".reprovacao-value");
+
+      if (valorEl) {
+        valorEl.textContent = valorTratado;
+      }
+
+      atualizarEstadoBotoesReprovacao(item);
     });
 }
 
+/**
+ * Altera o número de reprovações da disciplina.
+ * Não permite interação quando a disciplina estiver bloqueada.
+ */
 /**
  * Altera o número de reprovações da disciplina.
  * Não permite interação quando a disciplina estiver bloqueada.
@@ -312,6 +352,12 @@ function alterarReprovacao(id, delta) {
   if (item?.classList.contains("locked")) return;
 
   const atual = getReprovacoesCanonicas(id);
+
+  if (delta > 0 && atual >= LIMITE_REPROVACOES) {
+    atualizarEstadoBotoesReprovacao(item);
+    return;
+  }
+
   const novo = Math.max(0, atual + delta);
 
   setReprovacoesCanonicas(id, novo);
@@ -580,8 +626,7 @@ function atualizarBloqueios() {
       lockBadge.remove();
     }
 
-    if (minusBtn) minusBtn.disabled = false;
-    if (plusBtn) plusBtn.disabled = false;
+  atualizarEstadoBotoesReprovacao(item);
 
     if (!jaMarcada && !podeMarcar) {
       item.classList.add("locked");

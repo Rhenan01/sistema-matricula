@@ -1,29 +1,319 @@
 /* ==========================
    VARIÁVEIS
    ========================== */
-:root {
-  --bg-a: #0a1f44;
-  --bg-b: #142b5e;
-  --card: #0f254f;
-  --text: #e0e6f0;
-  --muted: #a3b1c6;
+:root,
+html.theme-dark,
+body.theme-dark {
+  --grade-transparent: transparent;
+  --grade-white: #ffffff;
 
-  --accentA: #0062a1;
-  --accentB: #1e90ff;
-  --accentC: #34d399;
+  --grade-bg-a: #0a1f44;
+  --grade-bg-b: #142b5e;
+  --grade-bg-modal-list: #1e1e2f;
+  --grade-bg-modal-item: #2c2c44;
+  --grade-bg-scroll-thumb: #3a3a5c;
 
-  --glass: rgba(255, 255, 255, 0.04);
-  --glass-2: rgba(255, 255, 255, 0.02);
+  --grade-card: #0f254f;
+  --grade-text: #e0e6f0;
+  --grade-muted: #a3b1c6;
+  --grade-text-strong: #f8fafc;
+  --grade-text-soft: #eaf4ff;
+  --grade-text-chip: #dbeafe;
+  --grade-text-danger: #ffd6d6;
+  --grade-text-dark-button: #042028;
+  --grade-text-occupied: #0b1726;
+  --grade-text-remove: rgba(0, 0, 0, 0.50);
+  --grade-text-modal: #f5f5f5;
+  --grade-text-modal-close: #cccccc;
 
-  --success: #10b981;
-  --warning: #f59e0b;
-  --danger: #ef4444;
+  --grade-accent-a: #0062a1;
+  --grade-accent-b: #1e90ff;
+  --grade-accent-c: #34d399;
 
-  --shadow: 0 12px 40px rgba(2, 8, 23, 0.6);
-  --radius-xl: 20px;
-  --radius-lg: 18px;
-  --radius-md: 14px;
-  --radius-sm: 10px;
+  --grade-success: #10b981;
+  --grade-warning: #f59e0b;
+  --grade-danger: #ef4444;
+
+  --grade-glass: rgba(255, 255, 255, 0.04);
+  --grade-glass-1: rgba(255, 255, 255, 0.01);
+  --grade-glass-2: rgba(255, 255, 255, 0.02);
+  --grade-glass-3: rgba(255, 255, 255, 0.03);
+  --grade-glass-5: rgba(255, 255, 255, 0.05);
+  --grade-glass-6: rgba(255, 255, 255, 0.06);
+  --grade-glass-8: rgba(255, 255, 255, 0.08);
+  --grade-glass-10: rgba(255, 255, 255, 0.10);
+  --grade-glass-12: rgba(255, 255, 255, 0.12);
+  --grade-glass-14: rgba(255, 255, 255, 0.14);
+  --grade-glass-16: rgba(255, 255, 255, 0.16);
+  --grade-glass-18: rgba(255, 255, 255, 0.18);
+  --grade-glass-22: rgba(255, 255, 255, 0.22);
+
+  --grade-blue-8: rgba(0, 80, 158, 0.08);
+  --grade-blue-10: rgba(30, 144, 255, 0.10);
+  --grade-blue-12: rgba(30, 144, 255, 0.12);
+  --grade-blue-14: rgba(30, 144, 255, 0.14);
+  --grade-blue-16: rgba(30, 144, 255, 0.16);
+  --grade-blue-18: rgba(30, 144, 255, 0.18);
+  --grade-blue-22: rgba(30, 144, 255, 0.22);
+  --grade-blue-24: rgba(30, 144, 255, 0.24);
+  --grade-blue-28: rgba(30, 144, 255, 0.28);
+  --grade-blue-35: rgba(30, 144, 255, 0.35);
+  --grade-blue-45: rgba(30, 144, 255, 0.45);
+  --grade-blue-70: rgba(30, 144, 255, 0.70);
+  --grade-blue-85: rgba(30, 144, 255, 0.85);
+  --grade-blue-90: rgba(30, 144, 255, 0.90);
+
+  --grade-green-16: rgba(52, 211, 153, 0.16);
+  --grade-green-22: rgba(52, 211, 153, 0.22);
+  --grade-green-30: rgba(52, 211, 153, 0.30);
+  --grade-green-85: rgba(52, 211, 153, 0.85);
+  --grade-green-95: rgba(52, 211, 153, 0.95);
+
+  --grade-danger-10: rgba(239, 68, 68, 0.10);
+  --grade-danger-16: rgba(239, 68, 68, 0.16);
+  --grade-danger-18: rgba(239, 68, 68, 0.18);
+
+  --grade-black-30: rgba(0, 0, 0, 0.30);
+  --grade-black-60: rgba(0, 0, 0, 0.60);
+
+  --grade-shadow: 0 12px 40px rgba(2, 8, 23, 0.60);
+  --grade-shadow-profile: 0 10px 24px rgba(2, 8, 23, 0.28);
+  --grade-shadow-profile-hover: 0 14px 30px rgba(2, 8, 23, 0.38);
+  --grade-shadow-dropdown: 0 18px 38px rgba(2, 8, 23, 0.50);
+  --grade-shadow-avatar: 0 8px 18px rgba(0, 98, 161, 0.35);
+  --grade-shadow-button: 0 8px 30px rgba(6, 11, 35, 0.60);
+  --grade-shadow-button-soft: 0 4px 12px rgba(0, 80, 158, 0.18);
+  --grade-shadow-gerar: 0 10px 24px rgba(2, 8, 23, 0.22);
+  --grade-shadow-gerar-hover: 0 14px 28px rgba(2, 8, 23, 0.28);
+  --grade-shadow-tools: 0 8px 18px rgba(2, 8, 23, 0.22);
+  --grade-shadow-tools-landscape: 0 8px 18px rgba(2, 8, 23, 0.18);
+  --grade-shadow-modal-item: 0 4px 8px rgba(0, 0, 0, 0.30);
+  --grade-focus-shadow: 0 0 0 3px rgba(30, 144, 255, 0.12);
+
+  --grade-radius-xl: 20px;
+  --grade-radius-lg: 18px;
+  --grade-radius-md: 14px;
+  --grade-radius-sm: 10px;
+
+  --grade-body-bg: linear-gradient(180deg, var(--grade-bg-a), var(--grade-bg-b) 40%, var(--grade-bg-a));
+
+  --grade-profile-bg:
+    linear-gradient(180deg, var(--grade-glass-8), var(--grade-glass-3));
+
+  --grade-profile-dropdown-bg:
+    linear-gradient(180deg, rgba(15, 37, 79, 0.96), rgba(10, 31, 68, 0.96));
+
+  --grade-avatar-bg:
+    linear-gradient(135deg, var(--grade-accent-a), var(--grade-accent-b));
+
+  --grade-controls-bg:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), var(--grade-glass-1));
+
+  --grade-resume-bg:
+    linear-gradient(180deg, var(--grade-glass-5), var(--grade-glass-2));
+
+  --grade-btn-bg:
+    linear-gradient(90deg, var(--grade-accent-a), var(--grade-accent-b));
+
+  --grade-btn-gerar-bg:
+    linear-gradient(135deg, var(--grade-blue-16), var(--grade-green-16));
+
+  --grade-btn-gerar-hover-bg:
+    linear-gradient(135deg, var(--grade-blue-22), rgba(52, 211, 153, 0.22));
+
+  --grade-btn-export-bg:
+    linear-gradient(135deg, var(--grade-blue-16), var(--grade-blue-10));
+
+  --grade-btn-export-hover-bg:
+    linear-gradient(135deg, var(--grade-blue-22), var(--grade-blue-14));
+
+  --grade-chip-bg:
+    linear-gradient(90deg, #071a2b, #08223a);
+
+  --grade-head-bg:
+    linear-gradient(180deg, var(--grade-glass-2), var(--grade-glass-1));
+
+  --grade-timecell-bg:
+    linear-gradient(90deg, var(--grade-glass-2), var(--grade-glass-1));
+
+  --grade-head-mobile-bg:
+    linear-gradient(180deg, #17356b, #122d5d);
+
+  --grade-sticky-mobile-bg: #17356b;
+
+  --grade-tools-bg: rgba(15, 37, 79, 0.95);
+
+  --grade-scrollbar-bg: var(--grade-glass-5);
+  --grade-scrollbar-thumb-bg:
+    linear-gradient(90deg, var(--grade-blue-85), var(--grade-green-85));
+
+  --grade-historico-scroll-thumb:
+    linear-gradient(180deg, var(--grade-blue-90), rgba(0, 98, 161, 0.95));
+
+  --grade-historico-scroll-thumb-hover:
+    linear-gradient(180deg, var(--grade-green-95), rgba(30, 144, 255, 0.95));
+
+  --grade-grid-border: rgba(255, 255, 255, 0.04);
+  --grade-grid-border-strong: rgba(255, 255, 255, 0.06);
+  --grade-disabled-cell-bg: rgba(255, 255, 255, 0.22);
+  --grade-disabled-cell-border: var(--grade-grid-border);
+  --grade-select-arrow-svg: url("data:image/svg+xml,%3Csvg fill='%23e6eefc' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
+}
+
+html.theme-light,
+body.theme-light {
+  --grade-transparent: transparent;
+  --grade-white: #ffffff;
+
+  --grade-bg-a: #eaf3ff;
+  --grade-bg-b: #d8e9fb;
+  --grade-bg-modal-list: #f7fbff;
+  --grade-bg-modal-item: rgba(255, 255, 255, 0.78);
+  --grade-bg-scroll-thumb: rgba(47, 143, 232, 0.48);
+
+  --grade-card: #ffffff;
+  --grade-text: #10233f;
+  --grade-muted: #536783;
+  --grade-text-strong: #10233f;
+  --grade-text-soft: #0f4f86;
+  --grade-text-chip: #0f4f86;
+  --grade-text-danger: #b23333;
+  --grade-text-dark-button: #ffffff;
+  --grade-text-occupied: #0b1726;
+  --grade-text-remove: rgba(0, 0, 0, 0.48);
+  --grade-text-modal: #10233f;
+  --grade-text-modal-close: #536783;
+
+  --grade-accent-a: #176bc2;
+  --grade-accent-b: #2f8fe8;
+  --grade-accent-c: #17a764;
+
+  --grade-success: #17a764;
+  --grade-warning: #c4890f;
+  --grade-danger: #e54848;
+
+  --grade-glass: rgba(255, 255, 255, 0.74);
+  --grade-glass-1: rgba(229, 242, 255, 0.54);
+  --grade-glass-2: rgba(255, 255, 255, 0.54);
+  --grade-glass-3: rgba(255, 255, 255, 0.58);
+  --grade-glass-5: rgba(255, 255, 255, 0.68);
+  --grade-glass-6: rgba(255, 255, 255, 0.72);
+  --grade-glass-8: rgba(255, 255, 255, 0.80);
+  --grade-glass-10: rgba(255, 255, 255, 0.82);
+  --grade-glass-12: rgba(255, 255, 255, 0.86);
+  --grade-glass-14: rgba(255, 255, 255, 0.88);
+  --grade-glass-16: rgba(255, 255, 255, 0.90);
+  --grade-glass-18: rgba(255, 255, 255, 0.92);
+  --grade-glass-22: rgba(255, 255, 255, 0.94);
+
+  --grade-blue-8: rgba(47, 143, 232, 0.08);
+  --grade-blue-10: rgba(47, 143, 232, 0.10);
+  --grade-blue-12: rgba(47, 143, 232, 0.12);
+  --grade-blue-14: rgba(47, 143, 232, 0.14);
+  --grade-blue-16: rgba(47, 143, 232, 0.16);
+  --grade-blue-18: rgba(47, 143, 232, 0.18);
+  --grade-blue-22: rgba(47, 143, 232, 0.22);
+  --grade-blue-24: rgba(47, 143, 232, 0.24);
+  --grade-blue-28: rgba(47, 143, 232, 0.28);
+  --grade-blue-35: rgba(47, 143, 232, 0.35);
+  --grade-blue-45: rgba(47, 143, 232, 0.45);
+  --grade-blue-70: rgba(47, 143, 232, 0.70);
+  --grade-blue-85: rgba(47, 143, 232, 0.85);
+  --grade-blue-90: rgba(47, 143, 232, 0.90);
+
+  --grade-green-16: rgba(23, 167, 100, 0.16);
+  --grade-green-22: rgba(23, 167, 100, 0.22);
+  --grade-green-30: rgba(23, 167, 100, 0.30);
+  --grade-green-85: rgba(23, 167, 100, 0.85);
+  --grade-green-95: rgba(23, 167, 100, 0.95);
+
+  --grade-danger-10: rgba(229, 72, 72, 0.10);
+  --grade-danger-16: rgba(229, 72, 72, 0.16);
+  --grade-danger-18: rgba(229, 72, 72, 0.18);
+
+  --grade-black-30: rgba(38, 76, 122, 0.16);
+  --grade-black-60: rgba(15, 33, 58, 0.42);
+
+  --grade-shadow: 0 12px 40px rgba(38, 76, 122, 0.16);
+  --grade-shadow-profile: 0 10px 24px rgba(38, 76, 122, 0.14);
+  --grade-shadow-profile-hover: 0 14px 30px rgba(38, 76, 122, 0.18);
+  --grade-shadow-dropdown: 0 18px 38px rgba(38, 76, 122, 0.20);
+  --grade-shadow-avatar: 0 8px 18px rgba(47, 143, 232, 0.22);
+  --grade-shadow-button: 0 8px 30px rgba(47, 143, 232, 0.18);
+  --grade-shadow-button-soft: 0 4px 12px rgba(47, 143, 232, 0.16);
+  --grade-shadow-gerar: 0 10px 24px rgba(38, 76, 122, 0.14);
+  --grade-shadow-gerar-hover: 0 14px 28px rgba(38, 76, 122, 0.18);
+  --grade-shadow-tools: 0 8px 18px rgba(38, 76, 122, 0.16);
+  --grade-shadow-tools-landscape: 0 8px 18px rgba(38, 76, 122, 0.14);
+  --grade-shadow-modal-item: 0 4px 8px rgba(38, 76, 122, 0.16);
+  --grade-focus-shadow: 0 0 0 3px rgba(47, 143, 232, 0.14);
+
+  --grade-body-bg:
+    radial-gradient(circle at top left, rgba(47, 143, 232, 0.20), var(--grade-transparent) 22%),
+    radial-gradient(circle at bottom right, rgba(120, 185, 245, 0.28), var(--grade-transparent) 25%),
+    linear-gradient(180deg, var(--grade-bg-a), var(--grade-bg-b));
+
+  --grade-profile-bg:
+    linear-gradient(180deg, var(--grade-glass), var(--grade-glass-1));
+
+  --grade-profile-dropdown-bg:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(229, 242, 255, 0.98));
+
+  --grade-avatar-bg:
+    linear-gradient(135deg, var(--grade-accent-a), var(--grade-accent-b));
+
+  --grade-controls-bg:
+    linear-gradient(180deg, var(--grade-glass), var(--grade-glass-1));
+
+  --grade-resume-bg:
+    linear-gradient(180deg, var(--grade-glass), var(--grade-glass-1));
+
+  --grade-btn-bg:
+    linear-gradient(90deg, var(--grade-accent-a), var(--grade-accent-b));
+
+  --grade-btn-gerar-bg:
+    linear-gradient(135deg, var(--grade-blue-16), var(--grade-green-16));
+
+  --grade-btn-gerar-hover-bg:
+    linear-gradient(135deg, var(--grade-blue-22), rgba(23, 167, 100, 0.22));
+
+  --grade-btn-export-bg:
+    linear-gradient(135deg, var(--grade-blue-16), var(--grade-blue-10));
+
+  --grade-btn-export-hover-bg:
+    linear-gradient(135deg, var(--grade-blue-22), var(--grade-blue-14));
+
+  --grade-chip-bg:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.76), rgba(229, 242, 255, 0.66));
+
+  --grade-head-bg:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(229, 242, 255, 0.58));
+
+  --grade-timecell-bg:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.78), rgba(229, 242, 255, 0.58));
+
+  --grade-head-mobile-bg:
+    linear-gradient(180deg, #dcecff, #cfe3fb);
+
+  --grade-sticky-mobile-bg: #dcecff;
+
+  --grade-tools-bg: rgba(255, 255, 255, 0.94);
+
+  --grade-scrollbar-bg: rgba(48, 104, 166, 0.12);
+  --grade-scrollbar-thumb-bg:
+    linear-gradient(90deg, var(--grade-blue-85), var(--grade-green-85));
+
+  --grade-historico-scroll-thumb:
+    linear-gradient(180deg, var(--grade-blue-90), rgba(23, 107, 194, 0.95));
+
+  --grade-historico-scroll-thumb-hover:
+    linear-gradient(180deg, var(--grade-green-95), rgba(47, 143, 232, 0.95));
+
+  --grade-grid-border: rgba(47, 143, 232, 0.28);
+  --grade-grid-border-strong: rgba(47, 143, 232, 0.38);
+  --grade-disabled-cell-bg: rgba(148, 163, 184, 0.32);
+  --grade-disabled-cell-border: var(--grade-grid-border);
+  --grade-select-arrow-svg: url("data:image/svg+xml,%3Csvg fill='%2310233f' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
 }
 
 /* ==========================
@@ -41,8 +331,8 @@ body {
 }
 
 body {
-  background: linear-gradient(180deg, var(--bg-a), var(--bg-b) 40%, var(--bg-a));
-  color: var(--text);
+  background: var(--grade-body-bg);
+  color: var(--grade-text);
   padding: 22px;
 }
 
@@ -75,7 +365,7 @@ header {
 }
 
 .title-wrap p {
-  color: var(--muted);
+  color: var(--grade-muted);
   margin: 10px 0 0;
   font-size: 15px;
   min-height: 24px;
@@ -83,11 +373,51 @@ header {
 }
 
 .logo-cefet {
+  width: 100px;
+  height: auto;
+}
+
+/* ==========================
+   AÇÕES DO CABEÇALHO
+   ========================== */
+.header-actions {
   position: absolute;
   top: 0;
   right: 0;
-  width: 100px;
-  height: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.theme-header-button {
+  height: 44px;
+  padding: 0 16px;
+  border-radius: var(--grade-radius-md);
+  border: 1px solid var(--grade-glass-8);
+  background: var(--grade-profile-bg);
+  color: var(--grade-text);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  box-shadow: var(--grade-shadow-profile);
+  backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+}
+
+.theme-header-button:hover {
+  transform: translateY(-2px);
+  border-color: var(--grade-blue-35);
+  background: var(--grade-glass-8);
+}
+
+.theme-toggle-icon,
+.theme-toggle-text {
+  pointer-events: none;
 }
 
 /* ==========================
@@ -108,26 +438,26 @@ header {
   width: 255px;
   min-height: 74px;
   padding: 10px 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-lg);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
-  color: var(--text);
+  border: 1px solid var(--grade-glass-8);
+  border-radius: var(--grade-radius-lg);
+  background: var(--grade-profile-bg);
+  color: var(--grade-text);
   cursor: pointer;
-  box-shadow: 0 10px 24px rgba(2, 8, 23, 0.28);
+  box-shadow: var(--grade-shadow-profile);
   backdrop-filter: blur(10px);
   transition: all 0.28s ease;
 }
 
 .profile-trigger:hover {
   transform: translateY(-2px);
-  border-color: rgba(30, 144, 255, 0.35);
-  box-shadow: 0 14px 30px rgba(2, 8, 23, 0.38);
+  border-color: var(--grade-blue-35);
+  box-shadow: var(--grade-shadow-profile-hover);
 }
 
 .profile-trigger:focus {
   outline: none;
-  border-color: rgba(30, 144, 255, 0.45);
-  box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.12);
+  border-color: var(--grade-blue-45);
+  box-shadow: var(--grade-focus-shadow);
 }
 
 .profile-avatar {
@@ -138,11 +468,11 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--accentA), var(--accentB));
-  color: #ffffff;
+  background: var(--grade-avatar-bg);
+  color: var(--grade-white);
   font-weight: 800;
   font-size: 16px;
-  box-shadow: 0 8px 18px rgba(0, 98, 161, 0.35);
+  box-shadow: var(--grade-shadow-avatar);
 }
 
 .profile-avatar.large {
@@ -164,14 +494,14 @@ header {
 
 .profile-user-label {
   font-size: 11px;
-  color: var(--muted);
+  color: var(--grade-muted);
   line-height: 1;
 }
 
 .profile-user-name {
   font-size: 14px;
   font-weight: 700;
-  color: var(--text);
+  color: var(--grade-text);
   line-height: 1.15;
   max-width: 150px;
   display: -webkit-box;
@@ -184,7 +514,7 @@ header {
 
 .profile-chevron {
   font-size: 18px;
-  color: var(--muted);
+  color: var(--grade-muted);
   transition: transform 0.25s ease;
 }
 
@@ -198,10 +528,10 @@ header {
   left: 0;
   width: 255px;
   padding: 12px;
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(180deg, rgba(15, 37, 79, 0.96), rgba(10, 31, 68, 0.96));
-  box-shadow: 0 18px 38px rgba(2, 8, 23, 0.5);
+  border-radius: var(--grade-radius-lg);
+  border: 1px solid var(--grade-glass-8);
+  background: var(--grade-profile-dropdown-bg);
+  box-shadow: var(--grade-shadow-dropdown);
   opacity: 0;
   transform: translateY(-8px) scale(0.98);
   pointer-events: none;
@@ -219,7 +549,7 @@ header {
   align-items: center;
   gap: 12px;
   padding: 4px 2px 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--grade-glass-6);
   margin-bottom: 10px;
 }
 
@@ -231,7 +561,7 @@ header {
 }
 
 .profile-dropdown-user strong {
-  color: var(--text);
+  color: var(--grade-text);
   font-size: 14px;
   white-space: nowrap;
   overflow: hidden;
@@ -246,20 +576,20 @@ header {
   text-decoration: none;
   font-weight: 700;
   padding: 12px;
-  border-radius: var(--radius-md);
+  border-radius: var(--grade-radius-md);
   transition: all 0.25s ease;
 }
 
 .profile-link {
-  color: var(--text);
-  background: rgba(30, 144, 255, 0.10);
-  border: 1px solid rgba(30, 144, 255, 0.16);
+  color: var(--grade-text);
+  background: var(--grade-blue-10);
+  border: 1px solid var(--grade-blue-16);
   margin-bottom: 8px;
 }
 
 .profile-link:hover {
-  background: rgba(30, 144, 255, 0.18);
-  color: #ffffff;
+  background: var(--grade-blue-18);
+  color: var(--grade-white);
   transform: translateY(-1px);
 }
 
@@ -279,23 +609,23 @@ header {
 }
 
 .profile-link-icon {
-  background: rgba(30, 144, 255, 0.18);
+  background: var(--grade-blue-18);
 }
 
 .profile-logout-link {
-  color: #ffd6d6;
-  background: rgba(239, 68, 68, 0.10);
-  border: 1px solid rgba(239, 68, 68, 0.16);
+  color: var(--grade-text-danger);
+  background: var(--grade-danger-10);
+  border: 1px solid var(--grade-danger-16);
 }
 
 .profile-logout-link:hover {
-  background: rgba(239, 68, 68, 0.18);
-  color: #ffffff;
+  background: var(--grade-danger-18);
+  color: var(--grade-white);
   transform: translateY(-1px);
 }
 
 .logout-icon {
-  background: rgba(239, 68, 68, 0.18);
+  background: var(--grade-danger-18);
 }
 
 /* ==========================
@@ -313,10 +643,10 @@ main {
    CONTROLES
    ========================== */
 .controls {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.01));
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--grade-controls-bg);
+  border: 1px solid var(--grade-glass-5);
   border-radius: 24px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--grade-shadow);
   overflow: hidden;
 }
 
@@ -372,9 +702,9 @@ main {
 
 .controls-hint {
   padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--grade-glass-6);
   font-size: 12px;
-  color: var(--muted);
+  color: var(--grade-muted);
   line-height: 1.5;
 }
 
@@ -389,7 +719,7 @@ main {
 label.small,
 .small-muted {
   font-size: 12px;
-  color: var(--muted);
+  color: var(--grade-muted);
 }
 
 .field-historico {
@@ -420,19 +750,19 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"],
 select {
   width: 100%;
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--grade-glass-5);
+  color: var(--grade-text);
+  border: 1px solid var(--grade-glass-12);
   padding: 10px 12px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--grade-radius-sm);
   min-height: 42px;
   font: inherit;
 }
 
 input[type="number"]:focus,
 select:focus {
-  border-color: var(--accentA);
-  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--grade-accent-a);
+  background: var(--grade-glass-8);
   outline: none;
 }
 
@@ -440,7 +770,7 @@ select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg fill='%23e6eefc' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
+  background-image: var(--grade-select-arrow-svg);
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 16px 16px;
@@ -448,8 +778,8 @@ select {
 }
 
 select option {
-  background: var(--bg-b);
-  color: var(--text);
+  background: var(--grade-bg-b);
+  color: var(--grade-text);
 }
 
 /* ==========================
@@ -460,8 +790,8 @@ select option {
   width: 100%;
   padding: 0 14px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--grade-glass-8);
+  background: var(--grade-glass-3);
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
@@ -472,8 +802,8 @@ select option {
 }
 
 .switch-card:hover {
-  border-color: rgba(30, 144, 255, 0.28);
-  background-color: rgba(0, 80, 158, 0.08);
+  border-color: var(--grade-blue-28);
+  background-color: var(--grade-blue-8);
 }
 
 .switch-card input {
@@ -484,7 +814,7 @@ select option {
   width: 38px;
   height: 22px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.16);
+  background: var(--grade-glass-16);
   position: relative;
   transition: all 0.24s ease;
   flex-shrink: 0;
@@ -495,7 +825,7 @@ select option {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #ffffff;
+  background: var(--grade-white);
   position: absolute;
   top: 3px;
   left: 3px;
@@ -503,7 +833,7 @@ select option {
 }
 
 .switch-card input:checked + .switch-slider {
-  background: linear-gradient(90deg, var(--accentA), var(--accentB));
+  background: var(--grade-btn-bg);
 }
 
 .switch-card input:checked + .switch-slider::after {
@@ -513,7 +843,7 @@ select option {
 .switch-label {
   font-size: 13px;
   font-weight: 700;
-  color: var(--text);
+  color: var(--grade-text);
   line-height: 1.2;
 }
 
@@ -530,8 +860,8 @@ select option {
   height: 52px;
   padding: 8px 12px;
   border-radius: 14px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--grade-resume-bg);
+  border: 1px solid var(--grade-glass-6);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -540,7 +870,7 @@ select option {
 
 .resume-label {
   font-size: 11px;
-  color: var(--muted);
+  color: var(--grade-muted);
   line-height: 1;
 }
 
@@ -549,7 +879,7 @@ select option {
   font-weight: 800;
   line-height: 1.1;
   margin-top: 4px;
-  color: #f8fafc;
+  color: var(--grade-text-strong);
 }
 
 /* ==========================
@@ -561,9 +891,9 @@ select option {
   padding: 10px 14px;
   border-radius: 12px;
   font-weight: 700;
-  color: #042028;
-  background: linear-gradient(90deg, var(--accentA), var(--accentB));
-  box-shadow: 0 8px 30px rgba(6, 11, 35, 0.6);
+  color: var(--grade-text-dark-button);
+  background: var(--grade-btn-bg);
+  box-shadow: var(--grade-shadow-button);
   transition: all 0.24s ease;
 }
 
@@ -572,30 +902,30 @@ select option {
 }
 
 .btn.ghost {
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--text);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--grade-glass-3);
+  color: var(--grade-text);
+  border: 1px solid var(--grade-glass-8);
   box-shadow: none;
   min-height: 42px;
 }
 
 .btn.ghost:hover {
-  border-color: rgba(30, 144, 255, 0.28);
-  background-color: rgba(0, 80, 158, 0.08);
-  box-shadow: 0 4px 12px rgba(0, 80, 158, 0.18);
+  border-color: var(--grade-blue-28);
+  background-color: var(--grade-blue-8);
+  box-shadow: var(--grade-shadow-button-soft);
 }
 
 .btn-gerar-inline {
   min-width: 190px;
   height: 52px;
   padding: 0 24px;
-  border: 1px solid rgba(52, 211, 153, 0.16);
+  border: 1px solid var(--grade-green-16);
   border-radius: 16px;
   font-size: 16px;
   font-weight: 800;
-  color: #f8fafc;
-  background: linear-gradient(135deg, rgba(30, 144, 255, 0.16), rgba(52, 211, 153, 0.16));
-  box-shadow: 0 10px 24px rgba(2, 8, 23, 0.22);
+  color: var(--grade-text-strong);
+  background: var(--grade-btn-gerar-bg);
+  box-shadow: var(--grade-shadow-gerar);
   backdrop-filter: blur(10px);
   cursor: pointer;
   transition: all 0.24s ease;
@@ -607,9 +937,9 @@ select option {
 
 .btn-gerar-inline:hover {
   transform: translateY(-2px);
-  border-color: rgba(52, 211, 153, 0.30);
-  background: linear-gradient(135deg, rgba(30, 144, 255, 0.22), rgba(52, 211, 153, 0.22));
-  box-shadow: 0 14px 28px rgba(2, 8, 23, 0.28);
+  border-color: var(--grade-green-30);
+  background: var(--grade-btn-gerar-hover-bg);
+  box-shadow: var(--grade-shadow-gerar-hover);
 }
 
 .btn-export {
@@ -618,14 +948,14 @@ select option {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #eaf4ff;
-  background: linear-gradient(135deg, rgba(30, 144, 255, 0.16), rgba(30, 144, 255, 0.10));
-  border: 1px solid rgba(30, 144, 255, 0.22);
+  color: var(--grade-text-soft);
+  background: var(--grade-btn-export-bg);
+  border: 1px solid var(--grade-blue-22);
   box-shadow: none;
 }
 
 .btn-export:hover {
-  background: linear-gradient(135deg, rgba(30, 144, 255, 0.22), rgba(30, 144, 255, 0.14));
+  background: var(--grade-btn-export-hover-bg);
 }
 
 .btn-icon-text {
@@ -674,15 +1004,15 @@ select option {
   font-size: 13px;
   font-weight: 700;
   line-height: 1.2;
-  border: 1px solid transparent;
+  border: 1px solid var(--grade-transparent);
   backdrop-filter: blur(8px);
 }
 
 .feedback-chip-horario,
 .feedback-chip-dia-livre {
-  color: #dbeafe;
-  background: rgba(30, 144, 255, 0.10);
-  border-color: rgba(30, 144, 255, 0.22);
+  color: var(--grade-text-chip);
+  background: var(--grade-blue-10);
+  border-color: var(--grade-blue-22);
 }
 
 /* ==========================
@@ -691,11 +1021,11 @@ select option {
 .historico-panel {
   max-width: 1280px;
   margin: -2px auto 0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.01));
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--grade-controls-bg);
+  border: 1px solid var(--grade-glass-5);
   border-radius: 14px;
   padding: 14px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--grade-shadow);
 }
 
 .historico-panel.collapsed {
@@ -720,7 +1050,7 @@ select option {
   overflow-x: hidden;
   padding-right: 8px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(30, 144, 255, 0.7) rgba(255, 255, 255, 0.05);
+  scrollbar-color: var(--grade-blue-70) var(--grade-glass-5);
 }
 
 .historico-chip {
@@ -729,9 +1059,9 @@ select option {
   gap: 8px;
   padding: 8px 12px;
   border-radius: 999px;
-  background: linear-gradient(90deg, #071a2b, #08223a);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  color: var(--text);
+  background: var(--grade-chip-bg);
+  border: 1px solid var(--grade-glass-5);
+  color: var(--grade-text);
   font-size: 13px;
   white-space: nowrap;
 }
@@ -749,9 +1079,9 @@ select option {
   border-radius: 999px;
   font-size: 10px;
   font-weight: 700;
-  color: var(--muted);
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--grade-muted);
+  background: var(--grade-glass-6);
+  border: 1px solid var(--grade-glass-6);
 }
 
 .historico-chips::-webkit-scrollbar {
@@ -759,28 +1089,28 @@ select option {
 }
 
 .historico-chips::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--grade-glass-5);
   border-radius: 999px;
 }
 
 .historico-chips::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(30, 144, 255, 0.9), rgba(0, 98, 161, 0.95));
+  background: var(--grade-historico-scroll-thumb);
   border-radius: 999px;
-  border: 2px solid rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--grade-glass-5);
 }
 
 .historico-chips::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, rgba(52, 211, 153, 0.95), rgba(30, 144, 255, 0.95));
+  background: var(--grade-historico-scroll-thumb-hover);
 }
 
 /* ==========================
    GRADE
    ========================== */
 .grade-wrap {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  background: var(--grade-controls-bg);
   padding: 12px;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--grade-glass);
   overflow-x: auto;
 }
 
@@ -811,10 +1141,10 @@ select option {
 }
 
 .chip {
-  background: linear-gradient(90deg, #071a2b, #08223a);
+  background: var(--grade-chip-bg);
   padding: 8px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--grade-glass);
   display: flex;
   gap: 8px;
   align-items: center;
@@ -829,13 +1159,13 @@ select option {
 .grid {
   display: grid;
   grid-template-columns: 120px repeat(6, minmax(0, 1fr));
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
-  border-left: 1px solid rgba(255, 255, 255, 0.04);
+  border-top: 1px solid var(--grade-grid-border);
+  border-left: 1px solid var(--grade-grid-border);
 }
 
 .cell {
-  border-right: 1px solid rgba(255, 255, 255, 0.04);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  border-right: 1px solid var(--grade-grid-border);
+  border-bottom: 1px solid var(--grade-grid-border);
   padding: 8px;
   min-height: 48px;
   min-width: 0;
@@ -848,7 +1178,7 @@ select option {
 }
 
 .head {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  background: var(--grade-head-bg);
   font-weight: 800;
   position: sticky;
   top: 0;
@@ -858,7 +1188,7 @@ select option {
 .timecell {
   position: sticky;
   left: 0;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  background: var(--grade-timecell-bg);
   font-weight: 700;
   z-index: 1;
   cursor: default;
@@ -866,7 +1196,7 @@ select option {
 
 .drop-empty {
   opacity: 0.22;
-  border-color: #0062a1;
+  border-color: var(--grade-accent-a);
   transition: all 0.12s;
 }
 
@@ -899,7 +1229,7 @@ select option {
   min-height: 100%;
   padding: 6px 24px 6px 8px;
   border-radius: 8px;
-  color: #0b1726;
+  color: var(--grade-text-occupied);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -933,7 +1263,7 @@ select option {
   font-size: 12px;
   font-weight: 900;
   cursor: pointer;
-  color: rgba(0, 0, 0, 0.5);
+  color: var(--grade-text-remove);
   line-height: 1;
 }
 
@@ -943,7 +1273,9 @@ select option {
 }
 
 .sat-muted {
-  background-color: rgba(200, 200, 200, 0.2);
+  background-color: var(--grade-disabled-cell-bg);
+  border-right-color: var(--grade-disabled-cell-border);
+  border-bottom-color: var(--grade-disabled-cell-border);
 }
 
 .tools {
@@ -961,12 +1293,12 @@ select option {
   z-index: 9999;
   inset: 0;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--grade-black-60);
 }
 
 .modal-content {
-  background-color: #1e1e2f;
-  color: #f5f5f5;
+  background-color: var(--grade-bg-modal-list);
+  color: var(--grade-text-modal);
   margin: 10% auto;
   padding: 20px;
   border-radius: 12px;
@@ -978,7 +1310,7 @@ select option {
 .modal-content h3 {
   margin-bottom: 12px;
   text-align: center;
-  color: #fff;
+  color: var(--grade-text-modal);
 }
 
 .modal-content ul {
@@ -989,8 +1321,8 @@ select option {
 .modal-content li {
   padding: 10px;
   margin: 5px 0;
-  background-color: #2c2c44;
-  color: #f5f5f5;
+  background-color: var(--grade-bg-modal-item);
+  color: var(--grade-text-modal);
   border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
@@ -998,14 +1330,14 @@ select option {
 }
 
 .modal-content li:hover {
-  background-color: #00509e;
-  color: #fff;
+  background-color: var(--grade-accent-a);
+  color: var(--grade-white);
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--grade-shadow-modal-item);
 }
 
 .modal .close {
-  color: #ccc;
+  color: var(--grade-text-modal-close);
   float: right;
   font-size: 24px;
   font-weight: bold;
@@ -1014,7 +1346,7 @@ select option {
 }
 
 .modal .close:hover {
-  color: #fff;
+  color: var(--grade-white);
 }
 
 .modal-content::-webkit-scrollbar {
@@ -1022,12 +1354,12 @@ select option {
 }
 
 .modal-content::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--grade-glass-5);
   border-radius: 8px;
 }
 
 .modal-content::-webkit-scrollbar-thumb {
-  background: #3a3a5c;
+  background: var(--grade-bg-scroll-thumb);
   border-radius: 8px;
 }
 
@@ -1057,12 +1389,8 @@ select option {
    RESPONSIVIDADE - MONTAGEM DE GRADE
    ========================================================= */
 
-
 /* ---------------------------------------------------------
    Telas médias e notebooks menores
-   ---------------------------------------------------------
-   Ajusta a largura geral e reorganiza os controles quando a
-   tela começa a ficar estreita para o layout completo.
    --------------------------------------------------------- */
 @media (max-width: 1200px) {
   header,
@@ -1093,12 +1421,8 @@ select option {
   }
 }
 
-
 /* ---------------------------------------------------------
    Tablets e telas intermediárias
-   ---------------------------------------------------------
-   Centraliza o perfil no topo, reduz a logo e deixa os
-   controles mais confortáveis em duas colunas.
    --------------------------------------------------------- */
 @media (max-width: 980px) {
   body {
@@ -1127,11 +1451,25 @@ select option {
     width: 280px;
   }
 
-  .logo-cefet {
+  .header-actions {
     position: static;
-    display: block;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .theme-header-button {
+    width: min(280px, 100%);
+    height: 42px;
+    border-radius: 13px;
+    font-size: 0.82rem;
+  }
+
+  .logo-cefet {
     width: 96px;
-    margin: 12px auto 0;
+    margin: 0 auto;
   }
 
   .controls-panel {
@@ -1166,12 +1504,8 @@ select option {
   }
 }
 
-
 /* ---------------------------------------------------------
    Base mobile
-   ---------------------------------------------------------
-   Define a largura útil da página em telas pequenas e impede
-   rolagem lateral fora da área da grade.
    --------------------------------------------------------- */
 @media (max-width: 768px) {
   html {
@@ -1291,12 +1625,8 @@ select option {
   }
 }
 
-
 /* ---------------------------------------------------------
    Celular em pé
-   ---------------------------------------------------------
-   A página fica em coluna única. A grade mantém largura mínima
-   e usa rolagem horizontal própria para preservar legibilidade.
    --------------------------------------------------------- */
 @media (max-width: 768px) and (orientation: portrait) {
   header,
@@ -1317,6 +1647,7 @@ select option {
   }
 
   .profile-area {
+    order: 1;
     position: relative;
     left: auto;
     top: auto;
@@ -1371,7 +1702,31 @@ select option {
     max-width: 210px;
   }
 
+  .header-actions {
+    order: 2;
+    position: static;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 10px;
+    margin-top: 0;
+  }
+
+  .theme-header-button {
+    width: 100%;
+    height: 42px;
+    border-radius: 13px;
+    font-size: 0.82rem;
+  }
+
+  .logo-cefet {
+    width: 84px;
+    margin: 0 auto;
+  }
+
   .title-wrap {
+    order: 3;
     width: 100%;
     text-align: center;
   }
@@ -1387,11 +1742,6 @@ select option {
     margin: 6px auto 0;
     font-size: 0.78rem;
     line-height: 1.35;
-  }
-
-  .logo-cefet {
-    width: 84px;
-    margin-top: 2px;
   }
 
   .switch-card {
@@ -1456,12 +1806,12 @@ select option {
   }
 
   .grade-wrap::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--grade-scrollbar-bg);
     border-radius: 999px;
   }
 
   .grade-wrap::-webkit-scrollbar-thumb {
-    background: linear-gradient(90deg, rgba(30, 144, 255, 0.85), rgba(52, 211, 153, 0.85));
+    background: var(--grade-scrollbar-thumb-bg);
     border-radius: 999px;
   }
 
@@ -1487,14 +1837,14 @@ select option {
     position: sticky;
     top: 0;
     z-index: 15;
-    background: linear-gradient(180deg, #17356b, #122d5d);
+    background: var(--grade-head-mobile-bg);
   }
 
   .cell.head:first-child {
     position: sticky;
     left: 0;
     z-index: 30;
-    background: #17356b !important;
+    background: var(--grade-sticky-mobile-bg) !important;
     box-shadow: none !important;
   }
 
@@ -1507,9 +1857,9 @@ select option {
     min-width: 104px !important;
     max-width: 104px !important;
 
-    background: #17356b !important;
+    background: var(--grade-sticky-mobile-bg) !important;
     box-shadow: none !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    border-right: 1px solid var(--grade-glass-6);
 
     overflow: hidden;
     white-space: nowrap;
@@ -1578,7 +1928,7 @@ select option {
     justify-content: center;
     margin-top: 10px;
     padding-top: 8px;
-    background: transparent !important;
+    background: var(--grade-transparent) !important;
   }
 
   .tools .small-muted {
@@ -1591,13 +1941,13 @@ select option {
     padding: 8px 14px;
     border-radius: 999px;
 
-    background: rgba(15, 37, 79, 0.95);
-    border: 1px solid rgba(52, 211, 153, 0.22);
-    color: #dbeafe;
+    background: var(--grade-tools-bg);
+    border: 1px solid var(--grade-green-22);
+    color: var(--grade-text-chip);
 
     font-size: 0.74rem;
     line-height: 1.2;
-    box-shadow: 0 8px 18px rgba(2, 8, 23, 0.22);
+    box-shadow: var(--grade-shadow-tools);
   }
 
   .modal-content {
@@ -1606,7 +1956,6 @@ select option {
     margin: 18dvh auto 0;
   }
 }
-
 
 /* ---------------------------------------------------------
    Celulares pequenos em pé
@@ -1640,6 +1989,11 @@ select option {
   .profile-user-name {
     font-size: 11px;
     max-width: 190px;
+  }
+
+  .theme-header-button {
+    height: 40px;
+    font-size: 0.76rem;
   }
 
   .title-wrap h1 {
@@ -1718,7 +2072,6 @@ select option {
   }
 }
 
-
 /* ---------------------------------------------------------
    Celulares muito pequenos
    Ex.: 320x568.
@@ -1744,6 +2097,11 @@ select option {
 
   .profile-user-name {
     max-width: 160px;
+  }
+
+  .theme-header-button {
+    height: 38px;
+    font-size: 0.72rem;
   }
 
   .title-wrap h1 {
@@ -1778,13 +2136,8 @@ select option {
   }
 }
 
-
 /* ---------------------------------------------------------
    Celular deitado
-   ---------------------------------------------------------
-   A grade é compactada para caber inteira na tela. Nesse modo
-   a página usa rolagem vertical normal e não precisa arrastar
-   a grade para o lado.
    --------------------------------------------------------- */
 @media (orientation: landscape) and (max-height: 500px) and (max-width: 950px) {
   html {
@@ -1859,12 +2212,40 @@ select option {
     font-size: 0.82rem;
   }
 
+  .header-actions {
+    position: absolute;
+    inset: 0;
+    height: 66px;
+    display: block;
+    margin-top: 0;
+    pointer-events: none;
+  }
+
+  .theme-header-button {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: auto;
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 13px;
+    font-size: 0.78rem;
+    transform: translateY(-50%);
+    pointer-events: auto;
+  }
+
+  .theme-header-button:hover {
+    transform: translateY(calc(-50% - 2px));
+  }
+
   .logo-cefet {
     position: absolute;
     right: 0;
-    top: 92px;
+    top: 50%;
     width: 96px;
     margin: 0;
+    transform: translateY(-50%);
+    pointer-events: auto;
   }
 
   .controls-panel {
@@ -1951,7 +2332,7 @@ select option {
     position: sticky;
     top: 0;
     z-index: 6;
-    background: linear-gradient(180deg, #17356b, #122d5d);
+    background: var(--grade-head-mobile-bg);
     font-size: 0.7rem;
     white-space: nowrap;
   }
@@ -1960,7 +2341,7 @@ select option {
     position: sticky;
     left: 0;
     z-index: 12;
-    background: #17356b;
+    background: var(--grade-sticky-mobile-bg);
     box-shadow: none;
   }
 
@@ -1973,9 +2354,9 @@ select option {
     font-size: 0.56rem;
     line-height: 1.15;
     white-space: nowrap;
-    background: #17356b;
+    background: var(--grade-sticky-mobile-bg);
     box-shadow: none;
-    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    border-right: 1px solid var(--grade-glass-6);
   }
 
   .occupied {
@@ -2006,7 +2387,7 @@ select option {
     width: 100%;
     margin-top: 10px;
     padding-top: 0;
-    background: transparent;
+    background: var(--grade-transparent);
 
     display: flex;
     justify-content: center;
@@ -2021,13 +2402,13 @@ select option {
     padding: 7px 14px;
     border-radius: 999px;
 
-    background: rgba(15, 37, 79, 0.95);
-    border: 1px solid rgba(52, 211, 153, 0.22);
-    color: #dbeafe;
+    background: var(--grade-tools-bg);
+    border: 1px solid var(--grade-green-22);
+    color: var(--grade-text-chip);
 
     font-size: 0.72rem;
     line-height: 1.2;
-    box-shadow: 0 8px 18px rgba(2, 8, 23, 0.18);
+    box-shadow: var(--grade-shadow-tools-landscape);
   }
 
   .modal-content {
@@ -2035,7 +2416,6 @@ select option {
     max-height: 78dvh;
   }
 }
-
 
 /* ---------------------------------------------------------
    Celular deitado com altura muito baixa
@@ -2054,8 +2434,17 @@ select option {
     font-size: 0.76rem;
   }
 
+  .header-actions {
+    top: 0;
+    height: 58px;
+  }
+
+  .theme-header-button {
+    height: 38px;
+    font-size: 0.74rem;
+  }
+
   .logo-cefet {
-    top: 82px;
     width: 82px;
   }
 
@@ -2090,13 +2479,9 @@ select option {
   }
 }
 
-
 /* ---------------------------------------------------------
    Tablet deitado
    Ex.: 1024x768.
-   ---------------------------------------------------------
-   Separa perfil, título e logo em três áreas para evitar
-   sobreposição no cabeçalho.
    --------------------------------------------------------- */
 @media (min-width: 951px) and (max-width: 1100px) and (orientation: landscape) {
   header,
@@ -2110,7 +2495,7 @@ select option {
     min-height: 86px;
     padding-top: 0;
     display: grid;
-    grid-template-columns: 240px 1fr 100px;
+    grid-template-columns: 240px 1fr 190px;
     align-items: center;
     gap: 18px;
   }
@@ -2169,10 +2554,23 @@ select option {
     font-size: 0.78rem;
   }
 
-  .logo-cefet {
+  .header-actions {
     position: static;
-    width: 92px;
     justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 0;
+  }
+
+  .theme-header-button {
+    height: 40px;
+    padding: 0 12px;
+    font-size: 0.76rem;
+  }
+
+  .logo-cefet {
+    width: 92px;
     margin: 0;
   }
 
@@ -2206,4 +2604,3 @@ select option {
     grid-template-columns: 120px repeat(6, minmax(120px, 1fr));
   }
 }
-

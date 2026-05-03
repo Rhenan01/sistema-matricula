@@ -13,7 +13,12 @@
 
     <!-- Biblioteca para animação de texto digitado -->
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem("sistema_matricula_theme") || "theme-dark";
+            document.documentElement.classList.add(savedTheme);
+        })();
+    </script>
     <!-- Estilos específicos da página de histórico de disciplinas -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/historico_disciplinas.css') }}">
 </head>
@@ -95,7 +100,14 @@
             </div>
 
             <!-- Logo da instituição -->
-            <img src="{{ url_for('static', filename='figures/logo.png') }}" alt="Logo CEFET" class="logo-cefet">
+            <div class="header-actions">
+                <button type="button" class="theme-header-button" data-theme-toggle>
+                    <span class="theme-toggle-icon">☀️</span>
+                    <span class="theme-toggle-text">Modo claro</span>
+                </button>
+
+                <img src="{{ url_for('static', filename='figures/logo.png') }}" alt="Logo CEFET" class="logo-cefet">
+            </div>
         </div>
     </header>
 
@@ -180,6 +192,7 @@
     <div id="toast" class="toast"></div>
 
     <!-- Script principal da página -->
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/historico_disciplinas.js') }}"></script>
 </body>
 </html>

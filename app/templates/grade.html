@@ -15,7 +15,12 @@
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem("sistema_matricula_theme") || "theme-dark";
+            document.documentElement.classList.add(savedTheme);
+        })();
+    </script>
     <!-- Estilos da página -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/grade.css') }}">
 </head>
@@ -80,7 +85,14 @@
             </div>
 
             <!-- Logo -->
-            <img src="{{ url_for('static', filename='figures/logo.png') }}" alt="Logo CEFET" class="logo-cefet">
+            <div class="header-actions">
+                <button type="button" class="theme-header-button" data-theme-toggle>
+                    <span class="theme-toggle-icon">☀️</span>
+                    <span class="theme-toggle-text">Modo claro</span>
+                </button>
+
+                <img src="{{ url_for('static', filename='figures/logo.png') }}" alt="Logo CEFET" class="logo-cefet">
+            </div>
         </div>
     </header>
 
@@ -226,6 +238,7 @@
     </div>
 
     <!-- Script principal -->
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/grade.js') }}"></script>
 </body>
 </html>

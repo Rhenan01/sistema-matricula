@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Administrativo</title>
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem("sistema_matricula_theme") || "theme-dark";
+            document.documentElement.classList.add(savedTheme);
+        })();
+    </script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_dashboard.css') }}">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='central' font-size='38'%3E⚙️%3C/text%3E%3C/svg%3E">
 </head>
@@ -15,7 +21,15 @@
     <main class="admin-page">
         <section class="admin-hero">
             <div class="admin-hero-top">
-                <a href="{{ url_for('main.index') }}" class="admin-back-btn">← Voltar ao menu</a>
+                <div class="admin-hero-actions">
+                    <a href="{{ url_for('main.index') }}" class="admin-back-btn">← Voltar ao menu</a>
+
+                    <button type="button" class="admin-theme-btn" data-theme-toggle>
+                        <span class="theme-toggle-icon">☀️</span>
+                        <span class="theme-toggle-text">Modo claro</span>
+                    </button>
+                </div>
+
                 <span class="admin-badge">Área restrita</span>
             </div>
 
@@ -65,5 +79,6 @@
             </a>
         </section>
     </main>
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
 </body>
 </html>

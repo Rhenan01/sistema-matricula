@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciar PPCs</title>
-
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem("sistema_matricula_theme") || "theme-dark";
+            document.documentElement.classList.add(savedTheme);
+        })();
+    </script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_ppcs.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -61,11 +66,14 @@
                         <i class="fa-solid fa-arrow-left"></i>
                         <span>Voltar ao painel</span>
                     </a>
-
                     <a href="{{ url_for('main.index') }}" class="back-button secondary-button">
                         <i class="fa-solid fa-house"></i>
                         <span>Menu principal</span>
                     </a>
+                    <button type="button" class="theme-button" data-theme-toggle>
+                        <span class="theme-toggle-icon">☀️</span>
+                        <span class="theme-toggle-text">Modo claro</span>
+                    </button>
                 </div>
 
                 <span class="hero-badge">
@@ -195,8 +203,14 @@
                                     </div>
                                 </form>
 
-                                <form method="POST" action="{{ url_for('admin.excluir_ppc', ppc_id=ppc.id) }}" class="delete-form">
-                                    <button type="submit" class="btn btn-danger">
+                                <form
+                                    method="POST"
+                                    action="{{ url_for('admin.excluir_ppc', ppc_id=ppc.id) }}"
+                                    class="delete-form"
+                                    data-ppc-code="{{ ppc.codigo }}"
+                                    data-ppc-course="{{ ppc.curso_nome }}"
+                                >
+                                    <button type="button" class="btn btn-danger open-delete-modal">
                                         <i class="fa-solid fa-trash"></i>
                                         Excluir
                                     </button>
@@ -248,7 +262,7 @@
             </div>
         </div>
     </div>
-
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin_ppcs.js') }}"></script>
 </body>
 </html>

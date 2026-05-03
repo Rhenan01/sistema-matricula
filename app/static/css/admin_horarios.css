@@ -1,19 +1,198 @@
-:root {
-  --bg-a: #071733;
-  --bg-b: #0c2452;
-  --glass: rgba(255, 255, 255, 0.08);
-  --glass-strong: rgba(255, 255, 255, 0.11);
-  --border: rgba(255, 255, 255, 0.12);
-  --text-main: #f4f8ff;
-  --text-muted: #c7d5ea;
-  --blue: #3ea6ff;
-  --blue-strong: #1e90ff;
-  --teal: #1fc8db;
-  --danger: #ff4747;
-  --shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
-  --radius-xl: 28px;
-  --radius-lg: 22px;
-  --radius-md: 16px;
+:root,
+html.theme-dark,
+body.theme-dark {
+  --horarios-bg-a: #071733;
+  --horarios-bg-b: #0c2452;
+
+  --horarios-transparent: transparent;
+  --horarios-white: #ffffff;
+
+  --horarios-glass: rgba(255, 255, 255, 0.08);
+  --horarios-glass-strong: rgba(255, 255, 255, 0.11);
+  --horarios-glass-soft: rgba(255, 255, 255, 0.04);
+  --horarios-glass-medium: rgba(255, 255, 255, 0.05);
+  --horarios-glass-input: rgba(255, 255, 255, 0.09);
+  --horarios-glass-button: rgba(255, 255, 255, 0.08);
+  --horarios-glass-button-secondary: rgba(255, 255, 255, 0.05);
+  --horarios-glass-button-hover: rgba(255, 255, 255, 0.12);
+  --horarios-glass-cell: rgba(255, 255, 255, 0.04);
+  --horarios-glass-time: rgba(255, 255, 255, 0.06);
+  --horarios-glass-empty-border: rgba(255, 255, 255, 0.06);
+
+  --horarios-border: rgba(255, 255, 255, 0.12);
+  --horarios-border-soft: rgba(255, 255, 255, 0.08);
+  --horarios-border-sticky: rgba(255, 255, 255, 0.14);
+  --horarios-border-entry: rgba(62, 166, 255, 0.18);
+  --horarios-border-blue: rgba(62, 166, 255, 0.20);
+  --horarios-border-blue-strong: rgba(62, 166, 255, 0.24);
+  --horarios-border-danger: rgba(255, 59, 59, 0.24);
+
+  --horarios-text-main: #f4f8ff;
+  --horarios-text-muted: #c7d5ea;
+  --horarios-text-blue-soft: #b7e2ff;
+  --horarios-text-danger-soft: #ff8f8f;
+  --horarios-text-time-mobile: rgba(255, 255, 255, 0.82);
+
+  --horarios-blue: #3ea6ff;
+  --horarios-blue-strong: #1e90ff;
+  --horarios-teal: #1fc8db;
+  --horarios-danger: #ff4747;
+  --horarios-danger-strong: #db2626;
+
+  --horarios-shape-1: #49c5ff;
+  --horarios-shape-2: #22d3ee;
+
+  --horarios-sticky-bg: rgba(55, 86, 126, 0.98);
+
+  --horarios-shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
+  --horarios-sticky-shadow-top: 0 8px 20px rgba(0, 0, 0, 0.22);
+  --horarios-sticky-shadow-left: 8px 0 18px rgba(0, 0, 0, 0.18);
+
+  --horarios-radius-xl: 28px;
+  --horarios-radius-lg: 22px;
+  --horarios-radius-md: 16px;
+
+  --horarios-transition: 0.22s ease;
+
+  --horarios-body-bg:
+    radial-gradient(circle at top left, rgba(62, 166, 255, 0.18), var(--horarios-transparent) 18%),
+    radial-gradient(circle at center right, rgba(31, 200, 219, 0.15), var(--horarios-transparent) 22%),
+    linear-gradient(180deg, var(--horarios-bg-a), var(--horarios-bg-b));
+
+  --horarios-hero-bg:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.05));
+
+  --horarios-section-bg:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.04));
+
+  --horarios-entry-bg:
+    linear-gradient(135deg, rgba(62, 166, 255, 0.16), rgba(30, 144, 255, 0.10));
+
+  --horarios-add-btn-bg:
+    linear-gradient(135deg, #2ca3ff, #1778ea);
+
+  --horarios-edit-btn-bg:
+    linear-gradient(135deg, #31a1ff, #1678e8);
+
+  --horarios-danger-btn-bg:
+    linear-gradient(135deg, #ff4b4b, #db2626);
+
+  --horarios-flash-success-bg:
+    linear-gradient(135deg, rgba(23, 184, 95, 0.95), rgba(14, 143, 71, 0.95));
+
+  --horarios-flash-error-bg:
+    linear-gradient(135deg, rgba(255, 59, 59, 0.95), rgba(219, 38, 38, 0.95));
+
+  --horarios-modal-overlay-bg: rgba(4, 14, 34, 0.72);
+
+  --horarios-modal-card-bg:
+    linear-gradient(145deg, rgba(31, 63, 119, 0.96), rgba(16, 39, 82, 0.96));
+
+  --horarios-modal-blue-bg: rgba(62, 166, 255, 0.14);
+  --horarios-modal-danger-bg: rgba(255, 59, 59, 0.14);
+
+  --horarios-modal-secondary-bg: rgba(255, 255, 255, 0.10);
+  --horarios-modal-secondary-hover-bg: rgba(255, 255, 255, 0.16);
+  --horarios-modal-secondary-border: rgba(255, 255, 255, 0.10);
+  --horarios-modal-secondary-text: #ffffff;
+
+  --horarios-primary-btn-bg:
+    linear-gradient(135deg, #2797ff, #1678e8);
+}
+
+html.theme-light,
+body.theme-light {
+  --horarios-bg-a: #eaf3ff;
+  --horarios-bg-b: #cfe3fb;
+
+  --horarios-transparent: transparent;
+  --horarios-white: #ffffff;
+
+  --horarios-glass: rgba(255, 255, 255, 0.74);
+  --horarios-glass-strong: rgba(255, 255, 255, 0.88);
+  --horarios-glass-soft: rgba(229, 242, 255, 0.54);
+  --horarios-glass-medium: rgba(240, 248, 255, 0.68);
+  --horarios-glass-input: rgba(255, 255, 255, 0.72);
+  --horarios-glass-button: rgba(255, 255, 255, 0.72);
+  --horarios-glass-button-secondary: rgba(255, 255, 255, 0.62);
+  --horarios-glass-button-hover: rgba(255, 255, 255, 0.92);
+  --horarios-glass-cell: rgba(255, 255, 255, 0.54);
+  --horarios-glass-time: rgba(255, 255, 255, 0.62);
+  --horarios-glass-empty-border: rgba(48, 104, 166, 0.14);
+
+  --horarios-border: rgba(48, 104, 166, 0.18);
+  --horarios-border-soft: rgba(48, 104, 166, 0.14);
+  --horarios-border-sticky: rgba(48, 104, 166, 0.22);
+  --horarios-border-entry: rgba(47, 143, 232, 0.20);
+  --horarios-border-blue: rgba(47, 143, 232, 0.22);
+  --horarios-border-blue-strong: rgba(47, 143, 232, 0.26);
+  --horarios-border-danger: rgba(229, 72, 72, 0.22);
+
+  --horarios-text-main: #10233f;
+  --horarios-text-muted: #536783;
+  --horarios-text-blue-soft: #155b99;
+  --horarios-text-danger-soft: #c73535;
+  --horarios-text-time-mobile: rgba(16, 35, 63, 0.82);
+
+  --horarios-blue: #2f8fe8;
+  --horarios-blue-strong: #176bc2;
+  --horarios-teal: #74bdf4;
+  --horarios-danger: #e54848;
+  --horarios-danger-strong: #c92f2f;
+
+  --horarios-shape-1: #8ed4ff;
+  --horarios-shape-2: #74bdf4;
+
+  --horarios-sticky-bg: rgba(218, 235, 252, 0.98);
+
+  --horarios-shadow: 0 20px 48px rgba(38, 76, 122, 0.16);
+  --horarios-sticky-shadow-top: 0 8px 20px rgba(38, 76, 122, 0.12);
+  --horarios-sticky-shadow-left: 8px 0 18px rgba(38, 76, 122, 0.10);
+
+  --horarios-body-bg:
+    radial-gradient(circle at top left, rgba(47, 143, 232, 0.20), var(--horarios-transparent) 18%),
+    radial-gradient(circle at center right, rgba(120, 185, 245, 0.28), var(--horarios-transparent) 22%),
+    linear-gradient(180deg, var(--horarios-bg-a), var(--horarios-bg-b));
+
+  --horarios-hero-bg:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.74), rgba(229, 242, 255, 0.54));
+
+  --horarios-section-bg:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.74), rgba(229, 242, 255, 0.54));
+
+  --horarios-entry-bg:
+    linear-gradient(135deg, rgba(47, 143, 232, 0.16), rgba(23, 107, 194, 0.08));
+
+  --horarios-add-btn-bg:
+    linear-gradient(135deg, #2f8fe8, #176bc2);
+
+  --horarios-edit-btn-bg:
+    linear-gradient(135deg, #2f8fe8, #176bc2);
+
+  --horarios-danger-btn-bg:
+    linear-gradient(135deg, #e54848, #c92f2f);
+
+  --horarios-flash-success-bg:
+    linear-gradient(135deg, rgba(23, 167, 100, 0.96), rgba(15, 125, 74, 0.96));
+
+  --horarios-flash-error-bg:
+    linear-gradient(135deg, rgba(229, 72, 72, 0.96), rgba(201, 47, 47, 0.96));
+
+  --horarios-modal-overlay-bg: rgba(15, 33, 58, 0.42);
+
+  --horarios-modal-card-bg:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(229, 242, 255, 0.96));
+
+  --horarios-modal-blue-bg: rgba(47, 143, 232, 0.14);
+  --horarios-modal-danger-bg: rgba(229, 72, 72, 0.12);
+
+  --horarios-modal-secondary-bg: rgba(47, 143, 232, 0.40);
+  --horarios-modal-secondary-hover-bg: rgba(47, 143, 232, 0.48);
+  --horarios-modal-secondary-border: rgba(47, 143, 232, 0.32);
+  --horarios-modal-secondary-text: #0f4f86;
+
+  --horarios-primary-btn-bg:
+    linear-gradient(135deg, #2f8fe8, #176bc2);
 }
 
 * {
@@ -28,11 +207,8 @@ body {
 }
 
 body {
-  color: var(--text-main);
-  background:
-    radial-gradient(circle at top left, rgba(62, 166, 255, 0.18), transparent 18%),
-    radial-gradient(circle at center right, rgba(31, 200, 219, 0.15), transparent 22%),
-    linear-gradient(180deg, var(--bg-a), var(--bg-b));
+  color: var(--horarios-text-main);
+  background: var(--horarios-body-bg);
 }
 
 .schedule-bg {
@@ -48,7 +224,7 @@ body {
   height: 260px;
   top: -70px;
   left: -70px;
-  background: #49c5ff;
+  background: var(--horarios-shape-1);
 }
 
 .schedule-bg-2 {
@@ -56,7 +232,7 @@ body {
   height: 320px;
   top: 120px;
   right: -100px;
-  background: #22d3ee;
+  background: var(--horarios-shape-2);
 }
 
 .schedule-page {
@@ -70,10 +246,10 @@ body {
 .schedule-hero {
   margin-bottom: 20px;
   padding: 24px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.05));
-  box-shadow: var(--shadow);
+  border: 1px solid var(--horarios-border);
+  border-radius: var(--horarios-radius-xl);
+  background: var(--horarios-hero-bg);
+  box-shadow: var(--horarios-shadow);
   backdrop-filter: blur(14px);
 }
 
@@ -98,6 +274,7 @@ body {
 }
 
 .schedule-back-btn,
+.schedule-theme-btn,
 .schedule-add-btn,
 .schedule-toggle-all-btn {
   display: inline-flex;
@@ -108,30 +285,39 @@ body {
   padding: 0 16px;
   border-radius: 14px;
   font-weight: 800;
-  border: 1px solid var(--border);
+  border: 1px solid var(--horarios-border);
   text-decoration: none;
   cursor: pointer;
+  font-family: inherit;
 }
 
-.schedule-back-btn {
-  color: var(--text-main);
-  background: rgba(255, 255, 255, 0.08);
+.schedule-back-btn,
+.schedule-theme-btn {
+  color: var(--horarios-text-main);
+  background: var(--horarios-glass-button);
 }
 
 .schedule-back-btn.secondary,
 .schedule-toggle-all-btn {
-  color: var(--text-main);
-  background: rgba(255, 255, 255, 0.05);
+  color: var(--horarios-text-main);
+  background: var(--horarios-glass-button-secondary);
 }
 
+.schedule-theme-btn:hover,
+.schedule-back-btn:hover,
 .schedule-toggle-all-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--horarios-glass-button-hover);
+}
+
+.theme-toggle-icon,
+.theme-toggle-text {
+  pointer-events: none;
 }
 
 .schedule-add-btn {
-  color: #fff;
+  color: var(--horarios-white);
   border: none;
-  background: linear-gradient(135deg, #2ca3ff, #1778ea);
+  background: var(--horarios-add-btn-bg);
 }
 
 .schedule-hero-content {
@@ -147,8 +333,8 @@ body {
   margin-bottom: 10px;
   padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(62, 166, 255, 0.12);
-  border: 1px solid rgba(62, 166, 255, 0.20);
+  background: var(--horarios-glass-button-secondary);
+  border: 1px solid var(--horarios-border-blue);
   font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
@@ -164,7 +350,7 @@ body {
 .schedule-hero p {
   max-width: 780px;
   margin: 0;
-  color: var(--text-muted);
+  color: var(--horarios-text-muted);
   line-height: 1.5;
 }
 
@@ -178,22 +364,22 @@ body {
 .schedule-filter label {
   font-size: 13px;
   font-weight: 700;
-  color: var(--text-muted);
+  color: var(--horarios-text-muted);
 }
 
 .schedule-filter select {
   min-height: 48px;
   padding: 0 14px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--horarios-border);
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.09);
-  color: var(--text-main);
+  background: var(--horarios-glass-input);
+  color: var(--horarios-text-main);
   outline: none;
 }
 
 .schedule-filter select option {
-  background: #17386f;
-  color: #fff;
+  background: var(--horarios-bg-b);
+  color: var(--horarios-white);
 }
 
 .schedule-sections {
@@ -203,10 +389,10 @@ body {
 }
 
 .schedule-section {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.04));
-  box-shadow: var(--shadow);
+  border: 1px solid var(--horarios-border);
+  border-radius: var(--horarios-radius-lg);
+  background: var(--horarios-section-bg);
+  box-shadow: var(--horarios-shadow);
   overflow: hidden;
 }
 
@@ -218,7 +404,7 @@ body {
   padding: 18px 20px;
   list-style: none;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--horarios-glass-soft);
 }
 
 .schedule-section summary::-webkit-details-marker {
@@ -237,14 +423,14 @@ body {
   min-height: 34px;
   padding: 0 12px;
   border-radius: 999px;
-  background: rgba(62, 166, 255, 0.12);
-  border: 1px solid rgba(62, 166, 255, 0.20);
+  background: var(--horarios-glass-button-secondary);
+  border: 1px solid var(--horarios-border-blue);
   font-size: 13px;
   font-weight: 800;
 }
 
 .schedule-summary-action {
-  color: var(--text-muted);
+  color: var(--horarios-text-muted);
   font-size: 13px;
 }
 
@@ -267,7 +453,7 @@ body {
 .schedule-grid-time-cell,
 .schedule-cell {
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--horarios-border-soft);
 }
 
 .schedule-grid-header {
@@ -276,7 +462,7 @@ body {
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--horarios-glass);
 }
 
 .schedule-grid-time {
@@ -285,7 +471,7 @@ body {
 
 .schedule-grid-time-cell {
   padding: 10px;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--horarios-glass-time);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -298,14 +484,14 @@ body {
 }
 
 .schedule-grid-time-cell small {
-  color: var(--text-muted);
+  color: var(--horarios-text-muted);
   line-height: 1.3;
 }
 
 .schedule-cell {
   min-height: 120px;
   padding: 8px;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--horarios-glass-cell);
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -314,14 +500,14 @@ body {
 .schedule-empty-cell {
   flex: 1;
   border-radius: 12px;
-  border: 1px dashed rgba(255, 255, 255, 0.06);
+  border: 1px dashed var(--horarios-glass-empty-border);
 }
 
 .schedule-entry {
   padding: 10px;
-  border: 1px solid rgba(62, 166, 255, 0.18);
+  border: 1px solid var(--horarios-border-entry);
   border-radius: 14px;
-  background: linear-gradient(135deg, rgba(62, 166, 255, 0.16), rgba(30, 144, 255, 0.10));
+  background: var(--horarios-entry-bg);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -356,16 +542,16 @@ body {
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  color: #fff;
+  color: var(--horarios-white);
   flex-shrink: 0;
 }
 
 .icon-btn.edit {
-  background: linear-gradient(135deg, #31a1ff, #1678e8);
+  background: var(--horarios-edit-btn-bg);
 }
 
 .icon-btn.danger {
-  background: linear-gradient(135deg, #ff4b4b, #db2626);
+  background: var(--horarios-danger-btn-bg);
 }
 
 .flash-container {
@@ -386,21 +572,22 @@ body {
   justify-content: space-between;
   gap: 12px;
   align-items: center;
-  box-shadow: var(--shadow);
+  box-shadow: var(--horarios-shadow);
+  color: var(--horarios-white);
 }
 
 .flash-success {
-  background: linear-gradient(135deg, rgba(23, 184, 95, 0.95), rgba(14, 143, 71, 0.95));
+  background: var(--horarios-flash-success-bg);
 }
 
 .flash-error {
-  background: linear-gradient(135deg, rgba(255, 59, 59, 0.95), rgba(219, 38, 38, 0.95));
+  background: var(--horarios-flash-error-bg);
 }
 
 .flash-close {
   border: none;
-  background: transparent;
-  color: #fff;
+  background: var(--horarios-transparent);
+  color: var(--horarios-white);
   font-size: 22px;
   cursor: pointer;
 }
@@ -410,7 +597,7 @@ body {
   inset: 0;
   z-index: 9998;
   padding: 24px;
-  background: rgba(4, 14, 34, 0.72);
+  background: var(--horarios-modal-overlay-bg);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
@@ -418,7 +605,7 @@ body {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: 0.22s ease;
+  transition: var(--horarios-transition);
 }
 
 .modal-overlay.active {
@@ -432,9 +619,9 @@ body {
   max-width: 460px;
   padding: 24px;
   border-radius: 24px;
-  background: linear-gradient(145deg, rgba(31, 63, 119, 0.96), rgba(16, 39, 82, 0.96));
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: var(--shadow);
+  background: var(--horarios-modal-card-bg);
+  border: 1px solid var(--horarios-border);
+  box-shadow: var(--horarios-shadow);
 }
 
 .modal-card-large {
@@ -453,15 +640,15 @@ body {
 }
 
 .modal-icon.blue {
-  background: rgba(62, 166, 255, 0.14);
-  border: 1px solid rgba(62, 166, 255, 0.24);
-  color: #b7e2ff;
+  background: var(--horarios-modal-blue-bg);
+  border: 1px solid var(--horarios-border-blue-strong);
+  color: var(--horarios-text-blue-soft);
 }
 
 .modal-icon.danger {
-  background: rgba(255, 59, 59, 0.14);
-  border: 1px solid rgba(255, 59, 59, 0.24);
-  color: #ff8f8f;
+  background: var(--horarios-modal-danger-bg);
+  border: 1px solid var(--horarios-border-danger);
+  color: var(--horarios-text-danger-soft);
 }
 
 .modal-tag {
@@ -473,8 +660,8 @@ body {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  background: rgba(62, 166, 255, 0.12);
-  border: 1px solid rgba(62, 166, 255, 0.20);
+  background: var(--horarios-glass-button-secondary);
+  border: 1px solid var(--horarios-border-blue);
 }
 
 .modal-header h3 {
@@ -484,7 +671,7 @@ body {
 
 .modal-header p {
   margin: 0;
-  color: var(--text-muted);
+  color: var(--horarios-text-muted);
   line-height: 1.5;
 }
 
@@ -500,16 +687,16 @@ body {
   width: 100%;
   min-height: 48px;
   padding: 0 14px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--horarios-border);
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text-main);
+  background: var(--horarios-glass-button);
+  color: var(--horarios-text-main);
   outline: none;
 }
 
 .horario-form select option {
-  background: #17386f;
-  color: #fff;
+  background: var(--horarios-bg-b);
+  color: var(--horarios-white);
 }
 
 .modal-actions {
@@ -532,18 +719,23 @@ body {
 }
 
 .btn-primary {
-  color: #fff;
-  background: linear-gradient(135deg, #2797ff, #1678e8);
+  color: var(--horarios-white);
+  background: var(--horarios-primary-btn-bg);
 }
 
 .btn-secondary {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.10);
+  color: var(--horarios-modal-secondary-text);
+  background: var(--horarios-modal-secondary-bg);
+  border: 1px solid var(--horarios-modal-secondary-border);
+}
+
+.btn-secondary:hover {
+  background: var(--horarios-modal-secondary-hover-bg);
 }
 
 .btn-danger {
-  color: #fff;
-  background: linear-gradient(135deg, #ff4b4b, #db2626);
+  color: var(--horarios-white);
+  background: var(--horarios-danger-btn-bg);
 }
 
 /* =========================================================
@@ -611,6 +803,7 @@ body {
   }
 
   .schedule-back-btn,
+  .schedule-theme-btn,
   .schedule-toggle-all-btn,
   .schedule-add-btn {
     min-height: 44px;
@@ -651,9 +844,6 @@ body {
   }
 }
 
-/* ---------------------------------------------------------
-   Celular em pé
-   --------------------------------------------------------- */
 @media (max-width: 768px) and (orientation: portrait) {
   .schedule-page {
     width: min(430px, calc(100vw - 24px));
@@ -677,6 +867,7 @@ body {
   }
 
   .schedule-back-btn,
+  .schedule-theme-btn,
   .schedule-toggle-all-btn,
   .schedule-add-btn {
     width: 100%;
@@ -775,9 +966,9 @@ body {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(55, 86, 126, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+    background: var(--horarios-sticky-bg);
+    border: 1px solid var(--horarios-border-sticky);
+    box-shadow: var(--horarios-sticky-shadow-top);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
@@ -786,9 +977,9 @@ body {
     position: sticky;
     left: 0;
     z-index: 45;
-    background: rgba(55, 86, 126, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    box-shadow: 8px 0 18px rgba(0, 0, 0, 0.18);
+    background: var(--horarios-sticky-bg);
+    border: 1px solid var(--horarios-border-sticky);
+    box-shadow: var(--horarios-sticky-shadow-left);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
@@ -830,7 +1021,7 @@ body {
     display: block;
     font-size: 0.62rem;
     line-height: 1.15;
-    color: rgba(255, 255, 255, 0.82);
+    color: var(--horarios-text-time-mobile);
   }
 
   .schedule-entry {
@@ -870,9 +1061,6 @@ body {
   }
 }
 
-/* ---------------------------------------------------------
-   Celulares pequenos em pé
-   --------------------------------------------------------- */
 @media (max-width: 390px) and (orientation: portrait) {
   .schedule-page {
     width: min(348px, calc(100vw - 24px));
@@ -886,6 +1074,7 @@ body {
   }
 
   .schedule-back-btn,
+  .schedule-theme-btn,
   .schedule-toggle-all-btn,
   .schedule-add-btn {
     min-height: 40px;
@@ -946,9 +1135,6 @@ body {
   }
 }
 
-/* ---------------------------------------------------------
-   Celulares muito pequenos em pé
-   --------------------------------------------------------- */
 @media (max-width: 340px) and (orientation: portrait) {
   .schedule-page {
     width: min(318px, calc(100vw - 18px));
@@ -963,6 +1149,7 @@ body {
   }
 
   .schedule-back-btn,
+  .schedule-theme-btn,
   .schedule-toggle-all-btn,
   .schedule-add-btn {
     justify-content: flex-start;
@@ -989,9 +1176,6 @@ body {
   }
 }
 
-/* ---------------------------------------------------------
-   Celular deitado
-   --------------------------------------------------------- */
 @media (orientation: landscape) and (max-height: 500px) and (max-width: 950px) {
   body {
     min-height: 100dvh;
@@ -1030,6 +1214,7 @@ body {
   }
 
   .schedule-back-btn,
+  .schedule-theme-btn,
   .schedule-toggle-all-btn,
   .schedule-add-btn {
     width: auto;
@@ -1210,9 +1395,6 @@ body {
   }
 }
 
-/* ---------------------------------------------------------
-   Celular deitado com altura muito baixa
-   --------------------------------------------------------- */
 @media (orientation: landscape) and (max-height: 390px) and (max-width: 950px) {
   .schedule-page {
     padding-top: 8px;
@@ -1332,9 +1514,6 @@ body {
   }
 }
 
-/* ---------------------------------------------------------
-   Tablet em pé
-   --------------------------------------------------------- */
 @media (min-width: 769px) and (max-width: 900px) and (orientation: portrait) {
   .schedule-page {
     width: min(720px, calc(100vw - 36px));

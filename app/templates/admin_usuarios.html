@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciar Usuários</title>
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem("sistema_matricula_theme") || "theme-dark";
+            document.documentElement.classList.add(savedTheme);
+        })();
+    </script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_usuarios.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='central' font-size='36'%3E👤%3C/text%3E%3C/svg%3E">
@@ -25,6 +31,10 @@
                     <i class="fa-solid fa-house"></i>
                     <span>Menu principal</span>
                 </a>
+                <button type="button" class="hero-btn theme-button" data-theme-toggle>
+                    <span class="theme-toggle-icon">☀️</span>
+                    <span class="theme-toggle-text">Modo claro</span>
+                </button>
             </div>
 
             <div class="hero-content">
@@ -287,7 +297,7 @@
             </div>
         </div>
     </div>
-
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin_usuarios.js') }}"></script>
 </body>
 </html>

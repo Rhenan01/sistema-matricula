@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciar Horários</title>
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem("sistema_matricula_theme") || "theme-dark";
+            document.documentElement.classList.add(savedTheme);
+        })();
+    </script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_horarios.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -37,6 +43,10 @@
                         <i class="fa-solid fa-house"></i>
                         Menu principal
                     </a>
+                    <button type="button" class="schedule-theme-btn" data-theme-toggle>
+                        <span class="theme-toggle-icon">☀️</span>
+                        <span class="theme-toggle-text">Modo claro</span>
+                    </button>
                 </div>
 
                 <div class="schedule-hero-tools">
@@ -250,7 +260,7 @@
             </div>
         </div>
     </div>
-
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin_horarios.js') }}"></script>
 </body>
 </html>

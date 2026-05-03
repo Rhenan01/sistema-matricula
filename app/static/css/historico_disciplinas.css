@@ -1,31 +1,196 @@
-:root {
-  /* =========================
-     Paleta principal
-     ========================= */
-  --bg-a: #07162f;
-  --bg-b: #0d2450;
-  --bg-c: #12346f;
+:root,
+html.theme-dark,
+body.theme-dark {
+  --historico-transparent: transparent;
+  --historico-white: #ffffff;
 
-  /* Superfícies e transparências */
-  --card: rgba(255, 255, 255, 0.08);
-  --glass-2: rgba(255, 255, 255, 0.03);
-  --line: rgba(255, 255, 255, 0.10);
+  --historico-bg-a: #07162f;
+  --historico-bg-b: #0d2450;
+  --historico-bg-c: #12346f;
 
-  /* Tipografia */
-  --text: #eaf2ff;
-  --muted: #a9b8d3;
+  --historico-card: rgba(255, 255, 255, 0.08);
+  --historico-card-strong: rgba(255, 255, 255, 0.10);
+  --historico-card-hover: rgba(255, 255, 255, 0.09);
+  --historico-glass-2: rgba(255, 255, 255, 0.03);
+  --historico-glass-3: rgba(255, 255, 255, 0.04);
+  --historico-glass-4: rgba(255, 255, 255, 0.05);
+  --historico-glass-5: rgba(255, 255, 255, 0.06);
+  --historico-glass-6: rgba(255, 255, 255, 0.08);
+  --historico-glass-7: rgba(255, 255, 255, 0.10);
+  --historico-glass-8: rgba(255, 255, 255, 0.12);
+  --historico-glass-dropdown-start: rgba(10, 31, 68, 0.99);
+  --historico-glass-dropdown-end: rgba(15, 37, 79, 0.99);
 
-  /* Cores de destaque */
-  --accentA: #00509e;
-  --accentB: #1e90ff;
-  --accentC: #34d399;
+  --historico-line: rgba(255, 255, 255, 0.10);
+  --historico-line-soft: rgba(255, 255, 255, 0.08);
+  --historico-line-check: rgba(255, 255, 255, 0.14);
+  --historico-line-blue: rgba(30, 144, 255, 0.16);
+  --historico-line-blue-hover: rgba(30, 144, 255, 0.18);
+  --historico-line-blue-strong: rgba(30, 144, 255, 0.24);
+  --historico-line-blue-focus: rgba(30, 144, 255, 0.50);
+  --historico-line-green: rgba(52, 211, 153, 0.18);
+  --historico-line-danger: rgba(239, 68, 68, 0.16);
+  --historico-line-warning: rgba(251, 191, 36, 0.18);
+  --historico-line-locked: rgba(255, 255, 255, 0.12);
 
-  /* Estados */
-  --danger: #ef4444;
-  --warning: #fbbf24;
+  --historico-text: #eaf2ff;
+  --historico-muted: #a9b8d3;
+  --historico-placeholder: #9fb0ce;
+  --historico-button-primary-text: #041829;
+  --historico-toast-text: #042028;
+  --historico-danger-text: #ffd9d9;
+  --historico-disciplina-cr-text: #8cd7ff;
 
-  /* Sombra padrão */
-  --shadow: 0 20px 60px rgba(2, 8, 23, 0.40);
+  --historico-accent-a: #00509e;
+  --historico-accent-b: #1e90ff;
+  --historico-accent-c: #34d399;
+
+  --historico-danger: #ef4444;
+  --historico-warning: #fbbf24;
+  --historico-purple: #7c3aed;
+
+  --historico-orb-1: #1e90ff;
+  --historico-orb-2: #34d399;
+  --historico-orb-3: #7c3aed;
+
+  --historico-radial-top: rgba(30, 144, 255, 0.16);
+  --historico-radial-bottom: rgba(52, 211, 153, 0.10);
+
+  --historico-profile-shadow: 0 10px 30px rgba(2, 8, 23, 0.28);
+  --historico-profile-dropdown-shadow: 0 18px 40px rgba(2, 8, 23, 0.52);
+  --historico-avatar-shadow: 0 8px 20px rgba(0, 80, 158, 0.35);
+  --historico-shadow: 0 20px 60px rgba(2, 8, 23, 0.40);
+  --historico-btn-shadow: 0 12px 30px rgba(30, 144, 255, 0.22);
+  --historico-btn-shadow-hover: 0 16px 32px rgba(30, 144, 255, 0.28);
+  --historico-check-shadow: 0 8px 18px rgba(30, 144, 255, 0.24);
+  --historico-toast-shadow: 0 18px 40px rgba(2, 8, 23, 0.35);
+  --historico-input-focus-shadow: 0 0 0 4px rgba(30, 144, 255, 0.10);
+
+  --historico-body-bg:
+    radial-gradient(circle at top left, var(--historico-radial-top), var(--historico-transparent) 22%),
+    radial-gradient(circle at bottom right, var(--historico-radial-bottom), var(--historico-transparent) 20%),
+    linear-gradient(180deg, var(--historico-bg-a), var(--historico-bg-b) 45%, var(--historico-bg-c));
+
+  --historico-profile-trigger-bg:
+    linear-gradient(180deg, var(--historico-card-strong), var(--historico-glass-3));
+
+  --historico-profile-dropdown-bg:
+    linear-gradient(180deg, var(--historico-glass-dropdown-start), var(--historico-glass-dropdown-end));
+
+  --historico-avatar-bg:
+    linear-gradient(135deg, var(--historico-accent-a), var(--historico-accent-b));
+
+  --historico-surface-bg:
+    linear-gradient(180deg, var(--historico-card), var(--historico-glass-2));
+
+  --historico-stat-bg:
+    linear-gradient(180deg, var(--historico-card-strong), var(--historico-glass-3));
+
+  --historico-primary-bg:
+    linear-gradient(90deg, var(--historico-accent-c), var(--historico-accent-b));
+
+  --historico-check-bg:
+    linear-gradient(135deg, var(--historico-accent-c), var(--historico-accent-b));
+
+  --historico-toast-bg:
+    linear-gradient(90deg, #0ea5e9, #34d399);
+}
+
+html.theme-light,
+body.theme-light {
+  --historico-transparent: transparent;
+  --historico-white: #ffffff;
+
+  --historico-bg-a: #eaf3ff;
+  --historico-bg-b: #d8e9fb;
+  --historico-bg-c: #cfe3fb;
+
+  --historico-card: rgba(255, 255, 255, 0.74);
+  --historico-card-strong: rgba(255, 255, 255, 0.88);
+  --historico-card-hover: rgba(255, 255, 255, 0.86);
+  --historico-glass-2: rgba(229, 242, 255, 0.54);
+  --historico-glass-3: rgba(255, 255, 255, 0.58);
+  --historico-glass-4: rgba(255, 255, 255, 0.62);
+  --historico-glass-5: rgba(255, 255, 255, 0.68);
+  --historico-glass-6: rgba(255, 255, 255, 0.72);
+  --historico-glass-7: rgba(255, 255, 255, 0.80);
+  --historico-glass-8: rgba(255, 255, 255, 0.88);
+  --historico-glass-dropdown-start: rgba(255, 255, 255, 0.98);
+  --historico-glass-dropdown-end: rgba(229, 242, 255, 0.98);
+
+  --historico-line: rgba(48, 104, 166, 0.18);
+  --historico-line-soft: rgba(48, 104, 166, 0.14);
+  --historico-line-check: rgba(48, 104, 166, 0.22);
+  --historico-line-blue: rgba(47, 143, 232, 0.18);
+  --historico-line-blue-hover: rgba(47, 143, 232, 0.24);
+  --historico-line-blue-strong: rgba(47, 143, 232, 0.28);
+  --historico-line-blue-focus: rgba(47, 143, 232, 0.42);
+  --historico-line-green: rgba(23, 167, 100, 0.20);
+  --historico-line-danger: rgba(229, 72, 72, 0.18);
+  --historico-line-warning: rgba(196, 137, 15, 0.22);
+  --historico-line-locked: rgba(48, 104, 166, 0.18);
+
+  --historico-text: #10233f;
+  --historico-muted: #536783;
+  --historico-placeholder: #7b8fa8;
+  --historico-button-primary-text: #ffffff;
+  --historico-toast-text: #ffffff;
+  --historico-danger-text: #b23333;
+  --historico-disciplina-cr-text: #0f4f86;
+
+  --historico-accent-a: #176bc2;
+  --historico-accent-b: #2f8fe8;
+  --historico-accent-c: #17a764;
+
+  --historico-danger: #e54848;
+  --historico-warning: #c4890f;
+  --historico-purple: #7a8df5;
+
+  --historico-orb-1: #8ed4ff;
+  --historico-orb-2: #9edec5;
+  --historico-orb-3: #9db8ff;
+
+  --historico-radial-top: rgba(47, 143, 232, 0.20);
+  --historico-radial-bottom: rgba(120, 185, 245, 0.28);
+
+  --historico-profile-shadow: 0 10px 30px rgba(38, 76, 122, 0.14);
+  --historico-profile-dropdown-shadow: 0 18px 40px rgba(38, 76, 122, 0.20);
+  --historico-avatar-shadow: 0 8px 20px rgba(47, 143, 232, 0.22);
+  --historico-shadow: 0 20px 60px rgba(38, 76, 122, 0.16);
+  --historico-btn-shadow: 0 12px 30px rgba(47, 143, 232, 0.18);
+  --historico-btn-shadow-hover: 0 16px 32px rgba(47, 143, 232, 0.22);
+  --historico-check-shadow: 0 8px 18px rgba(47, 143, 232, 0.18);
+  --historico-toast-shadow: 0 18px 40px rgba(38, 76, 122, 0.18);
+  --historico-input-focus-shadow: 0 0 0 4px rgba(47, 143, 232, 0.14);
+
+  --historico-body-bg:
+    radial-gradient(circle at top left, var(--historico-radial-top), var(--historico-transparent) 22%),
+    radial-gradient(circle at bottom right, var(--historico-radial-bottom), var(--historico-transparent) 20%),
+    linear-gradient(180deg, var(--historico-bg-a), var(--historico-bg-b) 45%, var(--historico-bg-c));
+
+  --historico-profile-trigger-bg:
+    linear-gradient(180deg, var(--historico-card), var(--historico-glass-2));
+
+  --historico-profile-dropdown-bg:
+    linear-gradient(180deg, var(--historico-glass-dropdown-start), var(--historico-glass-dropdown-end));
+
+  --historico-avatar-bg:
+    linear-gradient(135deg, var(--historico-accent-a), var(--historico-accent-b));
+
+  --historico-surface-bg:
+    linear-gradient(180deg, var(--historico-card), var(--historico-glass-2));
+
+  --historico-stat-bg:
+    linear-gradient(180deg, var(--historico-card), var(--historico-glass-2));
+
+  --historico-primary-bg:
+    linear-gradient(90deg, var(--historico-accent-c), var(--historico-accent-b));
+
+  --historico-check-bg:
+    linear-gradient(135deg, var(--historico-accent-c), var(--historico-accent-b));
+
+  --historico-toast-bg:
+    linear-gradient(90deg, #2f8fe8, #17a764);
 }
 
 /* =========================
@@ -43,11 +208,8 @@ body {
 }
 
 body {
-  background:
-    radial-gradient(circle at top left, rgba(30, 144, 255, 0.16), transparent 22%),
-    radial-gradient(circle at bottom right, rgba(52, 211, 153, 0.10), transparent 20%),
-    linear-gradient(180deg, var(--bg-a), var(--bg-b) 45%, var(--bg-c));
-  color: var(--text);
+  background: var(--historico-body-bg);
+  color: var(--historico-text);
   padding: 18px;
   overflow-x: hidden;
 }
@@ -67,7 +229,7 @@ body {
 .orb-1 {
   width: 240px;
   height: 240px;
-  background: #1e90ff;
+  background: var(--historico-orb-1);
   top: 50px;
   left: -60px;
 }
@@ -75,7 +237,7 @@ body {
 .orb-2 {
   width: 240px;
   height: 240px;
-  background: #34d399;
+  background: var(--historico-orb-2);
   right: -70px;
   top: 260px;
 }
@@ -83,7 +245,7 @@ body {
 .orb-3 {
   width: 220px;
   height: 220px;
-  background: #7c3aed;
+  background: var(--historico-orb-3);
   left: 42%;
   bottom: -80px;
 }
@@ -137,16 +299,56 @@ main {
 
 .title-wrap p {
   margin: 6px 0 0;
-  color: var(--muted);
+  color: var(--historico-muted);
   font-size: 14px;
 }
 
 .logo-cefet {
+  width: 110px;
+  height: auto;
+}
+
+/* =========================
+   Ações do cabeçalho
+   ========================= */
+.header-actions {
   position: absolute;
   top: 0;
   right: 0;
-  width: 110px;
-  height: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.theme-header-button {
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 14px;
+  border: 1px solid var(--historico-line);
+  background: var(--historico-profile-trigger-bg);
+  color: var(--historico-text);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  box-shadow: var(--historico-profile-shadow);
+  backdrop-filter: blur(12px);
+  transition: 0.25s ease;
+}
+
+.theme-header-button:hover {
+  transform: translateY(-2px);
+  border-color: var(--historico-line-blue-strong);
+  background: var(--historico-glass-8);
+}
+
+.theme-toggle-icon,
+.theme-toggle-text {
+  pointer-events: none;
 }
 
 /* =========================
@@ -167,19 +369,19 @@ main {
   width: 300px;
   min-height: 76px;
   padding: 10px 14px;
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  border: 1px solid var(--historico-line);
   border-radius: 20px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.04));
-  color: var(--text);
+  background: var(--historico-profile-trigger-bg);
+  color: var(--historico-text);
   cursor: pointer;
-  box-shadow: 0 10px 30px rgba(2, 8, 23, 0.28);
+  box-shadow: var(--historico-profile-shadow);
   backdrop-filter: blur(12px);
   transition: all 0.28s ease;
 }
 
 .profile-trigger:hover {
   transform: translateY(-2px);
-  border-color: rgba(30, 144, 255, 0.35);
+  border-color: var(--historico-line-blue-strong);
 }
 
 .profile-avatar {
@@ -190,10 +392,10 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--accentA), var(--accentB));
-  color: white;
+  background: var(--historico-avatar-bg);
+  color: var(--historico-white);
   font-weight: 800;
-  box-shadow: 0 8px 20px rgba(0, 80, 158, 0.35);
+  box-shadow: var(--historico-avatar-shadow);
 }
 
 .profile-avatar.large {
@@ -214,7 +416,7 @@ main {
 
 .profile-user-label {
   font-size: 11px;
-  color: var(--muted);
+  color: var(--historico-muted);
 }
 
 .profile-user-name {
@@ -227,7 +429,7 @@ main {
 
 .profile-chevron {
   margin-left: auto;
-  color: var(--muted);
+  color: var(--historico-muted);
   transition: transform 0.2s ease;
 }
 
@@ -242,9 +444,9 @@ main {
   width: 300px;
   padding: 12px;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  background: linear-gradient(180deg, rgba(10, 31, 68, 0.99), rgba(15, 37, 79, 0.99));
-  box-shadow: 0 18px 40px rgba(2, 8, 23, 0.52);
+  border: 1px solid var(--historico-line);
+  background: var(--historico-profile-dropdown-bg);
+  box-shadow: var(--historico-profile-dropdown-shadow);
   opacity: 0;
   transform: translateY(-8px) scale(0.98);
   pointer-events: none;
@@ -264,7 +466,7 @@ main {
   align-items: center;
   padding-bottom: 12px;
   margin-bottom: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--historico-line-soft);
 }
 
 .profile-link {
@@ -279,25 +481,25 @@ main {
 }
 
 .profile-link.secondary {
-  color: var(--text);
-  background: rgba(30, 144, 255, 0.10);
-  border: 1px solid rgba(30, 144, 255, 0.16);
+  color: var(--historico-text);
+  background: var(--historico-glass-7);
+  border: 1px solid var(--historico-line-blue);
   margin-bottom: 8px;
 }
 
 .profile-link.secondary:hover {
-  background: rgba(30, 144, 255, 0.18);
+  background: var(--historico-glass-8);
 }
 
 .profile-link.danger {
-  color: #ffd9d9;
-  background: rgba(239, 68, 68, 0.10);
-  border: 1px solid rgba(239, 68, 68, 0.16);
+  color: var(--historico-danger-text);
+  background: var(--historico-glass-3);
+  border: 1px solid var(--historico-line-danger);
 }
 
 .profile-link.danger:hover {
-  background: rgba(239, 68, 68, 0.18);
-  color: white;
+  background: var(--historico-glass-7);
+  color: var(--historico-white);
 }
 
 /* =========================
@@ -306,9 +508,9 @@ main {
 .hero-card,
 .toolbar,
 .semester-card {
-  background: linear-gradient(180deg, var(--card), var(--glass-2));
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow);
+  background: var(--historico-surface-bg);
+  border: 1px solid var(--historico-line);
+  box-shadow: var(--historico-shadow);
   backdrop-filter: blur(14px);
 }
 
@@ -336,7 +538,7 @@ main {
 
 .hero-left p {
   margin: 0;
-  color: var(--muted);
+  color: var(--historico-muted);
   max-width: 760px;
   line-height: 1.55;
   font-size: 15px;
@@ -352,8 +554,8 @@ main {
   min-width: 160px;
   border-radius: 20px;
   padding: 16px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.04));
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: var(--historico-stat-bg);
+  border: 1px solid var(--historico-line);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -361,7 +563,7 @@ main {
 
 .stat-label {
   font-size: 12px;
-  color: var(--muted);
+  color: var(--historico-muted);
   margin-bottom: 8px;
 }
 
@@ -402,7 +604,7 @@ main {
 
 .field label {
   font-size: 12px;
-  color: var(--muted);
+  color: var(--historico-muted);
   font-weight: 700;
 }
 
@@ -417,30 +619,30 @@ main {
 input,
 select {
   height: 48px;
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  border: 1px solid var(--historico-line);
   border-radius: 14px;
   padding: 0 14px;
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text);
+  background: var(--historico-glass-5);
+  color: var(--historico-text);
   font-size: 14px;
   outline: none;
   transition: 0.22s ease;
 }
 
 input::placeholder {
-  color: #9fb0ce;
+  color: var(--historico-placeholder);
 }
 
 input:focus,
 select:focus {
-  border-color: rgba(30, 144, 255, 0.5);
-  box-shadow: 0 0 0 4px rgba(30, 144, 255, 0.10);
-  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--historico-line-blue-focus);
+  box-shadow: var(--historico-input-focus-shadow);
+  background: var(--historico-glass-6);
 }
 
 select option {
-  background: #12346f;
-  color: var(--text);
+  background: var(--historico-bg-c);
+  color: var(--historico-text);
 }
 
 /* =========================
@@ -463,35 +665,35 @@ select option {
 }
 
 .btn.primary {
-  color: #041829;
-  background: linear-gradient(90deg, var(--accentC), var(--accentB));
-  box-shadow: 0 12px 30px rgba(30, 144, 255, 0.22);
+  color: var(--historico-button-primary-text);
+  background: var(--historico-primary-bg);
+  box-shadow: var(--historico-btn-shadow);
 }
 
 .btn.primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 32px rgba(30, 144, 255, 0.28);
+  box-shadow: var(--historico-btn-shadow-hover);
 }
 
 .btn.ghost {
-  color: var(--text);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: var(--historico-text);
+  background: var(--historico-glass-3);
+  border: 1px solid var(--historico-line);
 }
 
 .btn.ghost:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--historico-glass-6);
   transform: translateY(-2px);
 }
 
 .secondary-link {
-  color: var(--text);
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: var(--historico-text);
+  background: var(--historico-glass-5);
+  border: 1px solid var(--historico-line);
 }
 
 .secondary-link:hover {
-  background: rgba(255, 255, 255, 0.10);
+  background: var(--historico-glass-7);
 }
 
 /* =========================
@@ -556,9 +758,9 @@ select option {
 }
 
 .semester-btn {
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text);
+  border: 1px solid var(--historico-line);
+  background: var(--historico-glass-4);
+  color: var(--historico-text);
   border-radius: 12px;
   padding: 9px 12px;
   font-size: 12px;
@@ -568,7 +770,7 @@ select option {
 }
 
 .semester-btn:hover {
-  background: rgba(255, 255, 255, 0.10);
+  background: var(--historico-glass-7);
 }
 
 /* =========================
@@ -579,7 +781,7 @@ select option {
   overflow-y: auto;
   padding-right: 4px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+  scrollbar-color: var(--historico-glass-8) var(--historico-transparent);
 }
 
 .semester-body::-webkit-scrollbar {
@@ -587,15 +789,14 @@ select option {
 }
 
 .semester-body::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.22);
+  background: var(--historico-glass-8);
   border-radius: 999px;
 }
 
 .semester-body::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--historico-transparent);
 }
 
-/* Mantido porque o JS ainda tem suporte para colapso */
 .semester-card.collapsed .semester-body {
   max-height: 0;
   overflow: hidden;
@@ -617,26 +818,25 @@ select option {
   align-items: flex-start;
   padding: 10px 12px;
   border-radius: 14px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--historico-surface-bg);
+  border: 1px solid var(--historico-line-soft);
   transition: 0.22s ease;
   position: relative;
 }
 
 .disciplina-item:hover {
   transform: translateX(3px);
-  border-color: rgba(30, 144, 255, 0.24);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.04));
+  border-color: var(--historico-line-blue-strong);
+  background: var(--historico-profile-trigger-bg);
 }
 
-/* Checkbox visual da disciplina */
 .disc-check {
   width: 24px;
   height: 24px;
   min-width: 24px;
   border-radius: 8px;
-  border: 2px solid rgba(255, 255, 255, 0.14);
-  background: transparent;
+  border: 2px solid var(--historico-line-check);
+  background: var(--historico-transparent);
   display: inline-grid;
   place-items: center;
   cursor: pointer;
@@ -653,9 +853,9 @@ select option {
 }
 
 .disc-check.checked {
-  background: linear-gradient(135deg, var(--accentC), var(--accentB));
-  border-color: transparent;
-  box-shadow: 0 8px 18px rgba(30, 144, 255, 0.24);
+  background: var(--historico-check-bg);
+  border-color: var(--historico-transparent);
+  box-shadow: var(--historico-check-shadow);
 }
 
 .disc-check.checked svg {
@@ -663,7 +863,6 @@ select option {
   transform: scale(1);
 }
 
-/* Conteúdo textual da disciplina */
 .disciplina-content {
   flex: 1;
   min-width: 0;
@@ -701,9 +900,9 @@ select option {
   padding: 5px 8px;
   font-size: 10px;
   font-weight: 800;
-  color: #8cd7ff;
-  background: rgba(30, 144, 255, 0.12);
-  border: 1px solid rgba(30, 144, 255, 0.18);
+  color: var(--historico-disciplina-cr-text);
+  background: var(--historico-glass-7);
+  border: 1px solid var(--historico-line-blue-hover);
   white-space: nowrap;
 }
 
@@ -716,11 +915,11 @@ select option {
 
 .disciplina-meta span {
   font-size: 11px;
-  color: var(--muted);
+  color: var(--historico-muted);
   padding: 4px 8px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: var(--historico-glass-4);
+  border: 1px solid var(--historico-line-soft);
 }
 
 .disciplina-bottom-row {
@@ -731,7 +930,6 @@ select option {
   gap: 14px;
 }
 
-/* Espaço onde aparece o badge de bloqueio */
 .locked-slot {
   min-height: 24px;
   display: flex;
@@ -750,7 +948,7 @@ select option {
 
 .reprovacao-label {
   font-size: 11px;
-  color: var(--muted);
+  color: var(--historico-muted);
   font-weight: 700;
   white-space: nowrap;
 }
@@ -761,8 +959,8 @@ select option {
   gap: 8px;
   padding: 6px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: var(--historico-glass-5);
+  border: 1px solid var(--historico-line);
 }
 
 .reprovacao-btn {
@@ -770,8 +968,8 @@ select option {
   height: 28px;
   border: none;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.10);
-  color: var(--text);
+  background: var(--historico-glass-7);
+  color: var(--historico-text);
   font-size: 18px;
   font-weight: 800;
   line-height: 1;
@@ -783,7 +981,7 @@ select option {
 }
 
 .reprovacao-btn:hover {
-  background: rgba(30, 144, 255, 0.20);
+  background: var(--historico-glass-8);
   transform: scale(1.05);
 }
 
@@ -794,7 +992,7 @@ select option {
 }
 
 .reprovacao-btn:disabled:hover {
-  background: rgba(255, 255, 255, 0.10);
+  background: var(--historico-glass-7);
   transform: none;
 }
 
@@ -803,7 +1001,7 @@ select option {
   text-align: center;
   font-size: 14px;
   font-weight: 800;
-  color: var(--text);
+  color: var(--historico-text);
 }
 
 /* =========================
@@ -812,13 +1010,13 @@ select option {
 .disciplina-item.locked {
   opacity: 0.48;
   filter: grayscale(0.12);
-  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border: 1px dashed var(--historico-line-locked);
 }
 
 .disciplina-item.locked:hover {
   transform: none;
-  border-color: rgba(255, 255, 255, 0.12);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03));
+  border-color: var(--historico-line-locked);
+  background: var(--historico-surface-bg);
 }
 
 .disciplina-item.locked .disc-check {
@@ -838,13 +1036,12 @@ select option {
   border-radius: 999px;
   font-size: 10px;
   font-weight: 800;
-  color: var(--warning);
-  background: rgba(251, 191, 36, 0.10);
-  border: 1px solid rgba(251, 191, 36, 0.18);
+  color: var(--historico-warning);
+  background: var(--historico-glass-3);
+  border: 1px solid var(--historico-line-warning);
   white-space: nowrap;
 }
 
-/* Ajustes de layout do estado bloqueado */
 .disciplina-item.locked .disciplina-top {
   align-items: center;
 }
@@ -897,12 +1094,12 @@ select option {
   position: fixed;
   right: 24px;
   bottom: 24px;
-  background: linear-gradient(90deg, #0ea5e9, #34d399);
-  color: #042028;
+  background: var(--historico-toast-bg);
+  color: var(--historico-toast-text);
   font-weight: 900;
   padding: 14px 18px;
   border-radius: 14px;
-  box-shadow: 0 18px 40px rgba(2, 8, 23, 0.35);
+  box-shadow: var(--historico-toast-shadow);
   transform: translateY(24px);
   opacity: 0;
   pointer-events: none;
@@ -919,26 +1116,12 @@ select option {
    Responsividade
    ========================================================= */
 
-
-/* ---------------------------------------------------------
-   Telas médias
-   ---------------------------------------------------------
-   A partir desse ponto, o grid de semestres passa de três
-   para duas colunas, mantendo boa leitura em notebooks menores.
-   --------------------------------------------------------- */
 @media (max-width: 1250px) {
   .semestres-grid {
     grid-template-columns: repeat(2, minmax(290px, 1fr));
   }
 }
 
-
-/* ---------------------------------------------------------
-   Tablets e telas intermediárias
-   ---------------------------------------------------------
-   Reorganiza o cabeçalho e empilha o resumo superior quando
-   a largura não comporta bem a estrutura completa do desktop.
-   --------------------------------------------------------- */
 @media (max-width: 980px) {
   header,
   main {
@@ -961,11 +1144,25 @@ select option {
     width: 280px;
   }
 
-  .logo-cefet {
+  .header-actions {
     position: static;
-    display: block;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .theme-header-button {
+    width: min(280px, 100%);
+    height: 42px;
+    border-radius: 13px;
+    font-size: 0.82rem;
+  }
+
+  .logo-cefet {
     width: 100px;
-    margin: 12px auto 0;
+    margin: 0 auto;
   }
 
   .hero-card {
@@ -978,13 +1175,6 @@ select option {
   }
 }
 
-
-/* ---------------------------------------------------------
-   Base mobile
-   ---------------------------------------------------------
-   Define a largura útil da página, evita rolagem lateral e
-   prepara os blocos principais para telas estreitas.
-   --------------------------------------------------------- */
 @media (max-width: 768px) {
   html {
     width: 100%;
@@ -1057,14 +1247,6 @@ select option {
   }
 }
 
-
-/* ---------------------------------------------------------
-   Celular em pé
-   ---------------------------------------------------------
-   Layout vertical compacto. O conteúdo principal fica em uma
-   coluna e os controles de reprovação passam a ocupar a
-   largura do card.
-   --------------------------------------------------------- */
 @media (max-width: 768px) and (orientation: portrait) {
   body {
     padding-top: 14px;
@@ -1080,12 +1262,30 @@ select option {
   }
 
   .profile-area {
+    order: 1;
     position: relative;
     left: auto;
     top: auto;
     transform: none;
     width: 100%;
     z-index: 2000;
+  }
+
+  .header-actions {
+    order: 2;
+    position: static;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 10px;
+    margin-top: 0;
+  }
+
+  .title-wrap {
+    order: 3;
+    width: 100%;
+    text-align: center;
   }
 
   .profile-trigger {
@@ -1116,9 +1316,16 @@ select option {
     max-width: 210px;
   }
 
-  .title-wrap {
+  .theme-header-button {
     width: 100%;
-    text-align: center;
+    height: 42px;
+    border-radius: 13px;
+    font-size: 0.82rem;
+  }
+
+  .logo-cefet {
+    width: 86px;
+    margin: 0 auto;
   }
 
   .title-wrap h1 {
@@ -1132,11 +1339,6 @@ select option {
     margin: 6px auto 0;
     font-size: 0.78rem;
     line-height: 1.35;
-  }
-
-  .logo-cefet {
-    width: 86px;
-    margin-top: 2px;
   }
 
   .hero-card {
@@ -1370,11 +1572,6 @@ select option {
   }
 }
 
-
-/* ---------------------------------------------------------
-   Celulares pequenos em pé
-   Ex.: 360x800 e 390x844.
-   --------------------------------------------------------- */
 @media (max-width: 390px) and (orientation: portrait) {
   header,
   main {
@@ -1398,6 +1595,15 @@ select option {
     font-size: 11px;
   }
 
+  .theme-header-button {
+    height: 40px;
+    font-size: 0.76rem;
+  }
+
+  .logo-cefet {
+    width: 78px;
+  }
+
   .title-wrap h1 {
     font-size: 1.55rem;
   }
@@ -1405,10 +1611,6 @@ select option {
   .title-wrap p {
     max-width: 250px;
     font-size: 0.72rem;
-  }
-
-  .logo-cefet {
-    width: 78px;
   }
 
   .hero-card,
@@ -1476,11 +1678,6 @@ select option {
   }
 }
 
-
-/* ---------------------------------------------------------
-   Celulares muito pequenos
-   Ex.: 320x568.
-   --------------------------------------------------------- */
 @media (max-width: 340px) and (orientation: portrait) {
   body {
     padding-top: 10px;
@@ -1495,6 +1692,11 @@ select option {
 
   .profile-user-name {
     max-width: 160px;
+  }
+
+  .theme-header-button {
+    height: 38px;
+    font-size: 0.72rem;
   }
 
   .title-wrap h1 {
@@ -1526,13 +1728,6 @@ select option {
   }
 }
 
-
-/* ---------------------------------------------------------
-   Celular deitado
-   ---------------------------------------------------------
-   Mantém o uso horizontal da tela e deixa a página com rolagem
-   vertical normal. Os semestres ficam em duas colunas.
-   --------------------------------------------------------- */
 @media (orientation: landscape) and (max-height: 500px) and (max-width: 950px) {
   html {
     overflow-x: hidden;
@@ -1597,12 +1792,33 @@ select option {
     font-size: 0.82rem;
   }
 
-  .logo-cefet {
+  .header-actions {
     position: absolute;
+    left: 0;
     right: 0;
-    top: 92px;
+    top: 0;
+    height: 66px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 0;
+    pointer-events: none;
+  }
+
+  .theme-header-button {
+    width: auto;
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 13px;
+    font-size: 0.78rem;
+    pointer-events: auto;
+  }
+
+  .logo-cefet {
     width: 96px;
     margin: 0;
+    pointer-events: auto;
   }
 
   .hero-card {
@@ -1671,12 +1887,6 @@ select option {
   }
 }
 
-
-/* ---------------------------------------------------------
-   Celular deitado com altura muito baixa
-   ---------------------------------------------------------
-   Reduz alguns elementos para preservar área útil.
-   --------------------------------------------------------- */
 @media (orientation: landscape) and (max-height: 390px) and (max-width: 950px) {
   .title-wrap {
     padding-top: 76px;
@@ -1690,8 +1900,17 @@ select option {
     font-size: 0.76rem;
   }
 
+  .header-actions {
+    top: 0;
+    height: 58px;
+  }
+
+  .theme-header-button {
+    height: 38px;
+    font-size: 0.74rem;
+  }
+
   .logo-cefet {
-    top: 82px;
     width: 82px;
   }
 
@@ -1719,14 +1938,6 @@ select option {
   }
 }
 
-
-/* ---------------------------------------------------------
-   Tablet deitado
-   Ex.: 1024x768.
-   ---------------------------------------------------------
-   Mantém perfil, título e logo em três colunas para evitar
-   sobreposição no cabeçalho.
-   --------------------------------------------------------- */
 @media (min-width: 951px) and (max-width: 1100px) and (orientation: landscape) {
   header,
   main {
@@ -1738,7 +1949,7 @@ select option {
     min-height: 86px;
     padding-top: 0;
     display: grid;
-    grid-template-columns: 240px 1fr 100px;
+    grid-template-columns: 240px 1fr 190px;
     align-items: center;
     gap: 18px;
   }
@@ -1797,10 +2008,23 @@ select option {
     font-size: 0.78rem;
   }
 
-  .logo-cefet {
+  .header-actions {
     position: static;
-    width: 92px;
     justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 0;
+  }
+
+  .theme-header-button {
+    height: 40px;
+    padding: 0 12px;
+    font-size: 0.76rem;
+  }
+
+  .logo-cefet {
+    width: 92px;
     margin: 0;
   }
 
@@ -1846,4 +2070,3 @@ select option {
     overflow-y: auto;
   }
 }
-

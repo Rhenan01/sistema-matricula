@@ -7,46 +7,281 @@
     box-sizing: border-box;
 }
 
-:root {
-    --bg-primary: #071b44;
-    --bg-secondary: #0c2a63;
-    --bg-card: rgba(255, 255, 255, 0.08);
-    --bg-card-strong: rgba(255, 255, 255, 0.12);
-    --bg-input: rgba(255, 255, 255, 0.07);
-    --border-soft: rgba(255, 255, 255, 0.12);
-    --border-strong: rgba(255, 255, 255, 0.18);
+/* =========================================================
+   VARIÁVEIS - GERENCIAR CURSOS
+========================================================= */
+:root,
+html.theme-dark,
+body.theme-dark {
+    --cursos-bg-primary: #05173d;
+    --cursos-bg-secondary: #0a2558;
+    --cursos-bg-tertiary: #0c2f6d;
 
-    --text-primary: #f8fbff;
-    --text-secondary: #c9d6ea;
-    --text-muted: #95a8c7;
+    --cursos-transparent: transparent;
+    --cursos-white: #ffffff;
 
-    --accent: #33a1ff;
-    --accent-hover: #59b3ff;
-    --accent-dark: #0d4c96;
+    --cursos-bg-card: rgba(255, 255, 255, 0.08);
+    --cursos-bg-card-soft: rgba(255, 255, 255, 0.04);
+    --cursos-bg-card-medium: rgba(255, 255, 255, 0.05);
+    --cursos-bg-card-strong: rgba(255, 255, 255, 0.12);
+    --cursos-bg-input: rgba(255, 255, 255, 0.07);
+    --cursos-bg-counter: rgba(255, 255, 255, 0.06);
+    --cursos-bg-empty: rgba(255, 255, 255, 0.05);
+    --cursos-bg-flash-icon: rgba(255, 255, 255, 0.18);
+    --cursos-bg-flash-progress: rgba(255, 255, 255, 0.85);
+    --cursos-bg-modal-secondary: rgba(255, 255, 255, 0.08);
+    --cursos-bg-modal-secondary-hover: rgba(255, 255, 255, 0.14);
+    --cursos-bg-modal-danger-soft: rgba(255, 59, 59, 0.14);
+    --cursos-bg-modal-tag: rgba(255, 59, 59, 0.10);
 
-    --success: #17b85f;
-    --success-dark: #0e8f47;
+    --cursos-border-soft: rgba(255, 255, 255, 0.12);
+    --cursos-border-medium: rgba(255, 255, 255, 0.14);
+    --cursos-border-strong: rgba(255, 255, 255, 0.18);
+    --cursos-border-icon: rgba(255, 255, 255, 0.16);
+    --cursos-border-icon-soft: rgba(255, 255, 255, 0.10);
+    --cursos-border-empty: rgba(255, 255, 255, 0.16);
+    --cursos-border-secondary: rgba(255, 255, 255, 0.10);
+    --cursos-border-danger-soft: rgba(255, 59, 59, 0.22);
+    --cursos-border-danger-tag: rgba(255, 59, 59, 0.18);
 
-    --danger: #ff3b3b;
-    --danger-dark: #db2626;
+    --cursos-text-primary: #f8fbff;
+    --cursos-text-secondary: #c9d6ea;
+    --cursos-text-muted: #95a8c7;
+    --cursos-text-soft-blue: #cfe8ff;
+    --cursos-text-kicker: #8fc6ff;
+    --cursos-text-tag: #b8d7ff;
+    --cursos-text-icon: #dff0ff;
+    --cursos-text-input-icon: #91b8e7;
+    --cursos-text-counter: #d7e7fb;
+    --cursos-text-index: #dff1ff;
+    --cursos-text-empty-icon: #d8ecff;
+    --cursos-text-modal-icon: #ff8585;
+    --cursos-text-modal-tag: #ffd7d7;
 
-    --shadow-main: 0 24px 60px rgba(0, 0, 0, 0.24);
-    --shadow-soft: 0 14px 35px rgba(0, 0, 0, 0.16);
+    --cursos-accent: #33a1ff;
+    --cursos-accent-hover: #59b3ff;
+    --cursos-accent-dark: #0d4c96;
 
-    --radius-xl: 28px;
-    --radius-lg: 22px;
-    --radius-md: 18px;
-    --radius-sm: 14px;
+    --cursos-success: #17b85f;
+    --cursos-success-dark: #0e8f47;
 
-    --transition: all 0.28s ease;
+    --cursos-danger: #ff3b3b;
+    --cursos-danger-dark: #db2626;
+
+    --cursos-orb-one: #2d8cff;
+    --cursos-orb-two: #1fc8db;
+    --cursos-orb-three: #7b61ff;
+    --cursos-purple: #7b61ff;
+
+    --cursos-shadow-main: 0 24px 60px rgba(0, 0, 0, 0.24);
+    --cursos-shadow-soft: 0 14px 35px rgba(0, 0, 0, 0.16);
+    --cursos-shadow-flash: 0 18px 35px rgba(0, 0, 0, 0.24);
+    --cursos-shadow-primary: 0 12px 22px rgba(39, 151, 255, 0.22);
+    --cursos-shadow-save: 0 12px 22px rgba(40, 150, 255, 0.22);
+    --cursos-shadow-danger: 0 12px 22px rgba(255, 59, 59, 0.22);
+    --cursos-focus-shadow: 0 0 0 4px rgba(51, 161, 255, 0.12);
+    --cursos-inset-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+    --cursos-radius-xl: 28px;
+    --cursos-radius-lg: 22px;
+    --cursos-radius-md: 18px;
+    --cursos-radius-sm: 14px;
+
+    --cursos-transition: all 0.28s ease;
+
+    --cursos-body-bg: linear-gradient(
+        180deg,
+        var(--cursos-bg-primary) 0%,
+        var(--cursos-bg-secondary) 48%,
+        var(--cursos-bg-tertiary) 100%
+    );
+
+    --cursos-hero-bg:
+        radial-gradient(circle at top right, rgba(70, 155, 255, 0.18), var(--cursos-transparent) 28%),
+        linear-gradient(135deg, var(--cursos-bg-card), var(--cursos-bg-card-medium));
+
+    --cursos-hero-before-bg:
+        radial-gradient(circle, rgba(51, 161, 255, 0.18), var(--cursos-transparent) 65%);
+
+    --cursos-hero-icon-bg:
+        linear-gradient(135deg, rgba(51, 161, 255, 0.22), rgba(123, 97, 255, 0.16));
+
+    --cursos-card-bg:
+        linear-gradient(135deg, var(--cursos-bg-card), var(--cursos-bg-card-soft));
+
+    --cursos-course-item-bg:
+        linear-gradient(135deg, var(--cursos-bg-card), var(--cursos-bg-card-medium));
+
+    --cursos-course-before-bg:
+        linear-gradient(180deg, #37a7ff, var(--cursos-purple));
+
+    --cursos-course-index-bg:
+        linear-gradient(135deg, rgba(51, 161, 255, 0.20), rgba(123, 97, 255, 0.16));
+
+    --cursos-primary-btn-bg:
+        linear-gradient(135deg, #2797ff, #1678e8);
+
+    --cursos-primary-btn-bg-hover:
+        linear-gradient(135deg, #40a6ff, #2286f3);
+
+    --cursos-save-btn-bg:
+        linear-gradient(135deg, #2896ff, #1a7ae8);
+
+    --cursos-save-btn-bg-hover:
+        linear-gradient(135deg, #3aa2ff, #2787f0);
+
+    --cursos-danger-btn-bg:
+        linear-gradient(135deg, var(--cursos-danger), var(--cursos-danger-dark));
+
+    --cursos-empty-icon-bg:
+        linear-gradient(135deg, rgba(51, 161, 255, 0.15), rgba(123, 97, 255, 0.15));
+
+    --cursos-flash-success-bg:
+        linear-gradient(135deg, rgba(23, 184, 95, 0.96), rgba(14, 143, 71, 0.96));
+
+    --cursos-flash-error-bg:
+        linear-gradient(135deg, rgba(255, 59, 59, 0.96), rgba(219, 38, 38, 0.96));
+
+    --cursos-modal-overlay-bg: rgba(3, 12, 32, 0.72);
+
+    --cursos-modal-card-bg:
+        linear-gradient(145deg, rgba(31, 63, 119, 0.96), rgba(16, 39, 82, 0.96));
+}
+
+html.theme-light,
+body.theme-light {
+    --cursos-bg-primary: #eaf3ff;
+    --cursos-bg-secondary: #d8e9fb;
+    --cursos-bg-tertiary: #cfe3fb;
+
+    --cursos-transparent: transparent;
+    --cursos-white: #ffffff;
+
+    --cursos-bg-card: rgba(255, 255, 255, 0.74);
+    --cursos-bg-card-soft: rgba(229, 242, 255, 0.54);
+    --cursos-bg-card-medium: rgba(240, 248, 255, 0.68);
+    --cursos-bg-card-strong: rgba(255, 255, 255, 0.88);
+    --cursos-bg-input: rgba(255, 255, 255, 0.72);
+    --cursos-bg-counter: rgba(255, 255, 255, 0.62);
+    --cursos-bg-empty: rgba(255, 255, 255, 0.58);
+    --cursos-bg-flash-icon: rgba(255, 255, 255, 0.22);
+    --cursos-bg-flash-progress: rgba(255, 255, 255, 0.85);
+    --cursos-bg-modal-secondary: rgba(47, 143, 232, 0.40);
+    --cursos-bg-modal-secondary-hover: rgba(47, 143, 232, 0.48);
+    --cursos-bg-modal-danger-soft: rgba(229, 72, 72, 0.12);
+    --cursos-bg-modal-tag: rgba(229, 72, 72, 0.10);
+
+    --cursos-border-soft: rgba(48, 104, 166, 0.18);
+    --cursos-border-medium: rgba(48, 104, 166, 0.22);
+    --cursos-border-strong: rgba(47, 143, 232, 0.34);
+    --cursos-border-icon: rgba(47, 143, 232, 0.18);
+    --cursos-border-icon-soft: rgba(47, 143, 232, 0.16);
+    --cursos-border-empty: rgba(48, 104, 166, 0.20);
+    --cursos-border-secondary: rgba(47, 143, 232, 0.18);
+    --cursos-border-danger-soft: rgba(229, 72, 72, 0.22);
+    --cursos-border-danger-tag: rgba(229, 72, 72, 0.18);
+
+    --cursos-text-primary: #10233f;
+    --cursos-text-secondary: #536783;
+    --cursos-text-muted: #7b8fa8;
+    --cursos-text-soft-blue: #0f4f86;
+    --cursos-text-kicker: #1f6fb5;
+    --cursos-text-tag: #1f6fb5;
+    --cursos-text-icon: #155b99;
+    --cursos-text-input-icon: #527ba8;
+    --cursos-text-counter: #183b62;
+    --cursos-text-index: #155b99;
+    --cursos-text-empty-icon: #1f6fb5;
+    --cursos-text-modal-icon: #c73535;
+    --cursos-text-modal-tag: #a92d2d;
+
+    --cursos-accent: #2f8fe8;
+    --cursos-accent-hover: #176bc2;
+    --cursos-accent-dark: #0f4f86;
+
+    --cursos-success: #17a764;
+    --cursos-success-dark: #0f7d4a;
+
+    --cursos-danger: #e54848;
+    --cursos-danger-dark: #c92f2f;
+
+    --cursos-orb-one: #8ed4ff;
+    --cursos-orb-two: #74bdf4;
+    --cursos-orb-three: #9db8ff;
+    --cursos-purple: #7a8df5;
+
+    --cursos-shadow-main: 0 24px 60px rgba(38, 76, 122, 0.16);
+    --cursos-shadow-soft: 0 14px 35px rgba(38, 76, 122, 0.12);
+    --cursos-shadow-flash: 0 18px 35px rgba(38, 76, 122, 0.18);
+    --cursos-shadow-primary: 0 12px 22px rgba(47, 143, 232, 0.18);
+    --cursos-shadow-save: 0 12px 22px rgba(47, 143, 232, 0.18);
+    --cursos-shadow-danger: 0 12px 22px rgba(229, 72, 72, 0.18);
+    --cursos-focus-shadow: 0 0 0 4px rgba(47, 143, 232, 0.14);
+    --cursos-inset-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+
+    --cursos-body-bg:
+        radial-gradient(circle at top left, rgba(47, 143, 232, 0.20), var(--cursos-transparent) 22%),
+        radial-gradient(circle at bottom right, rgba(120, 185, 245, 0.28), var(--cursos-transparent) 25%),
+        linear-gradient(180deg, var(--cursos-bg-primary), var(--cursos-bg-tertiary));
+
+    --cursos-hero-bg:
+        radial-gradient(circle at top right, rgba(47, 143, 232, 0.16), var(--cursos-transparent) 28%),
+        linear-gradient(135deg, var(--cursos-bg-card), var(--cursos-bg-card-soft));
+
+    --cursos-hero-before-bg:
+        radial-gradient(circle, rgba(47, 143, 232, 0.20), var(--cursos-transparent) 65%);
+
+    --cursos-hero-icon-bg:
+        linear-gradient(135deg, rgba(47, 143, 232, 0.18), rgba(23, 107, 194, 0.08));
+
+    --cursos-card-bg:
+        linear-gradient(135deg, var(--cursos-bg-card), var(--cursos-bg-card-soft));
+
+    --cursos-course-item-bg:
+        linear-gradient(135deg, var(--cursos-bg-card), var(--cursos-bg-card-medium));
+
+    --cursos-course-before-bg:
+        linear-gradient(180deg, #2f8fe8, var(--cursos-purple));
+
+    --cursos-course-index-bg:
+        linear-gradient(135deg, rgba(47, 143, 232, 0.16), rgba(122, 141, 245, 0.10));
+
+    --cursos-primary-btn-bg:
+        linear-gradient(135deg, #2f8fe8, #176bc2);
+
+    --cursos-primary-btn-bg-hover:
+        linear-gradient(135deg, #48a2f1, #2478cc);
+
+    --cursos-save-btn-bg:
+        linear-gradient(135deg, #2f8fe8, #176bc2);
+
+    --cursos-save-btn-bg-hover:
+        linear-gradient(135deg, #48a2f1, #2478cc);
+
+    --cursos-danger-btn-bg:
+        linear-gradient(135deg, var(--cursos-danger), var(--cursos-danger-dark));
+
+    --cursos-empty-icon-bg:
+        linear-gradient(135deg, rgba(47, 143, 232, 0.14), rgba(122, 141, 245, 0.10));
+
+    --cursos-flash-success-bg:
+        linear-gradient(135deg, rgba(23, 167, 100, 0.96), rgba(15, 125, 74, 0.96));
+
+    --cursos-flash-error-bg:
+        linear-gradient(135deg, rgba(229, 72, 72, 0.96), rgba(201, 47, 47, 0.96));
+
+    --cursos-modal-overlay-bg: rgba(15, 33, 58, 0.42);
+
+    --cursos-modal-card-bg:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(229, 242, 255, 0.96));
 }
 
 html,
 body {
     min-height: 100%;
     font-family: "Inter", "Segoe UI", Arial, sans-serif;
-    background: linear-gradient(180deg, #05173d 0%, #0a2558 48%, #0c2f6d 100%);
-    color: var(--text-primary);
+    background: var(--cursos-body-bg);
+    color: var(--cursos-text-primary);
 }
 
 /* =========================================================
@@ -69,7 +304,7 @@ body {
 .orb-1 {
     width: 260px;
     height: 260px;
-    background: #2d8cff;
+    background: var(--cursos-orb-one);
     top: -70px;
     left: -70px;
 }
@@ -77,7 +312,7 @@ body {
 .orb-2 {
     width: 220px;
     height: 220px;
-    background: #1fc8db;
+    background: var(--cursos-orb-two);
     right: -80px;
     top: 120px;
 }
@@ -85,7 +320,7 @@ body {
 .orb-3 {
     width: 180px;
     height: 180px;
-    background: #7b61ff;
+    background: var(--cursos-orb-three);
     bottom: 80px;
     left: 6%;
 }
@@ -110,11 +345,9 @@ body {
     margin-bottom: 18px;
     padding: 18px 24px 20px;
     border-radius: 24px;
-    background:
-        radial-gradient(circle at top right, rgba(70, 155, 255, 0.18), transparent 28%),
-        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
-    border: 1px solid var(--border-soft);
-    box-shadow: var(--shadow-main);
+    background: var(--cursos-hero-bg);
+    border: 1px solid var(--cursos-border-soft);
+    box-shadow: var(--cursos-shadow-main);
     backdrop-filter: blur(12px);
 }
 
@@ -125,7 +358,7 @@ body {
     width: 220px;
     height: 220px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(51, 161, 255, 0.18), transparent 65%);
+    background: var(--cursos-hero-before-bg);
 }
 
 .hero-topbar {
@@ -144,40 +377,53 @@ body {
 }
 
 .secondary-button {
-    background: rgba(255,255,255,0.05);
+    background: var(--cursos-bg-card-medium);
 }
 
 .secondary-button:hover {
-    background: rgba(255,255,255,0.10);
+    background: var(--cursos-bg-card-strong);
 }
 
-.back-button {
+.back-button,
+.theme-button {
     display: inline-flex;
     align-items: center;
     gap: 10px;
     padding: 12px 18px;
     border-radius: 16px;
     text-decoration: none;
-    color: var(--text-primary);
-    background: rgba(255,255,255,0.07);
-    border: 1px solid var(--border-soft);
-    transition: var(--transition);
+    color: var(--cursos-text-primary);
+    background: var(--cursos-bg-input);
+    border: 1px solid var(--cursos-border-soft);
+    transition: var(--cursos-transition);
     font-weight: 700;
+    font-family: inherit;
 }
 
-.back-button:hover {
+.theme-button {
+    justify-content: center;
+    cursor: pointer;
+}
+
+.back-button:hover,
+.theme-button:hover {
     transform: translateY(-2px);
-    background: rgba(255,255,255,0.12);
-    box-shadow: var(--shadow-soft);
+    background: var(--cursos-bg-card-strong);
+    box-shadow: var(--cursos-shadow-soft);
+}
+
+.theme-toggle-icon,
+.theme-toggle-text {
+    pointer-events: none;
 }
 
 .hero-badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(51, 161, 255, 0.12);
-    color: #cfe8ff;
-    border: 1px solid rgba(51, 161, 255, 0.26);
+    background: var(--cursos-bg-card-strong);
+    color: var(--cursos-text-soft-blue);
+    border: 1px solid var(--cursos-border-strong);
     padding: 11px 16px;
     border-radius: 999px;
     font-size: 0.92rem;
@@ -202,7 +448,7 @@ body {
     font-weight: 800;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: #8fc6ff;
+    color: var(--cursos-text-kicker);
 }
 
 .hero-text h1 {
@@ -216,7 +462,7 @@ body {
 .hero-text p {
     font-size: 0.96rem;
     line-height: 1.55;
-    color: var(--text-secondary);
+    color: var(--cursos-text-secondary);
     max-width: 720px;
 }
 
@@ -228,12 +474,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background:
-        linear-gradient(135deg, rgba(51, 161, 255, 0.22), rgba(123, 97, 255, 0.16));
-    border: 1px solid rgba(255,255,255,0.16);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), var(--shadow-soft);
+    background: var(--cursos-hero-icon-bg);
+    border: 1px solid var(--cursos-border-icon);
+    box-shadow: var(--cursos-inset-shadow), var(--cursos-shadow-soft);
     font-size: 2.1rem;
-    color: #dff0ff;
+    color: var(--cursos-text-icon);
 }
 
 /* =========================================================
@@ -243,10 +488,9 @@ body {
     margin-bottom: 18px;
     padding: 18px 24px;
     border-radius: 24px;
-    background:
-        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
-    border: 1px solid var(--border-soft);
-    box-shadow: var(--shadow-main);
+    background: var(--cursos-card-bg);
+    border: 1px solid var(--cursos-border-soft);
+    box-shadow: var(--cursos-shadow-main);
     backdrop-filter: blur(12px);
 }
 
@@ -266,9 +510,9 @@ body {
     margin-bottom: 8px;
     padding: 6px 12px;
     border-radius: 999px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid var(--border-soft);
-    color: #b8d7ff;
+    background: var(--cursos-bg-card);
+    border: 1px solid var(--cursos-border-soft);
+    color: var(--cursos-text-tag);
     font-size: 0.8rem;
     font-weight: 800;
     letter-spacing: 0.03em;
@@ -282,7 +526,7 @@ body {
 }
 
 .card-header p {
-    color: var(--text-secondary);
+    color: var(--cursos-text-secondary);
     line-height: 1.45;
     font-size: 0.95rem;
 }
@@ -303,10 +547,10 @@ body {
     position: relative;
     display: flex;
     align-items: center;
-    background: var(--bg-input);
-    border: 1px solid var(--border-soft);
+    background: var(--cursos-bg-input);
+    border: 1px solid var(--cursos-border-soft);
     border-radius: 18px;
-    transition: var(--transition);
+    transition: var(--cursos-transition);
 }
 
 .input-wrapper {
@@ -319,15 +563,15 @@ body {
 .input-wrapper:focus-within,
 .mini-input-wrapper:focus-within,
 .search-box:focus-within {
-    border-color: rgba(89, 179, 255, 0.42);
-    box-shadow: 0 0 0 4px rgba(51, 161, 255, 0.12);
+    border-color: var(--cursos-accent-hover);
+    box-shadow: var(--cursos-focus-shadow);
     transform: translateY(-1px);
 }
 
 .input-wrapper i,
 .mini-input-wrapper i,
 .search-box i {
-    color: #91b8e7;
+    color: var(--cursos-text-input-icon);
     font-size: 1rem;
     margin-right: 12px;
 }
@@ -338,15 +582,15 @@ body {
     width: 100%;
     border: none;
     outline: none;
-    background: transparent;
-    color: var(--text-primary);
+    background: var(--cursos-transparent);
+    color: var(--cursos-text-primary);
     font-size: 1rem;
     font-family: inherit;
 }
 
 .input-wrapper input::placeholder,
 .search-box input::placeholder {
-    color: var(--text-muted);
+    color: var(--cursos-text-muted);
 }
 
 .btn {
@@ -355,7 +599,7 @@ body {
     cursor: pointer;
     font-family: inherit;
     font-weight: 800;
-    transition: var(--transition);
+    transition: var(--cursos-transition);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -371,13 +615,13 @@ body {
     min-height: 52px;
     padding: 0 20px;
     border-radius: 16px;
-    color: white;
-    background: linear-gradient(135deg, #2797ff, #1678e8);
-    box-shadow: 0 12px 22px rgba(39, 151, 255, 0.22);
+    color: var(--cursos-white);
+    background: var(--cursos-primary-btn-bg);
+    box-shadow: var(--cursos-shadow-primary);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #40a6ff, #2286f3);
+    background: var(--cursos-primary-btn-bg-hover);
 }
 
 /* =========================================================
@@ -403,9 +647,9 @@ body {
     height: 50px;
     padding: 0 16px;
     border-radius: 16px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid var(--border-soft);
-    color: #d7e7fb;
+    background: var(--cursos-bg-counter);
+    border: 1px solid var(--cursos-border-soft);
+    color: var(--cursos-text-counter);
     font-weight: 700;
 }
 
@@ -425,10 +669,9 @@ body {
     gap: 18px;
     padding: 18px;
     border-radius: 22px;
-    background:
-        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
-    border: 1px solid var(--border-soft);
-    transition: var(--transition);
+    background: var(--cursos-course-item-bg);
+    border: 1px solid var(--cursos-border-soft);
+    transition: var(--cursos-transition);
     position: relative;
     overflow: hidden;
 }
@@ -439,15 +682,15 @@ body {
     inset: 0 auto 0 0;
     width: 4px;
     border-radius: 20px;
-    background: linear-gradient(180deg, #37a7ff, #7b61ff);
+    background: var(--cursos-course-before-bg);
     opacity: 0;
-    transition: var(--transition);
+    transition: var(--cursos-transition);
 }
 
 .course-item:hover {
     transform: translateY(-4px);
-    border-color: var(--border-strong);
-    box-shadow: var(--shadow-soft);
+    border-color: var(--cursos-border-strong);
+    box-shadow: var(--cursos-shadow-soft);
 }
 
 .course-item:hover::before {
@@ -465,12 +708,12 @@ body {
     width: 56px;
     height: 56px;
     border-radius: 18px;
-    background: linear-gradient(135deg, rgba(51, 161, 255, 0.20), rgba(123, 97, 255, 0.16));
-    border: 1px solid rgba(255,255,255,0.12);
+    background: var(--cursos-course-index-bg);
+    border: 1px solid var(--cursos-border-soft);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #dff1ff;
+    color: var(--cursos-text-index);
     font-weight: 800;
     flex-shrink: 0;
 }
@@ -482,7 +725,7 @@ body {
 }
 
 .course-info p {
-    color: var(--text-secondary);
+    color: var(--cursos-text-secondary);
     font-size: 0.95rem;
 }
 
@@ -512,22 +755,22 @@ body {
     min-height: 50px;
     padding: 0 18px;
     border-radius: 16px;
-    background: linear-gradient(135deg, #2896ff, #1a7ae8);
-    color: white;
-    box-shadow: 0 12px 22px rgba(40, 150, 255, 0.22);
+    background: var(--cursos-save-btn-bg);
+    color: var(--cursos-white);
+    box-shadow: var(--cursos-shadow-save);
 }
 
 .btn-save:hover {
-    background: linear-gradient(135deg, #3aa2ff, #2787f0);
+    background: var(--cursos-save-btn-bg-hover);
 }
 
 .btn-danger {
     min-height: 50px;
     padding: 0 18px;
     border-radius: 16px;
-    background: linear-gradient(135deg, var(--danger), var(--danger-dark));
-    color: white;
-    box-shadow: 0 12px 22px rgba(255, 59, 59, 0.22);
+    background: var(--cursos-danger-btn-bg);
+    color: var(--cursos-white);
+    box-shadow: var(--cursos-shadow-danger);
 }
 
 .btn-danger:hover {
@@ -546,8 +789,8 @@ body {
     padding: 34px 20px;
     border-radius: 22px;
     text-align: center;
-    background: rgba(255,255,255,0.05);
-    border: 1px dashed rgba(255,255,255,0.16);
+    background: var(--cursos-bg-empty);
+    border: 1px dashed var(--cursos-border-empty);
 }
 
 .empty-state-icon {
@@ -558,10 +801,10 @@ body {
     align-items: center;
     justify-content: center;
     margin-bottom: 16px;
-    background: linear-gradient(135deg, rgba(51, 161, 255, 0.15), rgba(123, 97, 255, 0.15));
-    border: 1px solid rgba(255,255,255,0.10);
+    background: var(--cursos-empty-icon-bg);
+    border: 1px solid var(--cursos-border-icon-soft);
     font-size: 1.8rem;
-    color: #d8ecff;
+    color: var(--cursos-text-empty-icon);
 }
 
 .empty-state h3,
@@ -572,7 +815,7 @@ body {
 
 .empty-state p,
 .empty-search-state p {
-    color: var(--text-secondary);
+    color: var(--cursos-text-secondary);
     line-height: 1.6;
 }
 
@@ -599,18 +842,18 @@ body {
     overflow: hidden;
     border-radius: 18px;
     padding: 16px 16px 14px;
-    box-shadow: 0 18px 35px rgba(0,0,0,0.24);
-    border: 1px solid rgba(255,255,255,0.14);
+    box-shadow: var(--cursos-shadow-flash);
+    border: 1px solid var(--cursos-border-medium);
     backdrop-filter: blur(10px);
     animation: slideInRight 0.35s ease;
 }
 
 .flash-success {
-    background: linear-gradient(135deg, rgba(23, 184, 95, 0.96), rgba(14, 143, 71, 0.96));
+    background: var(--cursos-flash-success-bg);
 }
 
 .flash-error {
-    background: linear-gradient(135deg, rgba(255, 59, 59, 0.96), rgba(219, 38, 38, 0.96));
+    background: var(--cursos-flash-error-bg);
 }
 
 .flash-message-content {
@@ -627,7 +870,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255,255,255,0.18);
+    background: var(--cursos-bg-flash-icon);
     font-size: 1rem;
 }
 
@@ -652,12 +895,12 @@ body {
     top: 12px;
     right: 12px;
     border: none;
-    background: transparent;
-    color: white;
+    background: var(--cursos-transparent);
+    color: var(--cursos-white);
     font-size: 1rem;
     cursor: pointer;
     opacity: 0.92;
-    transition: var(--transition);
+    transition: var(--cursos-transition);
 }
 
 .flash-close:hover {
@@ -670,7 +913,7 @@ body {
     bottom: 0;
     left: 0;
     height: 4px;
-    background: rgba(255,255,255,0.85);
+    background: var(--cursos-bg-flash-progress);
     animation: flashProgress 4s linear forwards;
 }
 
@@ -712,7 +955,7 @@ body {
     position: fixed;
     inset: 0;
     z-index: 9998;
-    background: rgba(3, 12, 32, 0.72);
+    background: var(--cursos-modal-overlay-bg);
     backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
@@ -721,7 +964,7 @@ body {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: var(--transition);
+    transition: var(--cursos-transition);
 }
 
 .modal-overlay.active {
@@ -735,12 +978,11 @@ body {
     max-width: 480px;
     padding: 28px;
     border-radius: 26px;
-    background:
-        linear-gradient(145deg, rgba(31, 63, 119, 0.96), rgba(16, 39, 82, 0.96));
-    border: 1px solid rgba(255,255,255,0.12);
-    box-shadow: var(--shadow-main);
+    background: var(--cursos-modal-card-bg);
+    border: 1px solid var(--cursos-border-soft);
+    box-shadow: var(--cursos-shadow-main);
     transform: translateY(12px) scale(0.98);
-    transition: var(--transition);
+    transition: var(--cursos-transition);
 }
 
 .modal-overlay.active .modal-card {
@@ -754,9 +996,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 59, 59, 0.14);
-    border: 1px solid rgba(255, 59, 59, 0.22);
-    color: #ff8585;
+    background: var(--cursos-bg-modal-danger-soft);
+    border: 1px solid var(--cursos-border-danger-soft);
+    color: var(--cursos-text-modal-icon);
     font-size: 1.7rem;
     margin-bottom: 18px;
 }
@@ -770,9 +1012,9 @@ body {
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    color: #ffd7d7;
-    background: rgba(255, 59, 59, 0.10);
-    border: 1px solid rgba(255, 59, 59, 0.18);
+    color: var(--cursos-text-modal-tag);
+    background: var(--cursos-bg-modal-tag);
+    border: 1px solid var(--cursos-border-danger-tag);
 }
 
 .modal-content h3 {
@@ -781,7 +1023,7 @@ body {
 }
 
 .modal-content p {
-    color: var(--text-secondary);
+    color: var(--cursos-text-secondary);
     line-height: 1.65;
 }
 
@@ -796,13 +1038,13 @@ body {
     min-height: 50px;
     padding: 0 18px;
     border-radius: 16px;
-    background: rgba(255,255,255,0.08);
-    color: white;
-    border: 1px solid rgba(255,255,255,0.10);
+    background: var(--cursos-bg-modal-secondary);
+    color: var(--cursos-white);
+    border: 1px solid var(--cursos-border-secondary);
 }
 
 .btn-secondary:hover {
-    background: rgba(255,255,255,0.14);
+    background: var(--cursos-bg-modal-secondary-hover);
 }
 
 /* =========================================================
@@ -845,7 +1087,6 @@ body {
 /* =========================================================
    RESPONSIVIDADE - GERENCIAR CURSOS
    ========================================================= */
-
 
 /* ---------------------------------------------------------
    Tablets e notebooks menores
@@ -901,7 +1142,6 @@ body {
         flex: 1;
     }
 }
-
 
 /* ---------------------------------------------------------
    Base mobile
@@ -961,7 +1201,7 @@ body {
     }
 
     /*
-      No celular, os dois botões principais ficam agrupados no topo
+      No celular, os botões principais ficam agrupados no topo
       e o selo fica logo abaixo, centralizado.
     */
     .hero-topbar {
@@ -980,7 +1220,8 @@ body {
     }
 
     .back-button,
-    .secondary-button {
+    .secondary-button,
+    .theme-button {
         width: 100%;
         min-height: 40px;
         padding: 9px 12px;
@@ -988,6 +1229,10 @@ body {
         font-size: 0.82rem;
         justify-content: center;
         text-align: center;
+    }
+
+    .theme-button {
+        grid-column: 1 / -1;
     }
 
     .hero-badge {
@@ -1183,7 +1428,6 @@ body {
     }
 }
 
-
 /* ---------------------------------------------------------
    Celulares pequenos
    Ex.: 360x800 e 390x844.
@@ -1206,7 +1450,8 @@ body {
         margin-bottom: 16px;
     }
 
-    .back-button {
+    .back-button,
+    .theme-button {
         min-height: 38px;
         padding: 8px 12px;
         font-size: 0.78rem;
@@ -1275,7 +1520,6 @@ body {
     }
 }
 
-
 /* ---------------------------------------------------------
    Celular deitado
    ---------------------------------------------------------
@@ -1316,7 +1560,8 @@ body {
         flex-wrap: wrap;
     }
 
-    .back-button {
+    .back-button,
+    .theme-button {
         min-height: 40px;
         padding: 9px 14px;
         border-radius: 13px;
@@ -1448,7 +1693,6 @@ body {
         min-height: 48px;
     }
 }
-
 
 /* ---------------------------------------------------------
    Celular deitado com altura muito baixa

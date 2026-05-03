@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciar Cursos</title>
-
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem("sistema_matricula_theme") || "theme-dark";
+            document.documentElement.classList.add(savedTheme);
+        })();
+    </script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_cursos.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -56,17 +61,22 @@
         <!-- Cabeçalho principal -->
         <section class="hero-card reveal">
           <div class="hero-topbar">
-              <div class="hero-topbar-left">
-                  <a href="{{ url_for('admin.dashboard') }}" class="back-button">
-                      <i class="fa-solid fa-arrow-left"></i>
-                      <span>Voltar ao painel</span>
-                  </a>
+            <div class="hero-topbar-left">
+                <a href="{{ url_for('admin.dashboard') }}" class="back-button">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Voltar ao painel</span>
+                </a>
 
-                  <a href="{{ url_for('main.index') }}" class="back-button secondary-button">
-                      <i class="fa-solid fa-house"></i>
-                      <span>Menu principal</span>
-                  </a>
-              </div>
+                <a href="{{ url_for('main.index') }}" class="back-button secondary-button">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Menu principal</span>
+                </a>
+
+                <button type="button" class="theme-button" data-theme-toggle>
+                    <span class="theme-toggle-icon">☀️</span>
+                    <span class="theme-toggle-text">Modo claro</span>
+                </button>
+            </div>
 
               <span class="hero-badge">
                   <i class="fa-solid fa-shield-halved"></i>
@@ -235,7 +245,7 @@
             </div>
         </div>
     </div>
-
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin_cursos.js') }}"></script>
 </body>
 </html>

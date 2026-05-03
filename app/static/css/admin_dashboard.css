@@ -1,17 +1,134 @@
-:root {
-  --bg-primary: #071b44;
-  --bg-secondary: #0e2b63;
-  --bg-card: rgba(255, 255, 255, 0.08);
-  --bg-card-hover: rgba(255, 255, 255, 0.12);
-  --border-soft: rgba(255, 255, 255, 0.12);
-  --text-main: #f4f7fb;
-  --text-muted: #c7d3e6;
-  --accent: #3ea6ff;
-  --accent-strong: #1e90ff;
-  --shadow-main: 0 18px 45px rgba(0, 0, 0, 0.28);
-  --radius-xl: 28px;
-  --radius-lg: 22px;
-  --radius-md: 16px;
+/* =========================================================
+   VARIÁVEIS - PAINEL ADMINISTRATIVO
+   ========================================================= */
+
+:root,
+html.theme-dark,
+body.theme-dark {
+  --admin-bg-primary: #071b44;
+  --admin-bg-secondary: #0e2b63;
+
+  --admin-color-transparent: transparent;
+
+  --admin-text-main: #f4f7fb;
+  --admin-text-muted: #c7d3e6;
+  --admin-text-badge: #d8ecff;
+  --admin-text-card-action: #d9edff;
+
+  --admin-shape-one: #4cc9f0;
+  --admin-shape-two: #4895ef;
+  --admin-shape-three: #3a86ff;
+
+  --admin-bg-card-hover: rgba(255, 255, 255, 0.12);
+  --admin-bg-card-hover-soft: rgba(255, 255, 255, 0.05);
+
+  --admin-border-soft: rgba(255, 255, 255, 0.12);
+
+  --admin-body-radial-top: rgba(62, 166, 255, 0.18);
+  --admin-body-radial-bottom: rgba(30, 144, 255, 0.18);
+
+  --admin-hero-bg-start: rgba(255, 255, 255, 0.09);
+  --admin-hero-bg-end: rgba(255, 255, 255, 0.04);
+  --admin-hero-after-glow: rgba(62, 166, 255, 0.20);
+
+  --admin-btn-bg: rgba(255, 255, 255, 0.08);
+  --admin-btn-bg-hover: rgba(255, 255, 255, 0.12);
+  --admin-btn-border-hover: rgba(62, 166, 255, 0.35);
+
+  --admin-badge-bg: rgba(62, 166, 255, 0.14);
+  --admin-badge-border: rgba(62, 166, 255, 0.25);
+
+  --admin-card-before-glow: rgba(62, 166, 255, 0.08);
+  --admin-card-border-hover: rgba(62, 166, 255, 0.30);
+
+  --admin-card-icon-bg-start: rgba(62, 166, 255, 0.22);
+  --admin-card-icon-bg-end: rgba(30, 144, 255, 0.12);
+  --admin-card-icon-border: rgba(62, 166, 255, 0.18);
+
+  --admin-card-action-bg: rgba(62, 166, 255, 0.10);
+  --admin-card-action-border: rgba(62, 166, 255, 0.18);
+
+  --admin-shadow-main: 0 18px 45px rgba(0, 0, 0, 0.28);
+
+  --admin-radius-xl: 28px;
+  --admin-radius-lg: 22px;
+  --admin-radius-md: 16px;
+
+  --admin-body-bg:
+    radial-gradient(circle at top left, var(--admin-body-radial-top), var(--admin-color-transparent) 22%),
+    radial-gradient(circle at bottom right, var(--admin-body-radial-bottom), var(--admin-color-transparent) 25%),
+    linear-gradient(180deg, var(--admin-bg-primary), var(--admin-bg-secondary));
+
+  --admin-hero-bg: linear-gradient(135deg, var(--admin-hero-bg-start), var(--admin-hero-bg-end));
+  --admin-hero-after-bg: radial-gradient(circle, var(--admin-hero-after-glow), var(--admin-color-transparent) 65%);
+
+  --admin-card-bg: linear-gradient(135deg, var(--admin-hero-bg-start), var(--admin-hero-bg-end));
+  --admin-card-bg-hover: linear-gradient(135deg, var(--admin-bg-card-hover), var(--admin-bg-card-hover-soft));
+  --admin-card-before-bg: linear-gradient(135deg, var(--admin-card-before-glow), var(--admin-color-transparent) 45%);
+
+  --admin-card-icon-bg: linear-gradient(135deg, var(--admin-card-icon-bg-start), var(--admin-card-icon-bg-end));
+}
+
+html.theme-light,
+body.theme-light {
+  --admin-bg-primary: #eaf3ff;
+  --admin-bg-secondary: #cfe3fb;
+
+  --admin-color-transparent: transparent;
+
+  --admin-text-main: #10233f;
+  --admin-text-muted: #536783;
+  --admin-text-badge: #0f4f86;
+  --admin-text-card-action: #0f4f86;
+
+  --admin-shape-one: #8ed4ff;
+  --admin-shape-two: #74bdf4;
+  --admin-shape-three: #5fa8ee;
+
+  --admin-bg-card-hover: rgba(255, 255, 255, 0.82);
+  --admin-bg-card-hover-soft: rgba(240, 248, 255, 0.78);
+
+  --admin-border-soft: rgba(48, 104, 166, 0.18);
+
+  --admin-body-radial-top: rgba(47, 143, 232, 0.20);
+  --admin-body-radial-bottom: rgba(120, 185, 245, 0.28);
+
+  --admin-hero-bg-start: rgba(255, 255, 255, 0.74);
+  --admin-hero-bg-end: rgba(229, 242, 255, 0.54);
+  --admin-hero-after-glow: rgba(47, 143, 232, 0.20);
+
+  --admin-btn-bg: rgba(255, 255, 255, 0.72);
+  --admin-btn-bg-hover: rgba(255, 255, 255, 0.92);
+  --admin-btn-border-hover: rgba(47, 143, 232, 0.42);
+
+  --admin-badge-bg: rgba(47, 143, 232, 0.12);
+  --admin-badge-border: rgba(47, 143, 232, 0.22);
+
+  --admin-card-before-glow: rgba(47, 143, 232, 0.12);
+  --admin-card-border-hover: rgba(47, 143, 232, 0.34);
+
+  --admin-card-icon-bg-start: rgba(47, 143, 232, 0.18);
+  --admin-card-icon-bg-end: rgba(23, 107, 194, 0.08);
+  --admin-card-icon-border: rgba(47, 143, 232, 0.22);
+
+  --admin-card-action-bg: rgba(47, 143, 232, 0.10);
+  --admin-card-action-border: rgba(47, 143, 232, 0.20);
+
+  --admin-shadow-main: 0 18px 45px rgba(38, 76, 122, 0.18);
+
+  --admin-body-bg:
+    radial-gradient(circle at top left, var(--admin-body-radial-top), var(--admin-color-transparent) 22%),
+    radial-gradient(circle at bottom right, var(--admin-body-radial-bottom), var(--admin-color-transparent) 25%),
+    linear-gradient(180deg, var(--admin-bg-primary), var(--admin-bg-secondary));
+
+  --admin-hero-bg: linear-gradient(135deg, var(--admin-hero-bg-start), var(--admin-hero-bg-end));
+  --admin-hero-after-bg: radial-gradient(circle, var(--admin-hero-after-glow), var(--admin-color-transparent) 65%);
+
+  --admin-card-bg: linear-gradient(135deg, var(--admin-hero-bg-start), var(--admin-hero-bg-end));
+  --admin-card-bg-hover: linear-gradient(135deg, var(--admin-bg-card-hover), var(--admin-bg-card-hover-soft));
+  --admin-card-before-bg: linear-gradient(135deg, var(--admin-card-before-glow), var(--admin-color-transparent) 45%);
+
+  --admin-card-icon-bg: linear-gradient(135deg, var(--admin-card-icon-bg-start), var(--admin-card-icon-bg-end));
 }
 
 * {
@@ -26,11 +143,8 @@ body {
 }
 
 body {
-  background:
-    radial-gradient(circle at top left, rgba(62, 166, 255, 0.18), transparent 22%),
-    radial-gradient(circle at bottom right, rgba(30, 144, 255, 0.18), transparent 25%),
-    linear-gradient(180deg, var(--bg-primary), var(--bg-secondary));
-  color: var(--text-main);
+  background: var(--admin-body-bg);
+  color: var(--admin-text-main);
   overflow-x: hidden;
 }
 
@@ -45,7 +159,7 @@ body {
 .shape-1 {
   width: 220px;
   height: 220px;
-  background: #4cc9f0;
+  background: var(--admin-shape-one);
   top: -60px;
   left: -60px;
 }
@@ -53,7 +167,7 @@ body {
 .shape-2 {
   width: 180px;
   height: 180px;
-  background: #4895ef;
+  background: var(--admin-shape-two);
   right: 40px;
   top: 100px;
 }
@@ -61,7 +175,7 @@ body {
 .shape-3 {
   width: 260px;
   height: 260px;
-  background: #3a86ff;
+  background: var(--admin-shape-three);
   left: 8%;
   bottom: -90px;
 }
@@ -77,11 +191,11 @@ body {
 .admin-hero {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(255,255,255,0.09), rgba(255,255,255,0.04));
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-xl);
+  background: var(--admin-hero-bg);
+  border: 1px solid var(--admin-border-soft);
+  border-radius: var(--admin-radius-xl);
   padding: 24px 32px;
-  box-shadow: var(--shadow-main);
+  box-shadow: var(--admin-shadow-main);
   backdrop-filter: blur(14px);
 }
 
@@ -91,7 +205,7 @@ body {
   inset: auto -60px -60px auto;
   width: 220px;
   height: 220px;
-  background: radial-gradient(circle, rgba(62,166,255,0.20), transparent 65%);
+  background: var(--admin-hero-after-bg);
   border-radius: 50%;
 }
 
@@ -103,15 +217,50 @@ body {
   margin-bottom: 20px;
 }
 
+.admin-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-theme-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--admin-text-main);
+  background: var(--admin-btn-bg);
+  border: 1px solid var(--admin-border-soft);
+  border-radius: 14px;
+  padding: 12px 18px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.admin-theme-btn:hover {
+  transform: translateY(-2px);
+  background: var(--admin-btn-bg-hover);
+  border-color: var(--admin-btn-border-hover);
+}
+
+.theme-toggle-icon,
+.theme-toggle-text {
+  pointer-events: none;
+}
+
 .admin-back-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   text-decoration: none;
-  color: var(--text-main);
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid var(--border-soft);
+  color: var(--admin-text-main);
+  background: var(--admin-btn-bg);
+  border: 1px solid var(--admin-border-soft);
   border-radius: 14px;
   padding: 12px 18px;
   font-weight: 700;
@@ -120,8 +269,8 @@ body {
 
 .admin-back-btn:hover {
   transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(62, 166, 255, 0.35);
+  background: var(--admin-btn-bg-hover);
+  border-color: var(--admin-btn-border-hover);
 }
 
 .admin-badge {
@@ -130,9 +279,9 @@ body {
   justify-content: center;
   padding: 10px 16px;
   border-radius: 999px;
-  background: rgba(62, 166, 255, 0.14);
-  border: 1px solid rgba(62, 166, 255, 0.25);
-  color: #d8ecff;
+  background: var(--admin-badge-bg);
+  border: 1px solid var(--admin-badge-border);
+  color: var(--admin-text-badge);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -148,7 +297,7 @@ body {
 .admin-hero-content p {
   margin: 0;
   max-width: 760px;
-  color: var(--text-muted);
+  color: var(--admin-text-muted);
   font-size: 16px;
   line-height: 1.5;
 }
@@ -164,12 +313,12 @@ body {
   position: relative;
   overflow: hidden;
   text-decoration: none;
-  color: var(--text-main);
-  background: linear-gradient(135deg, rgba(255,255,255,0.09), rgba(255,255,255,0.04));
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-lg);
+  color: var(--admin-text-main);
+  background: var(--admin-card-bg);
+  border: 1px solid var(--admin-border-soft);
+  border-radius: var(--admin-radius-lg);
   padding: 22px 22px;
-  box-shadow: var(--shadow-main);
+  box-shadow: var(--admin-shadow-main);
   backdrop-filter: blur(10px);
   transition: transform 0.24s ease, border-color 0.24s ease, background 0.24s ease;
 }
@@ -178,15 +327,15 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(62,166,255,0.08), transparent 45%);
+  background: var(--admin-card-before-bg);
   opacity: 0;
   transition: opacity 0.24s ease;
 }
 
 .admin-card:hover {
   transform: translateY(-6px);
-  border-color: rgba(62, 166, 255, 0.30);
-  background: linear-gradient(135deg, var(--bg-card-hover), rgba(255,255,255,0.05));
+  border-color: var(--admin-card-border-hover);
+  background: var(--admin-card-bg-hover);
 }
 
 .admin-card:hover::before {
@@ -205,8 +354,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(62,166,255,0.22), rgba(30,144,255,0.12));
-  border: 1px solid rgba(62,166,255,0.18);
+  background: var(--admin-card-icon-bg);
+  border: 1px solid var(--admin-card-icon-border);
   font-size: 24px;
   margin-bottom: 16px;
 }
@@ -220,7 +369,7 @@ body {
 
 .admin-card p {
   margin: 0 0 18px;
-  color: var(--text-muted);
+  color: var(--admin-text-muted);
   font-size: 15px;
   line-height: 1.5;
 }
@@ -231,9 +380,9 @@ body {
   justify-content: center;
   padding: 10px 14px;
   border-radius: 12px;
-  background: rgba(62, 166, 255, 0.10);
-  border: 1px solid rgba(62, 166, 255, 0.18);
-  color: #d9edff;
+  background: var(--admin-card-action-bg);
+  border: 1px solid var(--admin-card-action-border);
+  color: var(--admin-text-card-action);
   font-size: 13px;
   font-weight: 700;
 }
@@ -334,7 +483,14 @@ body {
     margin-bottom: 22px;
   }
 
-  .admin-back-btn {
+  .admin-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .admin-back-btn,
+  .admin-theme-btn {
     width: fit-content;
     max-width: 100%;
     min-height: 42px;
@@ -425,7 +581,8 @@ body {
     margin-bottom: 20px;
   }
 
-  .admin-back-btn {
+  .admin-back-btn,
+  .admin-theme-btn {
     min-height: 40px;
     padding: 9px 13px;
     font-size: 0.82rem;
@@ -495,7 +652,8 @@ body {
     margin-bottom: 18px;
   }
 
-  .admin-back-btn {
+  .admin-back-btn,
+  .admin-theme-btn {
     min-height: 40px;
     padding: 9px 14px;
   }
